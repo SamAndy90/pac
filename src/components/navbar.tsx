@@ -39,8 +39,6 @@ export default function Header() {
     fetchData();
   }, []);
 
-  console.log(data[0]);
-
   const desiredLeftSequence = ["HOME", "CONTESTS", "PEACE SOCIAL"];
 
   // Sort the left menu items according to the desired sequence
