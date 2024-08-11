@@ -1,0 +1,39 @@
+// schemas/logo.js
+export default {
+  name: "logo",
+  title: "Website Logo",
+  type: "document",
+  fields: [
+    {
+      name: "title",
+      title: "Title",
+      type: "string",
+      description: "Title of the logo",
+    },
+    {
+      name: "image",
+      title: "Logo Image",
+      type: "image",
+      options: {
+        hotspot: true, // Enables the hotspot functionality
+      },
+      fields: [
+        {
+          name: "alt",
+          title: "Alternative Text",
+          type: "string",
+          description: "Important for SEO and accessibility.",
+          options: {
+            isHighlighted: true, // Makes the field easily accessible
+          },
+        },
+      ],
+    },
+    {
+      name: "link",
+      title: "Link",
+      type: "string",
+      description: "URL the logo should link to.",
+    },
+  ],
+};

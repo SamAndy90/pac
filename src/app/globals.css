@@ -1,0 +1,385 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  .font-condensed {
+    font-stretch: condensed;
+  }
+}
+.containerClass {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 0rem !important;
+  padding-left: 0rem !important;
+}
+
+.slick-dots li {
+  margin-bottom: 20px !important;
+}
+
+.slick-dots li button:before {
+  top: 20px !important;
+}
+.textBlur {
+  background: rgba(255, 255, 255, 0.2); /* Background color with opacity */
+  backdrop-filter: blur(1px); /* Blur effect */
+  -webkit-backdrop-filter: blur(1px); /* For Safari */
+}
+/* Default styles */
+.ant-modal-content {
+  position: fixed !important;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) !important;
+  width: 853px;
+  height: 490px;
+  padding: 0 !important;
+  margin: auto;
+}
+.ant-modal-body {
+  height: 490px;
+  width: 853px;
+}
+.ant-modal-close-icon {
+  color: white;
+}
+@media screen and (max-width: 1536px) {
+  .ant-modal-content {
+    height: 490px;
+    width: 853px;
+    position: fixed !important;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .ant-modal-body {
+    height: 100%;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .ant-modal-content {
+    height: 350px;
+    width: 75%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  .ant-modal-body {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .ant-modal-content {
+    height: 250px;
+    width: 80%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+@media screen and (max-width: 500px) {
+  .ant-modal-content {
+    height: 200px;
+    width: 80%;
+    top: 50%;
+    position: absolute;
+
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+@media screen and (max-width: 430px) {
+  .ant-modal-content {
+    height: 200px;
+    width: 80%;
+    top: 50%;
+    position: absolute;
+
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+@media screen and (max-width: 390px) {
+  .ant-modal-content {
+    height: 150px;
+    width: 80%;
+    left: 50%;
+    top: 50%;
+    position: absolute;
+
+    transform: translate(-50%, -50%);
+  }
+}
+
+.rhc-banner {
+  background-color: transparent !important;
+}
+.rhc-banner .rhc-banner__content {
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  box-shadow: 0 0 9px 0 #c9c4c4;
+  display: block;
+  flex-direction: column;
+  padding: 30px 40px;
+  position: relative;
+  text-align: right;
+  width: 70%;
+}
+.rhc-banner .rhc-banner__content .rhc-banner__content__message {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+}
+.rhc-banner .rhc-banner__content button {
+  border: 2px solid #33455a;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 10px;
+}
+.settings__content__footer button {
+  border: 2px solid #33455a;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 10px;
+}
+.rhc-banner__content__primary {
+  color: white !important;
+}
+
+.rhc-settings__content__footer button {
+  border: 2px solid #33455a;
+  border-radius: 6px;
+  color: #33455a;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 10px;
+}
+.rhc-settings__content__footer__primary {
+  color: white !important;
+}
+
+.marquee {
+  width: 100%;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee div {
+  padding-left: 100%;
+  display: inline-block;
+  animation: animate 15s linear infinite;
+}
+
+@keyframes animate {
+  100% {
+    transform: translate(-100%, 0);
+  }
+}
+@layer components {
+  .richtext h1 {
+    @apply uppercase text-[#33455A]  w-1/2 lg:w-full text-left font-lodrian font-black text-4xl justify-center m-auto lg:text-5xl tracking-widest;
+  }
+  .richtext p {
+    @apply font-avenirThin whitespace-pre-wrap text-[#33455A] font-[350] text-[19.2px] leading-[28.8px];
+  }
+  .richtext-h2 h2 {
+    @apply uppercase text-[#33455A]  w-1/2 lg:w-full text-left  font-lodrian font-black text-3xl justify-center m-auto lg:text-4xl tracking-widest;
+  }
+  .richtext-h3 h3 {
+    @apply uppercase text-[#33455A]  w-1/2 lg:w-full text-left  font-lodrian font-black text-2xl justify-center m-auto lg:text-3xl tracking-widest;
+  }
+}
+
+.slick-dots li {
+  width: 31px !important;
+  height: 12px !important;
+
+  margin: 0 2px;
+  transition: width 0.3s ease-in-out;
+  background: #666666;
+  border-radius: 10px;
+}
+.slick-dots {
+  bottom: -20px !important;
+}
+
+.slick-dots .slick-active {
+  width: 69px !important;
+  height: 12px !important;
+  transition: width 0.3s ease-in-out;
+}
+.slick-dots .slick {
+  transition: width 0.3s ease-in-out;
+}
+.slick-dots li.slick-active button:before {
+  color: transparent !important;
+}
+.slick-dots li button:before {
+  color: transparent;
+}
+#winnerCircle .slick-dots {
+  bottom: -60px !important;
+}
+#happeningNow .slick-dots {
+  bottom: -80px !important;
+}
+#happeningNow .slick-dots li {
+  width: 31px !important;
+  height: 12px !important;
+  margin: 0 2px;
+  transition: width 0.3s ease-in-out;
+  background: white;
+  border-radius: 10px;
+}
+#happeningNow .slick-dots .slick-active {
+  width: 69px !important;
+  height: 12px !important;
+  transition: width 0.3s ease-in-out;
+}
+#happeningNow .slick-dots li.slick-active button:before {
+  color: transparent !important;
+}
+#happeningNow .slick-dots li button:before {
+  color: transparent;
+}
+#winnerCircle .slick-dots li.slick-active button:before {
+  color: transparent !important;
+}
+#winnerCircle .slick-dots li button:before {
+  color: transparent;
+}
+.fade-in {
+  animation: fadeIn 2s;
+}
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+.fade-out {
+  animation: fadeOut 2s;
+}
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@media screen and (min-width: 768px) {
+  .responsive-inset {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+#plpContest .slick-dots {
+  bottom: -50px !important;
+}
+#plpContest .slick-dots li {
+  width: 31px !important;
+  height: 12px !important;
+  margin: 0 2px;
+  transition: width 0.3s ease-in-out;
+  background: gray;
+  border-radius: 10px;
+}
+#plpContest .slick-dots .slick-active {
+  width: 69px !important;
+  height: 12px !important;
+  transition: width 0.3s ease-in-out;
+}
+#plpContest .slick-dots li.slick-active button:before {
+  color: transparent !important;
+}
+#plpContest .slick-dots li button:before {
+  color: transparent;
+}
