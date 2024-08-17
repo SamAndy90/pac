@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Londrina_Solid, Inter } from "next/font/google";
+import { Londrina_Solid, Inter, Averia_Libre } from "next/font/google";
 import localFont from "next/font/local";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -31,10 +31,12 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export const metadata: Metadata = {
-  title: "Peace Keepers Adventure Co",
-  description: "Peace Keepers Adventure Co",
-};
+const averia = Averia_Libre({
+  subsets: ["latin"],
+  weight: ["700"],
+  preload: false,
+  variable: "--font-averia",
+});
 
 const Avenir = localFont({
   src: "./AvenirLTStd-Black.otf",
@@ -84,6 +86,11 @@ const thunder = localFont({
   variable: "--font-thunder-variable",
 });
 
+export const metadata: Metadata = {
+  title: "Peace Keepers Adventure Co",
+  description: "Peace Keepers Adventure Co",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -93,7 +100,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} relative bg-pka_background`}
+          className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} relative bg-pka_background`}
         >
           <ApolloProviderComp>
             <StoreProvider>

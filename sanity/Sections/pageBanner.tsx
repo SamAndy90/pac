@@ -1,4 +1,4 @@
-import { titleField } from "./titleField";
+import { titleField } from "./fields/titleField";
 import { portraitField } from "./portraitField";
 export default {
   name: "page.shopBanner",

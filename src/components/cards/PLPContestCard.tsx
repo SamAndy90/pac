@@ -1,10 +1,10 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import CountdownComponent from "../../components/countdownCounter";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import { Button } from "../ui/button";
 import { ImgUrl } from "@/lib/utils";
 import Link from "next/link";
+import CountdownComponent from "../countdownCounter";
 
 type TData = {
   Title: string;
@@ -140,7 +140,7 @@ function PLPContestCard({ data }: Props) {
               <div className="flex mt-5"> {Intro}</div>
 
               <div className="flex justify-center items-center   md:space-x-4 my-6 md:my-4 flex-col md:flex-row  m-auto">
-                {buttons?.map((button, index) => (
+                {buttons?.map((button) => (
                   <Button key={button._key} variant={button.style}>
                     {button?.url ? (
                       <Link href={button.url}>{button.text}</Link>

@@ -1,6 +1,8 @@
-import { titleField } from "./titleField";
+import { titleField } from "./fields";
 import { portraitField } from "./portraitField";
-export default {
+import { defineType } from "sanity";
+
+export default defineType({
   name: "page.livecontest",
   type: "object",
   title: "Live Contest",
@@ -31,4 +33,4 @@ export default {
     },
     portraitField,
   ],
-};
+});

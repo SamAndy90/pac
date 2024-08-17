@@ -79,7 +79,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="w-full justify-center h-0 flex">
+      <header className="w-full max-w-[1920px] mx-auto justify-center h-0 flex">
         <div className="w-full flex mx-[18px] relative justify-center">
           <nav className="bg-pka_blue text-xl font-thunder font-medium w-full mx-auto inset-x-0 top-0 lg:flex items-center z-40 my-5 absolute justify-around hidden rounded-full h-[62px]">
             <div className="flex flex-1 items-center gap-[20px] xl:gap-[57px] 2xl:gap-[68.8px] justify-end ">
@@ -140,7 +140,7 @@ export default function Header() {
             </div>
           </nav>
         </div>
-      </div>
+      </header>
 
       <div className="flex justify-center w-full">
         <div className="relative mx-4 flex w-full z-50">

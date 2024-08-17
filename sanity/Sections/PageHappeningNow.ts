@@ -1,12 +1,12 @@
-import { titleField } from "./titleField";
-import { buttonField } from "./buttonField";
+import { titleField } from "./fields/titleField";
+import { buttonField } from "./fields/buttonField";
 import { portraitField } from "./portraitField";
-import getImageSize from "../lib/getmageSize";
+import { newbutton } from "./fields";
+
 export default {
   name: "page.happeningnow",
   type: "object",
   title: "Happening Now",
-
   fields: [
     titleField,
     {
@@ -17,6 +17,11 @@ export default {
         {
           type: "object",
           fields: [
+            {
+              name: "subtitle",
+              title: "Event Subtitle",
+              type: "string",
+            },
             {
               name: "Title",
               title: "Event Name",
@@ -41,6 +46,7 @@ export default {
                 list: [
                   { title: "Style 1", value: "style1" },
                   { title: "Style 2", value: "style2" },
+                  { title: "Style 3", value: "style3" },
                 ],
               },
               hidden: ({ parent }: any) => parent.whereToShow !== "homepage",
@@ -72,7 +78,7 @@ export default {
               name: "Intro",
               title: "Event Description",
               type: "text",
-              Option: {
+              option: {
                 rows: 10,
               },
             },
@@ -100,9 +106,21 @@ export default {
               },
             },
             {
-              name: "Color",
-              title: "Timer Color Code",
-              type: "simplerColor",
+              name: "timerstyle",
+              type: "object",
+              title: "Timer Style",
+              fields: [
+                {
+                  name: "bgcolor",
+                  title: "Timer BG Color Code",
+                  type: "simplerColor",
+                },
+                {
+                  name: "numcolor",
+                  title: "Timer Numbers Color Code",
+                  type: "simplerColor",
+                },
+              ],
             },
             {
               name: "link",
@@ -120,19 +138,24 @@ export default {
                   : "",
             },
           ],
+          preview: {
+            select: {
+              title: "Title",
+            },
+          },
         },
       ],
-      validation: (rule: {
-        max: (arg0: number) => {
-          (): any;
-          new (): any;
-          error: {
-            (arg0: string): { (): any; new (): any; "": any };
-            new (): any;
-          };
-        };
-      }) => rule.max(9).error("You can only add up to 3 Events."),
+      // validation: (rule: {
+      //   max: (arg0: number) => {
+      //     (): any;
+      //     new (): any;
+      //     error: {
+      //       (arg0: string): { (): any; new (): any; "": any };
+      //       new (): any;
+      //     };
+      //   };
+      // }) => rule.max(9).error("You can only add up to 3 Events."),
     },
-    buttonField,
+    newbutton,
   ],
 };

@@ -1,8 +1,9 @@
 "use client";
+
 import React, { useEffect, useState } from "react";
 import banner from "../../resources/png/Explore.png";
-import CountdownComponent from "../../components/countdownCounter";
 import { ArrowRight, ArrowLeft } from "lucide-react";
+import CountdownComponent from "@/components/countdownCounter";
 function PLPContest(data: any) {
   const [click, setClicked] = useState(false);
   const [clickTwo, setClickedTwo] = useState(false);
@@ -54,8 +55,9 @@ function PLPContest(data: any) {
                 </div>
               </div>
               <div
-                className={`
-     w-full h-[638px]  justify-center ml-auto  items-center  `}
+                className={
+                  "w-full h-[638px] justify-center ml-auto items-center"
+                }
               >
                 <div className="w-[50%]  md:h-[381px]  md:mt-[86px] mb-[171px] flex flex-col items-center  justify-center m-auto">
                   <div className="w-[353.45px] h-[281.17px] flex items-center justify-center">

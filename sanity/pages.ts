@@ -1,15 +1,15 @@
-import { titleField } from "./Sections/titleField";
+import { titleField } from "./Sections/fields";
 
 // Page schema
-import { buttonField } from "./Sections/buttonField";
-import { portraitField } from "./Sections/portraitField";
-export default {
+import { defineArrayMember, defineField, defineType } from "sanity";
+
+export default defineType({
   name: "page",
   title: "Pages",
   type: "document",
   fields: [
-    titleField,
-    {
+    defineField(titleField),
+    defineField({
       name: "slug",
       title: "Slug",
       type: "slug",
@@ -17,18 +17,18 @@ export default {
         source: "title",
         maxLength: 200,
       },
-    },
-    {
+    }),
+    defineField({
       title: "SEO Schema",
       name: "schemaMarkup",
       type: "schemaMarkup",
-    },
-    {
+    }),
+    defineField({
       name: "template",
       type: "string",
       options: { list: ["ancillary", "homepageTemplate", "shoptemplate"] },
-    },
-    {
+    }),
+    defineField({
       name: "ancillarysections",
       type: "object",
       hidden: ({ parent }: { parent: any }) =>
@@ -39,18 +39,18 @@ export default {
           title: "Sections",
           type: "array",
           of: [
-            { type: "page.ancillaryheader" },
-            { type: "page.ancillaryimage" },
-            { type: "page.textsection" },
-            { type: "page.ancillary50" },
-            { type: "page.benifits" },
-            { type: "page.faq" },
-            { type: "page.comingsoon" },
+            defineArrayMember({ type: "page.ancillaryheader" }),
+            defineArrayMember({ type: "page.ancillaryimage" }),
+            defineArrayMember({ type: "page.textsection" }),
+            defineArrayMember({ type: "page.ancillary50" }),
+            defineArrayMember({ type: "page.benifits" }),
+            defineArrayMember({ type: "page.faq" }),
+            defineArrayMember({ type: "page.comingsoon" }),
           ],
         },
       ],
-    },
-    {
+    }),
+    defineField({
       name: "homepagetemplatesections",
       type: "object",
       hidden: ({ parent }: { parent: any }) =>
@@ -61,17 +61,17 @@ export default {
           title: "Sections",
           type: "array",
           of: [
-            { type: "page.slider" },
-            { type: "page.joinpeacekeeper" },
-            { type: "page.winnersCircle" },
-            { type: "page.happeningnow" },
-            { type: "page.explore" },
-            { type: "page.livecontest" },
+            defineArrayMember({ type: "page.hero" }),
+            defineArrayMember({ type: "page.joinpeacekeeper" }),
+            defineArrayMember({ type: "page.livecontest" }),
+            defineArrayMember({ type: "page.explore" }),
+            defineArrayMember({ type: "page.happeningnow" }),
+            defineArrayMember({ type: "page.winnersCircle" }),
           ],
         },
       ],
-    },
-    {
+    }),
+    defineField({
       name: "shoptemplatesections",
       type: "object",
       hidden: ({ parent }: { parent: any }) =>
@@ -82,9 +82,9 @@ export default {
           title: "Sections",
           type: "array",
           of: [
-            { type: "page.shopBanner" },
-            { type: "page.benifits" },
-            { type: "page.comingsoon" },
+            defineArrayMember({ type: "page.shopBanner" }),
+            defineArrayMember({ type: "page.benifits" }),
+            defineArrayMember({ type: "page.comingsoon" }),
           ],
         },
         {
@@ -100,6 +100,6 @@ export default {
           },
         },
       ],
-    },
+    }),
   ],
-};
+});

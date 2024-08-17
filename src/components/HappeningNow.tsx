@@ -1,8 +1,10 @@
 import Slider from "react-slick";
 import Link from "next/link";
 import EventCard from "./common/EventCard";
-import { Button } from "./ui/button";
 import settings from "../app/utils/HappeningNowSettings";
+import { Container } from "@/common";
+import { NewButton } from "./ui/NewButton";
+
 type Portrait = {
   asset: {
     _ref: string;
@@ -13,9 +15,8 @@ type Portrait = {
 
 type Button = {
   url: string;
-  className: string;
   text: string;
-  style: string;
+  style: "primary" | "secondary";
 };
 
 type Card = {
@@ -25,7 +26,7 @@ type Card = {
   style: string;
   time: string;
   _key: string;
-  Color: Color;
+  timerstyle: { bgcolor: Color; numcolor: Color };
   whereToShow: string;
   homepageStyle: string;
   status: string;
@@ -39,19 +40,19 @@ type TData = {
   _type: string;
   _key: string;
   title: string;
-  buttons: Button[];
+  newbutton: Button[];
 };
 type Color = {
   label: string;
   value: string;
 };
 
-type Props = {
+type HappeningNowProps = {
   data: TData;
 };
 
-const HappeningNow = ({ data }: Props) => {
-  const { title } = data;
+const HappeningNow = ({ data }: HappeningNowProps) => {
+  const { title, cards } = data;
 
   const splitTitle = (title: string) => {
     const words = title.split(" ");
@@ -61,87 +62,73 @@ const HappeningNow = ({ data }: Props) => {
     return [firstWord, remainingText];
   };
 
-  const cardsDisplay = data.cards
-    .filter((card) => {
-      return (
-        card.whereToShow.replace(/[^a-zA-Z0-9]/g, "") === "homepage" &&
-        card.status.replace(/[^a-zA-Z0-9]/g, "") === "active"
-      );
-    })
-    .slice(0, 3);
+  const cardsDisplay = cards.filter((card) => {
+    return card.whereToShow === "homepage" && card.status === "active";
+  });
 
   return (
-    <div className="w-full max-w-[1920px] justify-center items-center overflow-hidden lg:px-10 bg-[#33455A] flex flex-col ">
-      <div className="flex justify-center w-full m-auto mt-[68px] mb-[88px]  ">
-        <p
-          className="font-lodrian  font-extrabold text-center text-[#62CCB4] tracking-wider m-auto
-          md:text-4xl md:w-96 2xl:text-[38px] 2xl:leading-[46px] justify-center 2xl:w-[392px] 2xl:h-[92px] 2xl:justify-center
-          text-4xl sm:w-80"
-        >
-          <span className="flex justify-center m-auto">
-            {splitTitle(title)[0]}
-          </span>
-          <span className="flex justify-center m-auto">
-            {splitTitle(title)[1]}
-          </span>
-        </p>
-      </div>
-      <div className="hidden lg:flex flex-col md:flex-col lg:flex-row  xl:flex-row  gap-5 lg:relative justify-center">
-        {cardsDisplay.map((card) => {
-          return (
-            <EventCard
-              title={card.Title}
-              description={card.Intro}
-              backgroundImage={card.portrait?.asset._ref.replace(
-                /[^a-zA-Z0-9-]/g,
-                ""
-              )}
-              countdownBgColor={card.Color.value}
-              countdownTextColor="text-black"
-              exploreButtonText="Explore"
-              timer={card.time}
-              starttime={card.starttime}
-              style={card.homepageStyle.replace(/[^a-zA-Z0-9]/g, "")}
-            />
-          );
-        })}
-      </div>
+    <section className={"bg-pka_blue w-full"}>
+      <Container>
+        <div className="justify-center min-h-screen items-center gap-y-24 overflow-hidden flex flex-col pt-[72px] pb-24">
+          <div className="flex justify-center w-full m-auto">
+            <p className="font-thunder flex flex-col items-center xl:text-7xl font-bold text-center text-white tracking-wider md:text-6xl text-5xl">
+              <span>{splitTitle(title)[0]}</span>
+              <span>{splitTitle(title)[1]}</span>
+            </p>
+          </div>
+          <div className="hidden w-full lg:flex gap-7 relative justify-center">
+            {cardsDisplay.map((card) => {
+              console.log({ card });
 
-      <div className="w-full mx-auto flex ">
-        <div
-          className="lg:hidden slider-container containerClass  "
-          id="happeningNow"
-        >
-          <Slider {...settings}>
-            {cardsDisplay.map((card: any, index: number) => (
-              <div className="">
+              return (
                 <EventCard
+                  key={card._key}
                   title={card.Title}
                   description={card.Intro}
-                  backgroundImage={card.portrait?.asset._ref.replace(
-                    /[^a-zA-Z0-9-]/g,
-                    ""
-                  )}
-                  countdownBgColor={card.Color.value}
-                  countdownTextColor="text-black"
+                  backgroundImage={card.portrait?.asset._ref}
+                  countdownBgColor={card.timerstyle.bgcolor.value}
+                  countdownTextColor={card.timerstyle.numcolor.value}
                   exploreButtonText="Explore"
                   timer={card.time}
-                  style={card?.homepageStyle?.replace(/[^a-zA-Z0-9]/g, "")}
                   starttime={card.starttime}
+                  style={card.homepageStyle}
+                  className={"flex-1"}
                 />
-              </div>
-            ))}
-          </Slider>
+              );
+            })}
+          </div>
+
+          <div className="lg:hidden w-full mx-auto flex">
+            <div className="slider-container containerClass" id="happeningNow">
+              <Slider {...settings}>
+                {cardsDisplay.map((card: any) => (
+                  <EventCard
+                    key={card._key}
+                    title={card.Title}
+                    description={card.Intro}
+                    backgroundImage={card.portrait?.asset._ref}
+                    countdownBgColor={card.timerstyle.bgcolor.value}
+                    countdownTextColor={card.timerstyle.numcolor.value}
+                    exploreButtonText="Explore"
+                    timer={card.time}
+                    style={card?.homepageStyle}
+                    starttime={card.starttime}
+                  />
+                ))}
+              </Slider>
+            </div>
+          </div>
+
+          {data?.newbutton?.length > 0 && (
+            <Link href={data.newbutton[0].url} className={"mt-16"}>
+              <NewButton variant={data.newbutton[0].style}>
+                {data.newbutton[0].text}
+              </NewButton>
+            </Link>
+          )}
         </div>
-      </div>
-      <div className="flex mt-[125px] justify-center w-full m-auto lg:mt-[95px] lg:mb-[49px] xl:mt-[118px] xl:mb-[61px]  2xl:mt-[152px] 2xl:mb-[82px] mb-[88px] ">
-        {data?.buttons?.length > 0 && (
-          <Button variant={data.buttons[0].style as any}>
-            <Link href={data.buttons[0].url}>{data.buttons[0].text}</Link>
-          </Button>
-        )}
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 };
 

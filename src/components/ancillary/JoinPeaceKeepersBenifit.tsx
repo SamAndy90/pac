@@ -42,7 +42,10 @@ const JoinPeaceKeepersBenifit = ({ data }: Props) => {
       </h1>
       <div className="flex   w-full justify-center m-auto mt-[73.3px] mb-[90.4px] lg:justify-around flex-col lg:flex-row">
         {data?.cards?.map((card) => (
-          <div className="  justify-center m-auto flex flex-col  items-center w-[348.6px] ">
+          <div
+            key={card._key}
+            className="justify-center m-auto flex flex-col items-center w-[348.6px] "
+          >
             <Image
               src={ImgUrl(card.portrait.asset._ref)}
               width={240}

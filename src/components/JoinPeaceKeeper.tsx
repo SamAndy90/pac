@@ -1,7 +1,6 @@
 import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { client } from "../../sanity/lib/client";
-import { Button } from "./ui/button";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { NewButton } from "./ui/NewButton";
@@ -61,7 +60,7 @@ const Card50 = ({ data }: Props) => {
   return (
     <section className="flex w-full py-12 md:pt-[116px] md:pb-[136px] max-w-[1920px] min-h-screen mx-auto">
       <div className={"flex-1 py-16 px-3 lg:px-12 xl:pr-36"}>
-        <div className={"flex flex-col justify-center gap-20"}>
+        <div className={"flex h-full flex-col justify-center gap-20"}>
           <h2
             className={
               "uppercase font-thunder font-bold text-7xl text-pka_blue tracking-wider"

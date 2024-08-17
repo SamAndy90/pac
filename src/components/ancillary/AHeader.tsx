@@ -38,7 +38,7 @@ const AHeader = (props: Props) => {
         </div>
       </div>
       <div className="absolute tracking-[5px] h-full top-0 w-full left-0 flex flex-col justify-center items-center text-center font-lodrian text-white text-[48px] font-black">
-        {props.data.title.split("  ").map((word, index) => {
+        {props.data.title.split(" ").map((word, index) => {
           return (
             <p className="" key={word}>
               {word}

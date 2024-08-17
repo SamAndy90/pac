@@ -1,4 +1,4 @@
-import { titleField } from "./titleField";
+import { titleField } from "./fields/titleField";
 import { richtextField } from "./richtextField";
 export default {
   name: "page.textsection",

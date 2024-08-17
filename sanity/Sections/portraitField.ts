@@ -7,5 +7,5 @@ export const portraitField = defineField({
   options: {
     hotspot: true,
   },
-  validation: (Rule) => Rule.required().error("An image is required."),
+  validation: (rule) => rule.required().error("An image is required."),
 });

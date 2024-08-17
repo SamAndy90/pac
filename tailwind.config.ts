@@ -64,6 +64,7 @@ const config = {
         avenirThin: ["var(--font-avenir-thin)"],
         avenirBold: ["var(--font-avenir-bold)"],
         inter: ["var(--font-inter)"],
+        averia: ["var(--font-averia)"],
         thunder: ["var(--font-thunder-variable)"],
       },
       borderRadius: {

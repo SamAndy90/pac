@@ -1,31 +1,29 @@
-// ./schemas/heroType.ts
-
-import {defineField, defineType} from 'sanity'
+import { defineField, defineType } from "sanity";
 
 export const heroType = defineType({
-  name: 'hero',
-  type: 'object',
-  title: 'Hero',
+  name: "hero",
+  type: "document",
+  title: "Hero",
   fields: [
     defineField({
-      name: 'heading',
-      type: 'string',
+      name: "heading",
+      type: "string",
     }),
     defineField({
-      name: 'tagline',
-      type: 'string',
+      name: "tagline",
+      type: "string",
     }),
     defineField({
-      name: 'image',
-      type: 'image',
-      options: {hotspot: true},
+      name: "image",
+      type: "image",
+      options: { hotspot: true },
       fields: [
         defineField({
-          name: 'alt',
-          type: 'string',
-          title: 'Alternative text',
+          name: "alt",
+          type: "string",
+          title: "Alternative text",
         }),
       ],
     }),
   ],
-})
+});

@@ -7,7 +7,7 @@ import { SanityDocument } from "next-sanity";
 import { sanityFetch } from "../../../sanity/lib/fetch";
 import Ancillary from "@/components/templates/Ancillary";
 import ShopTemplate from "@/components/shoptemplate/ShopTemplate";
-type Props = {
+type MetadataProps = {
   params: {
     slug: string;
   };
@@ -19,7 +19,9 @@ async function getData() {
   });
   return fetchData;
 }
-export async function generateMetadata(props: Props): Promise<Metadata> {
+export async function generateMetadata(
+  props: MetadataProps
+): Promise<Metadata> {
   const data: any = await getData();
 
   const slugData = data.find(
@@ -39,7 +41,7 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-export default async function page(props: Props) {
+export default async function Page(props: MetadataProps) {
   await getData();
   const data = await getData();
 

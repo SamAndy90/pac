@@ -43,17 +43,17 @@ const WinnersCircle = ({ data }: Props) => {
 
   return (
     <div className="relative w-full mx-[103px] lg:my-20 flex justify-center overflow-hidden">
-      <div className="relative flex m-auto lg:bg-transparent h-[800px] lg:h-auto   bg-[#eff178]">
+      <div className="relative flex m-auto lg:bg-transparent h-[800px] lg:h-auto bg-pka_green_light">
         <div className=" 2xl:w-[880px] 2xl:h-[880px] xl:w-[733px] xl:h-[733px] lg:w-[586px] lg:h-[586px] ">
-          <Image src={Circle} alt="circle" className="" />
+          <Image src={Circle} alt="circle" />
         </div>
         <div className="flex justify-center  font-lodrian 2xl:top-[112px] xl:top-[95px] lg:top-[78px] top-[80px]  absolute w-full m-auto ">
           <div className=" flex-col 2xl:w-[300px] xl:w-[280px] lg:w-[200px]  justify-center m-auto flex text-center ">
-            <div className="uppercase tracking-widest text-3xl lg:text-5xl font-bold text-[#33455A]">
+            <div className="uppercase font-thunder tracking-widest text-3xl lg:text-5xl font-bold text-pka_blue2">
               {data.title}
             </div>
-            <div className=" mt-4  lg:hidden flex justify-center max-h-[400px]  items-center m-auto ">
-              <p className=" lg:w-[380px] xl:w-[420px] text-justify  2xl:w-[504px] 2xl:text-[13px] w-[90%] 2xl:leading-5   font-avenirThin text-sm lg:text-[10px] lg:leading-3 xl:text-[11px] xl:leading-4 align-middle">
+            <div className=" mt-4 lg:hidden flex justify-center max-h-[400px] items-center m-auto ">
+              <p className=" lg:w-[380px] xl:w-[420px] text-justify  2xl:w-[504px] 2xl:text-[13px] w-[90%] 2xl:leading-5 font-avenirBold text-sm lg:text-[10px] lg:leading-3 xl:text-[11px] xl:leading-4 align-middle">
                 {data?.description}
               </p>
             </div>
@@ -65,6 +65,7 @@ const WinnersCircle = ({ data }: Props) => {
             {mappedData?.map((card, index) => (
               <div key={index} className="">
                 <VideoCard
+                  key={card.cardSrc}
                   cardSrc={card.cardSrc}
                   title={card.title}
                   description={card.description}
@@ -81,6 +82,7 @@ const WinnersCircle = ({ data }: Props) => {
               {mappedData?.map((card, index) => (
                 <div key={index} className="">
                   <VideoCard
+                    key={card.cardSrc}
                     cardSrc={card.cardSrc}
                     title={card.title}
                     description={card.description}
@@ -91,9 +93,9 @@ const WinnersCircle = ({ data }: Props) => {
             </Slider>
           </div>
         </div>
-        <div className="absolute hidden lg:absolute w-full 2xl:bottom-[128px] xl:bottom-[111px] lg:bottom-[60px]  lg:flex m-auto  ">
-          <div className="flex justify-center  items-center m-auto ">
-            <p className=" lg:w-[380px] xl:w-[420px] 2xl:w-[504px] 2xl:text-[13px] w-[80%] 2xl:leading-5  text-center font-avenirThin text-sm lg:text-[10px] lg:leading-3 xl:text-[11px] xl:leading-4 align-middle">
+        <div className="absolute hidden lg:absolute w-full 2xl:bottom-[128px] xl:bottom-[111px] lg:bottom-[60px] lg:flex m-auto">
+          <div className="flex justify-center items-center m-auto ">
+            <p className="w-[80%] text-center text-[#19222C] font-avenirBold text-sm lg:text-2xl align-middle">
               {data?.description}
             </p>
           </div>

@@ -1,4 +1,6 @@
-export default {
+import { defineType } from "sanity";
+
+export const logo = defineType({
   name: "logo",
   title: "Website Logo",
   type: "document",
@@ -35,4 +37,4 @@ export default {
       description: "URL the logo should link to.",
     },
   ],
-};
+});

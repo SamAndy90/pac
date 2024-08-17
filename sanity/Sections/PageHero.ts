@@ -1,9 +1,9 @@
 import { buttonField } from "./fields/buttonField";
 import { portraitField } from "./portraitField";
 export default {
-  name: "page.slider",
+  name: "page.hero",
   type: "object",
-  title: "Hero Slider",
+  title: "Hero",
   fields: [
     {
       name: "style",

@@ -18,17 +18,19 @@ import "react-hook-consent/dist/styles/style.css";
 import HeroSection from "@/components/HeroSection";
 
 const AllComponents: { [key: string]: (data: any) => ReactNode } = {
+  "page.hero": (data: any) => <HeroSection data={data} />,
   "page.joinpeacekeeper": (data: any) => <Card50 data={data} />,
-  "page.explore": (data: any) => <CardsSection data={data} />,
-  "page.winnersCircle": (data: any) => <WinnersCircle data={data} />,
-  "page.slider": (data: any) => <HeroSection data={data} />,
-  "page.happeningnow": (data: any) => <HappeningNow data={data} />,
   "page.livecontest": (data: any) => <LiveContest data={data} />,
+  "page.explore": (data: any) => <CardsSection data={data} />,
+  "page.happeningnow": (data: any) => <HappeningNow data={data} />,
+  "page.winnersCircle": (data: any) => <WinnersCircle data={data} />,
 } as const;
-type Props = {
+
+type HomePageProps = {
   data: any[];
 };
-export default function HomePage({ data }: Props) {
+
+export default function HomePage({ data }: HomePageProps) {
   const [sections, setSections] = useState<any[]>(data);
   const [mounted, setMounted] = useState(false);
   const { toggleBanner, hasConsent } = useConsent();

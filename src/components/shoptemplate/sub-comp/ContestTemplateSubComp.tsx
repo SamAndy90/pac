@@ -114,6 +114,7 @@ const ContestTemplateSubComp = ({
         {HomeCards.map((card: any) => {
           return (
             <EventCard
+              key={card._key}
               title={card.Title}
               description={card.Intro}
               backgroundImage={card.portrait?.asset._ref.replace(
@@ -137,9 +138,10 @@ const ContestTemplateSubComp = ({
           id="plpContest"
         >
           <Slider {...settings}>
-            {HomeCards.map((card: any, index: number) => (
+            {HomeCards.map((card: any) => (
               <div className="mb-8">
                 <EventCard
+                  key={card._key}
                   title={card.Title}
                   description={card.Intro}
                   backgroundImage={card.portrait?.asset._ref.replace(

@@ -1,5 +1,5 @@
-import { titleField } from "./titleField";
-import { buttonField } from "./buttonField";
+import { titleField } from "./fields";
+import { buttonField } from "./fields";
 import { portraitField } from "./portraitField";
 export const JoinPeaceKeeper = {
   name: "joinpeacekeeper",

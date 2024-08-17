@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { client } from "../../sanity/lib/client";
+import { Container } from "@/common";
 
 interface Announcement {
   _id: string;
@@ -26,8 +27,12 @@ export default function Banner() {
 
   // Conditional rendering to handle undefined data or empty array
   return (
-    <div className="bg-pka_green text-pka_blue2 text-4xl tracking-[.2em] font-bold leading-none text-center pt-7 pb-2 font-thunder">
-      {data && data.length > 0 && <span>{data[0].message}</span>}
-    </div>
+    <section className={"bg-pka_green"}>
+      <Container>
+        <div className="text-pka_blue2 text-3xl md:text-4xl tracking-[.2em] font-bold leading-none text-center pt-7 pb-2 font-thunder">
+          {data && data.length > 0 && <span>{data[0].message}</span>}
+        </div>
+      </Container>
+    </section>
   );
 }

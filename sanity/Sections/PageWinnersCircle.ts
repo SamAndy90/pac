@@ -1,4 +1,4 @@
-import { titleField } from "./titleField";
+import { titleField } from "./fields/titleField";
 export default {
   name: "page.winnersCircle",
   type: "object",

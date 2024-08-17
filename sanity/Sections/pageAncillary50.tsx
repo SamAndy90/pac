@@ -1,5 +1,5 @@
-import { titleField } from "./titleField";
-import { buttonField } from "./buttonField";
+import { titleField } from "./fields/titleField";
+import { buttonField } from "./fields/buttonField";
 import { portraitField } from "./portraitField";
 export default {
   name: "page.ancillary50",

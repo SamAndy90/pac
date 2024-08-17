@@ -23,7 +23,7 @@ type TImage = {
 type TData = {
   portrait: TImage;
   Intro: string;
-  _type: "slider";
+  _type: "hero";
   name: string;
   Title: string;
   SubTitle: string;
@@ -120,7 +120,7 @@ const Style2 = ({ data }: { data: any }) => {
           </div>
 
           <div className="bottom-0 relative inset-x-0 flex lg:mr-[24px] mb-[37px] justify-end">
-            <p className="max-w-[852px] text-pretty md:text-2xl text-white font-avenirThin">
+            <p className="max-w-[852px] text-pretty xl:text-xl 2xl:text-2xl text-white font-avenirThin">
               {data.Intro}
             </p>
           </div>
@@ -157,7 +157,7 @@ const Style3 = ({ data }: { data: any }) => {
               <div className="flex gap-[23px] mt-[24px]">
                 {data.buttons?.map((button: any, index: number) => (
                   <Button
-                    key={index}
+                    key={button.text + index}
                     variant={"default"}
                     className={button.className}
                   >

@@ -1,13 +1,15 @@
 "use client";
 import { cn } from "@/lib/utils";
+import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import Countdown, { CountdownRenderProps } from "react-countdown";
 
 // TODO: Confirm if the count down deadline is coming from Sanity
 //
 interface RendererProps extends CountdownRenderProps {
-  bgColor: string;
-  textColor: string;
+  bgColor?: string;
+  textColor?: string;
+  size?: "small" | "large";
 }
 const Renderer: React.FC<RendererProps> = ({
   days,
@@ -15,76 +17,125 @@ const Renderer: React.FC<RendererProps> = ({
   minutes,
   seconds,
   completed,
-  bgColor,
-  textColor,
+  bgColor = "#0A4A64",
+  textColor = "#fff",
+  size = "large",
 }) => {
-  const bgColorValue = `bg-[${bgColor.slice(0, 7)}]`;
+  let bgColorValue = `bg-[#0A4A64]`;
+  let textColorValue = `text-[${textColor}]`;
+
+  const smallSizeStyles = "p-4 md:p-4 lg:p-4 xl:p-4";
 
   if (completed) {
     return "";
   } else {
     return (
-      <div className="gap-1 2xl:gap-2 flex items-center justify-center font-inter font-normal">
+      <div
+        className={clsx(
+          "gap-1 text-center lg:gap-x-2 xl:gap-x-3 flex items-center justify-center font-inter text-white",
+          textColorValue,
+          {
+            "xl:gap-x-2": size === "small",
+          }
+        )}
+      >
         <div
           className={cn(
-            `flex flex-col items-center justify-center w-14 h-16 gap-2 rounded-lg md:gap-0 xl:gap-2   md:h-[54px] md:w-[40px]  xl:w-[47px] xl:h-[67px] 2xl:w-[71px] 2xl:h-[100px] ${bgColorValue}`
+            "flex flex-col xl:p-x-6 lg:py-6 px-4 py-5 md:px-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
+            bgColorValue,
+            {
+              "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+            }
           )}
         >
           <span
-            className={`text-2xl md:text-[19px] xl:text-2xl 2xl:text-[36px] ${textColor}`}
+            className={cn("text-3xl md:text-4xl lg:text-5xl xl:text-[57px]", {
+              "text-2xl md:text-2xl lg:text-2xl xl:text-2xl": size === "small",
+            })}
           >
             {days}
           </span>
           <span
-            className={` text-[10px] md:text-[8px] xl:text-[10px] 2xl:text-[16px] ${textColor}`}
+            className={cn("md:text-lg xl:text-2xl", {
+              "md:text-base xl:text-base": size === "small",
+            })}
           >
             days
           </span>
         </div>
+
         <div
           className={cn(
-            `flex flex-col items-center justify-center w-14 h-16 gap-2 rounded-lg md:gap-0 xl:gap-2  md:h-[54px] md:w-[40px]  xl:w-[47px] xl:h-[67px] 2xl:w-[75px] 2xl:h-[100px] ${bgColorValue}`
+            "flex flex-col xl:p-x-6 lg:py-6 px-4 py-5 md:px-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
+            bgColorValue,
+            {
+              "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+            }
           )}
         >
           <span
-            className={`text-2xl md:text-[19px] xl:text-2xl 2xl:text-[36px] ${textColor}`}
+            className={cn("text-3xl md:text-4xl lg:text-5xl xl:text-[57px]", {
+              "text-2xl md:text-2xl lg:text-2xl xl:text-2xl": size === "small",
+            })}
           >
             {hours}
           </span>
           <span
-            className={`text-[10px] md:text-[8px] xl:text-[10px] 2xl:text-[16px] ${textColor}`}
+            className={cn("md:text-lg xl:text-2xl", {
+              "md:text-base xl:text-base": size === "small",
+            })}
           >
             hours
           </span>
         </div>
         <div
           className={cn(
-            `flex flex-col items-center justify-center w-[70px] h-16 gap-2 md:gap-0 xl:gap-2  rounded-lg  md:h-[54px] md:w-[49px]  xl:w-[61px] xl:h-[67px] 2xl:w-[92px] 2xl:h-[100px] ${bgColorValue}`
+            "flex flex-col xl:p-x-6 lg:py-6 px-4 py-5 md:px-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
+            bgColorValue,
+            {
+              "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+            }
           )}
         >
           <span
-            className={`text-2xl md:text-[19px]  xl:text-2xl  2xl:text-[36px] ${textColor}`}
+            className={cn("text-3xl md:text-4xl lg:text-5xl xl:text-[57px]", {
+              "text-2xl md:text-2xl lg:text-2xl xl:text-2xl": size === "small",
+            })}
           >
             {minutes}
           </span>
           <span
-            className={`text-[10px]  md:text-[8px] xl:text-[10px] 2xl:text-[16px] ${textColor}`}
+            className={cn("md:text-lg xl:text-2xl", {
+              "md:text-base xl:text-base": size === "small",
+            })}
           >
             minutes
           </span>
         </div>
         <div
           className={cn(
-            `flex flex-col items-center justify-center w-14 h-16 gap-2 rounded-lg xl:gap-2  md:gap-0 md:h-[54px] md:w-[40px]  xl:w-[47px] xl:h-[67px] 2xl:w-[72px] 2xl:h-[100px] ${bgColorValue}`
+            "flex flex-col xl:p-x-6 lg:py-6 px-4 py-5 md:px-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
+            bgColorValue,
+            {
+              "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+            }
           )}
         >
           <span
-            className={`text-2xl  md:text-[19px] xl:text-2xl 2xl:text-[36px] ${textColor}`}
+            className={cn(
+              "text-3xl md:text-4xl lg:text-5xl xl:text-[57px] min-w-10 md:min-w-14 xl:min-w-20",
+              {
+                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-10 md:min-w-10 xl:min-w-10":
+                  size === "small",
+              }
+            )}
           >
             {seconds}
           </span>
           <span
-            className={`text-[10px] md:text-[8px] xl:text-[10px] 2xl:text-[16px] ${textColor}`}
+            className={cn("md:text-lg xl:text-2xl", {
+              "md:text-base xl:text-base": size === "small",
+            })}
           >
             sec
           </span>
@@ -95,14 +146,16 @@ const Renderer: React.FC<RendererProps> = ({
 };
 
 interface CountdownComponentProps {
-  bgColor: string;
-  textColor: string;
+  bgColor?: string;
+  textColor?: string;
   timer?: string;
+  size?: "small" | "large";
 }
 const CountdownComponent: React.FC<CountdownComponentProps> = ({
   bgColor,
   textColor,
   timer,
+  size = "large",
 }) => {
   const [mounted, setMounted] = useState(false);
 
@@ -121,7 +174,12 @@ const CountdownComponent: React.FC<CountdownComponentProps> = ({
     <Countdown
       date={targetDate}
       renderer={(props) => (
-        <Renderer textColor={textColor} bgColor={bgColor} {...props} />
+        <Renderer
+          textColor={textColor}
+          size={size}
+          bgColor={bgColor}
+          {...props}
+        />
       )}
     />
   );
