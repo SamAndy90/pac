@@ -1,7 +1,7 @@
 import React from "react";
 
 import Image from "next/image";
-import Explore from "../resources/png/Explore.png";
+import Explore from "../resources/svg/explore.svg";
 import SliderComponent from "./common/SliderComponent";
 
 interface SliderCard {
@@ -50,14 +50,21 @@ export default function CardsSection({ data }: Props) {
   });
 
   return (
-    <div className="relative overflow-hidden w-full  max-w-[1920px]">
-      <div className="flex   flex-col lg:flex-row justify-center items-center relative  mt-10 mb-14 md:my-14 lg:my-20">
+    <div className="relative overflow-hidden w-full max-w-[1920px]">
+      <div className="flex flex-col lg:flex-row justify-center items-center relative  mt-10 mb-14 md:my-14 lg:my-20">
         <SliderComponent data={sliderCardData} />
       </div>
-      <div className="absolute  top-5 responsive-inset  items-center  flex w-full justify-center">
-        <div className="relative w-1/2  h-12 md:h-24 mb-8  lg:pb-0   lg:mt-0  lg:w-[684px] xl:w-[856px] 2xl:w-[1024px] ">
+      <div className="absolute top-5 responsive-inset items-center flex w-full justify-center">
+        <div className="relative w-1/2 mb-8 lg:pb-0 lg:mt-0 lg:w-[684px] xl:w-[856px] 2xl:w-[1024px] ">
           <div className="w-full h-full">
             <Image src={Explore} alt="banner" />
+            {/* <h5
+              className={
+                "text-[300px] relative font-thunder font-bold tracking-[0.15em] bg-white/65 bg-clip-text text-transparent"
+              }
+            >
+              EXPLORE
+            </h5> */}
           </div>
         </div>
       </div>

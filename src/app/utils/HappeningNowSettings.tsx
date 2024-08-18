@@ -122,7 +122,7 @@ const settings = {
       settings: {
         slidesToShow: 1,
         centerMode: true,
-        centerPadding: "120px",
+        centerPadding: "0px",
       },
     },
     {
@@ -130,7 +130,7 @@ const settings = {
       settings: {
         slidesToShow: 1,
         centerMode: true,
-        centerPadding: "90px",
+        centerPadding: "0px",
       },
     },
     {
@@ -138,7 +138,7 @@ const settings = {
       settings: {
         slidesToShow: 1,
         centerMode: true,
-        centerPadding: "60px",
+        centerPadding: "0px",
       },
     },
     {
@@ -146,7 +146,7 @@ const settings = {
       settings: {
         slidesToShow: 1,
         centerMode: true,
-        centerPadding: "40px",
+        centerPadding: "0px",
       },
     },
     {

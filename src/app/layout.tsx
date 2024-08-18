@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Londrina_Solid, Inter, Averia_Libre } from "next/font/google";
+import { Londrina_Solid, Inter, Averia_Libre, Roboto } from "next/font/google";
 import localFont from "next/font/local";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -8,6 +8,8 @@ import { ClerkProvider } from "@clerk/nextjs";
 import Banner from "@/components/AnnouncementBanner";
 import Header from "@/components/navbar";
 import Footer from "@/components/Footer";
+
+import "keen-slider/keen-slider.min.css";
 
 import { draftMode } from "next/headers";
 import LiveVisualEditing from "@/components/LiveVisualEditing";
@@ -29,6 +31,13 @@ const inter = Inter({
   weight: ["400", "500", "700", "800", "900"],
   preload: false,
   variable: "--font-inter",
+});
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  preload: false,
+  variable: "--font-roboto",
 });
 
 const averia = Averia_Libre({
@@ -100,7 +109,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} relative bg-pka_background`}
+          className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${roboto.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} relative bg-pka_background`}
         >
           <ApolloProviderComp>
             <StoreProvider>

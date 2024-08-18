@@ -52,22 +52,26 @@ const VideoCard: React.FC<VideoCardProps> = ({
     <>
       <div
         onClick={showModal}
-        className="relative hover:cursor-pointer items-center m-auto w-[202px] h-[303px] lg:h-[202px] lg:w-[135px]  gap-5 lg:gap-0 xl:h-[252.67px] xl:w-[168.67px]  2xl:w-[202px] 2xl:h-[303px]"
+        className="relative group hover:cursor-pointer w-full items-center mx-auto xl:max-w-[254px] rounded-2xl lg:rounded-[20px] overflow-hidden aspect-[2/3] bg-[#0A1200]"
       >
         <Image
           src={urlFor(cardSrc).url()}
           alt="bg"
-          className="rounded-lg "
+          className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
           fill
         />
 
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center">
-          <div className="text-2xl text-white">{title}</div>
-          <div className="text-base text-white">{description}</div>
+        <div className="relative h-full font-roboto flex flex-col justify-center items-center text-center">
+          <div className="text-2xl text-[#CED0CC] transition-colors group-hover:text-white duration-300">
+            {title}
+          </div>
+          <div className="text-xs uppercase transition-colors group-hover:text-white duration-300 text-[#CED0CC]">
+            {description}
+          </div>
 
           <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2">
-            <div className="text-base h-10 w-10 flex rounded-full bg-white items-center justify-center">
-              <PlayIcon className="text-black h-5 w-5 fill-black  hover:cursor-pointer" />
+            <div className="size-[72px] hover:bg-pka_green_light transition-colors flex rounded-full bg-white items-center justify-center">
+              <PlayIcon className="text-black size-7 fill-black hover:cursor-pointer" />
             </div>
           </div>
         </div>

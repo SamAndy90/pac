@@ -7,6 +7,7 @@ import Countdown, { CountdownRenderProps } from "react-countdown";
 // TODO: Confirm if the count down deadline is coming from Sanity
 //
 interface RendererProps extends CountdownRenderProps {
+  style?: string;
   bgColor?: string;
   textColor?: string;
   size?: "small" | "large";
@@ -17,14 +18,13 @@ const Renderer: React.FC<RendererProps> = ({
   minutes,
   seconds,
   completed,
+  style = "style1",
   bgColor = "#0A4A64",
   textColor = "#fff",
   size = "large",
 }) => {
   let bgColorValue = `bg-[#0A4A64]`;
   let textColorValue = `text-[${textColor}]`;
-
-  const smallSizeStyles = "p-4 md:p-4 lg:p-4 xl:p-4";
 
   if (completed) {
     return "";
@@ -33,7 +33,6 @@ const Renderer: React.FC<RendererProps> = ({
       <div
         className={clsx(
           "gap-1 text-center lg:gap-x-2 xl:gap-x-3 flex items-center justify-center font-inter text-white",
-          textColorValue,
           {
             "xl:gap-x-2": size === "small",
           }
@@ -42,9 +41,13 @@ const Renderer: React.FC<RendererProps> = ({
         <div
           className={cn(
             "flex flex-col xl:p-x-6 lg:py-6 px-4 py-5 md:px-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
-            bgColorValue,
             {
               "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+            },
+            {
+              "text-white bg-pka_blue": style === "style1",
+              "text-pka_blue2 bg-pka_green_light": style === "style2",
+              "text-white bg-[#6A7A87]": style === "style3",
             }
           )}
         >
@@ -70,6 +73,11 @@ const Renderer: React.FC<RendererProps> = ({
             bgColorValue,
             {
               "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+            },
+            {
+              "text-white bg-pka_blue": style === "style1",
+              "text-pka_blue2 bg-pka_green_light": style === "style2",
+              "text-white bg-[#6A7A87]": style === "style3",
             }
           )}
         >
@@ -94,6 +102,11 @@ const Renderer: React.FC<RendererProps> = ({
             bgColorValue,
             {
               "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+            },
+            {
+              "text-white bg-pka_blue": style === "style1",
+              "text-pka_blue2 bg-pka_green_light": style === "style2",
+              "text-white bg-[#6A7A87]": style === "style3",
             }
           )}
         >
@@ -118,6 +131,11 @@ const Renderer: React.FC<RendererProps> = ({
             bgColorValue,
             {
               "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+            },
+            {
+              "text-white bg-pka_blue": style === "style1",
+              "text-pka_blue2 bg-pka_green_light": style === "style2",
+              "text-white bg-[#6A7A87]": style === "style3",
             }
           )}
         >
@@ -146,12 +164,14 @@ const Renderer: React.FC<RendererProps> = ({
 };
 
 interface CountdownComponentProps {
+  style?: string;
   bgColor?: string;
   textColor?: string;
   timer?: string;
   size?: "small" | "large";
 }
 const CountdownComponent: React.FC<CountdownComponentProps> = ({
+  style = "style1",
   bgColor,
   textColor,
   timer,
@@ -175,6 +195,7 @@ const CountdownComponent: React.FC<CountdownComponentProps> = ({
       date={targetDate}
       renderer={(props) => (
         <Renderer
+          style={style}
           textColor={textColor}
           size={size}
           bgColor={bgColor}

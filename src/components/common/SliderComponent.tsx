@@ -33,7 +33,7 @@ function SliderComponent({ data }: SliderComponentProps) {
   };
 
   return (
-    <div className="w-full flex  relative ">
+    <div className="w-full flex relative ">
       <div
         className="hidden items-center lg:flex h-full lg:justify-center lg:!align-middle absolute  z-50 lg:left-[14px]  xl:left-[18px] 2xl:left-[21px] min-[1920px]:left-[26px]  text-black hover:cursor-pointer"
         onClick={goToPrev}
@@ -50,15 +50,20 @@ function SliderComponent({ data }: SliderComponentProps) {
         <div className="lg:mx-[85px] xl:mx-[106px] 2xl:mx-32 min-[1920px]:mx-40 overflow-hidden">
           <Slider {...settings} ref={sliderRef}>
             {data.map((item: any, index: number) => (
-              <div key={index} className=" flex ">
-                <div className="flex flex-col flex-wrap  relative   m-auto  my-10 lg:my-0 overflow-x-hidden w-[280px] h-[400px] lg:w-[277px] lg:h-[396.73px] xl:w-[346px] xl:h-[495.73px] 2xl:w-[416px] 2xl:h-[594px] min-[1920px]:w-[520px] min-[1920px]:h-[743px]  ">
+              <div key={index} className="flex group">
+                <div className="flex flex-col flex-wrap items-center rounded-[20px] overflow-hidden relative m-auto my-10 lg:my-0 overflow-x-hidden w-[280px] h-[400px] lg:w-[277px] lg:h-[396.73px] xl:w-[346px] xl:h-[495.73px] 2xl:w-[416px] 2xl:h-[594px] min-[1920px]:w-[520px] min-[1920px]:h-[743px]">
                   <Image
                     src={urlFor(item.potrait.asset._ref).url()}
                     alt="banner"
-                    className="rounded-[20px] object-cover"
+                    className="object-cover transition-opacity duration-300"
                     fill
                   />
-                  <p className="absolute text-[19.51px] xl:text-[24.39px] 2xl:text-[29.27px] font-lodrian tracking-wider bottom-0 flex m-auto text-center w-full justify-center text-white text-5xl font-londrina-solid-900 mb-[62px]">
+                  <div
+                    className={
+                      "absolute opacity-20 transition-opacity duration-300 group-hover:opacity-0 bg-[#0A1200] w-full h-full"
+                    }
+                  ></div>
+                  <p className="absolute text-[19.51px] xl:text-[24.39px] 2xl:text-2xl font-thunder tracking-wider bottom-[8.5%] m-auto text-center uppercase text-white text-5xl font-bold">
                     {item.title}
                   </p>
                 </div>

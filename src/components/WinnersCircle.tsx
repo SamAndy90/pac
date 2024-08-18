@@ -1,9 +1,9 @@
 "use client";
-import Image from "next/image";
-import Circle from "../resources/svg/circle.svg";
+
 import VideoCard from "./common/VideoCard";
-import Slider from "react-slick";
-import winnerSliderSettings from "../app/utils/winnerSliderSettings";
+import { Container } from "@/common";
+import { useKeenSlider } from "keen-slider/react";
+
 interface CardData {
   cardSrc: string;
   title: string;
@@ -32,76 +32,92 @@ type Props = {
 };
 
 const WinnersCircle = ({ data }: Props) => {
-  const mappedData: CardData[] = data?.winners.map((winner) => {
-    return {
-      cardSrc: winner.portrait.asset._ref,
-      title: winner.winnerTitle,
-      description: winner.description,
-      videoUrl: winner.videoUrl,
-    };
+  const [sliderRef, instanceRef] = useKeenSlider({
+    slides: {
+      perView: 1.2,
+      spacing: 20,
+    },
+    breakpoints: {
+      "(min-width: 460px)": {
+        slides: {
+          perView: 1.7,
+          spacing: 24,
+        },
+      },
+      "(min-width: 530px)": {
+        slides: {
+          perView: 2.2,
+          spacing: 24,
+        },
+      },
+      "(min-width: 768px)": {
+        slides: {
+          perView: 3.4,
+          spacing: 24,
+          origin: "center",
+        },
+        initial: 1,
+      },
+      "(min-width: 1024px)": {
+        slides: {
+          perView: 4,
+          spacing: 30,
+          origin: "auto",
+        },
+      },
+      "(min-width: 1280px)": {
+        slides: {
+          perView: 5,
+          spacing: 30,
+          origin: "auto",
+        },
+      },
+      "(min-width: 1400px)": {
+        slides: {
+          perView: 6,
+          spacing: 30,
+          origin: "auto",
+        },
+      },
+    },
   });
 
-  return (
-    <div className="relative w-full mx-[103px] lg:my-20 flex justify-center overflow-hidden">
-      <div className="relative flex m-auto lg:bg-transparent h-[800px] lg:h-auto bg-pka_green_light">
-        <div className=" 2xl:w-[880px] 2xl:h-[880px] xl:w-[733px] xl:h-[733px] lg:w-[586px] lg:h-[586px] ">
-          <Image src={Circle} alt="circle" />
-        </div>
-        <div className="flex justify-center  font-lodrian 2xl:top-[112px] xl:top-[95px] lg:top-[78px] top-[80px]  absolute w-full m-auto ">
-          <div className=" flex-col 2xl:w-[300px] xl:w-[280px] lg:w-[200px]  justify-center m-auto flex text-center ">
-            <div className="uppercase font-thunder tracking-widest text-3xl lg:text-5xl font-bold text-pka_blue2">
-              {data.title}
-            </div>
-            <div className=" mt-4 lg:hidden flex justify-center max-h-[400px] items-center m-auto ">
-              <p className=" lg:w-[380px] xl:w-[420px] text-justify  2xl:w-[504px] 2xl:text-[13px] w-[90%] 2xl:leading-5 font-avenirBold text-sm lg:text-[10px] lg:leading-3 xl:text-[11px] xl:leading-4 align-middle">
-                {data?.description}
-              </p>
-            </div>
-          </div>
-        </div>
+  const mappedData: CardData[] = data?.winners.map((winner) => ({
+    cardSrc: winner.portrait.asset._ref,
+    title: winner.winnerTitle,
+    description: winner.description,
+    videoUrl: winner.videoUrl,
+  }));
 
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 gap-5 w-[100%] xl:w-auto  xl:m-auto xl:flex items-center align-middle">
-          <div className="hidden   xl:flex gap-5  ">
-            {mappedData?.map((card, index) => (
-              <div key={index} className="">
-                <VideoCard
-                  key={card.cardSrc}
-                  cardSrc={card.cardSrc}
-                  title={card.title}
-                  description={card.description}
-                  videoUrl={card.videoUrl}
-                />
-              </div>
-            ))}
-          </div>
-          <div
-            id="winnerCircle"
-            className=" slider-container mt-24 lg:mt-4 container  block xl:hidden containerClass"
-          >
-            <Slider {...winnerSliderSettings}>
-              {mappedData?.map((card, index) => (
-                <div key={index} className="">
-                  <VideoCard
-                    key={card.cardSrc}
-                    cardSrc={card.cardSrc}
-                    title={card.title}
-                    description={card.description}
-                    videoUrl={card.videoUrl}
-                  />
-                </div>
-              ))}
-            </Slider>
-          </div>
-        </div>
-        <div className="absolute hidden lg:absolute w-full 2xl:bottom-[128px] xl:bottom-[111px] lg:bottom-[60px] lg:flex m-auto">
-          <div className="flex justify-center items-center m-auto ">
-            <p className="w-[80%] text-center text-[#19222C] font-avenirBold text-sm lg:text-2xl align-middle">
+  return (
+    <section className="w-full overflow-hidden">
+      <Container className={"2xl:max-w-[1680px]"}>
+        <div className="relative py-20">
+          <div className="max-w-[1100px] gap-y-6 flex flex-col items-center justify-start lg:justify-between mx-auto aspect-square bg-pka_green_light top-0 w-full rounded-full">
+            <h2 className="uppercase text-center lg:max-w-[290px] max-w-[266px] mt-[8.81%] font-thunder tracking-wider text-5xl lg:text-7xl font-bold text-pka_blue2">
+              {data.title}
+            </h2>
+            <p className="text-[#19222C] font-avenirBold text-lg lg:text-2xl lg:max-w-[645px] max-w-[520px] text-center lg:mb-[13.36%]">
               {data?.description}
             </p>
+            <div className="lg:absolute lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 w-full">
+              <div ref={sliderRef} className="keen-slider">
+                {mappedData?.map((card) => (
+                  <div className={"keen-slider__slide"} key={card.cardSrc}>
+                    <VideoCard
+                      cardSrc={card.cardSrc}
+                      title={card.title}
+                      description={card.description}
+                      videoUrl={card.videoUrl}
+                    />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </Container>
+    </section>
   );
 };
 export default WinnersCircle;
