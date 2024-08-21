@@ -39,7 +39,7 @@ const AHeader = (props: Props) => {
             >
               <p>About Peace</p>
               <p>
-                Keepers <em>Adventures</em>
+                Keepers <em className={"font-normal"}>Adventures</em>
               </p>
 
               {/* <p>
