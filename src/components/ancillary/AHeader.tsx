@@ -3,6 +3,7 @@ import React from "react";
 
 import { ImgUrl } from "@/lib/utils";
 import { Container } from "@/common";
+import { space } from "postcss/lib/list";
 
 type TImageAsset = {
   _ref: string;
@@ -30,19 +31,31 @@ const AHeader = (props: Props) => {
     <>
       <section className={"lg:hidden mb-5"}>
         <div className={"px-3"}>
-          <div className={"pt-[85px] mb-8 md:mb-12 text-center"}>
+          <div className={"pt-[95px] mb-8 md:mb-12 text-center"}>
             <h1
               className={
-                "text-[14vw] uppercase text-pka_blue font-thunder font-bold leading-none mx-auto"
+                "text-6xl max-w-[460px] sm:text-7xl sm:max-w-[520px] tracking-wider text-pka_blue font-thunder font-bold leading-none mx-auto"
               }
             >
-              {props.data.title.split(" ").map((word) => {
-                return (
-                  <p className="tracking-wider" key={word}>
-                    {word}
-                  </p>
-                );
-              })}
+              <p>About Peace</p>
+              <p>
+                Keepers <em>Adventures</em>
+              </p>
+
+              {/* <p>
+                {props.data.title
+                  .split(" ")
+                  .map((word: string) => word.trim())
+                  .slice(0, 2)
+                  .join(" ")}
+              </p>
+              <p>
+                {props.data.title
+                  .split(" ")
+                  .map((word: string) => word.trim())
+                  .slice(2, 4)
+                  .join(" ")}
+              </p> */}
             </h1>
           </div>
         </div>
