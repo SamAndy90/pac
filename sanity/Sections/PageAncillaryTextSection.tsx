@@ -5,5 +5,13 @@ export default {
   type: "object",
   title: "Ancillary Text Section",
 
-  fields: [titleField, richtextField],
+  fields: [
+    titleField,
+    {
+      name: "description",
+      title: "Description",
+      type: "string",
+    },
+    richtextField,
+  ],
 };

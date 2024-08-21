@@ -8,31 +8,46 @@ type TData = {
   _type: string;
   _key: string;
   title: string;
-  content: any;
+  description: string;
 };
 
 type Props = {
   data: TData;
 };
 
-const components = {
-  types: {
-    image: (image: any) => (
-      <div className="w-full">
-        <img
-          className="w-full object-cover"
-          src={ImgUrl(image.value.asset._ref)}
-        />
-      </div>
-    ),
-  },
-};
+// const components = {
+//   types: {
+//     image: (image: any) => (
+//       <div className="w-full">
+//         <img
+//           className="w-full object-cover"
+//           src={ImgUrl(image.value.asset._ref)}
+//         />
+//       </div>
+//     ),
+//   },
+// };
 
-const TextSection = (props: Props) => {
+const TextSection = ({ data }: Props) => {
+  const { title, description } = data;
   return (
-    <div className="mx-10 my-5 lg:my-[220px] mt-20 lg:mx-[226px] flex flex-col gap-y-[79px]  text-justify richtext richtext-h2 richtext-h3">
-      <PortableText value={props.data.content} components={components} />
-    </div>
+    <section className="mx-3 pt-20 pb-12 text-center">
+      <h2
+        className={
+          "uppercase text-6xl lg:text-[5.2vw] mb-6 text-pka_blue tracking-wider font-thunder font-bold leading-none"
+        }
+      >
+        {title}
+      </h2>
+      <p
+        className={
+          "md:max-w-[85%] mx-auto text-pka_black font-avenirThin text-xl lg:text-2xl 2xl:max-w-[1280px]"
+        }
+      >
+        {description}
+      </p>
+      {/* <PortableText value={props.data.content} components={components} /> */}
+    </section>
   );
 };
 

@@ -24,7 +24,7 @@ type Props = {
 
 const ImageDisplaySection = (props: Props) => {
   return (
-    <div className="h-screen flex justify-center items-center">
+    <section className="h-screen flex justify-center items-center">
       <div className="w-full relative h-full">
         <div className="h-full w-full">
           <Image
@@ -35,7 +35,7 @@ const ImageDisplaySection = (props: Props) => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

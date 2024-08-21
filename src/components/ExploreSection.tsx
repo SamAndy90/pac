@@ -57,10 +57,14 @@ export default function CardsSection({ data }: Props) {
       <div className="absolute top-5 responsive-inset items-center flex w-full justify-center">
         <div className="relative w-1/2 mb-8 lg:pb-0 lg:mt-0 lg:w-[684px] xl:w-[856px] 2xl:w-[1024px] ">
           <div className="w-full h-full">
-            <Image src={Explore} alt="banner" />
+            <Image
+              src={Explore}
+              alt="banner"
+              className={"pointer-events-none"}
+            />
             {/* <h5
               className={
-                "text-[300px] relative font-thunder font-bold tracking-[0.15em] bg-white/65 bg-clip-text text-transparent"
+                "text-[300px] relative pointer-events-none text-transparent leading-none bg-clip-text overflow-hidden font-thunder bg-white/65 font-bold tracking-[0.15em]"
               }
             >
               EXPLORE

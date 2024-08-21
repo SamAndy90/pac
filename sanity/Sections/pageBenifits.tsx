@@ -36,6 +36,38 @@ export default {
         },
       ],
     },
-    buttonField,
+    {
+      name: "buttons",
+      title: "Buttons",
+      type: "array",
+      of: [
+        {
+          type: "object",
+          fields: [
+            {
+              name: "style",
+              title: "Choose Style",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Style 1", value: "primary" },
+                  { title: "Style 2", value: "secondary" },
+                ],
+              },
+            },
+            {
+              name: "text",
+              title: "Button Text",
+              type: "string",
+            },
+            {
+              name: "url",
+              title: "Button URL",
+              type: "string",
+            },
+          ],
+        },
+      ],
+    },
   ],
 };

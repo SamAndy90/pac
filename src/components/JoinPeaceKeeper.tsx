@@ -41,7 +41,7 @@ type Props = {
   data: PeaceKeeperData;
 };
 
-const Card50 = ({ data }: Props) => {
+const JoinPeaceKeeper = ({ data }: Props) => {
   // Function to split the title into two lines
   const splitTitle = (title: string) => {
     const words = title.split(" ");
@@ -98,7 +98,7 @@ const Card50 = ({ data }: Props) => {
   );
 };
 
-export default Card50;
+export default JoinPeaceKeeper;
 
 // <section className="flex flex-col lg:flex-row w-full max-w-[1920px] lg:h-screen mx-auto">
 //   <div

@@ -29,6 +29,7 @@ const config = {
         pka_green_light: "#C1FFEA",
         pka_blue: "#0A4A64",
         pka_blue2: "#33455A",
+        pka_black: "#0A1200",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

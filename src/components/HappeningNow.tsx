@@ -163,7 +163,7 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
 
           {data?.newbutton?.length > 0 && (
             <Link href={data.newbutton[0].url} className={"mt-16"}>
-              <NewButton variant={"secondary"}>
+              <NewButton colorVariant={"secondary"}>
                 {data.newbutton[0].text}
               </NewButton>
             </Link>

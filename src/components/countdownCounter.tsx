@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import clsx from "clsx";
 import React, { useEffect, useState } from "react";
@@ -23,7 +24,7 @@ const Renderer: React.FC<RendererProps> = ({
   textColor = "#fff",
   size = "large",
 }) => {
-  let bgColorValue = `bg-[#0A4A64]`;
+  let bgColorValue = `bg-[${bgColor}]`;
   let textColorValue = `text-[${textColor}]`;
 
   if (completed) {
@@ -37,6 +38,9 @@ const Renderer: React.FC<RendererProps> = ({
             "xl:gap-x-2": size === "small",
           }
         )}
+        style={{
+          color: textColor,
+        }}
       >
         <div
           className={cn(
@@ -170,6 +174,7 @@ interface CountdownComponentProps {
   timer?: string;
   size?: "small" | "large";
 }
+
 const CountdownComponent: React.FC<CountdownComponentProps> = ({
   style = "style1",
   bgColor,
