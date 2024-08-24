@@ -3,6 +3,7 @@ import Image from "next/image";
 import { client } from "../../sanity/lib/client";
 import { Button } from "./ui/button";
 import { Container } from "@/common";
+import TitleImage from "@/resources/svg/main-title.svg";
 
 const builder = imageUrlBuilder(client);
 
@@ -110,13 +111,14 @@ const Style2 = ({ data }: { data: any }) => {
             "flex flex-col justify-between gap-16 min-h-[calc(100vh-72px)]"
           }
         >
-          <div className="w-full mt-[90px] text-white text-center">
-            <p className="font-thunder uppercase w-full font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,.25)] text-5xl md:text-6xl lg:text-7xl xl:text-9xl 2xl:text-[144px] tracking-[.3em]">
+          <div className="w-full mt-[90px] relative text-white text-center">
+            {/* <p className="font-thunder uppercase w-full font-bold drop-shadow-[0_4px_4px_rgba(0,0,0,.25)] text-5xl md:text-6xl lg:text-7xl xl:text-9xl 2xl:text-[144px] tracking-[.3em]">
               <span>{data.Title}</span>
               <span className="text-xl lg:-ml-4 xl:-ml-6 2xl:-ml-8 font-extrabold font-inter tracking-[.3em] text-[#96D8E0]">
                 co
               </span>
-            </p>
+            </p> */}
+            <Image src={TitleImage} alt={"Title"} className={"mx-auto"} />
           </div>
 
           <div className="bottom-0 relative inset-x-0 flex lg:mr-[24px] mb-[37px] justify-end">

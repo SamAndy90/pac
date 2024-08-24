@@ -1,6 +1,6 @@
 "use client";
 
-import { ImgUrl } from "@/lib/utils";
+import { cn, ImgUrl } from "@/lib/utils";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { Bell, Menu, User, X } from "lucide-react";
 import Link from "next/link";
@@ -25,7 +25,7 @@ async function getData(): Promise<[NavItem[], NavItem[], any]> {
 }
 
 export default function Header() {
-  const [openNav, setOpenNav] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
   const [data, setData] = useState<[NavItem[], NavItem[], any]>([[], [], {}]);
   const { isLoaded, isSignedIn, user } = useUser();
@@ -39,7 +39,13 @@ export default function Header() {
     fetchData();
   }, []);
 
-  const desiredLeftSequence = ["HOME", "CONTESTS", "PEACE SOCIAL"];
+  useEffect(() => {
+    const body = document.querySelector("body");
+    if (!body) return;
+    body.style.overflow = isMenuOpen ? "hidden" : "";
+  }, [isMenuOpen]);
+
+  const desiredLeftSequence = ["Home", "Contests", "Peace Social"];
 
   // Sort the left menu items according to the desired sequence
   const sortedLeftNavs = data[0].slice().sort((a, b) => {
@@ -50,7 +56,7 @@ export default function Header() {
   });
 
   // Define the desired sequence of right menu items
-  const desiredRightSequence = ["SUPPORT", "SHOP", "FACEBOOK"];
+  const desiredRightSequence = ["Support", "Shop", "Facebook"];
 
   // Sort the right menu items according to the desired sequence
   const sortedRightNavs = data[1].slice().sort((a, b) => {
@@ -80,7 +86,7 @@ export default function Header() {
   return (
     <>
       <header className="w-full max-w-[1920px] mx-auto justify-center h-0 flex">
-        <div className="w-full flex mx-[18px] relative justify-center">
+        <div className="w-full flex mx-4 relative justify-center">
           <nav className="bg-pka_blue text-xl font-thunder font-medium w-full mx-auto inset-x-0 top-0 lg:flex items-center z-40 my-5 absolute justify-around hidden rounded-full h-[62px]">
             <div className="flex flex-1 items-center gap-[20px] xl:gap-[57px] 2xl:gap-[68.8px] justify-end ">
               {sortedLeftNavs.map((item) => (
@@ -143,8 +149,15 @@ export default function Header() {
       </header>
 
       <div className="flex justify-center w-full">
-        <div className="relative mx-4 flex w-full z-50">
-          <nav className="lg:hidden my-2 w-full items-center h-[62px] px-4 bg-pka_blue rounded-full justify-between flex flex-col absolute lg:flex-row">
+        <div className={cn("relative mx-3 flex w-full z-50")}>
+          <nav
+            className={cn(
+              "lg:hidden z-50 my-2 w-full items-center h-[62px] px-4 bg-pka_blue rounded-full justify-between flex flex-col absolute lg:flex-row transition-all transform",
+              {
+                "fixed top-0 left-3 w-[calc(100%-24px)]": isMenuOpen,
+              }
+            )}
+          >
             <div className={"relative w-full h-full"}>
               <div className="flex h-full w-full items-center justify-between">
                 <Link
@@ -158,48 +171,53 @@ export default function Header() {
                     className={"object-cover"}
                   />
                 </Link>
-                {openNav ? (
+                {isMenuOpen ? (
                   <X
                     className="text-white hover:text-pka_green transition-colors"
-                    onClick={() => setOpenNav(false)}
+                    onClick={() => setIsMenuOpen(false)}
                   />
                 ) : (
                   <Menu
                     className="text-white hover:text-pka_green transition-colors"
-                    onClick={() => setOpenNav(true)}
+                    onClick={() => setIsMenuOpen(true)}
                   />
                 )}
               </div>
-              {openNav && (
-                <div className="flex absolute top-0 flex-col w-full z-50 justify-center m-auto mt-[72px] bg-pka_background shadow-md text-black py-5 rounded-lg lg:hidden">
-                  <div className="flex items-center justify-center gap-[10px] flex-col">
-                    {mobileNav.map((item) => (
-                      <Link
-                        className="text-lg font-avenirThin hover:text-pka_green transition-colors"
-                        onClick={() => setOpenNav(false)}
-                        href={item.link}
-                        key={item._id}
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                    <CartButton />
-
-                    {isSignedIn ? (
-                      <UserButton afterSignOutUrl="/sign-in" />
-                    ) : (
-                      <Link href="/sign-in">
-                        <User
-                          className="hover:text-pka_green transition-colors"
-                          onClick={() => setOpenNav(false)}
-                        />
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              )}
             </div>
           </nav>
+          <div
+            className={cn(
+              "flex left-0 -translate-y-full transition-transform transform duration-500 pt-24 px-2 h-full fixed top-0 flex-col w-full z-40 bg-pka_blue2 shadow-md text-white pb-5 lg:hidden",
+              {
+                "translate-y-0": isMenuOpen,
+              }
+            )}
+          >
+            <ul className={"divide-y-[1px] overflow-y-auto"}>
+              {mobileNav.map((item) => (
+                <li key={item._id}>
+                  <Link
+                    className="text-5xl sm:text-2xl leading-none block pb-3 pt-4 font-avenirThin hover:text-pka_green transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                    href={item.link}
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+            {/* <CartButton /> */}
+            {/* {isSignedIn ? (
+                    <UserButton afterSignOutUrl="/sign-in" />
+                  ) : (
+                    <Link href="/sign-in">
+                      <User
+                        className="hover:text-pka_green transition-colors"
+                        onClick={() => setIsMenuOpen(false)}
+                      />
+                    </Link>
+                  )} */}
+          </div>
         </div>
       </div>
     </>
