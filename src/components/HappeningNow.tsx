@@ -94,7 +94,7 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
       <Container>
         <div className="justify-center min-h-screen items-center gap-y-12 md:gap-y-24 overflow-hidden flex flex-col pt-[72px] pb-24">
           <div className="flex justify-center w-full m-auto">
-            <p className="font-thunder flex flex-col items-center xl:text-7xl font-bold text-center text-white tracking-wider md:text-6xl text-5xl">
+            <p className="font-thunder flex flex-col items-center xl:text-7xl font-bold text-center text-white tracking-wider text-6xl">
               <span>{splitTitle(title)[0]}</span>
               <span>{splitTitle(title)[1]}</span>
             </p>

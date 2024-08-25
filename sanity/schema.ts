@@ -18,6 +18,9 @@ import FooterLinks from "./Sections/footerlinks";
 import { HeaderLeft } from "./Sections/headerLeft";
 import { HeaderRight } from "./Sections/headerRight";
 import pageAncillary50 from "./Sections/pageAncillary50";
+import pageImageInfo from "./Sections/pageImageInfo";
+import pageImageSection from "./Sections/pageImageSection";
+import pageServices from "./Sections/pageServices";
 import pageAncillaryImage from "./Sections/pageAncillaryImage";
 import pageBenifits from "./Sections/pageBenifits";
 import pageComingSoon from "./Sections/pageComingSoon";
@@ -41,6 +44,9 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pageAncillaryImage,
     PageAncillaryHeader,
     pageAncillary50,
+    pageImageInfo,
+    pageImageSection,
+    pageServices,
     PageAncillaryTextSection,
     buttonField,
     titleField,

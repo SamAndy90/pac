@@ -7,8 +7,10 @@ import AHeader from "./ancillary/AHeader";
 import TextSection from "./ancillary/TextSection";
 import ImageDisplaySection from "./ancillary/ImageDisplaySection";
 import JoinPeaceKeepersBenifit from "./ancillary/JoinPeaceKeepersBenifit";
-import GivingBack from "./GivingBack";
 import JoinPeaceKeeper from "./JoinPeaceKeeper";
+import ImageInfo from "./ImageInfo";
+import ImageSection from "./ImageSection";
+import Services from "./Services";
 
 const AllComponents: { [key: string]: (data: any) => ReactNode } = {
   joinpeacekeeper: (data: any) => <JoinPeaceKeeper data={data} />,
@@ -19,8 +21,11 @@ const AllComponents: { [key: string]: (data: any) => ReactNode } = {
   "page.ancillaryheader": (data: any) => <AHeader data={data} />,
   "page.textsection": (data: any) => <TextSection data={data} />,
   "page.ancillaryimage": (data: any) => <ImageDisplaySection data={data} />,
-  "page.ancillary50": (data: any) => <GivingBack data={data} />,
+  "page.ancillary50": (data: any) => <ImageInfo data={data} />,
   "page.benifits": (data: any) => <JoinPeaceKeepersBenifit data={data} />,
+  "page.imageInfo": (data: any) => <ImageInfo data={data} revert={true} />,
+  "page.image": (data: any) => <ImageSection data={data} />,
+  "page.services": (data: any) => <Services data={data} />,
 } as const;
 
 export default AllComponents;
