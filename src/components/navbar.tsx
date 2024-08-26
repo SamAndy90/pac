@@ -193,15 +193,15 @@ export default function Header() {
               }
             )}
           >
-            <ul className={"divide-y-[1px] overflow-y-auto"}>
+            <ul className={"overflow-y-auto h-full block w-full"}>
               {mobileNav.map((item) => (
-                <li key={item._id}>
+                <li key={item._id} className={"first:border-t border-b"}>
                   <Link
-                    className="text-5xl sm:text-2xl leading-none block pb-3 pt-4 font-avenirThin hover:text-pka_green transition-colors"
+                    className="text-[12vw] leading-none md:text-6xl block pt-[2vw] pb-[2vw] md:pt-4 md:pb-3 font-avenirThin hover:text-pka_green transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                     href={item.link}
                   >
-                    {item.name}
+                    <span className={"block pt-2"}>{item.name}</span>
                   </Link>
                 </li>
               ))}

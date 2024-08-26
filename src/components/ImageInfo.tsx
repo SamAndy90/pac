@@ -32,11 +32,13 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
       <div
         style={{ backgroundColor: bgColor.value, color: textColor.value }}
         className={
-          "flex-1 bg-pka_blue lg:max-w-[52%] text-white flex flex-col justify-center px-3 py-16 lg:py-20 gap-y-12 lg:px-12 xl:pr-28"
+          "lg:w-[52%] bg-pka_blue text-white flex flex-col justify-between px-3 py-16 lg:py-20 gap-y-12 lg:px-12 xl:pr-28"
         }
       >
         <h2
-          className={"uppercase font-thunder font-bold text-6xl tracking-wider"}
+          className={
+            "uppercase mb-[25vw] flex-1 font-thunder font-bold text-6xl tracking-wider"
+          }
         >
           {title}
         </h2>
@@ -72,8 +74,8 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
         )}
       </div>
 
-      <div className="flex-1 lg:min-h-[320px] shrink-0">
-        <div className={"aspect-[4/3] lg:aspect-auto h-full relative"}>
+      <div className="lg:w-[48%] aspect-[10/14]">
+        <div className={"w-full h-full relative"}>
           <Image
             src={urlFor(data.portrait.asset._ref).url()}
             alt={"Join peace keepers social image"}
