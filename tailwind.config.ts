@@ -68,6 +68,7 @@ const config = {
         roboto: ["var(--font-roboto)"],
         averia: ["var(--font-averia)"],
         thunder: ["var(--font-thunder-variable)"],
+        garamond: ["var(--font-garamond)"],
       },
       borderRadius: {
         lg: "var(--radius)",

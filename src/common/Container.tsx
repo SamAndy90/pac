@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 
 export type ContainerProps = {
@@ -5,14 +6,17 @@ export type ContainerProps = {
   className?: string;
 };
 
-export function Container(props: ContainerProps) {
-  const { children, className } = props;
+export const Container = forwardRef<HTMLDivElement, ContainerProps>(
+  (props, ref) => {
+    const { children, className } = props;
 
-  return (
-    <div
-      className={twMerge("container mx-auto max-w-[1920px] px-3", className)}
-    >
-      {children}
-    </div>
-  );
-}
+    return (
+      <div
+        ref={ref}
+        className={twMerge("container mx-auto max-w-[1920px] px-3", className)}
+      >
+        {children}
+      </div>
+    );
+  }
+);

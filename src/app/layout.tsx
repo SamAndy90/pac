@@ -1,5 +1,11 @@
 import type { Metadata } from "next";
-import { Londrina_Solid, Inter, Averia_Libre, Roboto } from "next/font/google";
+import {
+  Londrina_Solid,
+  Inter,
+  Averia_Libre,
+  Roboto,
+  EB_Garamond,
+} from "next/font/google";
 import localFont from "next/font/local";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -31,6 +37,13 @@ const inter = Inter({
   weight: ["400", "500", "700", "800", "900"],
   preload: false,
   variable: "--font-inter",
+});
+
+const garamond = EB_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  preload: false,
+  variable: "--font-garamond",
 });
 
 const roboto = Roboto({
@@ -109,7 +122,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${roboto.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} relative bg-pka_background`}
+          className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${roboto.variable} ${garamond.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} relative bg-pka_background`}
         >
           <ApolloProviderComp>
             <StoreProvider>

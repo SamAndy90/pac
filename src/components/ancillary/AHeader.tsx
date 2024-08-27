@@ -1,9 +1,15 @@
+"use cient";
+
 import Image from "next/image";
 import React from "react";
 
 import { ImgUrl } from "@/lib/utils";
 import { Container } from "@/common";
-import { space } from "postcss/lib/list";
+
+import { useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 type TImageAsset = {
   _ref: string;
@@ -26,10 +32,63 @@ type Props = {
   data: TData;
 };
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
+
 const AHeader = (props: Props) => {
+  const container = useRef<HTMLElement | any>();
+
+  useGSAP(
+    () => {
+      gsap.to(".scaleimage", {
+        scale: 2.5,
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+          pin: true,
+          pinSpacing: false,
+        },
+      });
+    },
+    { scope: container }
+  );
+
+  useGSAP(
+    () => {
+      gsap.to(".uptitle", {
+        y: -150,
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+    },
+    { scope: container }
+  );
+
+  useGSAP(
+    () => {
+      gsap.to(".downtitle", {
+        y: 150,
+        scrollTrigger: {
+          trigger: container.current,
+          start: "top top",
+          end: "bottom top",
+          scrub: 1,
+        },
+      });
+    },
+    { scope: container }
+  );
+
   return (
     <>
-      <section className={"lg:hidden mb-5"}>
+      <section className={"lg:hidden"}>
         <div className={"px-3"}>
           <div className={"pt-[95px] mb-8 md:mb-12 text-center"}>
             <h1
@@ -41,21 +100,6 @@ const AHeader = (props: Props) => {
               <p>
                 Keepers <em className={"font-normal"}>Adventures</em>
               </p>
-
-              {/* <p>
-                {props.data.title
-                  .split(" ")
-                  .map((word: string) => word.trim())
-                  .slice(0, 2)
-                  .join(" ")}
-              </p>
-              <p>
-                {props.data.title
-                  .split(" ")
-                  .map((word: string) => word.trim())
-                  .slice(2, 4)
-                  .join(" ")}
-              </p> */}
             </h1>
           </div>
         </div>
@@ -64,16 +108,16 @@ const AHeader = (props: Props) => {
           <Image
             src={ImgUrl(props.data.portrait.asset._ref)}
             alt="banner"
-            className="object-cover"
+            className="object-cover scaleimage"
             fill
           />
         </div>
       </section>
 
-      <section className="hidden py-5 lg:block">
-        <Container>
-          <div>
-            <div className={"pt-28 mb-4 text-center"}>
+      <section className="hidden lg:block overflow-hidden min-h-[200vh]">
+        <Container className={"h-full"} ref={container}>
+          <div className={"h-full"}>
+            <div className={"pt-28 uptitle mb-4 text-center"}>
               <h1
                 className={
                   "text-[calc(13.3dvh)] uppercase text-pka_blue font-thunder font-bold leading-none mx-auto"
@@ -84,15 +128,15 @@ const AHeader = (props: Props) => {
                 </p>
               </h1>
             </div>
-            <div className="relative mx-auto rounded-3xl overflow-hidden lg:w-[50dvw] xl:w-[45dvw] h-[45vh] max-h-[600px]">
+            <div className="relative z-10 scaleimage mx-auto rounded-3xl overflow-hidden lg:w-[50dvw] xl:w-[45dvw] h-[45vh] max-h-[600px]">
               <Image
                 src={ImgUrl(props.data.portrait.asset._ref)}
                 alt="banner"
-                className="object-cover"
+                className="object-cover "
                 fill
               />
             </div>
-            <div className={"mt-8 xl:mt-10 text-center"}>
+            <div className={"mt-8 downtitle xl:mt-10 text-center"}>
               <h1
                 className={
                   "text-[calc(13.3dvh)] text-pka_blue font-thunder font-bold leading-none mx-auto"
