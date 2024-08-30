@@ -90,7 +90,7 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
   });
 
   return (
-    <section className={"bg-pka_blue w-full"}>
+    <section className={"bg-pka_blue mx-auto max-w-[1920px]"}>
       <Container>
         <div className="justify-center min-h-screen items-center gap-y-12 md:gap-y-24 overflow-hidden flex flex-col pt-[72px] pb-24">
           <div className="flex justify-center w-full m-auto">

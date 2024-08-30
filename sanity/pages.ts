@@ -64,7 +64,7 @@ export default defineType({
           title: "Sections",
           type: "array",
           of: [
-            defineArrayMember({ type: "page.hero" }),
+            defineArrayMember({ type: "hero" }),
             defineArrayMember({ type: "page.joinpeacekeeper" }),
             defineArrayMember({ type: "page.livecontest" }),
             defineArrayMember({ type: "page.explore" }),

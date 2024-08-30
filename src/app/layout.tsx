@@ -12,7 +12,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Banner from "@/components/AnnouncementBanner";
-import Header from "@/components/navbar";
+import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 import "keen-slider/keen-slider.min.css";
@@ -24,6 +24,7 @@ import Loader from "@/components/common/Loader";
 import { Suspense } from "react";
 import ApolloProviderComp from "@/components/ApolloProviderComp";
 import StoreProvider from "@/components/StoreProvider";
+import { AnnouncementProvider } from "@/context/AnnouncementContext";
 
 const LondrinaSolid = Londrina_Solid({
   subsets: ["latin"],
@@ -126,15 +127,22 @@ export default function RootLayout({
         >
           <ApolloProviderComp>
             <StoreProvider>
-              <Banner />
+              <AnnouncementProvider>
+                <Banner />
+                <div
+                  className={
+                    "flex min-h-screen flex-col h-full justify-between"
+                  }
+                >
+                  <Header />
+                  <main className="flex-1">
+                    <Suspense fallback={<Loader />}>{children}</Suspense>
+                  </main>
 
-              <Header />
-              <Suspense fallback={<Loader />}>
-                <div className="mt-0 lg:mt-0 bg-none">{children}</div>
-              </Suspense>
-
-              <Footer />
-              {draftMode().isEnabled && <LiveVisualEditing />}
+                  <Footer />
+                </div>
+                {draftMode().isEnabled && <LiveVisualEditing />}
+              </AnnouncementProvider>
             </StoreProvider>
           </ApolloProviderComp>
         </body>

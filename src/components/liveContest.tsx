@@ -1,21 +1,8 @@
-import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
-import { client } from "../../sanity/lib/client";
 import CountdownComponent from "./countdownCounter";
 import { Container } from "@/common";
-
-const builder = imageUrlBuilder(client);
-function urlFor(source: string) {
-  return builder.image(source);
-}
-
-type Portrait = {
-  asset: {
-    _ref: string;
-    _type: string;
-  };
-  _type: string;
-};
+import { Portrait } from "@/types";
+import { urlFor } from "@/lib/utils";
 
 type TData = {
   _key: string;
@@ -61,7 +48,7 @@ export default function LiveContest({ data }: Props) {
   };
 
   return (
-    <div className="relative w-full min-h-screen max-w-[1920px] overflow-hidden">
+    <section className="relative mx-auto min-h-screen max-w-[1920px] overflow-hidden">
       <Image
         src={urlFor(data.portrait.asset._ref).url()}
         alt="banner"
@@ -78,6 +65,6 @@ export default function LiveContest({ data }: Props) {
         </h2>
         <div className="mb-[8.7vh]">{timerDisplay()}</div>
       </Container>
-    </div>
+    </section>
   );
 }

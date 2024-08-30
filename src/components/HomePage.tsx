@@ -15,10 +15,10 @@ import {
   ConsentProvider,
 } from "react-hook-consent";
 import "react-hook-consent/dist/styles/style.css";
-import HeroSection from "@/components/HeroSection";
+import Hero from "@/components/Hero";
 
-const AllComponents: { [key: string]: (data: any) => ReactNode } = {
-  "page.hero": (data: any) => <HeroSection data={data} />,
+const HomePageComponents: { [key: string]: (data: any) => ReactNode } = {
+  hero: (data: any) => <Hero data={data} />,
   "page.joinpeacekeeper": (data: any) => <Card50 data={data} />,
   "page.livecontest": (data: any) => <LiveContest data={data} />,
   "page.explore": (data: any) => <CardsSection data={data} />,
@@ -38,7 +38,9 @@ export default function HomePage({ data }: HomePageProps) {
   {
     consent ? () => toggleBanner() : setConsent(false);
   }
+
   let DateList: any = [] as ReactNode[];
+
   const consentOptions = {
     services: [
       {
@@ -73,14 +75,15 @@ export default function HomePage({ data }: HomePageProps) {
     ],
     theme: "light",
   };
+
   DateList = sections?.map((section: any) => {
-    if (AllComponents[section._type]) {
-      return AllComponents[section._type](section);
+    if (HomePageComponents[section._type]) {
+      return HomePageComponents[section._type](section);
     }
   });
 
   useEffect(() => {
-    const query = `*[_type == "page" && title == "Home Page"]`;
+    const query = `*[_type == "page" && title == "Homepage"]`;
     const subscription = client.listen(query).subscribe((update) => {
       if (update.result?.homepagetemplatesections?.sections) {
         setSections(update.result?.homepagetemplatesections.sections);
@@ -99,9 +102,7 @@ export default function HomePage({ data }: HomePageProps) {
   return (
     //@ts-expect-error
     <ConsentProvider options={consentOptions}>
-      <main className="flex min-h-screen flex-col items-center justify-between">
-        {...DateList}
-      </main>
+      {...DateList}
       <ConsentBanner
         settings={{
           hidden: false,

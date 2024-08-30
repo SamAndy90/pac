@@ -1,16 +1,11 @@
-import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
-import { client } from "../../sanity/lib/client";
 import Link from "next/link";
 import { NewButton } from "./ui/NewButton";
+import { Color, Portrait } from "@/types";
+import { urlFor } from "@/lib/utils";
 interface PeaceKeeperData {
   _id: string;
-  portrait: {
-    _type: string;
-    asset: {
-      _ref: string;
-    };
-  };
+  portrait: Portrait;
   title: string;
   description: string;
   buttons: any[];
@@ -18,21 +13,9 @@ interface PeaceKeeperData {
   _createdAt: string;
   _rev: string;
   name: string;
-  textColor: {
-    label: string;
-    value: string;
-  };
-
-  bgColor: {
-    label: string;
-    value: string;
-  };
+  textColor: Color;
+  bgColor: Color;
   _type: string;
-}
-
-const builder = imageUrlBuilder(client);
-function urlFor(source: string) {
-  return builder.image(source);
 }
 
 type Props = {

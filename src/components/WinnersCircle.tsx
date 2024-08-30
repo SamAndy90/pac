@@ -2,6 +2,7 @@
 
 import VideoCard from "./common/VideoCard";
 import { Container } from "@/common";
+import { Portrait } from "@/types";
 import { useKeenSlider } from "keen-slider/react";
 
 interface CardData {
@@ -13,7 +14,7 @@ interface CardData {
 
 type Winner = {
   _key: string;
-  portrait: any;
+  portrait: Portrait;
   winnerTitle: string;
   videoUrl: string;
   description: string;

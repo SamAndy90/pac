@@ -9,13 +9,11 @@ const SmallBanner = ({ imageUrl, title }: Props) => {
   return (
     <div className="w-full mt-24 h-[238px] md:h-[300px] lg:h-[300px] rounded-lg relative flex justify-center  items-center overflow-hidden">
       <div className="w-full mx-2 relative rounded-lg h-full">
-        <div className="absolute inset-0 bg-[#0A1200] bg-opacity-20 rounded-lg"></div>
+        <div className="absolute inset-0 bg-pka_black bg-opacity-20 rounded-lg"></div>
         <img
           src={imageUrl}
           alt="banner"
           className="object-cover rounded-lg w-full h-full"
-
-          // layout="fill"
         />
       </div>
 

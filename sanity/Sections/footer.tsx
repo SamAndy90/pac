@@ -2,20 +2,28 @@ import { defineArrayMember, defineField, defineType } from "sanity";
 import { LinkIcon } from "@sanity/icons";
 
 export default defineType({
-  name: "footerlinks",
+  name: "footer",
   type: "document",
-  title: "Footer Links",
-  icon: LinkIcon,
   fields: [
     defineField({ name: "title", type: "string", title: "Title" }),
     defineField({
-      name: "generalLinks",
+      name: "logo",
+      type: "image",
+      title: "Logo",
+      options: {
+        hotspot: true,
+      },
+    }),
+    defineField({ name: "copyright", type: "string", title: "Copyright" }),
+    defineField({
+      name: "links",
       type: "array",
       title: "General Links",
       initialValue: [],
       of: [
         defineArrayMember({
           type: "object",
+          icon: LinkIcon,
           fields: [
             {
               name: "value",
@@ -42,7 +50,7 @@ export default defineType({
       title: "title",
     },
     prepare() {
-      return { title: "Links" };
+      return { title: "Footer Content" };
     },
   },
 });

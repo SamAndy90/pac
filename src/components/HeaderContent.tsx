@@ -1,43 +1,40 @@
 "use client";
 
-import { cn, ImgUrl } from "@/lib/utils";
+import { cn, urlFor } from "@/lib/utils";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { Bell, Menu, User, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { client } from "../../sanity/lib/client";
 import CartButton from "./shop/CartButton";
 import Image from "next/image";
-import Logo from "@/resources/png/pac-logo.png";
+import { SanityDocument } from "next-sanity";
+import { HeaderContentData } from "./Header";
+import { client } from "../../sanity/lib/client";
+import { Container } from "@/common";
 
-interface NavItem {
-  _id: string;
-  name: string;
-  link: string;
-}
+type HeaderContentProps = {
+  data: SanityDocument<HeaderContentData>;
+};
 
-async function getData(): Promise<[NavItem[], NavItem[], any]> {
-  const fetchLeftNavs = await client.fetch("*[_type == 'headerLeft'] ");
-  const fetchRightNavs = await client.fetch("*[_type == 'headerRight'] ");
-  const logo = await client.fetch("*[_type == 'logo'] ");
-
-  return [fetchLeftNavs, fetchRightNavs, logo];
-}
-
-export default function Header() {
+export default function HeaderContent(props: HeaderContentProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const [data, setData] = useState<[NavItem[], NavItem[], any]>([[], [], {}]);
+  const [data, setData] = useState(props.data);
   const { isLoaded, isSignedIn, user } = useUser();
 
-  useEffect(() => {
-    async function fetchData() {
-      const fetchedData = await getData();
+  const { logo, leftlinks, rightlinks, burgerlinks } = data;
 
-      setData(fetchedData);
-    }
-    fetchData();
-  }, []);
+  useEffect(() => {
+    const query = `*[_type == 'header']`;
+    const subscription = client
+      .listen<SanityDocument<HeaderContentData>>(query)
+      .subscribe((update) => {
+        if (update.result) {
+          setData(update.result);
+        }
+      });
+
+    return () => subscription.unsubscribe();
+  }, [setData, client]);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -45,69 +42,28 @@ export default function Header() {
     body.style.overflow = isMenuOpen ? "hidden" : "";
   }, [isMenuOpen]);
 
-  const desiredLeftSequence = ["Home", "Contests", "Peace Social"];
-
-  // Sort the left menu items according to the desired sequence
-  const sortedLeftNavs = data[0].slice().sort((a, b) => {
-    return (
-      desiredLeftSequence.indexOf(a.name.toUpperCase()) -
-      desiredLeftSequence.indexOf(b.name.toUpperCase())
-    );
-  });
-
-  // Define the desired sequence of right menu items
-  const desiredRightSequence = ["Support", "Shop", "Facebook"];
-
-  // Sort the right menu items according to the desired sequence
-  const sortedRightNavs = data[1].slice().sort((a, b) => {
-    return (
-      desiredRightSequence.indexOf(a.name.toUpperCase()) -
-      desiredRightSequence.indexOf(b.name.toUpperCase())
-    );
-  });
-
-  let logoUrl = "";
-  let logoLink = "";
-  if (data[2][0]?.image?.asset?._ref) {
-    logoUrl = ImgUrl(data[2][0]?.image?.asset?._ref);
-    logoLink = data[2][0]?.link;
-  }
-
-  useEffect(() => {
-    setMounted(true);
-  }, [setMounted]);
-
-  if (!mounted) {
-    return null;
-  }
-
-  const mobileNav = [...sortedLeftNavs, ...sortedRightNavs];
-
   return (
     <>
-      <header className="w-full max-w-[1920px] mx-auto justify-center h-0 flex">
-        <div className="w-full flex mx-4 relative justify-center">
-          <nav className="bg-pka_blue text-xl font-thunder font-medium w-full mx-auto inset-x-0 top-0 lg:flex items-center z-40 my-5 absolute justify-around hidden rounded-full h-[62px]">
+      <header className="fixed z-50 w-full top-3">
+        <Container>
+          <nav className="bg-pka_blue text-xl font-thunder font-medium w-full lg:flex items-center z-40 my-5 justify-around hidden rounded-full h-[62px]">
             <div className="flex flex-1 items-center gap-[20px] xl:gap-[57px] 2xl:gap-[68.8px] justify-end ">
-              {sortedLeftNavs.map((item) => (
+              {leftlinks.map((item) => (
                 <Link
-                  href={item.link}
-                  key={item._id}
+                  href={item.slug.current}
+                  key={item._key}
                   className={
                     "text-white hover:text-pka_green transition-colors tracking-widest"
                   }
                 >
-                  {item.name}
+                  {item.value}
                 </Link>
               ))}
             </div>
-            <div className="items-center flex-1 justify-center self-end flex">
-              <Link
-                href={logoLink}
-                className={"size-[177px] translate-y-2 relative"}
-              >
+            <div className="items-center flex-1 justify-center flex">
+              <Link href={"/"} className={"size-[177px] relative"}>
                 <Image
-                  src={Logo}
+                  src={urlFor(logo.asset._ref).url()}
                   alt="PAK Logo"
                   fill
                   className={"object-cover"}
@@ -116,19 +72,19 @@ export default function Header() {
             </div>
             <div className="flex flex-1 items-center justify-between gap-10">
               <div className="flex gap-[20px] xl:gap-[57px] 2xl:gap-[68.8px]">
-                {sortedRightNavs.map((item) => (
+                {rightlinks.map((item) => (
                   <Link
-                    href={item.link}
-                    key={item._id}
+                    href={item.slug.current}
+                    key={item._key}
                     className={
                       "text-white hover:text-pka_green transition-colors tracking-widest"
                     }
                   >
-                    {item.name}
+                    {item.value}
                   </Link>
                 ))}
               </div>
-              <div className="flex gap-3 2xl:gap-4 h-6 pr-[24px] xl:pr-[44px] items-center">
+              <div className="flex gap-x-4 2xl:gap-4 h-6 pr-[24px] xl:pr-[44px] items-center">
                 <Link href="/">
                   <Bell className="text-white hover:text-pka_green transition-colors size-[18px]" />
                 </Link>
@@ -145,7 +101,7 @@ export default function Header() {
               </div>
             </div>
           </nav>
-        </div>
+        </Container>
       </header>
 
       <div className="flex justify-center w-full">
@@ -161,11 +117,11 @@ export default function Header() {
             <div className={"relative w-full h-full"}>
               <div className="flex h-full w-full items-center justify-between">
                 <Link
-                  href={logoLink}
+                  href={"/"}
                   className={"max-w-[70px] w-full relative h-full"}
                 >
                   <Image
-                    src={Logo}
+                    src={urlFor(logo.asset._ref).url()}
                     alt="PAK Logo"
                     fill
                     className={"object-cover"}
@@ -194,14 +150,14 @@ export default function Header() {
             )}
           >
             <ul className={"overflow-y-auto h-full block w-full"}>
-              {mobileNav.map((item) => (
-                <li key={item._id} className={"first:border-t border-b"}>
+              {burgerlinks.map((item) => (
+                <li key={item._key} className={"first:border-t border-b"}>
                   <Link
                     className="text-[12vw] leading-none md:text-6xl block pt-[2vw] pb-[2vw] md:pt-4 md:pb-3 font-avenirThin hover:text-pka_green transition-colors"
                     onClick={() => setIsMenuOpen(false)}
-                    href={item.link}
+                    href={item.slug.current}
                   >
-                    <span className={"block pt-2"}>{item.name}</span>
+                    <span className={"block pt-2"}>{item.value}</span>
                   </Link>
                 </li>
               ))}
@@ -215,8 +171,7 @@ export default function Header() {
                         className="hover:text-pka_green transition-colors"
                         onClick={() => setIsMenuOpen(false)}
                       />
-                    </Link>
-                  )} */}
+                    </Link>)} */}
           </div>
         </div>
       </div>

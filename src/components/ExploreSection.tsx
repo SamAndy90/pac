@@ -3,30 +3,18 @@ import React from "react";
 import Image from "next/image";
 import Explore from "../resources/svg/explore.svg";
 import SliderComponent from "./common/SliderComponent";
+import { Portrait } from "@/types";
 
 interface SliderCard {
   id: string;
-  potrait: {
-    asset: {
-      _ref: string;
-    };
-  };
+  potrait: Portrait;
   title: string;
-  // Add any other properties if needed
 }
-
-type CardImage = {
-  _type: string;
-  asset: {
-    _ref: string;
-    _type: string;
-  };
-};
 
 type Card = {
   _key: string;
   cardTitle: string;
-  cardImage: CardImage;
+  cardImage: Portrait;
 };
 
 type Explore = {
@@ -50,7 +38,7 @@ export default function CardsSection({ data }: Props) {
   });
 
   return (
-    <div className="relative overflow-hidden w-full max-w-[1920px]">
+    <section className="relative overflow-hidden mx-auto max-w-[1920px]">
       <div className="flex flex-col lg:flex-row justify-center items-center relative  mt-10 mb-14 md:my-14 lg:my-20">
         <SliderComponent data={sliderCardData} />
       </div>
@@ -72,6 +60,6 @@ export default function CardsSection({ data }: Props) {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

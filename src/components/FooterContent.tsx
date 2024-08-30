@@ -4,58 +4,136 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { client } from "../../sanity/lib/client";
 import { Container } from "@/common";
+import { FooterContentData } from "./Footer";
+import { SanityDocument } from "next-sanity";
+import Image from "next/image";
+import { urlFor } from "@/lib/utils";
 
 type FooterContentProps = {
-  data: any;
+  data: SanityDocument<FooterContentData>;
 };
 
 const FooterContent = (props: FooterContentProps) => {
   const [data, setData] = useState(props.data);
 
-  const { generalLinks: links, title } = data;
+  const { links, title, logo, copyright } = data;
 
   useEffect(() => {
-    const query = `*[_type == 'footerlinks']`;
-    const subscription = client.listen(query).subscribe((update) => {
-      if (update.result) {
-        setData(update.result);
-      }
-    });
+    const query = `*[_type == 'footer']`;
+    const subscription = client
+      .listen<SanityDocument<FooterContentData>>(query)
+      .subscribe((update) => {
+        if (update.result) {
+          setData(update.result);
+        }
+      });
 
     return () => subscription.unsubscribe();
   }, [setData, client]);
 
   return (
-    <footer className={"bg-pka_blue"}>
+    <footer
+      className={
+        "bg-pka_blue w-full max-w-[1920px] mx-auto relative mt-14 overflow-x-clip z-10 before:absolute before:z-0 after:z-0 before:-translate-y-10 lg:before:-translate-y-14 before:top-0 before:-left-[5%] before:h-10 lg:before:h-14 before:-rotate-[4deg] before:origin-top-right before:bg-pka_blue before:w-[55%] after:absolute after:top-0 after:-translate-y-10 lg:after:-translate-y-14 after:-right-[5%] after:h-10 lg:after:h-14 after:rotate-[4deg] after:origin-top-left after:bg-pka_blue after:w-[55%]"
+      }
+    >
       <Container>
-        <div className={"py-1"}>
-          <nav className={"py-16"}>
-            <ul
+        <div
+          className={
+            "pb-3 gap-3 lg:pb-4 flex flex-col lg:flex-row lg:items-end items-center justify-between"
+          }
+        >
+          <p
+            className={
+              "flex-1 order-3 lg:order-1 font-garamond text-xs lg:text-base text-white"
+            }
+          >
+            {copyright}
+          </p>
+          <div className="flex-1 order-1 lg:order-2">
+            <div
               className={
-                "flex flex-col md:flex-row text-white font-averia text-[17px] justify-center md:justify-evenly items-center text-center gap-y-5 gap-x-4"
+                "relative -my-10 z-20 mx-auto max-w-[150px] aspect-square"
               }
             >
-              {links.map((link: any) => {
+              <Image
+                src={urlFor(logo.asset._ref).url()}
+                alt={"Logo"}
+                fill
+                className={"object-contain"}
+              />
+            </div>
+            <p
+              className={
+                "leading-[0.9] py-3 font-bold tracking-wider text-center text-6xl font-garamond text-pka_green_light"
+              }
+            >
+              {title}
+            </p>
+          </div>
+          <nav className={"flex-1 order-2 lg:order-3"}>
+            <ul
+              className={
+                "flex flex-wrap lg:flex-nowrap text-white font-garamond text-sm lg:text-base justify-center items-center gap-x-3 text-center"
+              }
+            >
+              {links.map((link, idX) => {
                 return (
                   <li
                     key={link.value}
                     className={
-                      "transition-colors uppercase hover:text-pka_green_light"
+                      "transition-colors hover:text-pka_green gap-x-3 flex items-center justify-center"
                     }
                   >
+                    {!!idX && (
+                      <Image
+                        src={urlFor(logo.asset._ref).url()}
+                        alt={"Logo"}
+                        width={24}
+                        height={24}
+                      />
+                    )}
                     <Link href={link.slug.current}>{link.value}</Link>
                   </li>
                 );
               })}
             </ul>
           </nav>
-          <div className="py-10 leading-none font-bold tracking-wider text-center text-7xl font-thunder text-pka_green_light">
-            <p>{title}</p>
-          </div>
         </div>
       </Container>
     </footer>
   );
+  // return (
+  //   <footer className={"bg-pka_blue"}>
+  //     <Container>
+  //       <div className={"py-1"}>
+  //         <nav className={"py-16"}>
+  //           <ul
+  //             className={
+  //               "flex flex-col md:flex-row text-white font-averia text-[17px] justify-center md:justify-evenly items-center text-center gap-y-5 gap-x-4"
+  //             }
+  //           >
+  //             {links.map((link: any) => {
+  //               return (
+  //                 <li
+  //                   key={link.value}
+  //                   className={
+  //                     "transition-colors uppercase hover:text-pka_green_light"
+  //                   }
+  //                 >
+  //                   <Link href={link.slug.current}>{link.value}</Link>
+  //                 </li>
+  //               );
+  //             })}
+  //           </ul>
+  //         </nav>
+  //         <div className="py-10 leading-none font-bold tracking-wider text-center text-7xl font-thunder text-pka_green_light">
+  //           <p>{title}</p>
+  //         </div>
+  //       </div>
+  //     </Container>
+  //   </footer>
+  // );
 };
 
 export default FooterContent;

@@ -31,7 +31,7 @@ type Props = {
 const TextSection = ({ data }: Props) => {
   const { title, description } = data;
   return (
-    <section className="px-3 pt-[16vw] text-pka_black lg:pt-[10vw] pb-[20vw] lg:pb-[10vw] bg-white text-center">
+    <section className="px-3 pt-[16vw] text-pka_blue lg:pt-[10vw] pb-[20vw] lg:pb-[10vw] bg-white text-center">
       {title && (
         <h2
           className={

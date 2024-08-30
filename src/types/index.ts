@@ -17,3 +17,15 @@ export type Color = {
   label: string;
   value: string;
 };
+
+export type Slug = {
+  current: string;
+  _type: string;
+};
+
+export type SanityLink = {
+  _type?: string;
+  _key: string;
+  value: string;
+  slug: Slug;
+};

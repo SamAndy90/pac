@@ -25,7 +25,7 @@ const Services = ({ data }: ServicesProps) => {
   return (
     <section className={"mx-auto w-full"}>
       <Container>
-        <div className={"py-12 md:py-16 text-pka_black lg:py-20 lg:px-[5vw]"}>
+        <div className={"py-12 md:py-16 text-pka_blue lg:py-20 lg:px-[5vw]"}>
           <div className={"lg:mb-16 mb-10"}>
             <h4 className={"text-lg font-avenirThin lg:text-xl mb-3 lg:mb-5"}>
               {subtitle}

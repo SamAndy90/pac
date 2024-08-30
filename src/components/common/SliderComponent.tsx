@@ -2,23 +2,16 @@
 
 import React, { useRef } from "react";
 import Slider from "react-slick";
-import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { client } from "../../../sanity/lib/client";
 import settings from "../../app/utils/ExploreSliderSettings";
+import { urlFor } from "@/lib/utils";
 interface SliderComponentProps {
   data: any[];
 }
 
 function SliderComponent({ data }: SliderComponentProps) {
   const sliderRef = useRef<Slider>(null);
-
-  const builder = imageUrlBuilder(client);
-
-  function urlFor(source: string) {
-    return builder.image(source);
-  }
 
   const goToNext = () => {
     if (sliderRef.current) {

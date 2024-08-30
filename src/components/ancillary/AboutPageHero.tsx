@@ -10,33 +10,24 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
+import { Portrait } from "@/types";
 
-type TImageAsset = {
-  _ref: string;
-  _type: "reference";
-};
-
-type TImage = {
-  _type: "image";
-  asset: TImageAsset;
-};
-
-type TData = {
+type AboutPageHeroData = {
   title: string;
   _type: string;
   _key: string;
-  portrait: TImage;
+  portrait: Portrait;
 };
 
-type Props = {
-  data: TData;
+type AboutPageHeroProps = {
+  data: AboutPageHeroData;
 };
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger, useGSAP);
 }
 
-const AHeader = (props: Props) => {
+const AboutPageHero = (props: AboutPageHeroProps) => {
   const container = useRef<HTMLElement | any>();
 
   useGSAP(
@@ -128,7 +119,7 @@ const AHeader = (props: Props) => {
                 </p>
               </h1>
             </div>
-            <div className="relative z-10 scaleimage mx-auto rounded-3xl overflow-hidden lg:w-[50dvw] xl:w-[45dvw] h-[45vh] max-h-[600px]">
+            <div className="relative z-[100] scaleimage mx-auto rounded-3xl overflow-hidden lg:w-[50dvw] xl:w-[45dvw] h-[45vh] max-h-[600px]">
               <Image
                 src={ImgUrl(props.data.portrait.asset._ref)}
                 alt="banner"
@@ -158,4 +149,4 @@ const AHeader = (props: Props) => {
   );
 };
 
-export default AHeader;
+export default AboutPageHero;

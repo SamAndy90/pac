@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 
 import { ImgUrl } from "@/lib/utils";
-import Link from "next/link";
 import { TCard } from "./JoinPeaceKeepersBenifit";
 
 type BenifitCardProps = {

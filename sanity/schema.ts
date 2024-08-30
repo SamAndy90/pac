@@ -1,5 +1,4 @@
 import { type SchemaTypeDefinition } from "sanity";
-import { NewFooter } from "./Sections/newfooter";
 
 import { generalLink } from "./Sections/generalLink";
 import socialLink from "./Sections/socialLink";
@@ -13,8 +12,6 @@ import PageLiveContest from "./Sections/PageLiveContest";
 import PageShop from "./Sections/PageShop";
 import PageWinnersCircle from "./Sections/PageWinnersCircle";
 import PageFaq from "./Sections/pageFaq";
-import { buttonField } from "./Sections/fields/buttonField";
-import FooterLinks from "./Sections/footerlinks";
 import { HeaderLeft } from "./Sections/headerLeft";
 import { HeaderRight } from "./Sections/headerRight";
 import pageAncillary50 from "./Sections/pageAncillary50";
@@ -25,20 +22,25 @@ import pageAncillaryImage from "./Sections/pageAncillaryImage";
 import pageBenifits from "./Sections/pageBenifits";
 import pageComingSoon from "./Sections/pageComingSoon";
 import { portraitField } from "./Sections/portraitField";
-import { titleField } from "./Sections/fields";
+import { titleField, buttonField } from "./Sections/fields";
 import pages from "./pages";
 import { logo } from "./Sections/logo";
-import PageHero from "./Sections/PageHero";
+import Hero from "./Sections/HomePage/hero";
+import Header from "./Sections/header";
+import Footer from "./Sections/footer";
+
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
+    Header,
+    Footer,
     pages,
+    Hero,
     PageExplore,
     PageHappeningNow,
     PageJoinpeacekeeper,
     pageBenifits,
     PageLiveContest,
     PageShop,
-    PageHero,
     PageWinnersCircle,
     pageComingSoon,
     pageAncillaryImage,
@@ -48,17 +50,15 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pageImageSection,
     pageServices,
     PageAncillaryTextSection,
-    buttonField,
-    titleField,
-    portraitField,
-    NewFooter,
-    FooterLinks,
+    pageShopBanner,
+    PageFaq,
     HeaderLeft,
     HeaderRight,
     generalLink,
     socialLink,
-    pageShopBanner,
-    PageFaq,
+    buttonField,
+    titleField,
+    portraitField,
     logo,
   ],
 };

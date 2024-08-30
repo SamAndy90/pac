@@ -1,20 +1,29 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import { client } from "../../sanity/lib/client";
 import { Container } from "@/common";
+import { SanityDocument } from "next-sanity";
+import { Transition } from "@headlessui/react";
+import { XIcon } from "lucide-react";
+import { useAnnouncementContext } from "@/context/AnnouncementContext";
+import { cn } from "@/lib/utils";
 
-interface Announcement {
-  _id: string;
+type Announcement = SanityDocument<{
   message: string;
-}
+}>;
 
 async function getData(): Promise<Announcement[]> {
-  const fetchData = await client.fetch("*[_type == 'announcement']");
-  return fetchData;
+  return await client.fetch("*[_type == 'announcement']");
 }
 
 export default function Banner() {
-  const [data, setData] = useState<Announcement[] | undefined>(); // Provide type annotation
+  const [data, setData] = useState<Announcement[] | undefined>();
+  const { isOpen, setIsOpen } = useAnnouncementContext();
+
+  useEffect(() => {
+    setIsOpen(true);
+  }, [setIsOpen]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,16 +32,47 @@ export default function Banner() {
     };
 
     fetchData();
-  }, []); // Empty dependency array ensures the effect runs only once on mount
+  }, []);
 
-  // Conditional rendering to handle undefined data or empty array
   return (
-    <section className={"bg-pka_green"}>
-      <Container>
-        <div className="text-pka_blue2 text-3xl md:text-4xl tracking-[.2em] font-bold leading-none text-center pt-7 pb-2 font-thunder">
-          {data && data.length > 0 && <span>{data[0].message}</span>}
+    <>
+      <Transition
+        show={isOpen}
+        enter={"transition duration-100 ease-out"}
+        enterFrom={"opacity-0"}
+        enterTo={"opacity-100"}
+        leave={"transition duration-75 ease-out"}
+        leaveFrom={"opacity-100"}
+        leaveTo={"opacity-0"}
+      >
+        <div
+          className={"bg-pka_green z-[999] fixed max-w-[1920px] w-full mx-auto"}
+        >
+          <Container>
+            <div className="text-pka_blue2 relative text-sm tracking-[.2em] font-bold leading-none text-center py-5 font-thunder">
+              <button
+                className={"right-4 top-2 absolute"}
+                onClick={() => setIsOpen(false)}
+              >
+                <XIcon
+                  className={
+                    "text-pka_blue2 hover:text-white transition-colors duration-300"
+                  }
+                />
+              </button>
+              {data && data.length > 0 && <span>{data[0].message}</span>}
+            </div>
+          </Container>
         </div>
-      </Container>
-    </section>
+      </Transition>
+      <div
+        className={cn(
+          "fixed z-[998] w-full h-full top-0 left-0 bg-pka_black/30",
+          {
+            hidden: !isOpen,
+          }
+        )}
+      ></div>
+    </>
   );
 }

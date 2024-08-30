@@ -4,11 +4,9 @@ import { SanityDocument } from "next-sanity";
 import { sanityFetch } from "../../sanity/lib/fetch";
 
 async function getData() {
-  const fetchData = await sanityFetch<SanityDocument[]>({
-    query: `*[_type == "page" && title == "Home Page"]`,
+  return await sanityFetch<SanityDocument[]>({
+    query: `*[_type == "page" && title == "Homepage"]`,
   });
-
-  return fetchData;
 }
 export async function generateMetadata(): Promise<Metadata> {
   const data: any = await getData();
@@ -33,6 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   let data = await getData();
+
   if (
     !data ||
     data.length === 0 ||
@@ -40,6 +39,7 @@ export default async function Home() {
   ) {
     data = await getData();
   }
+
   const sections = data[0]?.homepagetemplatesections?.sections;
 
   return <HomePage data={sections} />;
