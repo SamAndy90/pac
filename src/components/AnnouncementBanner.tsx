@@ -46,7 +46,9 @@ export default function Banner() {
         leaveTo={"opacity-0"}
       >
         <div
-          className={"bg-pka_green z-[999] fixed max-w-[1920px] w-full mx-auto"}
+          className={
+            "bg-pka_green z-[999] top-0 left-1/2 -translate-x-1/2 fixed max-w-[1920px] w-full mx-auto"
+          }
         >
           <Container>
             <div className="text-pka_blue2 relative text-sm tracking-[.2em] font-bold leading-none text-center py-5 font-thunder">
