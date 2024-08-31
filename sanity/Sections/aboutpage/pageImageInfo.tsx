@@ -1,6 +1,6 @@
-import { titleField } from "./fields/titleField";
-import { buttonField } from "./fields/buttonField";
-import { portraitField } from "./portraitField";
+import { titleField } from "../fields/titleField";
+import { buttonField } from "../fields/buttonField";
+import { portraitField } from "../fields/portraitField";
 import { defineField, defineType } from "sanity";
 
 export default defineType({

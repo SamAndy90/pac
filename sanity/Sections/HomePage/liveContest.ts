@@ -1,15 +1,13 @@
-import { titleField } from "./fields";
-import { portraitField } from "./portraitField";
-import { defineType } from "sanity";
+import { titleField, portraitField } from "../fields";
+import { defineField, defineType } from "sanity";
 
-export default defineType({
+export const liveContest = defineType({
   name: "page.livecontest",
   type: "object",
   title: "Live Contest",
-
   fields: [
-    titleField,
-    {
+    defineField(titleField),
+    defineField({
       name: "time",
       title: "Start Time",
       type: "datetime",
@@ -17,10 +15,9 @@ export default defineType({
         dateFormat: "YYYY-MM-DD",
         timeFormat: "HH:mm",
         timeStep: 15,
-        calendarTodayLabel: "Today",
       },
-    },
-    {
+    }),
+    defineField({
       name: "endtime",
       title: "End Time",
       type: "datetime",
@@ -28,9 +25,8 @@ export default defineType({
         dateFormat: "YYYY-MM-DD",
         timeFormat: "HH:mm",
         timeStep: 15,
-        calendarTodayLabel: "Today",
       },
-    },
-    portraitField,
+    }),
+    defineField(portraitField),
   ],
 });

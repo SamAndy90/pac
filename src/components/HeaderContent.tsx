@@ -60,13 +60,13 @@ export default function HeaderContent(props: HeaderContentProps) {
                 </Link>
               ))}
             </div>
-            <div className="items-center flex-1 justify-center flex">
-              <Link href={"/"} className={"size-[177px] relative"}>
+            <div className="items-center h-full flex-1 justify-center flex">
+              <Link href={"/"} className={"h-full w-full relative"}>
                 <Image
                   src={urlFor(logo.asset._ref).url()}
                   alt="PAK Logo"
                   fill
-                  className={"object-cover"}
+                  className={"object-contain"}
                 />
               </Link>
             </div>

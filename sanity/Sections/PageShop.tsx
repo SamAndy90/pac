@@ -1,5 +1,5 @@
 import { titleField } from "./fields/titleField";
-import { portraitField } from "./portraitField";
+import { portraitField } from "./fields/portraitField";
 export default {
   name: "page.plpShop",
   type: "object",

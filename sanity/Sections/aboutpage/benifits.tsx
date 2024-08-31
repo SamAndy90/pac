@@ -1,13 +1,15 @@
-import { titleField } from "./fields/titleField";
-import { buttonField } from "./fields/buttonField";
-import { portraitField } from "./portraitField";
-export default {
+import { titleField } from "../fields/titleField";
+import { buttonField } from "../fields/buttonField";
+import { portraitField } from "../fields/portraitField";
+import { defineField } from "sanity";
+
+export const benifits = defineField({
   name: "page.benifits",
   type: "object",
-  title: "PeaceKeeper Benifits",
+  title: "Benifits",
 
   fields: [
-    titleField,
+    defineField(titleField),
     {
       name: "cards",
       title: "Cards",
@@ -26,9 +28,6 @@ export default {
               name: "Intro",
               title: "Event Description",
               type: "text",
-              Option: {
-                rows: 5,
-              },
             },
 
             portraitField,
@@ -70,4 +69,4 @@ export default {
       ],
     },
   ],
-};
+});

@@ -55,7 +55,9 @@ const JoinPeaceKeeper = ({ data }: Props) => {
                     "md:min-w-[180px] lg:min-w-[210px] w-full sm:w-auto"
                   }
                 >
-                  <NewButton fullWidth>{button.text}</NewButton>
+                  <NewButton colorVariant={button.style} fullWidth>
+                    {button.text}
+                  </NewButton>
                 </Link>
               ) : (
                 <NewButton

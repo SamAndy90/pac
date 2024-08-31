@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import banner from "../../resources/png/Explore.png";
 import { ArrowRight, ArrowLeft } from "lucide-react";
 import CountdownComponent from "@/components/countdownCounter";
+
 function PLPContest(data: any) {
   const [click, setClicked] = useState(false);
   const [clickTwo, setClickedTwo] = useState(false);
@@ -29,10 +30,10 @@ function PLPContest(data: any) {
   return (
     <>
       <div className="flex-col">
-        <div className="mx-10  md:mx-[100px]  lg:mx-[160px] xl:mx-[200px] 2xl:mx-[260px] my-32 justify-center flex">
+        <div className="mx-10  md:mx-[100px] lg:mx-[160px] xl:mx-[200px] 2xl:mx-[260px] my-32 justify-center flex">
           <div className="!flex flex-col  md:flex-row  md:relative w-[100%] md:h-[300] lg:h-[638px]">
             <div
-              className={`flex bg-red-700   relative w-[100%] h-[500px] md:h-[638px]  rounded-t-[20px]   bg-cover bg-center  ${
+              className={`flex bg-red-700 relative w-[100%] h-[500px] md:h-[638px] rounded-t-[20px] bg-cover bg-center  ${
                 clickTwo
                   ? "md:w-[50%] w-full animate-once animate-out duration-500 transition-all  md:rounded-r-none md:rounded-l-[20px] "
                   : "rounded-[20px] animate-out transition-all duration-500 ease-in-out"
@@ -43,12 +44,12 @@ function PLPContest(data: any) {
                 <div className="flex ml-auto justify-end items-center">
                   {clickTwo ? (
                     <ArrowRight
-                      className="  md:w-[20px] md:h-[21px] lg:w-[30px] lg:h-[31px] xl:w-[40px] xl:h-[41px] 2xl:w-[49px] 2xl:h-[47px] md:block hidden"
+                      className="md:w-[20px] md:h-[21px] lg:w-[30px] lg:h-[31px] xl:w-[40px] xl:h-[41px] 2xl:w-[49px] 2xl:h-[47px] md:block hidden"
                       onClick={() => setClickedTwo(!clickTwo)}
                     />
                   ) : (
                     <ArrowLeft
-                      className="  md:w-[20px] md:h-[21px] lg:w-[30px] lg:h-[31px] xl:w-[40px] xl:h-[41px] 2xl:w-[49px] 2xl:h-[47px] md:block hidden"
+                      className="md:w-[20px] md:h-[21px] lg:w-[30px] lg:h-[31px] xl:w-[40px] xl:h-[41px] 2xl:w-[49px] 2xl:h-[47px] md:block hidden"
                       onClick={() => setClickedTwo(!clickTwo)}
                     />
                   )}

@@ -1,11 +1,10 @@
-import { titleField } from "./fields/titleField";
-import { portraitField } from "./portraitField";
+import { titleField, portraitField } from "../fields";
 import { defineArrayMember, defineField, defineType } from "sanity";
 
-export default defineType({
+export const services = defineType({
   name: "page.services",
   type: "object",
-  title: "Services Section",
+  title: "Services",
   fields: [
     defineField({
       name: "subtitle",

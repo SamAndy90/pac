@@ -22,6 +22,7 @@ type ImageInfoProps = {
 
 const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
   const { title, description, buttons, bgColor, textColor } = data;
+  const oneWordTitle = title?.split(" ");
 
   return (
     <section
@@ -37,10 +38,12 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
       >
         <h2
           className={
-            "uppercase mb-[25vw] flex-1 font-thunder font-bold text-6xl tracking-wider"
+            "uppercase mb-[5vw] flex-1 font-thunder font-bold text-7xl tracking-wider"
           }
         >
-          {title}
+          {oneWordTitle.map((word, idX) => (
+            <div key={word + idX}>{word}</div>
+          ))}
         </h2>
         <p className={"font-avenirThin"}>{description}</p>
         {!!buttons?.length && (
@@ -74,7 +77,7 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
         )}
       </div>
 
-      <div className="lg:w-[48%] aspect-[10/14]">
+      <div className="lg:w-[48%] aspect-[11/12]">
         <div className={"w-full h-full relative"}>
           <Image
             src={urlFor(data.portrait.asset._ref).url()}

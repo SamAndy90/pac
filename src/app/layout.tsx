@@ -62,21 +62,21 @@ const averia = Averia_Libre({
 });
 
 const Avenir = localFont({
-  src: "./AvenirLTStd-Black.otf",
+  src: "../fonts/AvenirLTStd-Black.otf",
   display: "swap",
   preload: false,
   variable: "--font-avenir",
 });
 
 const AvenirBold = localFont({
-  src: "./AvenirBold.otf",
+  src: "../fonts/AvenirBold.otf",
   display: "swap",
   preload: false,
   variable: "--font-avenir-bold",
 });
 
 const AvenirThin = localFont({
-  src: "./AvenirLTStd-Book.otf",
+  src: "../fonts/AvenirLTStd-Book.otf",
   display: "swap",
   preload: false,
   variable: "--font-avenir-thin",

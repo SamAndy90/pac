@@ -1,9 +1,8 @@
-import imageUrlBuilder from "@sanity/image-url";
 import Image from "next/image";
-import { client } from "../../sanity/lib/client";
 import { Container } from "@/common";
 import { Portrait } from "@/types";
 import { urlFor } from "@/lib/utils";
+import { SanityDocument } from "next-sanity";
 
 type ServicesData = {
   subtitle: string;
@@ -11,12 +10,10 @@ type ServicesData = {
   description: string[];
   services: string[];
   portrait: Portrait;
-  _key: string;
-  _type: string;
 };
 
 type ServicesProps = {
-  data: ServicesData;
+  data: SanityDocument<ServicesData>;
 };
 
 const Services = ({ data }: ServicesProps) => {
@@ -69,9 +66,9 @@ const Services = ({ data }: ServicesProps) => {
                 }
               >
                 {services.map((service, idX) => (
-                  <li key={service + idX}>
+                  <li key={service + idX} className={"flex items-center"}>
                     <span
-                      className={"w-5 mr-2 inline-block text-sm lg:text-base"}
+                      className={"w-5 mr-4 font-avenirBold text-lg lg:text-xl"}
                     >
                       {idX < 9 ? `0${idX + 1}` : idX + 1}
                     </span>

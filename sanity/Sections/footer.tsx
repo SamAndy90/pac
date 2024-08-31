@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField, defineType } from "sanity";
-import { LinkIcon } from "@sanity/icons";
+import { link } from "./fields";
 
 export default defineType({
   name: "footer",
@@ -20,35 +20,10 @@ export default defineType({
       type: "array",
       title: "General Links",
       initialValue: [],
-      of: [
-        defineArrayMember({
-          type: "object",
-          icon: LinkIcon,
-          fields: [
-            {
-              name: "value",
-              title: "Value",
-              type: "string",
-              validation: (rule) => rule.required(),
-            },
-            {
-              name: "slug",
-              type: "slug",
-              title: "URL",
-              options: {
-                source: "value",
-              },
-              validation: (rule) => rule.required(),
-            },
-          ],
-        }),
-      ],
+      of: [defineArrayMember(link)],
     }),
   ],
   preview: {
-    select: {
-      title: "title",
-    },
     prepare() {
       return { title: "Footer Content" };
     },

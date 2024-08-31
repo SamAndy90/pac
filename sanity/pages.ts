@@ -39,9 +39,8 @@ export default defineType({
           title: "Sections",
           type: "array",
           of: [
-            defineArrayMember({ type: "page.ancillaryheader" }),
-            defineArrayMember({ type: "page.ancillaryimage" }),
-            defineArrayMember({ type: "page.textsection" }),
+            defineArrayMember({ type: "abouthero" }),
+            defineArrayMember({ type: "textsection" }),
             defineArrayMember({ type: "page.ancillary50" }),
             defineArrayMember({ type: "page.imageInfo" }),
             defineArrayMember({ type: "page.image" }),

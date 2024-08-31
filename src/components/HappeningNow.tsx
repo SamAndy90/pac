@@ -1,18 +1,9 @@
-import Slider from "react-slick";
 import Link from "next/link";
 import EventCard from "./common/EventCard";
-import settings from "../app/utils/HappeningNowSettings";
 import { Container } from "@/common";
 import { NewButton } from "./ui/NewButton";
 import { useKeenSlider } from "keen-slider/react";
-
-type Portrait = {
-  asset: {
-    _ref: string;
-    _type: string;
-  };
-  _type: string;
-};
+import { Color, Portrait } from "@/types";
 
 type Button = {
   url: string;
@@ -21,10 +12,10 @@ type Button = {
 };
 
 type Card = {
-  Intro: string;
+  description: string;
   link: string;
   subtitle: string;
-  Title: string;
+  title: string;
   style: string;
   time: string;
   _key: string;
@@ -43,10 +34,6 @@ type TData = {
   _key: string;
   title: string;
   newbutton: Button[];
-};
-type Color = {
-  label: string;
-  value: string;
 };
 
 type HappeningNowProps = {
@@ -105,8 +92,8 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
               <div className={"keen-slider__slide"} key={card._key}>
                 <EventCard
                   subtitle={card.subtitle}
-                  title={card.Title}
-                  description={card.Intro}
+                  title={card.title}
+                  description={card.description}
                   backgroundImage={card.portrait?.asset._ref}
                   countdownBgColor={card.timerstyle.bgcolor.value}
                   countdownTextColor={card.timerstyle.numcolor.value}

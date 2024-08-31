@@ -1,6 +1,6 @@
 import { defineField } from "sanity";
 
-export default defineField({
+export const hero = defineField({
   name: "hero",
   type: "object",
   title: "Hero",

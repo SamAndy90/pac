@@ -19,7 +19,7 @@ type Card = {
 
 type Explore = {
   cards: Card[];
-  _type: "Explore";
+  _type: "explore";
   _key: string;
   title: string;
 };

@@ -1,33 +1,31 @@
-import { titleField } from "./fields/titleField";
-import { buttonField } from "./fields/buttonField";
-import { portraitField } from "./portraitField";
-import { newbutton } from "./fields";
+import { titleField, buttons, portraitField } from "../fields";
+import { defineArrayMember, defineField } from "sanity";
 
-export default {
+export const happeningNow = defineField({
   name: "page.happeningnow",
   type: "object",
   title: "Happening Now",
   fields: [
-    titleField,
-    {
+    defineField(titleField),
+    defineField({
       name: "cards",
       title: "Cards",
       type: "array",
       of: [
-        {
+        defineArrayMember({
           type: "object",
           fields: [
-            {
+            defineField({
               name: "subtitle",
               title: "Event Subtitle",
               type: "string",
-            },
-            {
-              name: "Title",
+            }),
+            defineField({
+              name: "title",
               title: "Event Name",
               type: "string",
-            },
-            {
+            }),
+            defineField({
               name: "whereToShow",
               title: "Where to Show",
               type: "string",
@@ -37,8 +35,19 @@ export default {
                   { title: "PLP Contest Page", value: "plpcontest" },
                 ],
               },
-            },
-            {
+            }),
+            defineField({
+              name: "status",
+              title: "Card Status",
+              type: "string",
+              options: {
+                list: [
+                  { title: "Active", value: "active" },
+                  { title: "Inactive", value: "inactive" },
+                ],
+              },
+            }),
+            defineField({
               name: "homepageStyle",
               title: "Choose Homepage Style for Cards",
               type: "string",
@@ -49,20 +58,9 @@ export default {
                   { title: "Style 3", value: "style3" },
                 ],
               },
-              hidden: ({ parent }: any) => parent.whereToShow !== "homepage",
-            },
-            {
-              name: "status",
-              title: "Card Status",
-              type: "string",
-              options: {
-                list: [
-                  { title: "Active", value: "active" },
-                  { title: "Inactive", value: "inactive" },
-                ],
-              },
-            },
-            {
+              hidden: ({ parent }) => parent.whereToShow !== "homepage",
+            }),
+            defineField({
               name: "contestStyle",
               title: "Choose PLP Contest Style for Cards",
               type: "string",
@@ -73,17 +71,14 @@ export default {
                 ],
               },
               hidden: ({ parent }: any) => parent.whereToShow !== "plpcontest",
-            },
-            {
-              name: "Intro",
+            }),
+            defineField({
+              name: "description",
               title: "Event Description",
               type: "text",
-              option: {
-                rows: 10,
-              },
-            },
+            }),
 
-            {
+            defineField({
               name: "starttime",
               title: "Start Time",
               type: "datetime",
@@ -91,21 +86,19 @@ export default {
                 dateFormat: "YYYY-MM-DD",
                 timeFormat: "HH:mm",
                 timeStep: 15,
-                calendarTodayLabel: "Today",
               },
-            },
-            {
+            }),
+            defineField({
               name: "time",
-              title: "End TIme",
+              title: "End Time",
               type: "datetime",
               options: {
                 dateFormat: "YYYY-MM-DD",
                 timeFormat: "HH:mm",
                 timeStep: 15,
-                calendarTodayLabel: "Today",
               },
-            },
-            {
+            }),
+            defineField({
               name: "timerstyle",
               type: "object",
               title: "Timer Style",
@@ -121,41 +114,23 @@ export default {
                   type: "simplerColor",
                 },
               ],
-            },
-            {
+            }),
+            defineField({
               name: "link",
               title: "Event URL",
               type: "string",
-            },
-
-            buttonField,
-            {
-              ...portraitField,
-
-              description: ({ parent }: { parent: { whereToShow: string } }) =>
-                parent.whereToShow === "plpcontest"
-                  ? "Image size must be 1400x638 for PLP Contest Page"
-                  : "",
-            },
+            }),
+            defineField(buttons),
+            defineField(portraitField),
           ],
-          preview: {
-            select: {
-              title: "Title",
-            },
-          },
-        },
+        }),
       ],
-      // validation: (rule: {
-      //   max: (arg0: number) => {
-      //     (): any;
-      //     new (): any;
-      //     error: {
-      //       (arg0: string): { (): any; new (): any; "": any };
-      //       new (): any;
-      //     };
-      //   };
-      // }) => rule.max(9).error("You can only add up to 3 Events."),
-    },
-    newbutton,
+    }),
+    defineField(buttons),
   ],
-};
+  preview: {
+    prepare() {
+      return { title: "Happening Now" };
+    },
+  },
+});
