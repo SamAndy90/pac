@@ -37,7 +37,7 @@ export default function Banner() {
   return (
     <>
       <Transition
-        show={false}
+        show={isOpen}
         enter={"transition duration-100 ease-out"}
         enterFrom={"opacity-0"}
         enterTo={"opacity-100"}
@@ -71,7 +71,7 @@ export default function Banner() {
         className={cn(
           "fixed z-[998] w-full h-full top-0 left-0 bg-pka_black/30",
           {
-            hidden: true,
+            hidden: !isOpen,
           }
         )}
       ></div>
