@@ -26,7 +26,7 @@ const ContestTemplateSubComp = ({
   const [sectionData, setSectionData] = useState(sections);
 
   useEffect(() => {
-    const query = `*[_type == "page" && title == "Home Page"]`;
+    const query = `*[_type == "page" && title == "Homepage"]`;
 
     const subscription = client.listen(query).subscribe((update) => {
       if (update.result) {

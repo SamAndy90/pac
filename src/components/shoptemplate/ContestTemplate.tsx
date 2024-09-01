@@ -9,7 +9,7 @@ type Props = {
 
 const getHappeningNowSection = async () => {
   const fetchData = await sanityFetch<SanityDocument[]>({
-    query: `*[_type == "page" && title == "Home Page"]`,
+    query: `*[_type == "page" && title == "Homepage"]`,
   });
 
   const sections = fetchData[0].homepagetemplatesections.sections;
