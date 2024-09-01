@@ -3,7 +3,7 @@ import { defineArrayMember, defineField } from "sanity";
 
 export const happeningNow = defineField({
   name: "page.happeningnow",
-  type: "object",
+  type: "document",
   title: "Happening Now",
   fields: [
     defineField(titleField),

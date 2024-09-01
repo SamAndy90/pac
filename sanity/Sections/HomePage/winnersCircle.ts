@@ -3,7 +3,7 @@ import { portraitField, titleField } from "../fields";
 
 export const winnersCircle = defineField({
   name: "page.winnersCircle",
-  type: "object",
+  type: "document",
   title: "Winner Circle",
   fields: [
     defineField(titleField),

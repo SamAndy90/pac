@@ -3,7 +3,7 @@ import { defineArrayMember, defineField } from "sanity";
 export const explore = defineField({
   name: "page.explore",
   title: "Explore Section",
-  type: "object",
+  type: "document",
   fields: [
     defineField({
       name: "title",

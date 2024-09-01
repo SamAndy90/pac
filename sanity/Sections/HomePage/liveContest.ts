@@ -3,7 +3,7 @@ import { defineField, defineType } from "sanity";
 
 export const liveContest = defineType({
   name: "page.livecontest",
-  type: "object",
+  type: "document",
   title: "Live Contest",
   fields: [
     defineField(titleField),

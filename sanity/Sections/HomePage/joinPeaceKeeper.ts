@@ -4,7 +4,7 @@ import { titleField, buttons, portraitField } from "../fields";
 export const joinPeaceKeeper = defineField({
   name: "page.joinpeacekeeper",
   title: "Join Peace Keeper",
-  type: "object",
+  type: "document",
   fields: [
     defineField(titleField),
     defineField({
