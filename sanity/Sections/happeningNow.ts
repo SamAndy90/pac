@@ -1,9 +1,9 @@
-import { titleField, buttons, portraitField } from "../fields";
+import { titleField, buttons, portraitField } from "./fields";
 import { defineArrayMember, defineField } from "sanity";
 
 export const happeningNow = defineField({
   name: "page.happeningnow",
-  type: "document",
+  type: "object",
   title: "Happening Now",
   fields: [
     defineField(titleField),

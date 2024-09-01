@@ -1,9 +1,9 @@
-import { titleField, portraitField } from "../fields";
+import { titleField, portraitField } from "./fields";
 import { defineField, defineType } from "sanity";
 
 export const liveContest = defineType({
   name: "page.livecontest",
-  type: "document",
+  type: "object",
   title: "Live Contest",
   fields: [
     defineField(titleField),
