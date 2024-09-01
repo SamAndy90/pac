@@ -51,18 +51,18 @@ export default function Banner() {
           }
         >
           <Container>
-            <div className="text-pka_blue2 relative text-sm tracking-[.2em] font-bold leading-none text-center py-5 font-thunder">
+            <div className="text-pka_blue2 px-8 relative text-sm tracking-[.2em] font-bold leading-none text-center py-5 font-thunder">
               <button
-                className={"right-4 top-2 absolute"}
+                className={"right-0 top-2 absolute"}
                 onClick={() => setIsOpen(false)}
               >
                 <XIcon
                   className={
-                    "text-pka_blue2 hover:text-white transition-colors duration-300"
+                    "text-pka_blue2 size-5 hover:text-white transition-colors duration-300"
                   }
                 />
               </button>
-              {data && data.length > 0 && <span>{data[0].message}</span>}
+              {data && data.length > 0 && <p>{data[0].message}</p>}
             </div>
           </Container>
         </div>

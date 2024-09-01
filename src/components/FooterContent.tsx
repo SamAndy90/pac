@@ -40,7 +40,7 @@ const FooterContent = (props: FooterContentProps) => {
       <Container>
         <div
           className={
-            "pb-3 gap-3 lg:pb-4 flex flex-col lg:flex-row lg:items-end items-center justify-between"
+            "pb-3 gap-y-3 gap-x-1 lg:pb-4 flex flex-col lg:flex-row lg:items-end items-center justify-between"
           }
         >
           <p
@@ -50,7 +50,7 @@ const FooterContent = (props: FooterContentProps) => {
           >
             {copyright}
           </p>
-          <div className="flex-1 order-1 lg:order-2">
+          <div className="flex-1 w-full order-1 lg:order-2">
             <div
               className={
                 "relative -my-10 z-20 mx-auto max-w-[150px] aspect-square"
@@ -63,18 +63,18 @@ const FooterContent = (props: FooterContentProps) => {
                 className={"object-contain"}
               />
             </div>
-            <p
+            <h2
               className={
-                "leading-[0.9] py-3 font-bold tracking-wider text-center text-6xl font-garamond text-pka_green_light"
+                "leading-[0.9] w-full break-words py-3 font-bold tracking-wider text-center text-4xl lg:text-5xl font-garamond text-pka_green_light"
               }
             >
               {title}
-            </p>
+            </h2>
           </div>
           <nav className={"flex-1 order-2 lg:order-3"}>
             <ul
               className={
-                "flex flex-wrap lg:flex-nowrap text-white font-garamond text-sm lg:text-base justify-center items-center gap-x-3 text-center"
+                "flex flex-wrap text-white font-garamond text-sm lg:text-base justify-center items-center gap-x-2 text-center"
               }
             >
               {links.map((link, idX) => {
@@ -82,7 +82,7 @@ const FooterContent = (props: FooterContentProps) => {
                   <li
                     key={link.value}
                     className={
-                      "transition-colors hover:text-pka_green gap-x-3 flex items-center justify-center"
+                      "transition-colors hover:text-pka_green gap-x-2 flex items-center justify-center"
                     }
                   >
                     {!!idX && (
