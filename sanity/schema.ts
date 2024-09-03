@@ -32,6 +32,8 @@ import {
   benifits,
 } from "./Sections/aboutpage";
 
+import { products, productCard } from "./Sections/shop";
+
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
     Header,
@@ -49,6 +51,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     services,
     imageSection,
     benifits,
+    productCard,
+    products,
     PageShop,
     pageComingSoon,
     pageImageInfo,

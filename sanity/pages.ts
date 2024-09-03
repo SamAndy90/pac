@@ -87,6 +87,7 @@ export default defineType({
             defineArrayMember({ type: "page.shopBanner" }),
             defineArrayMember({ type: "page.benifits" }),
             defineArrayMember({ type: "page.comingsoon" }),
+            defineArrayMember({ type: "products" }),
           ],
         },
         {

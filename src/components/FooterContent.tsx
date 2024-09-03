@@ -45,7 +45,7 @@ const FooterContent = (props: FooterContentProps) => {
         >
           <p
             className={
-              "flex-1 order-3 lg:order-1 font-garamond text-xs lg:text-base text-white"
+              "flex-1 order-3 lg:order-1 font-avenirThin text-xs text-white"
             }
           >
             {copyright}
@@ -74,16 +74,14 @@ const FooterContent = (props: FooterContentProps) => {
           <nav className={"flex-1 order-2 lg:order-3"}>
             <ul
               className={
-                "flex flex-wrap text-white font-garamond text-sm lg:text-base justify-center items-center gap-x-2 text-center"
+                "flex flex-wrap text-white font-thunder tracking-wider lg:text-lg justify-center items-center gap-x-2 text-center"
               }
             >
               {links.map((link, idX) => {
                 return (
                   <li
                     key={link.value}
-                    className={
-                      "transition-colors hover:text-pka_green gap-x-2 flex items-center justify-center"
-                    }
+                    className={"gap-x-2 flex items-center justify-center"}
                   >
                     {!!idX && (
                       <Image
@@ -93,7 +91,12 @@ const FooterContent = (props: FooterContentProps) => {
                         height={24}
                       />
                     )}
-                    <Link href={link.slug.current}>{link.value}</Link>
+                    <Link
+                      href={link.slug.current}
+                      className={"transition-colors hover:text-pka_green"}
+                    >
+                      {link.value}
+                    </Link>
                   </li>
                 );
               })}

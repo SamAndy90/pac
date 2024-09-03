@@ -1,7 +1,6 @@
-import BannerComponent from "@/components/product/BannerComponent";
-import ProductListing from "@/components/product/ProductListing";
 import { SanityDocument } from "next-sanity";
 import { sanityFetch } from "../../../sanity/lib/fetch";
+import ShopPage from "@/components/shop/ShopPage";
 
 async function getData() {
   return await sanityFetch<SanityDocument[]>({
@@ -9,20 +8,14 @@ async function getData() {
   });
 }
 
-const Product = async () => {
+export default async function Page(props: any) {
   const data = await getData();
-  if (!data) return null;
+  if (!data || data.length === 0 || !data[0]?.shoptemplatesections?.sections) {
+    return (
+      <div className={"text-center text-2xl mt-20"}>Content not found</div>
+    );
+  }
+  const sections = data[0]?.shoptemplatesections?.sections;
 
-  const dataItem = data[0];
-
-  const section0 = dataItem?.sections[0];
-
-  return (
-    <div className="w-full mx-auto lg:mt-40">
-      <BannerComponent data={section0} />
-      <ProductListing />
-    </div>
-  );
-};
-
-export default Product;
+  return <ShopPage data={sections} />;
+}

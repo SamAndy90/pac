@@ -1,39 +1,28 @@
 import Image from "next/image";
 import React from "react";
 
-import { ImgUrl } from "@/lib/utils";
 import Link from "next/link";
 import { NewButton } from "../ui/NewButton";
 import { Container } from "@/common";
 import BenifitCard from "./BenifitCard";
-
-type TImageAsset = {
-  _ref: string;
-  _type: "reference";
-};
-
-type TImage = {
-  _type: "image";
-  asset: TImageAsset;
-};
+import { Portrait } from "@/types";
+import { SanityDocument } from "next-sanity";
 
 export type TCard = {
   Intro: string;
   Title: string;
   _key: string;
-  portrait: TImage;
+  portrait: Portrait;
 };
 
 type TData = {
   title: string;
-  _type: string;
-  _key: string;
   cards: TCard[];
   buttons: any[];
 };
 
 type JoinPeaceKeepersBenifitProps = {
-  data: TData;
+  data: SanityDocument<TData>;
 };
 
 const JoinPeaceKeepersBenifit = ({ data }: JoinPeaceKeepersBenifitProps) => {

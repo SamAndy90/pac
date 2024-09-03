@@ -46,15 +46,13 @@ export default function HeaderContent(props: HeaderContentProps) {
     <>
       <header className="fixed z-50 w-full top-3">
         <Container>
-          <nav className="bg-pka_blue text-xl font-thunder font-medium w-full lg:flex items-center z-40 my-5 justify-around hidden rounded-full h-[62px]">
+          <nav className="bg-pka_blue text-white tracking-widest text-xl font-thunder font-medium w-full lg:flex items-center z-40 my-5 justify-around hidden rounded-full h-[62px]">
             <div className="flex flex-1 items-center gap-[20px] xl:gap-[57px] 2xl:gap-[68.8px] justify-end ">
               {leftlinks.map((item) => (
                 <Link
                   href={item.slug.current}
                   key={item._key}
-                  className={
-                    "text-white hover:text-pka_green transition-colors tracking-widest"
-                  }
+                  className={"hover:text-pka_green transition-colors"}
                 >
                   {item.value}
                 </Link>
@@ -153,7 +151,7 @@ export default function HeaderContent(props: HeaderContentProps) {
               {burgerlinks.map((item) => (
                 <li key={item._key} className={"first:border-t border-b"}>
                   <Link
-                    className="text-[12vw] leading-none md:text-6xl block pt-[2vw] pb-[2vw] md:pt-4 md:pb-3 font-avenirThin hover:text-pka_green transition-colors"
+                    className="text-[12vw] leading-none md:text-6xl block pt-[2vw] pb-[2vw] md:pt-4 md:pb-3 font-thunder tracking-wider hover:text-pka_green transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                     href={item.slug.current}
                   >
