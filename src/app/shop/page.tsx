@@ -12,7 +12,7 @@ export default async function Page(props: any) {
   const data = await getData();
   if (!data || data.length === 0 || !data[0]?.shoptemplatesections?.sections) {
     return (
-      <div className={"text-center text-2xl mt-20"}>Content not found</div>
+      <div className={"text-center text-2xl mt-24"}>Content not found</div>
     );
   }
   const sections = data[0]?.shoptemplatesections?.sections;
