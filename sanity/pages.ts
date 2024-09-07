@@ -26,7 +26,9 @@ export default defineType({
     defineField({
       name: "template",
       type: "string",
-      options: { list: ["ancillary", "homepageTemplate", "shoptemplate"] },
+      options: {
+        list: ["ancillary", "homepageTemplate", "shoptemplate", "faqstemplate"],
+      },
     }),
     defineField({
       name: "ancillarysections",
@@ -46,7 +48,6 @@ export default defineType({
             defineArrayMember({ type: "page.image" }),
             defineArrayMember({ type: "page.services" }),
             defineArrayMember({ type: "page.benifits" }),
-            defineArrayMember({ type: "page.faq" }),
             defineArrayMember({ type: "page.comingsoon" }),
           ],
         },
@@ -101,6 +102,20 @@ export default defineType({
               { title: "Peace Social", value: "peace" },
             ],
           },
+        },
+      ],
+    }),
+    defineField({
+      name: "faqstemplatesections",
+      type: "object",
+      hidden: ({ parent }: { parent: any }) =>
+        !(parent?.template === "faqstemplate"),
+      fields: [
+        {
+          name: "sections",
+          title: "Sections",
+          type: "array",
+          of: [defineArrayMember({ type: "faqs" })],
         },
       ],
     }),

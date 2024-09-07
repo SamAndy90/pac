@@ -1,4 +1,4 @@
-import HomePage from "@/components/HomePage";
+import HomePage from "@/components/Home/HomePage";
 import { Metadata } from "next";
 import { SanityDocument } from "next-sanity";
 import { sanityFetch } from "../../sanity/lib/fetch";

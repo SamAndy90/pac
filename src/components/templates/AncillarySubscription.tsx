@@ -2,12 +2,27 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import { client } from "../../../sanity/lib/client";
-import AllComponents from "../AllComponents";
+import AboutPageHero from "@/components/About/AboutPageHero";
+import TextSection from "@/components/About/TextSection";
+import ImageInfo from "@/components/About/ImageInfo";
+import Services from "@/components/About/Services";
+import ImageSection from "@/components/About/ImageSection";
+import JoinPeaceKeepersBenifit from "@/components/About/JoinPeaceKeepersBenifit";
 
 type Props = {
   sections: any;
   pageTitle: string;
 };
+
+const AllComponents: { [key: string]: (data: any) => ReactNode } = {
+  abouthero: (data: any) => <AboutPageHero data={data} />,
+  textsection: (data: any) => <TextSection data={data} />,
+  "page.ancillary50": (data: any) => <ImageInfo data={data} />,
+  "page.services": (data: any) => <Services data={data} />,
+  "page.image": (data: any) => <ImageSection data={data} />,
+  "page.benifits": (data: any) => <JoinPeaceKeepersBenifit data={data} />,
+  "page.imageInfo": (data: any) => <ImageInfo data={data} revert={true} />,
+} as const;
 
 const AncillarySubscription = ({ sections, pageTitle }: Props) => {
   const [sectionData, setSectionsData] = useState(sections);

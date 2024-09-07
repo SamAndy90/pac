@@ -1,6 +1,6 @@
 "use client";
 
-import JoinPeaceKeepersBenifit from "@/components/ancillary/JoinPeaceKeepersBenifit";
+import JoinPeaceKeepersBenifit from "@/components/About/JoinPeaceKeepersBenifit";
 import BannerComponent from "@/components/banner/BannerComponent";
 import ProductListing from "@/components/product/ProductListing";
 import React, { useEffect, useState } from "react";

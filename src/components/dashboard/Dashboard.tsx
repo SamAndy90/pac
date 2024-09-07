@@ -1,7 +1,7 @@
 // Dashboard.tsx
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import CommingSoon from "../common/CommingSoon";
+import { ComingSoon } from "@/common";
 import { NextStudio } from "next-sanity/studio";
 import config from "../../../sanity.config";
 import UserProfile from "./UserProfile";
@@ -34,25 +34,25 @@ const Dashboard: React.FC<Props> = ({ role }) => {
 
     {
       trigger: "my-contests",
-      content: <CommingSoon />,
+      content: <ComingSoon />,
       title: "My Contests",
       allowedRoles: ["org:admin", "org:member"],
     },
     {
       trigger: "manage-peace-social",
-      content: <CommingSoon />,
+      content: <ComingSoon />,
       title: "Manage Peace Social",
       allowedRoles: ["org:admin", "org:socialadmin"],
     },
     {
       trigger: "manage-users",
-      content: <CommingSoon />,
+      content: <ComingSoon />,
       title: "Manage Users",
       allowedRoles: ["org:admin"],
     },
     {
       trigger: "global-settings",
-      content: <CommingSoon />,
+      content: <ComingSoon />,
       title: "Global Settings",
       allowedRoles: ["org:admin"],
     },

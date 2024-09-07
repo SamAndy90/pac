@@ -6,7 +6,7 @@ import { Container } from "@/common";
 import { SanityDocument } from "next-sanity";
 import { Transition } from "@headlessui/react";
 import { XIcon } from "lucide-react";
-import { useAnnouncementContext } from "@/context/AnnouncementContext";
+import { useAnnouncementContext } from "@/contexts/Announcement";
 import { cn } from "@/lib/utils";
 
 type Announcement = SanityDocument<{
@@ -47,18 +47,18 @@ export default function Banner() {
       >
         <div
           className={
-            "bg-pka_green z-[999] top-0 left-1/2 -translate-x-1/2 fixed max-w-[1920px] w-full mx-auto"
+            "bg-white z-[999] shadow-lg top-1/2 -translate-y-1/2 rounded-xl left-1/2 -translate-x-1/2 fixed max-w-[calc(100vw-24px)] md:max-w-[700px] w-full md:mx-auto"
           }
         >
           <Container>
-            <div className="text-pka_blue2 px-8 relative text-sm tracking-[.2em] font-bold leading-none text-center py-5 font-thunder">
+            <div className="text-pka_blue px-8 relative text-lg tracking-widest font-bold leading-none text-center py-5 font-thunder">
               <button
                 className={"right-0 top-2 absolute"}
                 onClick={() => setIsOpen(false)}
               >
                 <XIcon
                   className={
-                    "text-pka_blue2 size-5 hover:text-white transition-colors duration-300"
+                    "text-pka_blue2 size-5 hover:text-pka_green transition-colors duration-300"
                   }
                 />
               </button>
@@ -69,7 +69,7 @@ export default function Banner() {
       </Transition>
       <div
         className={cn(
-          "fixed z-[998] w-full h-full top-0 left-0 bg-pka_black/30",
+          "fixed z-[998] w-full h-full top-0 left-0 bg-white/20 backdrop-blur",
           {
             hidden: !isOpen,
           }

@@ -1,8 +1,8 @@
 "use client";
 
-import fetchProducts from "@/app/api/fetechProduct";
+import { getShopifyProducts } from "@/lib/data-fetchers/shopify/products";
 import { useEffect, useState } from "react";
-import Loader from "../common/Loader";
+import { Loader } from "@/common";
 import AddProductCard from "./AddProductCard";
 import ProductCard from "./ProductCard";
 import PaginationControl from "./PaginationControl"; // Adjust the import based on your project structure
@@ -18,7 +18,7 @@ const ProductListing = (props: Props) => {
   useEffect(() => {
     async function getProducts() {
       setLoading(true);
-      const products = await fetchProducts();
+      const products = await getShopifyProducts();
       setProducts(products);
       setLoading(false);
     }

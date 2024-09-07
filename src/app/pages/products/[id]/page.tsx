@@ -1,9 +1,11 @@
 "use client";
-import Loader from "@/components/common/Loader";
-import AddToCartButton from "@/components/shop/AddToCartButton";
-import ImageDisplay from "@/components/shop/ImageDisplay";
+
+import { Loader } from "@/common/Loader";
+import AddToCartButton from "@/components/shopold/AddToCartButton";
+import ImageDisplay from "@/components/shopold/ImageDisplay";
 import { CartItem } from "@/lib/store/slices/cartSlice";
 import { gql, useQuery } from "@apollo/client";
+
 const GET_PRODUCT_BY_ID = gql`
   query Product($productId: ID) {
     product(id: $productId) {

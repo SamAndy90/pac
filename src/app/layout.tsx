@@ -20,11 +20,11 @@ import "keen-slider/keen-slider.min.css";
 import { draftMode } from "next/headers";
 import LiveVisualEditing from "@/components/LiveVisualEditing";
 
-import Loader from "@/components/common/Loader";
+import { Loader } from "@/common/Loader";
 import { Suspense } from "react";
-import ApolloProviderComp from "@/components/ApolloProviderComp";
-import StoreProvider from "@/components/StoreProvider";
-import { AnnouncementProvider } from "@/context/AnnouncementContext";
+import { IconDescriptor } from "next/dist/lib/metadata/types/metadata-types";
+import Splash from "@/components/Splash";
+import { Providers } from "@/contexts/Providers";
 
 const LondrinaSolid = Londrina_Solid({
   subsets: ["latin"],
@@ -109,9 +109,42 @@ const thunder = localFont({
   variable: "--font-thunder-variable",
 });
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
-  title: "Peace Keepers Adventure Co",
+  title: {
+    default: "Peace Keepers Adventure Co",
+    template: "%s | Peace Keepers",
+  },
   description: "Peace Keepers Adventure Co",
+  icons: {
+    icon: [
+      {
+        type: "image/png",
+        sizes: "32x32",
+        url: "/favicon-32x32.png",
+      },
+      {
+        type: "image/png",
+        sizes: "16x16",
+        url: "/favicon-16x16.png",
+      },
+    ],
+    apple: {
+      url: "/apple-touch-icon.png",
+      sizes: "180x180",
+    },
+    other: {
+      rel: "mask-icon",
+      url: "/safari-pinned-tab.svg",
+      color: "#0A4A64",
+      // because color is not supported by next metadata
+    } as IconDescriptor,
+  },
+  manifest: "/site.webmanifest",
+  other: {
+    "msapplication-TileColor": "#ffffff",
+  },
 };
 
 export default function RootLayout({
@@ -125,26 +158,21 @@ export default function RootLayout({
         <body
           className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${roboto.variable} ${garamond.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} relative bg-pka_background`}
         >
-          <ApolloProviderComp>
-            <StoreProvider>
-              <AnnouncementProvider>
-                <Banner />
-                <div
-                  className={
-                    "flex min-h-screen flex-col h-full justify-between"
-                  }
-                >
-                  <Header />
-                  <main className="flex-1">
-                    <Suspense fallback={<Loader />}>{children}</Suspense>
-                  </main>
+          <Providers>
+            <Banner />
+            <Splash />
+            <div
+              className={"flex min-h-screen flex-col h-full justify-between"}
+            >
+              <Header />
+              <main className="flex-1">
+                <Suspense fallback={<Loader />}>{children}</Suspense>
+              </main>
 
-                  <Footer />
-                </div>
-                {draftMode().isEnabled && <LiveVisualEditing />}
-              </AnnouncementProvider>
-            </StoreProvider>
-          </ApolloProviderComp>
+              <Footer />
+            </div>
+            {draftMode().isEnabled && <LiveVisualEditing />}
+          </Providers>
         </body>
       </html>
     </ClerkProvider>

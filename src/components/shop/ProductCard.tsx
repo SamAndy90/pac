@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Product } from "./Products";
+import { type Product } from "./Products";
 import { urlFor } from "@/lib/utils";
 
 export type ProductCardProps = {
@@ -8,7 +8,6 @@ export type ProductCardProps = {
 
 export function ProductCard({ data }: ProductCardProps) {
   const { title, description, portrait } = data;
-  console.log({ asd: data });
 
   return (
     <div className={"w-full lg:col-span-1 group"}>

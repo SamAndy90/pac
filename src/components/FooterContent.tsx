@@ -8,6 +8,7 @@ import { FooterContentData } from "./Footer";
 import { SanityDocument } from "next-sanity";
 import Image from "next/image";
 import { urlFor } from "@/lib/utils";
+import RectangleIMG from "@/resources/svg/footer-rectangle.svg";
 
 type FooterContentProps = {
   data: SanityDocument<FooterContentData>;
@@ -16,7 +17,7 @@ type FooterContentProps = {
 const FooterContent = (props: FooterContentProps) => {
   const [data, setData] = useState(props.data);
 
-  const { links, title, logo, copyright } = data;
+  const { links, logo, copyright } = data;
 
   useEffect(() => {
     const query = `*[_type == 'footer']`;
@@ -32,78 +33,81 @@ const FooterContent = (props: FooterContentProps) => {
   }, [setData, client]);
 
   return (
-    <footer
-      className={
-        "bg-pka_blue w-full max-w-[1920px] mx-auto relative mt-14 overflow-x-clip z-10 before:absolute before:z-0 after:z-0 before:-translate-y-10 lg:before:-translate-y-14 before:top-0 before:-left-[5%] before:h-10 lg:before:h-14 before:-rotate-[4deg] before:origin-top-right before:bg-pka_blue before:w-[55%] after:absolute after:top-0 after:-translate-y-10 lg:after:-translate-y-14 after:-right-[5%] after:h-10 lg:after:h-14 after:rotate-[4deg] after:origin-top-left after:bg-pka_blue after:w-[55%]"
-      }
-    >
-      <Container>
-        <div
-          className={
-            "pb-3 gap-y-3 gap-x-1 lg:pb-4 flex flex-col lg:flex-row lg:items-end items-center justify-between"
-          }
-        >
-          <p
+    <footer className={"max-w-[1920px] w-full mx-auto "}>
+      <div className={"-mt-16"}>
+        <Image src={RectangleIMG} alt={"Decor"} className={"w-full"} />
+      </div>
+      <div className={"bg-pka_blue"}>
+        <Container>
+          <div
             className={
-              "flex-1 order-3 lg:order-1 font-avenirThin text-xs text-white"
+              "pb-3 gap-y-3 gap-x-1 lg:pb-4 flex flex-col lg:flex-row lg:items-end items-center justify-between"
             }
           >
-            {copyright}
-          </p>
-          <div className="flex-1 w-full order-1 lg:order-2">
-            <div
+            <p
               className={
-                "relative -my-10 z-20 mx-auto max-w-[150px] aspect-square"
+                "flex-1 order-3 lg:order-1 font-avenirThin text-xs text-white"
               }
             >
-              <Image
-                src={urlFor(logo.asset._ref).url()}
-                alt={"Logo"}
-                fill
-                className={"object-contain"}
-              />
-            </div>
-            <h2
+              {copyright}
+            </p>
+            <div className="flex-1 w-full order-1 lg:order-2">
+              <div
+                className={
+                  "relative -mt-3 -mb-4 md:-mt-5 lg:-mt-8 z-20 mx-auto max-w-[130px] aspect-square"
+                }
+              >
+                <Image
+                  src={urlFor(logo.asset._ref).url()}
+                  alt={"Logo"}
+                  fill
+                  className={"object-contain"}
+                />
+              </div>
+              {/* <h2
               className={
                 "leading-[0.9] w-full break-words py-3 font-bold tracking-wider text-center text-4xl lg:text-5xl font-garamond text-pka_green_light"
               }
             >
               {title}
-            </h2>
-          </div>
-          <nav className={"flex-1 order-2 lg:order-3"}>
-            <ul
-              className={
-                "flex flex-wrap text-white font-thunder tracking-wider lg:text-lg justify-center items-center gap-x-2 text-center"
-              }
-            >
-              {links.map((link, idX) => {
-                return (
-                  <li
-                    key={link.value}
-                    className={"gap-x-2 flex items-center justify-center"}
-                  >
-                    {!!idX && (
-                      <Image
-                        src={urlFor(logo.asset._ref).url()}
-                        alt={"Logo"}
-                        width={24}
-                        height={24}
-                      />
-                    )}
-                    <Link
-                      href={link.slug.current}
-                      className={"transition-colors hover:text-pka_green"}
+            </h2> */}
+            </div>
+            <nav className={"flex-1 order-2 lg:order-3"}>
+              <ul
+                className={
+                  "flex flex-wrap text-white font-thunder tracking-wider lg:text-lg justify-center items-center gap-x-2 text-center"
+                }
+              >
+                {links.map((link, idX) => {
+                  return (
+                    <li
+                      key={link.value}
+                      className={"gap-x-2 flex items-center justify-center"}
                     >
-                      {link.value}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </nav>
-        </div>
-      </Container>
+                      {!!idX && (
+                        <Image
+                          src={urlFor(logo.asset._ref).url()}
+                          alt={"Logo"}
+                          width={24}
+                          height={24}
+                        />
+                      )}
+                      <Link
+                        href={link.slug.current}
+                        className={
+                          "transition-colors text-pka_green hover:text-pka_green_light"
+                        }
+                      >
+                        {link.value}
+                      </Link>
+                    </li>
+                  );
+                })}
+              </ul>
+            </nav>
+          </div>
+        </Container>
+      </div>
     </footer>
   );
   // return (

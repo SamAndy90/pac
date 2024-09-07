@@ -4,11 +4,11 @@ import React, { useEffect, useState } from "react";
 import { client } from "../../../../sanity/lib/client";
 import PLPContestCard2 from "@/components/cards/PLPContestCard2";
 import PLPContestCard from "@/components/cards/PLPContestCard";
-import EventCard from "@/components/common/EventCard";
-import JoinPeaceKeepersBenifit from "@/components/ancillary/JoinPeaceKeepersBenifit";
+import { EventCard } from "@/common/EventCard";
+import JoinPeaceKeepersBenifit from "@/components/About/JoinPeaceKeepersBenifit";
 import BannerComponent from "../../banner/BannerComponent";
 import Slider from "react-slick";
-import settings from "../../../app/utils/HappeningNowSettings";
+import settings from "@/lib/HappeningNowSettings";
 
 type Props = {
   title: string;

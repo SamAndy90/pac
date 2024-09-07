@@ -24,7 +24,7 @@ export async function generateMetadata(
   const data: any = await getData();
 
   const slugData = data.find(
-    (item: any) => item.slug.current === props.params.slug
+    (item: any) => item.slug?.current === props.params.slug
   );
 
   if (slugData?.schemaMarkup) {
@@ -72,6 +72,14 @@ export default async function Page(props: MetadataProps) {
     case "shoptemplate":
       return <ShopTemplate title={slugData.title} data={slugData} />;
     default:
-      return <div>Content not found</div>;
+      return (
+        <div
+          className={
+            "font-thunder tracking-wider text-pka_blue uppercase text-3xl h-screen flex items-center justify-center"
+          }
+        >
+          <p>Content not found</p>
+        </div>
+      );
   }
 }

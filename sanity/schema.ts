@@ -2,7 +2,6 @@ import { type SchemaTypeDefinition } from "sanity";
 
 import pageShopBanner from "./Sections/pageBanner";
 import PageShop from "./Sections/PageShop";
-import PageFaq from "./Sections/pageFaq";
 import pageImageInfo from "./Sections/aboutpage/pageImageInfo";
 import pageComingSoon from "./Sections/pageComingSoon";
 
@@ -31,6 +30,7 @@ import {
   imageSection,
   benifits,
 } from "./Sections/aboutpage";
+import { faqs } from "./Sections/faqs";
 
 import { products, productCard } from "./Sections/shop";
 
@@ -53,10 +53,10 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     benifits,
     productCard,
     products,
+    faqs,
     PageShop,
     pageComingSoon,
     pageImageInfo,
     pageShopBanner,
-    PageFaq,
   ],
 };

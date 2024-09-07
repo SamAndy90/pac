@@ -33,7 +33,7 @@ const Renderer: React.FC<RendererProps> = ({
     return (
       <div
         className={clsx(
-          "gap-1 text-center lg:gap-x-2 xl:gap-x-3 flex items-center justify-center font-inter text-white",
+          "gap-1 text-center lg:gap-x-2 xl:gap-x-3 flex items-center justify-center font-thunder tracking-widest text-white",
           {
             "xl:gap-x-2": size === "small",
           }
