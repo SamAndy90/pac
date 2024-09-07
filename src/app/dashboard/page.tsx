@@ -1,6 +1,5 @@
-
 "use client";
-import Loader from '@/components/common/Loader';
+import { Loader } from "@/common/Loader";
 import Dashboard from "@/components/dashboard/Dashboard";
 import { useUser } from "@clerk/nextjs";
 export default function Page() {
@@ -10,12 +9,12 @@ export default function Page() {
   const userRole = user?.organizationMemberships[0]?.role;
 
   // Define allowed roles for accessing the dashboard
-  const allowedRoles = ['org:admin', 'org:member', 'org:socialadmin'];
+  const allowedRoles = ["org:admin", "org:member", "org:socialadmin"];
 
   if (!user || !isLoaded) {
     return (
       <div className="h-[70vh] flex items-center justify-center">
-        <Loader/>
+        <Loader />
       </div>
     );
   }
