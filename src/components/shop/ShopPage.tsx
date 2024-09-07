@@ -18,6 +18,7 @@ type ShopPageProps = {
   data: [any];
 };
 
+
 export default function ShopPage({ data }: ShopPageProps) {
   const [sections, setSections] = useState(data);
 
