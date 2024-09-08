@@ -18,7 +18,7 @@ type ShopPageProps = {
   data: [any];
 };
 
-export default function ShopPage({ data }: ShopPageProps) {
+export function ShopPage({ data }: ShopPageProps) {
   const [sections, setSections] = useState(data);
 
   let Sections: any = [] as ReactNode[];

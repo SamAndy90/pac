@@ -1,6 +1,6 @@
 import { SanityDocument } from "next-sanity";
 import { sanityFetch } from "../../../sanity/lib/fetch";
-import ShopPage from "@/components/Shop/ShopPage";
+import { ShopPage } from "@/components/Shop/ShopPage";
 
 async function getData() {
   return await sanityFetch<SanityDocument[]>({
@@ -8,7 +8,7 @@ async function getData() {
   });
 }
 
-export default async function Page(props: any) {
+export default async function Page() {
   const data = await getData();
   if (!data || data.length === 0 || !data[0]?.shoptemplatesections?.sections) {
     return (
