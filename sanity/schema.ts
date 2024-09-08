@@ -15,13 +15,7 @@ import {
   explore,
   happeningNow,
   winnersCircle,
-} from "./Sections/home";
-// import { hero } from "./Sections/homepage/hero";
-// import { joinPeaceKeeper } from "./Sections/joinPeaceKeeper";
-// import { liveContest } from "./Sections/liveContest";
-// import { explore } from "./Sections/homepage/explore";
-// import { happeningNow } from "./Sections/happeningNow";
-// import { winnersCircle } from "./Sections/winnersCircle";
+} from "./Sections/homepage";
 import {
   aboutHero,
   textSection,
