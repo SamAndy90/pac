@@ -1,5 +1,5 @@
 import { defineField } from "sanity";
-import { titleField, buttons, portraitField } from "./fields";
+import { titleField, buttons, portraitField } from "../fields";
 
 export const joinPeaceKeeper = defineField({
   name: "page.joinpeacekeeper",

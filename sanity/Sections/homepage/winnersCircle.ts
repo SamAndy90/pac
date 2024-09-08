@@ -1,5 +1,5 @@
 import { defineArrayMember, defineField } from "sanity";
-import { portraitField, titleField } from "./fields";
+import { portraitField, titleField } from "../fields";
 
 export const winnersCircle = defineField({
   name: "page.winnersCircle",
