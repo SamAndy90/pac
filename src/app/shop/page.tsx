@@ -1,6 +1,6 @@
 import { SanityDocument } from "next-sanity";
 import { sanityFetch } from "../../../sanity/lib/fetch";
-import ShopPage from "@/components/ShopPage";
+import ShopPage from "@/components/Shop/ShopPage";
 
 async function getData() {
   return await sanityFetch<SanityDocument[]>({
