@@ -1,9 +1,9 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
-import BannerComponent from "../product/BannerComponent";
-import { Products } from "./Products";
-import { client } from "../../../sanity/lib/client";
+import BannerComponent from "./product/BannerComponent";
+import { Products } from "./Shop/Products";
+import { client } from "../../sanity/lib/client";
 import JoinPeaceKeepersBenifit from "@/components/About/JoinPeaceKeepersBenifit";
 
 const ShopPageComponents: {
