@@ -27,7 +27,13 @@ export default defineType({
       name: "template",
       type: "string",
       options: {
-        list: ["ancillary", "homepageTemplate", "shoptemplate", "faqstemplate"],
+        list: [
+          "ancillary",
+          "homepageTemplate",
+          "shoptemplate",
+          "faqstemplate",
+          "privacytemplate",
+        ],
       },
     }),
     defineField({
@@ -116,6 +122,20 @@ export default defineType({
           title: "Sections",
           type: "array",
           of: [defineArrayMember({ type: "faqs" })],
+        },
+      ],
+    }),
+    defineField({
+      name: "privacytemplatesections",
+      type: "object",
+      hidden: ({ parent }: { parent: any }) =>
+        !(parent?.template === "privacytemplate"),
+      fields: [
+        {
+          name: "sections",
+          title: "Sections",
+          type: "array",
+          of: [defineArrayMember({ type: "privacy" })],
         },
       ],
     }),

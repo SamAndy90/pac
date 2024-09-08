@@ -7,20 +7,19 @@ type Props = {
 
 const BannerCard = async ({ title, image }: Props) => {
   return (
-    <div className="w-full mt-24 mb-10 h-[300px] md:h-[450px] lg:h-[638px] rounded-lg relative flex justify-center  items-center overflow-hidden">
+    <div className="w-full mt-28 mb-20 h-[300px] md:h-[450px] lg:h-[638px] rounded-lg relative flex justify-center items-center overflow-hidden">
       <div className="w-full mx-2 relative rounded-lg h-full">
         <div className="absolute inset-0 bg-[#0A1200] bg-opacity-20 rounded-lg"></div>
         <Image
           src={image}
           alt="banner"
-          //Mike this is the line where you can change things for banner image
           className="object-cover rounded-lg"
           layout="fill"
         />
       </div>
 
       <div className="absolute flex justify-center items-center inset-0">
-        <div className="text-center flex items-center justify-center w-full h-full font-avenir text-white opacity-[75%] text-[80px] leading-[80px] md:text-[120px] md:leading-[80px] lg:text-[160px] lg:leading-3 xl:text-[180px] 2xl:text-[200px] 2xl:leading-3 font-black relative z-10">
+        <div className="text-center flex items-center justify-center w-full text-opacity-70 text- h-full font-avenir text-white text-[80px] leading-[80px] md:text-[120px] md:leading-[80px] lg:text-[160px] lg:leading-3 xl:text-[180px] 2xl:text-[200px] 2xl:leading-3 font-black relative z-10">
           {title}
         </div>
       </div>

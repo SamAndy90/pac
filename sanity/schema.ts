@@ -8,20 +8,20 @@ import pageComingSoon from "./Sections/pageComingSoon";
 import Header from "./Sections/header";
 import Footer from "./Sections/footer";
 import pages from "./pages";
-// import {
-//   hero,
-//   joinPeaceKeeper,
-//   liveContest,
-//   explore,
-//   happeningNow,
-//   winnersCircle,
-// } from "./Sections/homepage";
-import { hero } from "./Sections/hero";
-import { joinPeaceKeeper } from "./Sections/joinPeaceKeeper";
-import { liveContest } from "./Sections/liveContest";
-import { explore } from "./Sections/explore";
-import { happeningNow } from "./Sections/happeningNow";
-import { winnersCircle } from "./Sections/winnersCircle";
+import {
+  hero,
+  joinPeaceKeeper,
+  liveContest,
+  explore,
+  happeningNow,
+  winnersCircle,
+} from "./Sections/homepage";
+// import { hero } from "./Sections/homepage/hero";
+// import { joinPeaceKeeper } from "./Sections/joinPeaceKeeper";
+// import { liveContest } from "./Sections/liveContest";
+// import { explore } from "./Sections/homepage/explore";
+// import { happeningNow } from "./Sections/happeningNow";
+// import { winnersCircle } from "./Sections/winnersCircle";
 import {
   aboutHero,
   textSection,
@@ -31,6 +31,7 @@ import {
   benifits,
 } from "./Sections/aboutpage";
 import { faqs } from "./Sections/faqs";
+import { privacy } from "./Sections/privacy-policy";
 
 import { products, productCard } from "./Sections/shop";
 
@@ -54,6 +55,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     productCard,
     products,
     faqs,
+    privacy,
     PageShop,
     pageComingSoon,
     pageImageInfo,
