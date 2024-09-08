@@ -27,10 +27,13 @@ export default function Splash() {
 
   return (
     <section
-      className={cn("fixed h-screen w-full bg-pka_blue z-[1000]", {
-        "translate-y-full transition-transform transform duration-700 ease-out":
-          !isOpen,
-      })}
+      className={cn(
+        "fixed h-screen translate-y-full w-full bg-pka_blue z-[1000]",
+        {
+          "translate-y-full transition-transform transform duration-700 ease-out":
+            !isOpen,
+        }
+      )}
     >
       <div className={"text-white flex items-center justify-center h-full"}>
         <p className={"text-[2vw] split"}>
