@@ -24,10 +24,10 @@ import {
   imageSection,
   benifits,
 } from "./Sections/aboutpage";
+import { products, productCard } from "./Sections/shop";
+import { newslist, welcome } from "./Sections/journalpage";
 import { faqs } from "./Sections/faqs";
 import { privacy } from "./Sections/privacy-policy";
-
-import { products, productCard } from "./Sections/shop";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -50,6 +50,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     products,
     faqs,
     privacy,
+    welcome,
+    newslist,
     PageShop,
     pageComingSoon,
     pageImageInfo,

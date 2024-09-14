@@ -33,6 +33,7 @@ export default defineType({
           "shoptemplate",
           "faqstemplate",
           "privacytemplate",
+          "journaltemplate",
         ],
       },
     }),
@@ -136,6 +137,25 @@ export default defineType({
           title: "Sections",
           type: "array",
           of: [defineArrayMember({ type: "privacy" })],
+        },
+      ],
+    }),
+    defineField({
+      name: "journaltemplatesections",
+      type: "object",
+      hidden: ({ parent }: { parent: any }) =>
+        !(parent?.template === "journaltemplate"),
+      fields: [
+        {
+          name: "sections",
+          title: "Sections",
+          type: "array",
+          of: [
+            defineArrayMember({ type: "welcome" }),
+            defineArrayMember({ type: "newslist" }),
+            defineArrayMember({ type: "textsection" }),
+            defineArrayMember({ type: "page.image" }),
+          ],
         },
       ],
     }),

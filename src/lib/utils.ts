@@ -16,3 +16,16 @@ export function urlFor(source: string) {
 export function ImgUrl(source: string) {
   return urlFor(source)?.url();
 }
+
+export const formatDate = (isoDateString: string) => {
+  const date = new Date(isoDateString);
+  const options: Intl.DateTimeFormatOptions = {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  };
+
+  return date
+    .toLocaleDateString("en-GB", options)
+    .replace(/(\d+)\s(\w+)\s(\d+)/, "$1 $2, $3");
+};

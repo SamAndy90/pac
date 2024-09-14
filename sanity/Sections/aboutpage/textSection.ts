@@ -13,4 +13,9 @@ export const textSection = defineField({
       type: "string",
     }),
   ],
+  preview: {
+    prepare() {
+      return { title: "Text Section" };
+    },
+  },
 });

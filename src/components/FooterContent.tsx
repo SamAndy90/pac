@@ -33,7 +33,7 @@ const FooterContent = (props: FooterContentProps) => {
   }, [setData, client]);
 
   return (
-    <footer className={"max-w-[1920px] w-full mx-auto "}>
+    <footer className={"max-w-[1920px] relative z-50 w-full mx-auto"}>
       <div className={"-mt-16"}>
         <Image src={RectangleIMG} alt={"Decor"} className={"w-full"} />
       </div>

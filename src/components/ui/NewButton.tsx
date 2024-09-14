@@ -10,13 +10,14 @@ export type NewButtonProps = {
   type?: "button" | "submit";
   fullWidth?: boolean;
   colorVariant?: NewButtonStyles;
-} & Pick<React.HTMLAttributes<HTMLButtonElement>, "className">;
+} & Pick<React.HTMLAttributes<HTMLButtonElement>, "className" | "onClick">;
 
 export const NewButton = forwardRef<HTMLButtonElement, NewButtonProps>(
   (
     {
       children,
       className,
+      onClick,
       fullWidth = false,
       type = "button",
       colorVariant = "primary",
@@ -27,6 +28,7 @@ export const NewButton = forwardRef<HTMLButtonElement, NewButtonProps>(
       <button
         ref={ref}
         type={type}
+        onClick={onClick}
         className={cn(
           "uppercase font-thunder text-lg transition-colors border-4 rounded-lg flex items-center justify-center py-2 min-w-[210px]",
           {
