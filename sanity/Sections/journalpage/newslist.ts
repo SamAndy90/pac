@@ -1,9 +1,9 @@
 import { titleField } from "../fields";
-import { defineArrayMember, defineField } from "sanity";
+import { defineArrayMember, defineField, defineType } from "sanity";
 
-export const newslist = defineField({
+export const newslist = defineType({
   name: "newslist",
-  type: "object",
+  type: "document",
   title: "News list",
   fields: [
     defineField({
@@ -42,6 +42,7 @@ export const newslist = defineField({
               type: "array",
               name: "gallery",
               title: "Gallery",
+              validation: (rule) => rule.max(6),
               of: [
                 defineArrayMember({
                   type: "image",

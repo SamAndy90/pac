@@ -19,8 +19,6 @@ function ProductsPage() {
     getProducts();
   }, []);
 
-  console.log({ products });
-
   return (
     <div className="flex flex-col mt-7">
       <h1 className="text-center text-2xl font-bold">Products</h1>

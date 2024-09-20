@@ -1,5 +1,4 @@
 import { Container } from "@/common";
-import { Portrait } from "@/types";
 import { HotNewsCard } from "./HotNewsCard";
 import { Post } from "./News";
 

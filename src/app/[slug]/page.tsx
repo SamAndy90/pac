@@ -1,10 +1,9 @@
 import CommingSoon from "@/components/CommingSoon";
 import { urlFor } from "@/lib/utils";
 import { Metadata } from "next";
-import { SanityDocument } from "next-sanity";
-import { sanityFetch } from "../../../sanity/lib/fetch";
 import Ancillary from "@/components/templates/Ancillary";
 import ShopTemplate from "@/components/shoptemplate/ShopTemplate";
+import { getData } from "@/lib/data-fetchers/sanity";
 
 type MetadataProps = {
   params: {
@@ -12,16 +11,10 @@ type MetadataProps = {
   };
 };
 
-async function getData() {
-  return await sanityFetch<SanityDocument[]>({
-    query: `*[_type == "page"]`,
-  });
-}
-
 export async function generateMetadata(
   props: MetadataProps
 ): Promise<Metadata> {
-  const data: any = await getData();
+  const data: any = await getData(`*[_type == "page"]`);
 
   const slugData = data.find(
     (item: any) => item.slug?.current === props.params.slug
@@ -41,7 +34,7 @@ export async function generateMetadata(
 }
 
 export default async function Page(props: MetadataProps) {
-  const data = await getData();
+  const data = await getData(`*[_type == "page"]`);
 
   const slugData = data.find(
     (item: any) => item.slug?.current === props.params.slug

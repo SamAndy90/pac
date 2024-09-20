@@ -1,15 +1,11 @@
 import HomePage from "@/components/Home/HomePage";
 import { Metadata } from "next";
-import { SanityDocument } from "next-sanity";
-import { sanityFetch } from "../../sanity/lib/fetch";
+import { getData } from "@/lib/data-fetchers/sanity";
 
-async function getData() {
-  return await sanityFetch<SanityDocument[]>({
-    query: `*[_type == "page" && title == "Homepage"]`,
-  });
-}
+const query = `*[_type == "page" && title == "Homepage"]`;
+
 export async function generateMetadata(): Promise<Metadata> {
-  const data: any = await getData();
+  const data: any = await getData(query);
 
   if (
     data &&
@@ -30,14 +26,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  let data = await getData();
+  let data = await getData(query);
 
   if (
     !data ||
     data.length === 0 ||
     !data[0]?.homepagetemplatesections?.sections
   ) {
-    data = await getData();
+    data = await getData(query);
   }
 
   const sections = data[0]?.homepagetemplatesections?.sections;

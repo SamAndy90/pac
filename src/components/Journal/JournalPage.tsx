@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import { client } from "../../../sanity/lib/client";
 import { Welcome } from "./Welcome";
 import { HotNews } from "./HotNews";
@@ -8,12 +8,33 @@ import TextSection from "../About/TextSection";
 import News from "./News";
 import ImageSection from "../About/ImageSection";
 
+const JournalPageComponents: { [key: string]: (data: any) => ReactNode } = {
+  welcome: (data: any) => <Welcome data={data} />,
+  hotnews: (data: any) => <HotNews data={data} />,
+  textsection: (data: any) => (
+    <TextSection data={data} className={"bg-pka_background"} />
+  ),
+  news: (data: any) => <News data={data} />,
+  "page.image": (data: any) => <ImageSection data={data} />,
+} as const;
+
 type PrivacyPageProps = {
   data: [any];
+  news: any;
 };
 
-export default function JournalPage({ data }: PrivacyPageProps) {
+export default function JournalPage({ data, news }: PrivacyPageProps) {
   const [sections, setSections] = useState(data);
+
+  let Sections: any = [] as ReactNode[];
+
+  Sections = sections?.map((section: any) => {
+    if (JournalPageComponents[section._type]) {
+      return JournalPageComponents[section._type](
+        section._type === "news" || section._type === "hotnews" ? news : section
+      );
+    }
+  });
 
   useEffect(() => {
     const query = `*[_type == "page" && title == "Journal"]`;
@@ -25,18 +46,5 @@ export default function JournalPage({ data }: PrivacyPageProps) {
     return () => subscription.unsubscribe();
   }, [setSections, client]);
 
-  const welcome = sections.find((data) => data._type === "welcome");
-  const newslist = sections.find((data) => data._type === "newslist");
-  const textsection = sections.find((data) => data._type === "textsection");
-  const image = sections.find((data) => data._type === "page.image");
-
-  return (
-    <>
-      <Welcome data={welcome} />
-      <HotNews data={newslist} />
-      <TextSection data={textsection} className={"bg-pka_background"} />
-      <News data={newslist} />
-      <ImageSection data={image} />
-    </>
-  );
+  return <>{...Sections}</>;
 }

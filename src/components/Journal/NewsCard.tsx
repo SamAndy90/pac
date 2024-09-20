@@ -3,8 +3,6 @@ import { Post } from "./News";
 import Link from "next/link";
 import { cn, formatDate, urlFor } from "@/lib/utils";
 import { ArticleBadge } from "./HotNewsCard";
-import { Title } from "@/common";
-import { ArrowBigRight } from "lucide-react";
 import { FaArrowRight } from "react-icons/fa";
 
 export type NewsCardProps = {
@@ -15,7 +13,7 @@ export default function NewsCard({ post }: NewsCardProps) {
   const { article, title, gallery, created, _key } = post;
   return (
     <Link
-      href={_key}
+      href={`/journal/${_key}`}
       className={
         "gap-x-5 group flex gap-5 border-pka_black hover:border-pka_blue py-5 lg:py-8 border-b"
       }

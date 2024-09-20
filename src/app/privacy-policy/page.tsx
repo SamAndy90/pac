@@ -1,15 +1,8 @@
-import { SanityDocument } from "next-sanity";
-import { sanityFetch } from "../../../sanity/lib/fetch";
 import PrivacyPage from "@/components/Privacy/PrivacyPage";
-
-async function getData() {
-  return await sanityFetch<SanityDocument[]>({
-    query: `*[_type == "page" && title == "Privacy"]`,
-  });
-}
+import { getData } from "@/lib/data-fetchers/sanity";
 
 export default async function Page() {
-  const data = await getData();
+  const data = await getData(`*[_type == "page" && title == "Privacy"]`);
   if (
     !data ||
     data.length === 0 ||

@@ -25,7 +25,7 @@ import {
   benifits,
 } from "./Sections/aboutpage";
 import { products, productCard } from "./Sections/shop";
-import { newslist, welcome } from "./Sections/journalpage";
+import { newslist, welcome, hotnews, news } from "./Sections/journalpage";
 import { faqs } from "./Sections/faqs";
 import { privacy } from "./Sections/privacy-policy";
 
@@ -51,6 +51,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     faqs,
     privacy,
     welcome,
+    hotnews,
+    news,
     newslist,
     PageShop,
     pageComingSoon,

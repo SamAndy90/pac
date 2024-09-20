@@ -152,7 +152,8 @@ export default defineType({
           type: "array",
           of: [
             defineArrayMember({ type: "welcome" }),
-            defineArrayMember({ type: "newslist" }),
+            defineArrayMember({ type: "hotnews" }),
+            defineArrayMember({ type: "news" }),
             defineArrayMember({ type: "textsection" }),
             defineArrayMember({ type: "page.image" }),
           ],

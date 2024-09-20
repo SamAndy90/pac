@@ -1,15 +1,10 @@
-import { SanityDocument } from "next-sanity";
-import { sanityFetch } from "../../../sanity/lib/fetch";
 import JournalPage from "@/components/Journal/JournalPage";
-
-async function getData() {
-  return await sanityFetch<SanityDocument[]>({
-    query: `*[_type == "page" && title == "Journal"]`,
-  });
-}
+import { getData } from "@/lib/data-fetchers/sanity";
 
 export default async function Page() {
-  const data = await getData();
+  const data = await getData(`*[_type == "page" && title == "Journal"]`);
+  const newslist = await getData(`*[_type == "newslist"]`);
+
   if (
     !data ||
     data.length === 0 ||
@@ -23,5 +18,5 @@ export default async function Page() {
   }
   const sections = data[0]?.journaltemplatesections?.sections;
 
-  return <JournalPage data={sections} />;
+  return <JournalPage data={sections} news={newslist[0]} />;
 }

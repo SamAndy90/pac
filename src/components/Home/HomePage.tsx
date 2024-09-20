@@ -9,8 +9,8 @@ import LiveContest from "@/components/Home/LiveContest";
 
 import { client } from "../../../sanity/lib/client";
 
-import { useConsent } from "react-hook-consent";
 import {
+  useConsent,
   ConsentBanner,
   ConsentOptions,
   ConsentProvider,
@@ -42,7 +42,7 @@ export default function HomePage({ data }: HomePageProps) {
 
   let DateList: any = [] as ReactNode[];
 
-  const consentOptions = {
+  const consentOptions: ConsentOptions = {
     services: [
       {
         id: "myid",
@@ -101,7 +101,6 @@ export default function HomePage({ data }: HomePageProps) {
   if (!mounted) return null;
 
   return (
-    //@ts-expect-error
     <ConsentProvider options={consentOptions}>
       {...DateList}
       <ConsentBanner
