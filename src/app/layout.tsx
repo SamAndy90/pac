@@ -17,6 +17,7 @@ import Footer from "@/components/Footer";
 
 import "keen-slider/keen-slider.min.css";
 
+
 import { draftMode } from "next/headers";
 import LiveVisualEditing from "@/components/LiveVisualEditing";
 

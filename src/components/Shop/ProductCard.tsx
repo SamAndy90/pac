@@ -1,16 +1,23 @@
 import Image from "next/image";
-import { type Product } from "./Products";
-import { urlFor } from "@/lib/utils";
+import Link from "next/link";
 
 export type ProductCardProps = {
-  data: Product;
+  data: any;
 };
 
 export function ProductCard({ data }: ProductCardProps) {
-  const { title, description, portrait } = data;
+  const { title, description, images, id, handle } = data;
+
+  const imageSrc = images.edges ? images.edges[0]?.node.url : "";
+  const imageAltText = images.edges
+    ? images.edges[0]?.node.altText
+    : "Product image";
 
   return (
-    <div className={"w-full lg:col-span-1 group"}>
+    <Link
+      href={`/shop/${handle}?id=${id}`}
+      className={"w-full lg:col-span-1 group"}
+    >
       <div className={"aspect-[10/14] mb-4 lg:mb-6 relative"}>
         <div
           className={
@@ -21,8 +28,10 @@ export function ProductCard({ data }: ProductCardProps) {
           className={"w-full h-full relative overflow-hidden rounded-xl z-20"}
         >
           <Image
-            src={urlFor(portrait.asset._ref).url()}
-            alt={"Product photo"}
+            // src={urlFor(portrait.asset._ref).url()}
+            // alt={"Product photo"}
+            src={imageSrc}
+            alt={imageAltText}
             fill
             className={
               "object-cover lg:group-hover:scale-105 transition-transform duration-700"
@@ -44,6 +53,6 @@ export function ProductCard({ data }: ProductCardProps) {
       >
         {description}
       </p>
-    </div>
+    </Link>
   );
 }

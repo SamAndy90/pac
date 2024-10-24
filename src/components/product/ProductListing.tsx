@@ -1,6 +1,6 @@
 "use client";
 
-import { getShopifyProducts } from "@/lib/data-fetchers/shopify/products";
+import { getShopifyAllProducts } from "@/lib/data-fetchers/shopify/products";
 import { useEffect, useState } from "react";
 import { Loader } from "@/common";
 import AddProductCard from "./AddProductCard";
@@ -18,7 +18,7 @@ const ProductListing = (props: Props) => {
   useEffect(() => {
     async function getProducts() {
       setLoading(true);
-      const products = await getShopifyProducts();
+      const products = await getShopifyAllProducts();
       setProducts(products);
       setLoading(false);
     }

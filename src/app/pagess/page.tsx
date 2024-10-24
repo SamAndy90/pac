@@ -1,7 +1,7 @@
 // Example Next.js Page
 "use client";
 import React, { useEffect, useState } from "react";
-import { getShopifyProducts } from "@/lib/data-fetchers/shopify/products";
+import { getShopifyAllProducts } from "@/lib/data-fetchers/shopify/products";
 import { useUser } from "@clerk/nextjs";
 
 // Add comment for testing from new account
@@ -13,7 +13,7 @@ function ProductsPage() {
   const userRole = user?.organizationMemberships[0]?.role;
   useEffect(() => {
     async function getProducts() {
-      const products = await getShopifyProducts();
+      const products = await getShopifyAllProducts();
       setProducts(products);
     }
     getProducts();
@@ -25,8 +25,8 @@ function ProductsPage() {
       <div className="flex flex-col lg:flex-row gap-10">
         <div>
           {products.map((product: any) => (
-            <div className="flex flex-col gap-3" key={product.id}>
-              {product.imageUrl ? (
+            <div className="flex flex-col gap-3" key={product.node.id}>
+              {product.node.imageUrl ? (
                 <img
                   src={product.imageUrl}
                   alt={product.title}
@@ -46,10 +46,7 @@ function ProductsPage() {
               )}
               <h2>{product.title}</h2>
               {/* <p>{product.description}</p> */}
-              <p>
-                Price: {product.priceRange.minVariantPrice.amount}{" "}
-                {product.priceRange.minVariantPrice.currencyCode}
-              </p>
+              <p>Price: {product.node.priceRange.minVariantPrice.amount}</p>
             </div>
           ))}
         </div>

@@ -3,13 +3,14 @@
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
 
-export type NewButtonStyles = "primary" | "secondary";
+export type NewButtonStyles = "primary" | "secondary" | "danger";
 
 export type NewButtonProps = {
   children: React.ReactNode;
   type?: "button" | "submit";
   fullWidth?: boolean;
   colorVariant?: NewButtonStyles;
+  size?: "small" | "normal";
 } & Pick<React.HTMLAttributes<HTMLButtonElement>, "className" | "onClick">;
 
 export const NewButton = forwardRef<HTMLButtonElement, NewButtonProps>(
@@ -21,6 +22,7 @@ export const NewButton = forwardRef<HTMLButtonElement, NewButtonProps>(
       fullWidth = false,
       type = "button",
       colorVariant = "primary",
+      size = "normal",
     },
     ref
   ) => {
@@ -36,6 +38,12 @@ export const NewButton = forwardRef<HTMLButtonElement, NewButtonProps>(
               colorVariant === "primary",
             "text-pka_blue2 font-averia font-bold hover:border-pka_green_light hover:text-white border-white bg-pka_green_light hover:bg-pka_blue2":
               colorVariant === "secondary",
+            "text-white font-avenirThin bg-red-500 hover:bg-red-400 border-none":
+              colorVariant === "danger",
+          },
+          {
+            "py-2 min-w-[160px]": size === "small",
+            "py-2 min-w-[210px]": size === "normal",
           },
           {
             "w-full": fullWidth,

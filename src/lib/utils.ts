@@ -29,3 +29,9 @@ export const formatDate = (isoDateString: string) => {
     .toLocaleDateString("en-GB", options)
     .replace(/(\d+)\s(\w+)\s(\d+)/, "$1 $2, $3");
 };
+
+export const formatter = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+  minimumFractionDigits: 2,
+});

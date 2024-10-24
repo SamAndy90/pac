@@ -35,21 +35,25 @@ function PLPContest(data: any) {
             <div
               className={`flex bg-red-700 relative w-[100%] h-[500px] md:h-[638px] rounded-t-[20px] bg-cover bg-center  ${
                 clickTwo
-                  ? "md:w-[50%] w-full animate-once animate-out duration-500 transition-all  md:rounded-r-none md:rounded-l-[20px] "
+                  ? "md:w-[50%] w-full animate-once animate-out duration-500 transition-all md:rounded-r-none md:rounded-l-[20px] "
                   : "rounded-[20px] animate-out transition-all duration-500 ease-in-out"
               }`}
-              style={{ backgroundImage: `url(${banner.src})` }}
+              style={{
+                backgroundImage: `url(${banner.src})`,
+                backgroundSize: "96% auto",
+                backgroundRepeat: "no-repeat",
+              }}
             >
               <div className="absolute inset-0 flex justify-center items-center">
                 <div className="flex ml-auto justify-end items-center">
                   {clickTwo ? (
                     <ArrowRight
-                      className="md:w-[20px] md:h-[21px] lg:w-[30px] lg:h-[31px] xl:w-[40px] xl:h-[41px] 2xl:w-[49px] 2xl:h-[47px] md:block hidden"
+                      className="md:w-[20px] text-pka_blue md:h-[21px] lg:w-[30px] lg:h-[31px] xl:w-[40px] xl:h-[41px] 2xl:w-[49px] 2xl:h-[47px] md:block hidden"
                       onClick={() => setClickedTwo(!clickTwo)}
                     />
                   ) : (
                     <ArrowLeft
-                      className="md:w-[20px] md:h-[21px] lg:w-[30px] lg:h-[31px] xl:w-[40px] xl:h-[41px] 2xl:w-[49px] 2xl:h-[47px] md:block hidden"
+                      className="md:w-[20px] text-pka_blue md:h-[21px] lg:w-[30px] lg:h-[31px] xl:w-[40px] xl:h-[41px] 2xl:w-[49px] 2xl:h-[47px] md:block hidden"
                       onClick={() => setClickedTwo(!clickTwo)}
                     />
                   )}
@@ -93,10 +97,10 @@ function PLPContest(data: any) {
                 pellentesque. Aliquam potenti faucibus fames.
               </div>
               <div className="flex justify-center items-center  flex-col md:items-center m-auto gap-[30px] mt-7 md:flex-col 2xl:flex-row lg:justify-center lg:align-middle">
-                <div className="w-[209px] h-[41.28px] flex text-center justify-center items-center uppercase rounded-[8px] border-4 border-[#EFF178] bg-white text-[#33455A] text-[18px] leading-[24px] font-avenirBold">
+                <div className="w-[209px] h-[41.28px] flex text-center justify-center items-center uppercase rounded-[8px] border-4 border-white bg-white text-[#33455A] text-[18px] leading-[24px] font-avenirBold">
                   Enter Contest
                 </div>
-                <div className="w-[209px] h-[41.28px] flex justify-center items-center uppercase rounded-[8px] border-4 border-[#EFF178] text-white bg-[#33455A] text-[18px] leading-[24px] font-avenirBold">
+                <div className="w-[209px] h-[41.28px] flex justify-center items-center uppercase rounded-[8px] border-4 border-white text-white bg-pka_blue text-[18px] leading-[24px] font-avenirBold">
                   Join to Enter
                 </div>
               </div>

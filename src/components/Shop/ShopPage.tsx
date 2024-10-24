@@ -16,15 +16,19 @@ const ShopPageComponents: {
 
 type ShopPageProps = {
   data: [any];
+  shopifyProducts: [any];
 };
 
-export default function ShopPage({ data }: ShopPageProps) {
+export default function ShopPage({ data, shopifyProducts }: ShopPageProps) {
   const [sections, setSections] = useState(data);
 
   let Sections: any = [] as ReactNode[];
 
   Sections = sections?.map((section: any) => {
     if (ShopPageComponents[section._type]) {
+      if (section._type === "products") {
+        return ShopPageComponents[section._type](shopifyProducts);
+      }
       return ShopPageComponents[section._type](section);
     }
   });
