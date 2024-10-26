@@ -122,6 +122,20 @@ export async function getShopifyProductById(id: string) {
           name
         }
       }
+      variants (first: 20) {
+        edges {
+          node {
+            id
+            price{
+              amount
+            }
+            selectedOptions {
+              name
+              value
+            }
+          }
+        }
+      }
       priceRange {
         minVariantPrice {
           amount

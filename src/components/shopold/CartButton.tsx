@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
+import { useShopContext } from "@/contexts/ShopContext";
+import Link from "next/link";
 
 const CREATE_CHECKOUT = gql`
   mutation createCheckout($lineItems: [CheckoutLineItemInput!]!) {
@@ -68,6 +70,12 @@ const CartButton = () => {
     currency: "USD",
   });
 
+  const { cart, checkoutURL } = useShopContext();
+  let cartQuantity = 0;
+  cart.map((item) => {
+    return (cartQuantity += item.variantQuantity);
+  });
+
   return (
     <Sheet>
       <SheetTrigger className="relative flex items-center">
@@ -77,12 +85,13 @@ const CartButton = () => {
             height={18}
             className="lg:text-white text-black hover:text-pka_green transition-colors"
           />
-          {items.length > 0 && (
+          {cartQuantity > 0 && (
             <Badge
               variant="destructive"
               className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 border border-black lg:border-0"
             >
-              {items.length}
+              {/* {items.length} */}
+              {cartQuantity}
             </Badge>
           )}
         </div>
@@ -186,6 +195,25 @@ const CartButton = () => {
             <span className="text-xl font-bold mt-2">Your Cart is Empty </span>
           </div>
         )}
+        <SheetFooter className="flex-none">
+          <div className="bg-[#fcf9eb] w-full">
+            <div className="flex flex-col items-center justify-between">
+              <div className="flex justify-between items-center w-full text-sm lg:text-lg p-5">
+                Total
+                <div className="text-right text-sm lg:text-lg flex text-black dark:text-white">
+                  {/* {USDollar.format(totalAmount)} */}
+                </div>
+              </div>
+
+              <button
+                onClick={checkoutHandler}
+                className="border-4 !w-full !h-[33.03px] text-[12.8px] flex items-center justify-center  lg:!h-[27.02px]  xl:!h-[27.52px] 2xl:!h-[33.03px] lg:text-[8.53px] lg:rounded-[4.27px] lg:border-[2.13px] xl:text-[10.6px] 2xl:text-[12.8px] xl:border-[2.67px] bg-[#33455A] border-[#FFC52E] rounded-[8px] text-[#FFC52E] font-avenirThin hover:bg-[#FFC52E] hover:border-[#33455A] hover:text-[#33455A]"
+              >
+                Proceed to Checkout
+              </button>
+            </div>
+          </div>
+        </SheetFooter>
       </SheetContent>
     </Sheet>
   );

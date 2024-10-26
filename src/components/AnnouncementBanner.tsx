@@ -22,7 +22,7 @@ export default function Banner() {
   const { isOpen, setIsOpen } = useAnnouncementContext();
 
   useEffect(() => {
-    setIsOpen(true);
+    setIsOpen(false);
   }, [setIsOpen]);
 
   useEffect(() => {

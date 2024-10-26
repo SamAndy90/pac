@@ -3,7 +3,7 @@
 import { cn } from "@/lib/utils";
 import { forwardRef } from "react";
 
-export type NewButtonStyles = "primary" | "secondary" | "danger";
+export type NewButtonStyles = "primary" | "secondary" | "danger" | "black";
 
 export type NewButtonProps = {
   children: React.ReactNode;
@@ -40,6 +40,8 @@ export const NewButton = forwardRef<HTMLButtonElement, NewButtonProps>(
               colorVariant === "secondary",
             "text-white font-avenirThin bg-red-500 hover:bg-red-400 border-none":
               colorVariant === "danger",
+            "text-white font-avenirThin bg-pka_black hover:bg-pka_blue border-none":
+              colorVariant === "black",
           },
           {
             "py-2 min-w-[160px]": size === "small",

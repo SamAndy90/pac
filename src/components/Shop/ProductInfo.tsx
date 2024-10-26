@@ -1,16 +1,22 @@
+"use client";
+
 import { Container, Title } from "@/common";
 import { formatter } from "@/lib/utils";
 import Image from "next/image";
 import { FaRegImages } from "react-icons/fa6";
 import { ImageSlider } from "./ImageSlider";
 import { NewButton } from "../ui/NewButton";
+import { useShopContext } from "@/contexts/ShopContext";
 
 export type ProductInfoProps = {
   product: any;
 };
 
 export default function ProductInfo({ product }: ProductInfoProps) {
-  const { id, title, description, options, priceRange, images } = product;
+  const { id, title, description, options, variants, priceRange, images } =
+    product;
+
+  const { cart, addToCart } = useShopContext();
 
   const photos = images.edges?.map((i: any) => {
     if (!i.node.url) return;
@@ -18,6 +24,14 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       id: i.node.id,
       src: i.node.url,
       alt: i.node.altText,
+    };
+  });
+
+  const allVariantsOptions = variants.edges.map((v: any) => {
+    return {
+      id: v.node.id,
+      price: v.node.price.amount,
+      variantQuantity: 1,
     };
   });
 
@@ -54,9 +68,10 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               <NewButton
                 colorVariant={"danger"}
                 size={"small"}
-                className={"border-pka_blue2 tracking-wider"}
+                className={"border-pka_blue2 tracking-wider pb-1.5"}
+                onClick={() => addToCart(allVariantsOptions[0])}
               >
-                Buy
+                Add to cart
               </NewButton>
             </div>
           </div>

@@ -1,12 +1,11 @@
 "use client";
 
 import { createCheckout } from "@/lib/data-fetchers/shopify/products";
-import { addToCart } from "@/lib/store/slices/cartSlice";
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { json } from "stream/consumers";
 
 export type TShopContext = {
   cart: any[];
-  setCart: (v: any) => void;
   isCartOpen: boolean;
   setIsCartOpen: (v: boolean) => void;
   checkoutId: string;
@@ -18,7 +17,6 @@ export type TShopContext = {
 
 const defaultShopValues = {
   cart: [],
-  setCart: () => {},
   isCartOpen: false,
   setIsCartOpen: () => {},
   checkoutId: "",
@@ -41,6 +39,17 @@ export function ShopProvider(props: ShopProviderProps) {
   const [checkoutId, setCheckoutId] = useState<string>("");
   const [checkoutURL, setCheckoutURL] = useState<string>("");
 
+  useEffect(() => {
+    if (localStorage.checkout_id) {
+      let cartObject = JSON.parse(localStorage.checkout_id);
+
+      setCart([...cartObject[0]]);
+
+      setCheckoutId(cartObject[1].id);
+      setCheckoutURL(cartObject[1].checkoutUrl);
+    }
+  }, []);
+
   async function addToCart(newItem: any) {
     if (cart.length === 0) {
       setCart([newItem]);
@@ -51,9 +60,12 @@ export function ShopProvider(props: ShopProviderProps) {
       );
 
       setCheckoutId(checkout.id);
-      setCheckoutURL(checkout.url);
+      setCheckoutURL(checkout.checkoutUrl);
 
-      localStorage.setItem("checkout_id", JSON.stringify([newItem, checkout]));
+      localStorage.setItem(
+        "checkout_id",
+        JSON.stringify([[newItem], checkout])
+      );
     } else {
       let newCart = [...cart];
 
@@ -67,16 +79,19 @@ export function ShopProvider(props: ShopProviderProps) {
       });
 
       setCart(newCart);
-    }
 
-    return;
+      const storageCart = JSON.parse(localStorage.checkout_id);
+      localStorage.setItem(
+        "checkout_id",
+        JSON.stringify([[...cart], storageCart[1]])
+      );
+    }
   }
 
   return (
     <ShopContext.Provider
       value={{
         cart,
-        setCart,
         isCartOpen,
         setIsCartOpen,
         addToCart,

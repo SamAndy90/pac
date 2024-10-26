@@ -5,12 +5,13 @@ import { UserButton, useUser } from "@clerk/nextjs";
 import { Bell, Menu, User, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import CartButton from "./shopold/CartButton";
+// import CartButton from "./shopold/CartButton";
 import Image from "next/image";
 import { SanityDocument } from "next-sanity";
 import { HeaderContentData } from "./Header";
 import { client } from "../../sanity/lib/client";
 import { Container } from "@/common";
+import { CartButton } from "./Shop/CartButton";
 
 type HeaderContentProps = {
   data: SanityDocument<HeaderContentData>;
