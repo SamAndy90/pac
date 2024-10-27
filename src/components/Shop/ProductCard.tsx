@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaRegImages } from "react-icons/fa6";
 
 export type ProductCardProps = {
   data: any;
@@ -27,16 +28,26 @@ export function ProductCard({ data }: ProductCardProps) {
         <div
           className={"w-full h-full relative overflow-hidden rounded-xl z-20"}
         >
-          <Image
-            // src={urlFor(portrait.asset._ref).url()}
-            // alt={"Product photo"}
-            src={imageSrc}
-            alt={imageAltText}
-            fill
-            className={
-              "object-cover lg:group-hover:scale-105 transition-transform duration-700"
-            }
-          />
+          {imageSrc ? (
+            <Image
+              // src={urlFor(portrait.asset._ref).url()}
+              // alt={"Product photo"}
+              src={imageSrc}
+              alt={imageAltText}
+              fill
+              className={
+                "object-cover lg:group-hover:scale-105 transition-transform duration-700"
+              }
+            />
+          ) : (
+            <div
+              className={
+                "bg-pka_green_light aspect-[10/14] rounded-2xl flex items-center justify-center"
+              }
+            >
+              <FaRegImages className={"text-pka_blue2 size-20"} />
+            </div>
+          )}
         </div>
       </div>
       <h4

@@ -22,7 +22,6 @@ export default async function ProductPage({
       </section>
     );
   }
-  // console.log({ p: product });
 
   return <ProductInfo product={product} />;
 }

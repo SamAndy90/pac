@@ -1,6 +1,5 @@
 import { useShopContext } from "@/contexts/ShopContext";
 import { ShoppingCart } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 import { CartWindow } from "./CartWindow";
 
 export const CartButton = () => {
@@ -13,18 +12,17 @@ export const CartButton = () => {
   return (
     <>
       <div className="relative" onClick={() => setIsCartOpen(true)}>
-        <ShoppingCart
-          width={18}
-          height={18}
-          className="lg:text-white text-black hover:text-pka_green transition-colors"
-        />
+        <ShoppingCart className="lg:text-white size-5 text-white hover:text-pka_green transition-colors" />
         {cartQuantity > 0 && (
-          <Badge
-            variant="destructive"
-            className="absolute top-0 right-0 transform translate-x-1/2 -translate-y-1/2 border border-black lg:border-0"
+          <div
+            className={
+              "size-3.5 absolute top-0 right-0 translate-x-1.5 -translate-y-1.5 flex items-center justify-center bg-white text-pka_blue rounded-full text-[9px] font-bold overflow-hidden"
+            }
           >
-            {cartQuantity}
-          </Badge>
+            <span className={"leading-[0] tracking-[0] -mb-[1.5px]"}>
+              {cartQuantity}
+            </span>
+          </div>
         )}
       </div>
       <CartWindow
