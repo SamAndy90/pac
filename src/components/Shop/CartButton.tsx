@@ -12,7 +12,7 @@ export const CartButton = () => {
   return (
     <>
       <div className="relative" onClick={() => setIsCartOpen(true)}>
-        <ShoppingCart className="lg:text-white size-5 text-white hover:text-pka_green transition-colors" />
+        <ShoppingCart className="lg:text-white size-5 text-white lg:hover:text-pka_green transition-colors" />
         {cartQuantity > 0 && (
           <div
             className={

@@ -49,12 +49,12 @@ export const CartWindow = ({
         >
           <DialogPanel
             className={cn(
-              "fixed right-0 top-0 z-[100] h-full max-h-full min-w-96 max-w-full overflow-y-auto overflow-x-hidden bg-white shadow-[0_0_20px_rgba(255,255,255,0.03)]"
+              "fixed right-0 top-0 z-[100] h-full max-h-full min-w-full sm:min-w-96 max-w-full overflow-y-auto overflow-x-hidden bg-white sm:shadow-[0_0_20px_rgba(255,255,255,0.03)]"
             )}
           >
             <div
               className={
-                "relative flex flex-col overflow-hidden px-3 py-10 h-full"
+                "relative flex flex-col overflow-hidden px-3 pt-10 pb-3 h-full"
               }
             >
               <button

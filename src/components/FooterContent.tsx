@@ -7,8 +7,9 @@ import { Container } from "@/common";
 import { FooterContentData } from "./Footer";
 import { SanityDocument } from "next-sanity";
 import Image from "next/image";
-import { urlFor } from "@/lib/utils";
+import { cn, urlFor } from "@/lib/utils";
 import RectangleIMG from "@/resources/svg/footer-rectangle.svg";
+import { usePathname } from "next/navigation";
 
 type FooterContentProps = {
   data: SanityDocument<FooterContentData>;
@@ -16,6 +17,7 @@ type FooterContentProps = {
 
 const FooterContent = (props: FooterContentProps) => {
   const [data, setData] = useState(props.data);
+  const pathname = usePathname();
 
   const { links, logo, copyright } = data;
 
@@ -94,9 +96,14 @@ const FooterContent = (props: FooterContentProps) => {
                       )}
                       <Link
                         href={link.slug.current}
-                        className={
-                          "transition-colors text-pka_green hover:text-pka_green_light"
-                        }
+                        className={cn(
+                          "transition-colors text-pka_green active:text-pka_green_light",
+                          {
+                            "text-white": pathname === link.slug.current,
+                            "lg:hover:text-pka_green_light":
+                              pathname !== link.slug.current,
+                          }
+                        )}
                       >
                         {link.value}
                       </Link>
