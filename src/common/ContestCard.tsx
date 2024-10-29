@@ -98,7 +98,7 @@ export const ContestCard: FC<ContestCardProps> = ({
       >
         {title}
       </h3>
-      <p className={"text-white"}>{description}</p>
+      <p className={"text-white line-clamp-4"}>{description}</p>
       <div className="absolute z-20 bottom-[15%] sm:bottom-[12%]">
         {loadTimer()}
       </div>

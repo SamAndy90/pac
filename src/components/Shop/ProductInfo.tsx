@@ -2,7 +2,6 @@
 
 import { Container, Title } from "@/common";
 import { formatter } from "@/lib/utils";
-import Image from "next/image";
 import { FaRegImages } from "react-icons/fa6";
 import { ImageSlider } from "./ImageSlider";
 import { NewButton } from "../ui/NewButton";
@@ -54,10 +53,14 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           </div>
           <div className={"flex-1 shrink-0 flex gap-y-2 flex-col py-2"}>
             <Title>{title}</Title>
-            <p className={"text-pka_blue2 text-lg flex-1 mb-6"}>
+            <p className={"text-pka_blue2 text-lg flex-1 lg:flex-initial mb-6"}>
               {description}
             </p>
-            <div className={"flex items-center justify-between gap-x-2"}>
+            <div
+              className={
+                "flex flex-col sm:flex-row gap-y-2 sm:items-center justify-between gap-x-2"
+              }
+            >
               <div
                 className={
                   "text-4xl text-pka_blue font-thunder font-medium leading-none pt-1.5 text-nowrap"
@@ -67,8 +70,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               </div>
               <NewButton
                 colorVariant={"danger"}
+                fullWidth
                 size={"small"}
-                className={"border-pka_blue2 tracking-wider pb-1.5"}
+                className={"border-pka_blue2 tracking-wider pb-1.5 sm:w-auto"}
                 onClick={() => addToCart(allVariantsOptions[0])}
               >
                 Add to cart
