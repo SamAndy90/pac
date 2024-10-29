@@ -41,15 +41,25 @@ export default async function ContestPage({ params }: ContestPageType) {
       <section className={"mt-14 md:mt-20 pt-12 pb-24 lg:pb-40"}>
         <Container>
           <div>
-            <Title className={"text-center mb-8"}>{collection.title}</Title>
-            <p>{event?.description}</p>
-            <div className={"grid grid-cols-2 gap-x-3"}>
+            <Title className={"text-center mb-10"}>{collection.title}</Title>
+            <p
+              className={
+                "font-garamond text-xl lg:text-2xl sm:max-w-[85%] text-center mx-auto text-pka_blue2 mb-10"
+              }
+            >
+              {event?.description}
+            </p>
+            <div className={"grid grid-cols-1 md:grid-cols-2 gap-8"}>
               <div
                 className={
-                  "flex items-center justify-center rounded-2xl shadow-md aspect-[16/9] bg-white"
+                  "flex items-center px-4 py-3 justify-center rounded-2xl shadow-md aspect-square md:aspect-[16/9] bg-white"
                 }
               >
-                <p className={"text-red-500 font-garamond font-bold text-7xl"}>
+                <p
+                  className={
+                    "text-red-500 text-center font-garamond font-bold text-7xl"
+                  }
+                >
                   Sticker event
                 </p>
               </div>

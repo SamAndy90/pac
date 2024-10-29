@@ -69,7 +69,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 {formatter.format(priceRange.minVariantPrice.amount)} CAD
               </div>
               <NewButton
-                colorVariant={"danger"}
+                colorVariant={"primary"}
                 fullWidth
                 size={"small"}
                 className={"border-pka_blue2 tracking-wider pb-1.5 sm:w-auto"}

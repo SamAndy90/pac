@@ -79,11 +79,7 @@ export function ContestProductCard({ data }: ContestProductCardProps) {
       >
         {description}
       </p>
-      <NewButton
-        fullWidth
-        colorVariant={"danger"}
-        onClick={() => addToCart(allVariantsOptions[0])}
-      >
+      <NewButton fullWidth onClick={() => addToCart(allVariantsOptions[0])}>
         Buy
       </NewButton>
     </div>

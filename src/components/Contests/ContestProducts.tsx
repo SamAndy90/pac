@@ -21,8 +21,6 @@ export type ContestProductsProps = {
 };
 
 export function ContestProducts({ data }: ContestProductsProps) {
-  console.log({ data });
-
   return (
     <section>
       <Container>
