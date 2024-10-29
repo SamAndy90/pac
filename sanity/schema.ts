@@ -28,6 +28,7 @@ import { products, productCard } from "./Sections/shop";
 import { newslist, welcome, hotnews, news } from "./Sections/journalpage";
 import { faqs } from "./Sections/faqs";
 import { privacy } from "./Sections/privacy-policy";
+import { contest, contests } from "./Sections/contests";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -54,6 +55,8 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     hotnews,
     news,
     newslist,
+    contest,
+    contests,
     PageShop,
     pageComingSoon,
     pageImageInfo,

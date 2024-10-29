@@ -121,7 +121,7 @@ const ContestTemplateSubComp = ({
                 /[^a-zA-Z0-9-]/g,
                 ""
               )}
-              countdownBgColor={card.Color.value}
+              countdownBgColor={card.timerstyle.bgcolor.value}
               countdownTextColor="text-black"
               exploreButtonText="Explore"
               timer={card.time}
@@ -148,7 +148,7 @@ const ContestTemplateSubComp = ({
                     /[^a-zA-Z0-9-]/g,
                     ""
                   )}
-                  countdownBgColor={card.Color.value}
+                  countdownBgColor={card.timerstyle.bgcolor.value}
                   countdownTextColor="text-black"
                   exploreButtonText="Explore"
                   timer={card.time}

@@ -255,3 +255,55 @@ export async function updateCheckout(id: string, lineItems: any[]) {
 
   return res.data.cartLinesUpdate.cart ? res.data.cartLinesUpdate.cart : [];
 }
+
+export async function getProductsByCollection(handle: string) {
+  const query = `{
+    collection(handle: "contest-test") {
+      title
+      product(id:"${handle}") {
+        id
+        title
+        description
+        options {
+          id
+          name
+          optionValues {
+            name
+          }
+        }
+        variants (first: 20) {
+          edges {
+            node {
+              id
+              price{
+                amount
+              }
+              selectedOptions {
+                name
+                value
+              }
+            }
+          }
+        }
+        priceRange {
+          minVariantPrice {
+            amount
+          }
+        }
+        images(first: 10){
+          edges{
+            node{
+              id
+              url
+              altText
+            }
+          }
+        }
+      }
+    }
+  }`;
+
+  const response = await ShopifyData(query);
+
+  return response.data.product ? response.data.product : null;
+}

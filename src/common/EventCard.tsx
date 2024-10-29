@@ -50,13 +50,13 @@ export const EventCard: FC<EventCardProps> = ({
       );
     } else if (currentTime > endTime) {
       return (
-        <div className="font-thunder text-[38px]  tracking-wider xl:text-[38px] 2xl:text-[42px] lg:text-[28px] text-white">
+        <div className="font-thunder text-[38px] tracking-wider xl:text-[38px] 2xl:text-[42px] lg:text-[28px] text-white">
           Event Ended
         </div>
       );
     } else {
       return (
-        <div className="font-thunder text-[38px]  tracking-wider xl:text-[38px] 2xl:text-[42px] lg:text-[28px] text-white ">
+        <div className="font-thunder text-[38px] tracking-wider xl:text-[38px] 2xl:text-[42px] lg:text-[28px] text-white ">
           Coming Soon
         </div>
       );
