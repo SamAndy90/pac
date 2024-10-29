@@ -15,7 +15,7 @@ type ContestCardProps = {
   eventEnd: string;
   countdownBgColor: string;
   countdownTextColor: string;
-  backgroundImage?: any;
+  backgroundImage?: string;
 } & Pick<HTMLAttributes<HTMLDivElement>, "className">;
 
 export const ContestCard: FC<ContestCardProps> = ({
@@ -30,11 +30,11 @@ export const ContestCard: FC<ContestCardProps> = ({
   eventEnd,
   className,
 }) => {
-  const loadTimer = () => {
-    const currentTime = new Date();
-    const startTime = new Date(eventStart);
-    const endTime = new Date(eventEnd);
+  const currentTime = new Date();
+  const startTime = new Date(eventStart);
+  const endTime = new Date(eventEnd);
 
+  const loadTimer = () => {
     if (currentTime > startTime && currentTime < endTime) {
       return (
         <CountdownComponent
@@ -59,8 +59,11 @@ export const ContestCard: FC<ContestCardProps> = ({
     }
   };
 
+  const Component =
+    currentTime > startTime && currentTime < endTime ? Link : "div";
+
   return (
-    <Link
+    <Component
       href={`contests/${collectionName}`}
       className={cn(
         "max-w-[446px] group px-3 py-4 mx-auto aspect-[1/1.435] gap-y-2 overflow-hidden relative rounded-[20px] text-center flex flex-col items-center",
@@ -99,6 +102,6 @@ export const ContestCard: FC<ContestCardProps> = ({
       <div className="absolute z-20 bottom-[15%] sm:bottom-[12%]">
         {loadTimer()}
       </div>
-    </Link>
+    </Component>
   );
 };

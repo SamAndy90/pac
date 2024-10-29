@@ -256,46 +256,50 @@ export async function updateCheckout(id: string, lineItems: any[]) {
   return res.data.cartLinesUpdate.cart ? res.data.cartLinesUpdate.cart : [];
 }
 
-export async function getProductsByCollection(handle: string) {
+export async function getCollection(handle: string) {
   const query = `{
-    collection(handle: "contest-test") {
+    collection(handle: "${handle}") {
       title
-      product(id:"${handle}") {
-        id
-        title
-        description
-        options {
-          id
-          name
-          optionValues {
-            name
-          }
-        }
-        variants (first: 20) {
-          edges {
-            node {
+      products(first: 100) {
+      	edges {
+          node {
+            id
+            title
+            description
+            options {
               id
-              price{
-                amount
-              }
-              selectedOptions {
+              name
+              optionValues {
                 name
-                value
               }
             }
-          }
-        }
-        priceRange {
-          minVariantPrice {
-            amount
-          }
-        }
-        images(first: 10){
-          edges{
-            node{
-              id
-              url
-              altText
+            variants (first: 20) {
+              edges {
+                node {
+                  id
+                  price{
+                    amount
+                  }
+                  selectedOptions {
+                    name
+                    value
+                  }
+                }
+              }
+            }
+            priceRange {
+              minVariantPrice {
+                amount
+              }
+            }
+            images(first: 10){
+              edges{
+                node{
+                  id
+                  url
+                  altText
+                }
+              }
             }
           }
         }
@@ -305,5 +309,5 @@ export async function getProductsByCollection(handle: string) {
 
   const response = await ShopifyData(query);
 
-  return response.data.product ? response.data.product : null;
+  return response.data.collection ? response.data.collection : null;
 }

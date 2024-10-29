@@ -134,7 +134,7 @@ const ContestTemplateSubComp = ({
 
       <div className="w-full mx-auto flex ">
         <div
-          className="lg:hidden overflow-hidden slider-container containerClass  "
+          className="lg:hidden overflow-hidden slider-container containerClass"
           id="plpContest"
         >
           <Slider {...settings}>

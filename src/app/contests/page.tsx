@@ -30,13 +30,12 @@ export default async function ContestsPage() {
     );
   }
   const events: EventType[] = data[0]?.contestsList;
-  console.log({ data: events });
 
   return (
     <section className={"mt-14 md:mt-20 pt-12 pb-40"}>
       <Container>
         <div>
-          <Title className={"mb-8"}>{data[0]?.title}</Title>
+          <Title className={"mb-8 text-center"}>{data[0]?.title}</Title>
           <div
             className={
               "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-[5vw] lg:px-[8vw] gap-y-[12vw] md:gap-x-[8vw] lg:gap-x-[5vw] lg:gap-y-[6vw]"
