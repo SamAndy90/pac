@@ -1,5 +1,5 @@
 import { Title } from "@/common";
-import { cn } from "@/lib/utils";
+import { cn, formatter } from "@/lib/utils";
 import {
   Dialog,
   DialogPanel,
@@ -10,16 +10,23 @@ import { Fragment } from "react";
 import { FiX } from "react-icons/fi";
 import { NewButton } from "../ui/NewButton";
 import Link from "next/link";
+import { CartProduct } from "@/contexts/ShopContext";
+import CartProductCard from "./CartProductCard";
 
 export const CartWindow = ({
   open,
   onClose,
   checkoutURL,
+  cart,
 }: {
   open: boolean;
   onClose: () => void;
   checkoutURL: string;
+  cart: CartProduct[];
 }) => {
+  let totalPrice = 0;
+  cart.map((p) => (totalPrice += +p.price * p.variantQuantity));
+
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog onClose={onClose}>
@@ -67,22 +74,40 @@ export const CartWindow = ({
                   }
                 />
               </button>
-              <div className={"flex flex-col gap-y-4 overflow-hidden h-full"}>
-                <Title className={"text-3xl xl:text-4xl"}>
-                  Cart<div className={"h-[1px] rounded-sm bg-pka_black"}></div>
-                </Title>
-                <div className={"flex-1"}></div>
-                <Link href={checkoutURL} target={"_blank"}>
-                  <NewButton
-                    colorVariant={"black"}
-                    fullWidth
-                    onClick={() => {
-                      onClose();
-                    }}
-                  >
-                    Checkout
-                  </NewButton>
-                </Link>
+              <div className={"flex flex-col gap-y-2 overflow-hidden h-full"}>
+                <Title className={"text-3xl xl:text-4xl"}>Cart</Title>
+                <div
+                  className={
+                    "flex-1 border-y-[1px] border-pka_black py-2 overflow-hidden"
+                  }
+                >
+                  <div className={"overflow-y-scroll flex flex-col gap-y-3"}>
+                    {cart.map((p) => {
+                      return <CartProductCard key={p.id} product={p} />;
+                    })}
+                  </div>
+                </div>
+                <div
+                  className={
+                    "text-pka_blue font-thunder text-3xl font-bold flex items-center justify-between"
+                  }
+                >
+                  <span className={"font-normal"}>Total amount:</span>
+                  <span>{formatter.format(totalPrice)}</span>
+                </div>
+                <div>
+                  <Link href={checkoutURL} target={"_blank"} className={"mb-4"}>
+                    <NewButton
+                      colorVariant={"black"}
+                      fullWidth
+                      onClick={() => {
+                        onClose();
+                      }}
+                    >
+                      Checkout
+                    </NewButton>
+                  </Link>
+                </div>
               </div>
             </div>
           </DialogPanel>

@@ -14,6 +14,17 @@ import { CartButton } from "./Shop/CartButton";
 import { FiX } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 
+const social = [
+  {
+    label: "LinkedIn",
+    url: "http://www.linkedin.com",
+  },
+  {
+    label: "Instagram",
+    url: "http://www.instagram.com",
+  },
+];
+
 type HeaderContentProps = {
   data: SanityDocument<HeaderContentData>;
 };
@@ -50,24 +61,37 @@ export default function HeaderContent(props: HeaderContentProps) {
       <header className="fixed z-50 w-full lg:top-3">
         <Container>
           <div className={"py-2 lg:py-5 flex gap-x-2"}>
-            <nav className="bg-pka_blue flex-1 px-4 lg:px-10 text-white tracking-widest text-xl font-thunder font-medium flex items-center z-40 justify-between lg:justify-around rounded-full h-12 lg:h-[62px]">
-              <div className="hidden lg:flex flex-1 items-center gap-[20px] xl:gap-[57px] 2xl:gap-[68.8px] justify-end">
-                {leftlinks.map((item) => (
-                  <Link
-                    href={item.slug.current}
+            <nav className="bg-pka_blue flex-1 px-4 lg:px-10 text-white tracking-widest text-xl font-thunder font-medium flex items-center z-40 justify-between lg:justify-around rounded-full h-12 lg:h-[62px] relative">
+              <div className="hidden lg:flex flex-1 items-center gap-x-3">
+                {leftlinks.map((item, Idx) => (
+                  <div
                     key={item._key}
-                    className={cn(
-                      "lg:hover:text-pka_green active:text-pka_green transition-colors",
-                      {
-                        "text-pka_green": pathname === item.slug.current,
-                      }
-                    )}
+                    className={"gap-x-3 flex items-center justify-center"}
                   >
-                    {item.value}
-                  </Link>
+                    {!!Idx && (
+                      <Image
+                        src={urlFor(logo.asset._ref).url()}
+                        alt={"Logo"}
+                        width={24}
+                        height={24}
+                      />
+                    )}
+                    <Link
+                      href={item.slug.current}
+                      className={cn(
+                        "relative before:bg-white before:absolute before:w-0 before:transition-all hover:before:w-full before:rounded-sm before:bottom-1 before:h-0.5 before:duration-500 tracking-widest",
+                        {
+                          "before:w-full before:bg-pka_green before:hover:bg-pka_green":
+                            pathname === item.slug.current,
+                        }
+                      )}
+                    >
+                      {item.value}
+                    </Link>
+                  </div>
                 ))}
               </div>
-              <div className="items-center h-full flex-1 lg:justify-center flex">
+              <div className="items-center h-full absolute w-16 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:justify-center flex">
                 <Link href={"/"} className={"h-full w-12 lg:w-full relative"}>
                   <Image
                     src={urlFor(logo.asset._ref).url()}
@@ -77,21 +101,34 @@ export default function HeaderContent(props: HeaderContentProps) {
                   />
                 </Link>
               </div>
-              <div className="flex lg:flex-1 items-center justify-between gap-x-6 lg:gap-x-10">
-                <div className="lg:flex hidden gap-[20px] xl:gap-[57px] 2xl:gap-[68.8px]">
-                  {rightlinks.map((item) => (
-                    <Link
-                      href={item.slug.current}
+              <div className="flex flex-1 items-center justify-end gap-x-6 lg:gap-x-10">
+                <div className="lg:flex hidden gap-x-3">
+                  {rightlinks.map((item, Idx) => (
+                    <div
                       key={item._key}
-                      className={cn(
-                        "text-white lg:hover:text-pka_green active:text-pka_green transition-colors tracking-widest",
-                        {
-                          "text-pka_green": pathname === item.slug.current,
-                        }
-                      )}
+                      className={"gap-x-3 flex items-center justify-center"}
                     >
-                      {item.value}
-                    </Link>
+                      {!!Idx && (
+                        <Image
+                          src={urlFor(logo.asset._ref).url()}
+                          alt={"Logo"}
+                          width={24}
+                          height={24}
+                        />
+                      )}
+                      <Link
+                        href={item.slug.current}
+                        className={cn(
+                          "relative before:bg-white before:absolute before:w-0 before:transition-all hover:before:w-full before:rounded-sm before:bottom-1 before:h-0.5 before:duration-500 tracking-widest",
+                          {
+                            "before:w-full before:bg-pka_green before:hover:bg-pka_green":
+                              pathname === item.slug.current,
+                          }
+                        )}
+                      >
+                        {item.value}
+                      </Link>
+                    </div>
                   ))}
                 </div>
                 <div className="flex gap-x-4 2xl:gap-4 h-6 items-center">
@@ -139,9 +176,10 @@ export default function HeaderContent(props: HeaderContentProps) {
           </div>
         </Container>
       </header>
+
       <div
         className={cn(
-          "flex left-0 -translate-y-full transition-transform transform duration-500 pt-[74px] px-3 h-full fixed top-0 flex-col w-full z-40 bg-pka_blue2 shadow-md text-white pb-5 lg:hidden",
+          "flex left-0 -translate-y-full transition-transform transform duration-500 pt-28 px-3 h-full fixed top-0 flex-col w-full z-40 bg-pka_blue2 shadow-md text-white pb-5 lg:hidden",
           {
             "translate-y-0": isMenuOpen,
           }
@@ -168,6 +206,40 @@ export default function HeaderContent(props: HeaderContentProps) {
             </li>
           ))}
         </ul>
+        <div className={"pt-14"}>
+          <ul
+            className={
+              "flex flex-wrap text-white tracking-wider lg:text-lg items-center gap-x-2 text-center"
+            }
+          >
+            {social.map(({ label, url }, idX) => {
+              return (
+                <li
+                  key={url}
+                  className={"gap-x-2 flex items-center justify-center"}
+                >
+                  {!!idX && (
+                    <Image
+                      src={urlFor(logo.asset._ref).url()}
+                      alt={"Logo"}
+                      width={24}
+                      height={24}
+                    />
+                  )}
+                  <Link
+                    href={url}
+                    target={"_blank"}
+                    className={cn(
+                      "transition-colors text-pka_green active:text-pka_green_light hover:text-white"
+                    )}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
     </>
   );

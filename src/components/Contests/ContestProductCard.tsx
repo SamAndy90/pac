@@ -13,19 +13,32 @@ export type ContestProductCardProps = {
 export function ContestProductCard({ data }: ContestProductCardProps) {
   const { title, description, images, id, handle, variants } = data;
   const { cart, addToCart } = useShopContext();
+  console.log({ images });
 
-  const allVariantsOptions = variants.edges.map((v: any) => {
-    return {
-      id: v.node.id,
-      price: v.node.price.amount,
-      variantQuantity: 1,
-    };
-  });
+  const imageObject = images.edges
+    ? images.edges.map((node: any) => {
+        return {
+          id: node.id,
+          src: node.url ?? "",
+          alt: node.altText ?? "Product image",
+        };
+      })
+    : [];
 
   const imageSrc = images.edges ? images.edges[0]?.node.url : "";
   const imageAltText = images.edges
     ? images.edges[0]?.node.altText
     : "Product image";
+
+  const allVariantsOptions = variants.edges.map((v: any) => {
+    return {
+      id: v.node.id,
+      title: title,
+      image: imageObject[0],
+      price: v.node.price.amount,
+      variantQuantity: 1,
+    };
+  });
 
   return (
     <div
@@ -43,10 +56,8 @@ export function ContestProductCard({ data }: ContestProductCardProps) {
             "w-full h-full bg-white relative overflow-hidden rounded-xl z-20"
           }
         >
-          {imageSrc ? (
+          {imageObject ? (
             <Image
-              // src={urlFor(portrait.asset._ref).url()}
-              // alt={"Product photo"}
               src={imageSrc}
               alt={imageAltText}
               fill
@@ -79,7 +90,10 @@ export function ContestProductCard({ data }: ContestProductCardProps) {
       >
         {description}
       </p>
-      <NewButton fullWidth onClick={() => addToCart(allVariantsOptions[0])}>
+      <NewButton
+        fullWidth
+        // onClick={() => addToCart(allVariantsOptions[0])}
+      >
         Buy
       </NewButton>
     </div>

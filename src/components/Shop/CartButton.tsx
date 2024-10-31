@@ -6,7 +6,7 @@ export const CartButton = () => {
   const { cart, isCartOpen, setIsCartOpen, checkoutURL } = useShopContext();
 
   let cartQuantity = 0;
-  cart.map((item) => {
+  cart?.map((item) => {
     return (cartQuantity += item.variantQuantity);
   });
   return (
@@ -29,6 +29,7 @@ export const CartButton = () => {
         open={isCartOpen}
         onClose={() => setIsCartOpen(false)}
         checkoutURL={checkoutURL}
+        cart={cart}
       />
     </>
   );

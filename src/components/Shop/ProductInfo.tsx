@@ -29,6 +29,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const allVariantsOptions = variants.edges.map((v: any) => {
     return {
       id: v.node.id,
+      title: title,
+      image: photos[0],
       price: v.node.price.amount,
       variantQuantity: 1,
     };

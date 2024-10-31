@@ -28,7 +28,7 @@ const JoinPeaceKeeper = ({ data }: Props) => {
   const { title, description, buttons } = data;
 
   return (
-    <section className="flex w-full max-w-[1920px] min-h-screen mx-auto">
+    <section className="flex w-full max-w-[1920px] lg:min-h-screen mx-auto">
       <div
         className={
           "flex-1 py-16 lg:pt-[116px] lg:pb-[136px] px-3 lg:px-12 xl:pr-36"

@@ -209,20 +209,21 @@ export async function updateCheckout(id: string, lineItems: any[]) {
   const lineItemsObject = lineItems.map((item) => {
     return `
       {
-        variantId: ${item.id},
-        quantity: ${item.quantity}
+        id: "${item.cartLineId}"
+        merchandiseId: "${item.id}"
+        quantity: ${item.variantQuantity}
       }`;
   });
   const query = `
     mutation {
       cartLinesUpdate(
-        cartId: "${id}"", 
-        lines: ${lineItemsObject}
+        cartId: "${id}"
+        lines: [${lineItemsObject}]
       ) {
         cart {
           id
           checkoutUrl
-          lines(first: 5) {
+          lines(first: 10) {
             edges {
               node {
                 id
@@ -252,6 +253,8 @@ export async function updateCheckout(id: string, lineItems: any[]) {
     }`;
 
   const res = await ShopifyData(query);
+
+  console.log({ res });
 
   return res.data.cartLinesUpdate.cart ? res.data.cartLinesUpdate.cart : [];
 }
