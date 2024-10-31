@@ -25,7 +25,7 @@ export const CartWindow = ({
   cart: CartProduct[];
 }) => {
   let totalPrice = 0;
-  cart.map((p) => (totalPrice += +p.price * p.variantQuantity));
+  cart?.map((p) => (totalPrice += +p.price * p.variantQuantity));
 
   return (
     <Transition appear show={open} as={Fragment}>
@@ -82,7 +82,7 @@ export const CartWindow = ({
                   }
                 >
                   <div className={"overflow-y-scroll flex flex-col gap-y-3"}>
-                    {cart.map((p) => {
+                    {cart?.map((p) => {
                       return <CartProductCard key={p.id} product={p} />;
                     })}
                   </div>

@@ -28,14 +28,21 @@ export default function CartProductCard({ product }: CartProductCardProps) {
           />
         </div>
         <div className={"flex flex-col justify-between py-3"}>
-          <Link
+          {/* <Link
             href={`shop/${product.id}`}
             className={
               "font-thunder text-2xl text-pka_blue2 transition-colors hover:text-pka_green"
             }
           >
             {title}
-          </Link>
+          </Link> */}
+          <h3
+            className={
+              "font-thunder text-2xl text-pka_blue2 transition-colors hover:text-pka_green"
+            }
+          >
+            {title}
+          </h3>
           <div className={"flex justify-between"}>
             <span className={"text-pka_black/50"}>
               Qny <span>{variantQuantity}</span>

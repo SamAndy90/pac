@@ -16,7 +16,7 @@ export function ContestProductCard({ data }: ContestProductCardProps) {
   console.log({ images });
 
   const imageObject = images.edges
-    ? images.edges.map((node: any) => {
+    ? images.edges?.map((node: any) => {
         return {
           id: node.id,
           src: node.url ?? "",
@@ -56,7 +56,7 @@ export function ContestProductCard({ data }: ContestProductCardProps) {
             "w-full h-full bg-white relative overflow-hidden rounded-xl z-20"
           }
         >
-          {imageObject ? (
+          {imageSrc ? (
             <Image
               src={imageSrc}
               alt={imageAltText}
