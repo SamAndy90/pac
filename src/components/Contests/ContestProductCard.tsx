@@ -13,7 +13,6 @@ export type ContestProductCardProps = {
 export function ContestProductCard({ data }: ContestProductCardProps) {
   const { title, description, images, id, handle, variants } = data;
   const { cart, addToCart } = useShopContext();
-  console.log({ images });
 
   const imageObject = images.edges
     ? images.edges?.map((node: any) => {
@@ -25,10 +24,14 @@ export function ContestProductCard({ data }: ContestProductCardProps) {
       })
     : [];
 
+  console.log({ imageObject });
+
   const imageSrc = images.edges ? images.edges[0]?.node.url : "";
   const imageAltText = images.edges
     ? images.edges[0]?.node.altText
     : "Product image";
+
+  console.log({ imageSrc, imageAltText });
 
   const allVariantsOptions = variants.edges.map((v: any) => {
     return {
@@ -59,7 +62,7 @@ export function ContestProductCard({ data }: ContestProductCardProps) {
           {imageSrc ? (
             <Image
               src={imageSrc}
-              alt={imageAltText}
+              alt={imageAltText ?? "image"}
               fill
               className={
                 "object-contain lg:group-hover:scale-105 transition-transform duration-700"

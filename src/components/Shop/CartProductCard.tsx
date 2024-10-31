@@ -14,6 +14,8 @@ export default function CartProductCard({ product }: CartProductCardProps) {
   const { id, title, price, image, variantQuantity, cartLineId } = product;
   const { removeCartProduct } = useShopContext();
 
+  console.log({ image });
+
   return (
     <div className={"px-3 py-2.5 rounded-xl bg-pka_background"}>
       <div className={"flex gap-x-3 relative"}>
@@ -22,7 +24,7 @@ export default function CartProductCard({ product }: CartProductCardProps) {
         >
           <Image
             src={image.src}
-            alt={image.alt}
+            alt={image.alt ?? "image"}
             fill
             className={"object-contain"}
           />
