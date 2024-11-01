@@ -11,10 +11,9 @@ export type CartProductCardProps = {
 };
 
 export default function CartProductCard({ product }: CartProductCardProps) {
-  const { id, title, price, image, variantQuantity, cartLineId } = product;
-  const { removeCartProduct } = useShopContext();
-
-  console.log({ image });
+  const { id, title, handle, price, image, variantQuantity, cartLineId } =
+    product;
+  const { setIsCartOpen, removeCartProduct } = useShopContext();
 
   return (
     <div className={"px-3 py-2.5 rounded-xl bg-pka_background"}>
@@ -24,27 +23,21 @@ export default function CartProductCard({ product }: CartProductCardProps) {
         >
           <Image
             src={image.src}
-            alt={image.alt ?? "image"}
+            alt={image.alt}
             fill
             className={"object-contain"}
           />
         </div>
         <div className={"flex flex-col justify-between py-3"}>
-          {/* <Link
-            href={`shop/${product.id}`}
+          <Link
+            href={`/shop/${handle}?id=${product.id}`}
+            onClick={() => setIsCartOpen(false)}
             className={
               "font-thunder text-2xl text-pka_blue2 transition-colors hover:text-pka_green"
             }
           >
             {title}
-          </Link> */}
-          <h3
-            className={
-              "font-thunder text-2xl text-pka_blue2 transition-colors hover:text-pka_green"
-            }
-          >
-            {title}
-          </h3>
+          </Link>
           <div className={"flex justify-between"}>
             <span className={"text-pka_black/50"}>
               Qny <span>{variantQuantity}</span>

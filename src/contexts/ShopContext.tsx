@@ -4,11 +4,13 @@ import {
   createCheckout,
   updateCheckout,
 } from "@/lib/data-fetchers/shopify/products";
+import { CartItem } from "@/types";
 import { createContext, useContext, useEffect, useState } from "react";
 
 export type CartProduct = {
   id: string;
   title: string;
+  handle: string;
   image: {
     id: string;
     src: string;
@@ -102,9 +104,11 @@ export function ShopProvider(props: ShopProviderProps) {
   //     );
   //   }
   // }
-  async function addToCart(newItem: any) {
-    const checkout = await createCheckout(newItem.id, newItem.variantQuantity);
-    console.log();
+  async function addToCart(newItem: CartItem) {
+    const checkout = await createCheckout(
+      newItem.variantId,
+      newItem.variantQuantity
+    );
 
     if (cart.length === 0) {
       const cartWithId = checkout.lines.edges.map((edge: any) => ({
@@ -127,7 +131,7 @@ export function ShopProvider(props: ShopProviderProps) {
     } else {
       let updatedCart = [...cart];
       cart.map((item) => {
-        if (item.id === newItem.id) {
+        if (item.variantId === newItem.variantId) {
           item.variantQuantity++;
           updatedCart = [...cart];
         } else {
@@ -138,9 +142,7 @@ export function ShopProvider(props: ShopProviderProps) {
           updatedCart = [...cart, cartWithId[0]];
         }
       });
-
       setCart(updatedCart);
-
       const updatedCheckout = await updateCheckout(checkoutId, updatedCart);
 
       // setCheckoutURL(updatedCheckout.checkoutURL);
@@ -163,8 +165,10 @@ export function ShopProvider(props: ShopProviderProps) {
     }
   }
 
-  async function removeCartProduct(itemToRemove: CartProduct) {
-    const updatedCart = cart.filter((item) => item.id !== itemToRemove.id);
+  async function removeCartProduct(itemToRemove: any) {
+    const updatedCart = cart.filter(
+      (item) => item.variantId !== itemToRemove.variantId
+    );
     setCart(updatedCart);
 
     const newCheckout = await updateCheckout(checkoutId, updatedCart);

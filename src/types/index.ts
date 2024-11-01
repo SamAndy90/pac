@@ -29,3 +29,17 @@ export type SanityLink = {
   value: string;
   slug: Slug;
 };
+
+export type CartItem = {
+  id: string;
+  title: string;
+  handle: string;
+  variantId: string;
+  image: {
+    id: string;
+    src: string;
+    alt: string;
+  };
+  price: string;
+  variantQuantity: number;
+};

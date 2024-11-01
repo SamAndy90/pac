@@ -5,50 +5,50 @@ import Link from "next/link";
 import { FaRegImages } from "react-icons/fa6";
 import { NewButton } from "../ui/NewButton";
 import { useShopContext } from "@/contexts/ShopContext";
+import { CartItem } from "@/types";
 
 export type ContestProductCardProps = {
-  data: any;
+  product: any;
 };
 
-export function ContestProductCard({ data }: ContestProductCardProps) {
-  const { title, description, images, id, handle, variants } = data;
+export function ContestProductCard({ product }: ContestProductCardProps) {
+  const { title, description, media, id, handle, variants } = product;
   const { cart, addToCart } = useShopContext();
 
-  const imageObject = images.edges
-    ? images.edges?.map((node: any) => {
-        return {
-          id: node.id,
-          src: node.url ?? "",
-          alt: node.altText ?? "Product image",
-        };
-      })
-    : [];
+  const images = media.edges?.map((el: any) => {
+    if (!el.node.image.url) return;
+    return {
+      id: el.node.image.id,
+      src: el.node.image.url,
+      alt: el.node.image.altText ? el.node.image.altText : "Product Image",
+    };
+  });
 
-  console.log({ imageObject });
-
-  const imageSrc = images.edges ? images.edges[0]?.node.url : "";
-  const imageAltText = images.edges
-    ? images.edges[0]?.node.altText
+  const imageSrc = media.edges[0]?.node.image.url
+    ? media.edges[0]?.node.image.url
+    : null;
+  const imageAltText = media.edges[0]?.node.image.altText
+    ? media.edges[0]?.node.image.altText
     : "Product image";
 
-  console.log({ imageSrc, imageAltText });
-
-  const allVariantsOptions = variants.edges.map((v: any) => {
+  const allVariantsOptions: CartItem[] = variants.edges.map((v: any) => {
     return {
-      id: v.node.id,
-      title: title,
-      image: imageObject[0],
+      id,
+      title,
+      handle,
+      variantId: v.node.id,
+      image: images[0],
       price: v.node.price.amount,
       variantQuantity: 1,
     };
   });
 
   return (
-    <div
-      // href={`/shop/${handle}?id=${id}`}
-      className={"w-full lg:col-span-1 group flex flex-col"}
-    >
-      <div className={"aspect-square mb-4 lg:mb-6 relative"}>
+    <div className={"w-full lg:col-span-1 group flex flex-col"}>
+      <Link
+        href={`/shop/${handle}?id=${id}`}
+        className={"aspect-square mb-4 lg:mb-6 relative"}
+      >
         <div
           className={
             "absolute inset-0 bg-pka_green z-10 xl:h-[90%] transition-transform duration-700 rounded-2xl delay-100 lg:group-hover:rotate-[3deg]"
@@ -62,7 +62,7 @@ export function ContestProductCard({ data }: ContestProductCardProps) {
           {imageSrc ? (
             <Image
               src={imageSrc}
-              alt={imageAltText ?? "image"}
+              alt={imageAltText}
               fill
               className={
                 "object-contain lg:group-hover:scale-105 transition-transform duration-700"
@@ -71,14 +71,14 @@ export function ContestProductCard({ data }: ContestProductCardProps) {
           ) : (
             <div
               className={
-                "bg-pka_green_light aspect-square rounded-2xl flex items-center justify-center"
+                "bg-pka_green_light aspect-square rounded-xl flex items-center justify-center"
               }
             >
               <FaRegImages className={"text-pka_blue2 size-20"} />
             </div>
           )}
         </div>
-      </div>
+      </Link>
       <h4
         className={
           "mb-1 lg:mb-2 font-garamond font-bold text-pka_blue text-center text-[8.2vw] md:text-[4vw] lg:text-[3vw] xl:text-[2.4vw] leading-none"
@@ -93,10 +93,7 @@ export function ContestProductCard({ data }: ContestProductCardProps) {
       >
         {description}
       </p>
-      <NewButton
-        fullWidth
-        // onClick={() => addToCart(allVariantsOptions[0])}
-      >
+      <NewButton fullWidth onClick={() => addToCart(allVariantsOptions[0])}>
         Buy
       </NewButton>
     </div>

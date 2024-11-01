@@ -66,7 +66,7 @@ export const ContestCard: FC<ContestCardProps> = ({
     <Component
       href={`contests/${collectionName}`}
       className={cn(
-        "max-w-[446px] group px-3 py-4 mx-auto aspect-[1/1.435] gap-y-2 overflow-hidden relative rounded-[20px] text-center flex flex-col items-center",
+        "max-w-[446px] w-full group px-3 py-4 mx-auto aspect-[1/1.435] gap-y-2 overflow-hidden relative rounded-[20px] text-center flex flex-col items-center",
         className
       )}
     >

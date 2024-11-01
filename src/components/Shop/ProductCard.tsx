@@ -7,11 +7,13 @@ export type ProductCardProps = {
 };
 
 export function ProductCard({ data }: ProductCardProps) {
-  const { title, description, images, id, handle } = data;
+  const { title, description, media, id, handle } = data;
 
-  const imageSrc = images.edges ? images.edges[0]?.node.url : "";
-  const imageAltText = images.edges
-    ? images.edges[0]?.node.altText
+  const imageSrc = media.edges[0]?.node.image.url
+    ? media.edges[0]?.node.image.url
+    : null;
+  const imageAltText = media.edges[0]?.node.image.altText
+    ? media.edges[0]?.node.image.altText
     : "Product image";
 
   return (
@@ -30,8 +32,6 @@ export function ProductCard({ data }: ProductCardProps) {
         >
           {imageSrc ? (
             <Image
-              // src={urlFor(portrait.asset._ref).url()}
-              // alt={"Product photo"}
               src={imageSrc}
               alt={imageAltText}
               fill

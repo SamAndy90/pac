@@ -4,6 +4,8 @@ import { useKeenSlider } from "keen-slider/react";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import { FaRegImages } from "react-icons/fa6";
+
 type Image = {
   id: number | string;
   src: string;
@@ -42,30 +44,40 @@ export function ImageSlider(props: ImageSliderProps) {
   return (
     <div className={"relative mx-[5%] sm:mx-[10%]"}>
       <ul ref={sliderRef} className={"keen-slider aspect-[7/9]"}>
-        {images.map((i) => (
+        {!!images.length ? (
+          images.map((i) => (
+            <li
+              key={i.id}
+              className={
+                "keen-slider__slide rounded-2xl overflow-hidden relative flex items-center justify-center"
+              }
+            >
+              <Image
+                src={i.src}
+                alt={i.alt}
+                className={"z-0 object-cover brightness-50"}
+                fill
+              />
+              <div className={"absolute inset-0 z-10 backdrop-blur-sm"}></div>
+              <Image
+                src={i.src}
+                alt={i.alt}
+                className={
+                  "!left-1/2 !top-1/2 z-20 max-h-[90%] max-w-[90%] -translate-x-1/2 -translate-y-1/2 object-contain"
+                }
+                fill
+              />
+            </li>
+          ))
+        ) : (
           <li
-            key={i.id}
             className={
-              "keen-slider__slide rounded-2xl overflow-hidden relative flex items-center justify-center"
+              "bg-pka_green_light keen-slider__slide rounded-2xl overflow-hidden relative flex items-center justify-center"
             }
           >
-            <Image
-              src={i.src}
-              alt={i.alt}
-              className={"z-0 object-cover brightness-50"}
-              fill
-            />
-            <div className={"absolute inset-0 z-10 backdrop-blur-sm"}></div>
-            <Image
-              src={i.src}
-              alt={i.alt}
-              className={
-                "!left-1/2 !top-1/2 z-20 max-h-[90%] max-w-[90%] -translate-x-1/2 -translate-y-1/2 object-contain"
-              }
-              fill
-            />
+            <FaRegImages className={"text-pka_blue2 size-20"} />
           </li>
-        ))}
+        )}
       </ul>
 
       {displayDirectionButtons && (

@@ -32,8 +32,8 @@ export function Products({ data }: ProductsProps) {
               "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-[5vw] lg:px-[8vw] gap-y-[12vw] md:gap-x-[8vw] lg:gap-x-[5vw] lg:gap-y-[6vw]"
             }
           >
-            {data.map((el) => (
-              <ProductCard key={el.node.id} data={el.node} />
+            {data.map((edge) => (
+              <ProductCard key={edge.node.id} data={edge.node} />
             ))}
           </div>
         </div>

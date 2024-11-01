@@ -36,19 +36,19 @@ export default async function ContestPage({ params }: ContestPageType) {
     label: `Position ${index + 1}`,
   }));
 
-  if (collection.title.toLowerCase() === "sticker") {
-    return (
-      <section className={"mt-14 md:mt-20 pt-12 pb-24 lg:pb-40"}>
-        <Container>
-          <div>
-            <Title className={"text-center mb-10"}>{collection.title}</Title>
-            <p
-              className={
-                "font-garamond text-xl lg:text-2xl sm:max-w-[85%] text-center mx-auto text-pka_blue2 mb-10"
-              }
-            >
-              {event?.description}
-            </p>
+  return (
+    <section className={"mt-14 md:mt-20 pt-12 pb-24 lg:pb-40"}>
+      <Container>
+        <div>
+          <Title className={"text-center mb-10"}>{collection.title}</Title>
+          <p
+            className={
+              "font-garamond text-xl lg:text-2xl sm:max-w-[85%] text-center mx-auto text-pka_blue2 mb-10"
+            }
+          >
+            {event?.description}
+          </p>
+          {collection.title.toLowerCase() === "sticker" ? (
             <div className={"grid grid-cols-1 md:grid-cols-2 gap-8"}>
               <div
                 className={
@@ -74,27 +74,29 @@ export default async function ContestPage({ params }: ContestPageType) {
               </form>
               {/* <PositionForm list={positionList} /> */}
             </div>
-          </div>
-        </Container>
-      </section>
-    );
-  }
-
-  return (
-    <section className={"mt-14 md:mt-20 pt-6 lg:pt-12 pb-24 lg:pb-40"}>
-      <Container>
-        <div>
-          <Title className={"text-center mb-10"}>{collection.title}</Title>
-          <p
-            className={
-              "font-garamond text-xl lg:text-2xl sm:max-w-[85%] text-center mx-auto text-pka_blue2 mb-10"
-            }
-          >
-            {event?.description}
-          </p>
-          <ContestProducts data={collection.products.edges} />
+          ) : (
+            <ContestProducts products={collection.products.edges} />
+          )}
         </div>
       </Container>
     </section>
   );
+
+  // return (
+  //   <section className={"mt-14 md:mt-20 pt-6 lg:pt-12 pb-24 lg:pb-40"}>
+  //     <Container>
+  //       <div>
+  //         <Title className={"text-center mb-10"}>{collection.title}</Title>
+  //         <p
+  //           className={
+  //             "font-garamond text-xl lg:text-2xl sm:max-w-[85%] text-center mx-auto text-pka_blue2 mb-10"
+  //           }
+  //         >
+  //           {event?.description}
+  //         </p>
+  //         <ContestProducts data={collection.products.edges} />
+  //       </div>
+  //     </Container>
+  //   </section>
+  // );
 }

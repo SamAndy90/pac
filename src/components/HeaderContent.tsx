@@ -91,7 +91,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                   </div>
                 ))}
               </div>
-              <div className="items-center h-full absolute w-16 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 lg:justify-center flex">
+              <div className="items-center h-full absolute w-16 top-1/2 left-4 sm:left-1/2 sm:-translate-x-1/2 -translate-y-1/2 lg:justify-center flex">
                 <Link href={"/"} className={"h-full w-12 lg:w-full relative"}>
                   <Image
                     src={urlFor(logo.asset._ref).url()}

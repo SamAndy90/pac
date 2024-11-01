@@ -12,25 +12,27 @@ export type ProductInfoProps = {
 };
 
 export default function ProductInfo({ product }: ProductInfoProps) {
-  const { id, title, description, options, variants, priceRange, images } =
+  const { id, title, handle, description, variants, priceRange, media } =
     product;
 
   const { cart, addToCart } = useShopContext();
 
-  const photos = images.edges?.map((i: any) => {
-    if (!i.node.url) return;
+  const images = media.edges?.map((el: any) => {
+    if (!el.node.image.url) return;
     return {
-      id: i.node.id,
-      src: i.node.url,
-      alt: i.node.altText,
+      id: el.node.image.id,
+      src: el.node.image.url,
+      alt: el.node.image.altText ? el.node.image.altText : "Product Image",
     };
   });
 
   const allVariantsOptions = variants.edges.map((v: any) => {
     return {
-      id: v.node.id,
-      title: title,
-      image: photos[0],
+      id,
+      variantId: v.node.id,
+      title,
+      handle,
+      image: images[0],
       price: v.node.price.amount,
       variantQuantity: 1,
     };
@@ -41,8 +43,8 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       <Container>
         <div className={"flex w-full flex-col gap-y-12 md:flex-row md:gap-x-6"}>
           <div className={"md:w-1/2"}>
-            {photos.length ? (
-              <ImageSlider images={photos} />
+            {!!images.length ? (
+              <ImageSlider images={images} />
             ) : (
               <div
                 className={

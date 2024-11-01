@@ -1,7 +1,7 @@
 // Example Next.js Page
 "use client";
 import React, { useEffect, useState } from "react";
-import { getShopifyAllProducts } from "@/lib/data-fetchers/shopify/products";
+import { getShopifyProducts } from "@/lib/data-fetchers/shopify/products";
 import { useUser } from "@clerk/nextjs";
 
 // Add comment for testing from new account
@@ -13,7 +13,7 @@ function ProductsPage() {
   const userRole = user?.organizationMemberships[0]?.role;
   useEffect(() => {
     async function getProducts() {
-      const products = await getShopifyAllProducts();
+      const products = await getShopifyProducts();
       setProducts(products);
     }
     getProducts();

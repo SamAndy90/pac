@@ -17,10 +17,24 @@ import { ContestProductCard } from "./ContestProductCard";
 // };
 
 export type ContestProductsProps = {
-  data: any[];
+  products: any[];
 };
 
-export function ContestProducts({ data }: ContestProductsProps) {
+export function ContestProducts({ products }: ContestProductsProps) {
+  if (!products) {
+    return (
+      <section>
+        <Container>
+          <div>
+            <Title className={"text-center xl:text-5xl text-4xl"}>
+              Products not found
+            </Title>
+          </div>
+        </Container>
+      </section>
+    );
+  }
+
   return (
     <section>
       <Container>
@@ -33,8 +47,8 @@ export function ContestProducts({ data }: ContestProductsProps) {
               "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 sm:px-[5vw] lg:px-[8vw] gap-y-[12vw] md:gap-x-[8vw] lg:gap-x-[5vw] lg:gap-y-[6vw]"
             }
           >
-            {data.map((el) => (
-              <ContestProductCard key={el.node.id} data={el.node} />
+            {products.map((el) => (
+              <ContestProductCard key={el.node.id} product={el.node} />
             ))}
           </div>
         </div>

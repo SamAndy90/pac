@@ -1,6 +1,6 @@
 import ShopPage from "@/components/Shop/ShopPage";
 import { getData } from "@/lib/data-fetchers/sanity";
-import { getShopifyAllProducts } from "@/lib/data-fetchers/shopify/products";
+import { getShopifyProducts } from "@/lib/data-fetchers/shopify/products";
 
 export default async function Page() {
   const data = await getData(`*[_type == "page" && title == "Shop"]`);
@@ -11,7 +11,7 @@ export default async function Page() {
   }
   const sections = data[0]?.shoptemplatesections?.sections;
 
-  const shopifyProducts = await getShopifyAllProducts();
+  const shopifyProducts = await getShopifyProducts();
 
   return <ShopPage data={sections} shopifyProducts={shopifyProducts} />;
 }
