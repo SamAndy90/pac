@@ -7,7 +7,7 @@ import { FaArrowRight } from "react-icons/fa";
 type Props = {
   title: string;
   price: string;
-  imageUrl: string;
+  imageUrl?: string;
   id: string;
 };
 
@@ -18,12 +18,12 @@ const ProductCard = ({ id, title, price, imageUrl }: Props) => {
       href={`/pages/products/${id.split("/").pop()}`}
     >
       <div className="relative w-full h-full rounded-[20px] overflow-hidden group">
-        <Image
+        {/* <Image
           src={imageUrl}
           alt="banner"
           className=" h-48 w-96 rounded-[20px]"
           layout="fill"
-        />
+        /> */}
 
         <div className="absolute inset-0 bg-[#000000] bg-opacity-0 lg:opacity-0  rounded-[20px] group-hover:bg-opacity-25 group-hover:opacity-100 transition-opacity duration-300 z-10">
           <div className="absolute  inset-0 flex  justify-center items-center text-center z-20">
