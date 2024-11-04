@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Container, Title } from "@/common";
 import { Portrait } from "@/types";
-import { urlFor } from "@/lib/utils";
+import { ImgUrl } from "@/lib/utils";
 import CountdownComponent from "@/components/countdownCounter";
 
 type TData = {
@@ -51,7 +51,7 @@ export default function LiveContest({ data }: Props) {
   return (
     <section className="relative mx-auto min-h-screen max-w-[1920px] overflow-hidden">
       <Image
-        src={urlFor(portrait.asset._ref).url()}
+        src={ImgUrl(portrait)}
         alt="banner"
         className="object-cover"
         fill

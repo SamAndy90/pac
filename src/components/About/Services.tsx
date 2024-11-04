@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Container, Title } from "@/common";
 import { Portrait } from "@/types";
-import { urlFor } from "@/lib/utils";
+import { ImgUrl } from "@/lib/utils";
 import { SanityDocument } from "next-sanity";
 
 type ServicesData = {
@@ -48,7 +48,7 @@ const Services = ({ data }: ServicesProps) => {
                 }
               >
                 <Image
-                  src={urlFor(portrait.asset._ref).url()}
+                  src={ImgUrl(portrait)}
                   alt={"Image"}
                   fill
                   className={"object-cover"}

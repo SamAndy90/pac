@@ -63,7 +63,7 @@ export default async function ContestsPage() {
                   eventEnd={endtime}
                   countdownBgColor={timerstyle.bgcolor}
                   countdownTextColor={timerstyle.numcolor}
-                  backgroundImage={portrait.asset._ref}
+                  backgroundImage={portrait}
                 />
               );
             })}

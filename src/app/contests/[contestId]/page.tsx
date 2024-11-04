@@ -40,10 +40,10 @@ export default async function ContestPage({ params }: ContestPageType) {
     <section className={"mt-14 md:mt-20 pt-12 pb-24 lg:pb-40"}>
       <Container>
         <div>
-          <Title className={"text-center mb-10"}>{collection.title}</Title>
+          <Title className={"text-center mb-5"}>{collection.title}</Title>
           <p
             className={
-              "font-garamond text-xl lg:text-2xl sm:max-w-[85%] text-center mx-auto text-pka_blue2 mb-10"
+              "font-garamond text-xl lg:text-2xl sm:max-w-[85%] text-center mx-auto text-pka_blue2 mb-14"
             }
           >
             {event?.description}

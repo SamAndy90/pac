@@ -13,6 +13,13 @@ export type Button = {
   _key: string;
 };
 
+export type LinkType = {
+  label: string;
+  url: string;
+  _type?: string;
+  _key?: string;
+};
+
 export type Color = {
   label: string;
   value: string;

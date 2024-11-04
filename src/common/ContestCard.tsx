@@ -4,7 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC, HTMLAttributes } from "react";
 import CountdownComponent from "../components/countdownCounter";
-import { cn, urlFor } from "@/lib/utils";
+import { cn, ImgUrl } from "@/lib/utils";
+import { Portrait } from "@/types";
 
 type ContestCardProps = {
   collectionName: string;
@@ -15,7 +16,7 @@ type ContestCardProps = {
   eventEnd: string;
   countdownBgColor: string;
   countdownTextColor: string;
-  backgroundImage?: string;
+  backgroundImage?: Portrait;
 } & Pick<HTMLAttributes<HTMLDivElement>, "className">;
 
 export const ContestCard: FC<ContestCardProps> = ({
@@ -72,7 +73,7 @@ export const ContestCard: FC<ContestCardProps> = ({
     >
       {backgroundImage && (
         <Image
-          src={urlFor(backgroundImage).url()}
+          src={ImgUrl(backgroundImage)}
           alt="bg"
           className="object-cover -z-10 group-hover:scale-105 transition-all duration-500"
           fill

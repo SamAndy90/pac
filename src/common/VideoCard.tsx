@@ -5,10 +5,11 @@ import { Modal } from "antd";
 import Image from "next/image";
 import { PlayIcon } from "lucide-react";
 import ReactPlayer from "react-player";
-import { urlFor } from "@/lib/utils";
+import { ImgUrl } from "@/lib/utils";
+import { Portrait } from "@/types";
 
 interface VideoCardProps {
-  cardSrc: string;
+  cardSrc: Portrait;
   title: string;
   description: string;
   videoUrl: string;
@@ -50,7 +51,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
         className="relative group hover:cursor-pointer w-full items-center mx-auto xl:max-w-[254px] rounded-2xl lg:rounded-[20px] overflow-hidden aspect-[2/3] bg-[#0A1200]"
       >
         <Image
-          src={urlFor(cardSrc).url()}
+          src={ImgUrl(cardSrc)}
           alt="bg"
           className="object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-300"
           fill

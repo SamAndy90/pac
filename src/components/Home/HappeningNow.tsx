@@ -95,7 +95,7 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
                   subtitle={card.subtitle}
                   title={card.title}
                   description={card.description}
-                  backgroundImage={card.portrait?.asset._ref}
+                  backgroundImage={card.portrait}
                   countdownBgColor={card.timerstyle.bgcolor.value}
                   countdownTextColor={card.timerstyle.numcolor.value}
                   exploreButtonText="Explore"

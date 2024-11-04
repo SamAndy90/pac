@@ -103,7 +103,7 @@ const AboutPageHero = (props: AboutPageHeroProps) => {
 
         <div className="relative aspect-[10/11] md:aspect-[4/3]">
           <Image
-            src={ImgUrl(props.data.portrait.asset._ref)}
+            src={ImgUrl(props.data.portrait)}
             alt="banner"
             className="object-cover scaleimage"
             fill
@@ -127,7 +127,7 @@ const AboutPageHero = (props: AboutPageHeroProps) => {
             </div>
             <div className="relative z-[100] scaleimage mx-auto rounded-3xl overflow-hidden lg:w-[50dvw] xl:w-[45dvw] h-[45vh] max-h-[600px]">
               <Image
-                src={ImgUrl(props.data.portrait.asset._ref)}
+                src={ImgUrl(props.data.portrait)}
                 alt="banner"
                 className="object-cover "
                 fill

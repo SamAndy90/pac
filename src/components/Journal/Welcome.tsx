@@ -1,5 +1,5 @@
 import { Container, Title } from "@/common";
-import { urlFor } from "@/lib/utils";
+import { ImgUrl } from "@/lib/utils";
 import { Portrait } from "@/types";
 import Image from "next/image";
 
@@ -27,7 +27,7 @@ export function Welcome({ data }: WelcomeProps) {
               className={"relative w-[110px] h-[40px] lg:w-[140px] lg:h-[58px]"}
             >
               <Image
-                src={urlFor(textsvg.asset._ref).url()}
+                src={ImgUrl(textsvg)}
                 alt={"Text Image"}
                 fill
                 className={"object-contain"}

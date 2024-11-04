@@ -6,7 +6,7 @@ import { Portrait } from "@/types";
 import { useKeenSlider } from "keen-slider/react";
 
 interface CardData {
-  cardSrc: string;
+  cardSrc: Portrait;
   title: string;
   description: string;
   videoUrl: string;
@@ -85,7 +85,7 @@ const WinnersCircle = ({ data }: Props) => {
   });
 
   const mappedData: CardData[] = data?.winners.map((winner) => ({
-    cardSrc: winner.portrait.asset._ref,
+    cardSrc: winner.portrait,
     title: winner.winnerTitle,
     description: winner.description,
     videoUrl: winner.videoUrl,
@@ -110,7 +110,7 @@ const WinnersCircle = ({ data }: Props) => {
             <div className="lg:absolute lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 w-full">
               <div ref={sliderRef} className="keen-slider">
                 {mappedData?.map((card) => (
-                  <div className={"keen-slider__slide"} key={card.cardSrc}>
+                  <div className={"keen-slider__slide"} key={card.videoUrl}>
                     <VideoCard
                       cardSrc={card.cardSrc}
                       title={card.title}

@@ -34,6 +34,7 @@ export default defineType({
           "faqstemplate",
           "privacytemplate",
           "journaltemplate",
+          "contacttemplate",
         ],
       },
     }),
@@ -157,6 +158,20 @@ export default defineType({
             defineArrayMember({ type: "textsection" }),
             defineArrayMember({ type: "page.image" }),
           ],
+        },
+      ],
+    }),
+    defineField({
+      name: "contacttemplatesections",
+      type: "object",
+      hidden: ({ parent }: { parent: any }) =>
+        !(parent?.template === "contacttemplate"),
+      fields: [
+        {
+          name: "sections",
+          title: "Sections",
+          type: "array",
+          of: [defineArrayMember({ type: "contactdetails" })],
         },
       ],
     }),

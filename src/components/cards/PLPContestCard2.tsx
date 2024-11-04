@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { ImgUrl, cn } from "@/lib/utils";
 import Link from "next/link";
 import CountdownComponent from "../countdownCounter";
+import { Portrait } from "@/types";
 type TData = {
   Title: string;
   Intro: string;
@@ -16,12 +17,7 @@ type TData = {
     value: string;
     label: string;
   };
-  portrait: {
-    _type: string;
-    asset: {
-      _ref: string;
-    };
-  };
+  portrait: Portrait;
 };
 
 type Props = {
@@ -91,7 +87,7 @@ function PLPContestCard2({ data }: Props) {
               : "rounded-[20px] animate-out transition-all duration-500 ease-in-out"
           }`}
           style={{
-            backgroundImage: `url(${ImgUrl(portrait.asset._ref)})`,
+            backgroundImage: `url(${ImgUrl(portrait)})`,
             backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
             backgroundPosition: "center",

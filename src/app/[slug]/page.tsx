@@ -1,9 +1,9 @@
 import CommingSoon from "@/components/CommingSoon";
-import { urlFor } from "@/lib/utils";
 import { Metadata } from "next";
 import Ancillary from "@/components/templates/Ancillary";
 import ShopTemplate from "@/components/shoptemplate/ShopTemplate";
 import { getData } from "@/lib/data-fetchers/sanity";
+import { ImgUrl } from "@/lib/utils";
 
 type MetadataProps = {
   params: {
@@ -48,7 +48,7 @@ export default async function Page(props: MetadataProps) {
     const title = section?.title;
     const image = section?.portrait?.asset?._ref;
 
-    return <CommingSoon title={title} image={urlFor(image).url()} />;
+    return <CommingSoon title={title} image={ImgUrl(image)} />;
   }
 
   switch (slugData?.template) {

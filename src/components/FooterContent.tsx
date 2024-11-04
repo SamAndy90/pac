@@ -7,7 +7,7 @@ import { Container } from "@/common";
 import { FooterContentData } from "./Footer";
 import { SanityDocument } from "next-sanity";
 import Image from "next/image";
-import { cn, urlFor } from "@/lib/utils";
+import { cn, ImgUrl } from "@/lib/utils";
 import RectangleIMG from "@/resources/svg/footer-rectangle.svg";
 import { usePathname } from "next/navigation";
 
@@ -60,7 +60,7 @@ const FooterContent = (props: FooterContentProps) => {
                 }
               >
                 <Image
-                  src={urlFor(logo.asset._ref).url()}
+                  src={ImgUrl(logo)}
                   alt={"Logo"}
                   fill
                   className={"object-contain"}
@@ -88,7 +88,7 @@ const FooterContent = (props: FooterContentProps) => {
                     >
                       {!!idX && (
                         <Image
-                          src={urlFor(logo.asset._ref).url()}
+                          src={ImgUrl(logo)}
                           alt={"Logo"}
                           width={24}
                           height={24}

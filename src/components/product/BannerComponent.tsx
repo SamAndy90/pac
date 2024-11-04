@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { client } from "../../../sanity/lib/client";
 import BannerCard from "./BannerCard";
-import { urlFor } from "@/lib/utils";
+import { ImgUrl } from "@/lib/utils";
 
 type Props = {
   data: any;
@@ -31,7 +31,7 @@ export default function BannerComponent({ data }: Props) {
   return (
     <BannerCard
       title={sectionData?.title}
-      imageUrl={urlFor(sectionData?.portrait.asset._ref).url()}
+      imageUrl={ImgUrl(sectionData?.portrait)}
     />
   );
 }

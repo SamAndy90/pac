@@ -5,7 +5,7 @@ import Slider from "react-slick";
 import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import settings from "@/lib/ExploreSliderSettings";
-import { urlFor } from "@/lib/utils";
+import { ImgUrl } from "@/lib/utils";
 interface SliderComponentProps {
   data: any[];
 }
@@ -46,7 +46,7 @@ export const SliderComponent = ({ data }: SliderComponentProps) => {
               <div key={index} className="flex group">
                 <div className="flex flex-col flex-wrap items-center rounded-[20px] overflow-hidden relative m-auto my-10 lg:my-0 overflow-x-hidden w-[280px] h-[400px] lg:w-[277px] lg:h-[396.73px] xl:w-[346px] xl:h-[495.73px] 2xl:w-[416px] 2xl:h-[594px] min-[1920px]:w-[520px] min-[1920px]:h-[743px]">
                   <Image
-                    src={urlFor(item.potrait.asset._ref).url()}
+                    src={ImgUrl(item.potrait)}
                     alt="banner"
                     className="object-cover transition-opacity duration-300"
                     fill

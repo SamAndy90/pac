@@ -12,7 +12,7 @@ const BenifitCard = ({ card }: BenifitCardProps) => {
   return (
     <div className="flex md:max-w-auto w-full mx-auto px-3 py-4 max-w-[80%] gap-y-6 flex-1 flex-col items-center">
       <Image
-        src={ImgUrl(card.portrait.asset._ref)}
+        src={ImgUrl(card.portrait)}
         width={100}
         height={100}
         alt="banner"

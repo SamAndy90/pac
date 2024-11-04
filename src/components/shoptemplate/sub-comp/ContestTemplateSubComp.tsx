@@ -117,10 +117,7 @@ const ContestTemplateSubComp = ({
               key={card._key}
               title={card.Title}
               description={card.Intro}
-              backgroundImage={card.portrait?.asset._ref.replace(
-                /[^a-zA-Z0-9-]/g,
-                ""
-              )}
+              backgroundImage={card.portrait}
               countdownBgColor={card.timerstyle.bgcolor.value}
               countdownTextColor="text-black"
               exploreButtonText="Explore"

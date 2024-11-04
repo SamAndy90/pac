@@ -4,14 +4,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { FC, HTMLAttributes } from "react";
 import CountdownComponent from "../components/countdownCounter";
-import { cn, urlFor } from "@/lib/utils";
+import { cn, ImgUrl } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
+import { Portrait } from "@/types";
 
 type EventCardProps = {
   subtitle?: string;
   title: string;
   description: string;
-  backgroundImage?: any;
+  backgroundImage?: Portrait;
   countdownBgColor: string;
   countdownTextColor: string;
   exploreButtonText: string;
@@ -76,7 +77,7 @@ export const EventCard: FC<EventCardProps> = ({
         {backgroundImage && (
           <div className="absolute w-full bottom-0 h-1/3">
             <Image
-              src={urlFor(backgroundImage).url()}
+              src={ImgUrl(backgroundImage)}
               alt="bg"
               className="h-1/2 group-hover:scale-105 transition-all duration-500"
               fill
@@ -110,7 +111,7 @@ export const EventCard: FC<EventCardProps> = ({
     >
       {backgroundImage && (
         <Image
-          src={urlFor(backgroundImage).url()}
+          src={ImgUrl(backgroundImage)}
           alt="bg"
           className="object-cover group-hover:scale-105 transition-all duration-500"
           fill

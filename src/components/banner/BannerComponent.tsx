@@ -12,26 +12,17 @@ const BannerComponent = ({ data, variant = "small" }: Props) => {
   switch (variant) {
     case "small":
       return (
-        <SmallBanner
-          title={data.title}
-          imageUrl={ImgUrl(data.portrait.asset._ref)}
-        />
+        <SmallBanner title={data.title} imageUrl={ImgUrl(data.portrait)} />
       );
 
     case "large":
       return (
-        <LargeBanner
-          title={data.title}
-          imageUrl={ImgUrl(data.portrait.asset._ref)}
-        />
+        <LargeBanner title={data.title} imageUrl={ImgUrl(data.portrait)} />
       );
 
     default:
       return (
-        <SmallBanner
-          title={data.title}
-          imageUrl={ImgUrl(data.portrait.asset._ref)}
-        />
+        <SmallBanner title={data.title} imageUrl={ImgUrl(data.portrait)} />
       );
   }
 };

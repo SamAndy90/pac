@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { cn, urlFor } from "@/lib/utils";
+import { cn, ImgUrl } from "@/lib/utils";
 import { Portrait } from "@/types";
 
 type ImageData = {
@@ -20,7 +20,7 @@ const ImageSection = ({ data }: ImageSectionProps) => {
       )}
     >
       <Image
-        src={urlFor(data.portrait.asset._ref).url()}
+        src={ImgUrl(data.portrait)}
         alt={"Background image"}
         fill
         className={"object-cover"}

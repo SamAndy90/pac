@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { cn, urlFor } from "@/lib/utils";
+import { cn, ImgUrl } from "@/lib/utils";
 import Link from "next/link";
 import { NewButton } from "../ui/NewButton";
 import { Button, Color, Portrait } from "@/types";
@@ -86,7 +86,7 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
       <div className="lg:w-[50%] aspect-[11/12]">
         <div className={"w-full h-full relative"}>
           <Image
-            src={urlFor(data.portrait.asset._ref).url()}
+            src={ImgUrl(data.portrait)}
             alt={"Join peace keepers social image"}
             fill
             className={"object-cover"}

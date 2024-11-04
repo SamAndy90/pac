@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { cn, formatDate, urlFor } from "@/lib/utils";
+import { cn, formatDate, ImgUrl } from "@/lib/utils";
 import { HTMLAttributes } from "react";
 import Link from "next/link";
 import { Article, Post } from "./News";
@@ -29,7 +29,7 @@ export function HotNewsCard({
         ></div>
         <div className={"relative h-full rounded-xl overflow-hidden"}>
           <Image
-            src={urlFor(gallery[0].asset._ref).url()}
+            src={ImgUrl(gallery[0])}
             alt={"News image"}
             fill
             className={

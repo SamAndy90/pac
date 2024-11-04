@@ -36,7 +36,7 @@ export default function NewsDetails({ data }: NewsDetailsProps) {
                   }
                 >
                   <Image
-                    src={ImgUrl(img.asset._ref)}
+                    src={ImgUrl(img)}
                     alt={"Image"}
                     fill
                     className={"object-cover"}

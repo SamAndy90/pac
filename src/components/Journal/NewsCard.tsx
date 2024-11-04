@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Post } from "./News";
 import Link from "next/link";
-import { cn, formatDate, urlFor } from "@/lib/utils";
+import { cn, formatDate, ImgUrl } from "@/lib/utils";
 import { ArticleBadge } from "./HotNewsCard";
 import { FaArrowRight } from "react-icons/fa";
 
@@ -30,7 +30,7 @@ export default function NewsCard({ post }: NewsCardProps) {
         }
       >
         <Image
-          src={urlFor(gallery[0].asset._ref).url()}
+          src={ImgUrl(gallery[0])}
           alt={"News image"}
           fill
           className={

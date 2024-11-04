@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { Container } from "@/common";
 import { Portrait } from "@/types";
-import { urlFor } from "@/lib/utils";
+import { ImgUrl } from "@/lib/utils";
 import { SanityDocument } from "next-sanity";
 
 export type HeroData = {
@@ -35,7 +35,7 @@ export default function Hero({ data }: HeroProps) {
               }
             >
               <Image
-                src={urlFor(background.asset._ref).url()}
+                src={ImgUrl(background)}
                 alt={"Main image"}
                 fill
                 objectFit={"cover"}

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { NewButton } from "../ui/NewButton";
 import { Color, Portrait } from "@/types";
-import { urlFor } from "@/lib/utils";
+import { ImgUrl } from "@/lib/utils";
 import { Title } from "@/common";
 
 interface PeaceKeeperData {
@@ -72,7 +72,7 @@ const JoinPeaceKeeper = ({ data }: Props) => {
 
       <div className="flex-1 max-w-[50%] min-w-[50%] relative hidden md:block">
         <Image
-          src={urlFor(data.portrait.asset._ref).url()}
+          src={ImgUrl(data.portrait)}
           alt={"Join peace keepers social image"}
           fill
           className={"object-cover"}
