@@ -171,7 +171,10 @@ export default defineType({
           name: "sections",
           title: "Sections",
           type: "array",
-          of: [defineArrayMember({ type: "contactdetails" })],
+          of: [
+            defineArrayMember({ type: "contactdetails" }),
+            defineArrayMember({ type: "informing" }),
+          ],
         },
       ],
     }),

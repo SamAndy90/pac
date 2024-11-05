@@ -1,4 +1,4 @@
-import { Container, Title } from "@/common";
+import { Container, Loader, Title } from "@/common";
 import { formatPhoneNumber, ImgUrl } from "@/lib/utils";
 import { LinkType, Portrait } from "@/types";
 import Image from "next/image";
@@ -36,10 +36,10 @@ export default function ContactDetails({ data }: ContactDetailsProps) {
   const { address, email, phone, socials } = details;
 
   return (
-    <section className={"mt-16 lg:mt-28 pb-40"}>
+    <section className={"mt-16 lg:mt-28"}>
       <Container>
         <div className={"flex flex-col lg:flex-row"}>
-          <div className={"flex-1 mb-10 lg:mb-0"}>
+          <div className={"flex-1 mb-10 md:mb-14 lg:mb-0"}>
             <div
               className={
                 "relative aspect-[11/10] lg:aspect-[10/11] rounded-2xl overflow-hidden"
@@ -71,7 +71,7 @@ export default function ContactDetails({ data }: ContactDetailsProps) {
               {textsvg && (
                 <div
                   className={
-                    "relative mx-auto w-[110px] h-[44px] lg:w-[140px] lg:h-[55px] mb-3 lg:mb-6"
+                    "relative mx-auto lg:mx-0 w-[110px] h-[44px] lg:w-[140px] lg:h-[55px] mb-3 lg:mb-6"
                   }
                 >
                   <Image
@@ -92,29 +92,81 @@ export default function ContactDetails({ data }: ContactDetailsProps) {
                 </p>
               )}
               {email && (
-                <div>
-                  <h6>{email.label}</h6>
-                  <Link href={`mailto:${email.url.trim()}`}>{email.url}</Link>
+                <div
+                  className={
+                    "relative group py-4 border-b border-pka_blue2 lg:border-none"
+                  }
+                >
+                  <h6
+                    className={
+                      "lg:group-hover:text-white transition-colors duration-300 lg:text-lg font-avenirThin xl:text-xl text-pka_blue2"
+                    }
+                  >
+                    {email.label}
+                  </h6>
+                  <Link
+                    href={`mailto:${email.url.trim()}`}
+                    className={
+                      "lg:group-hover:text-white transition-colors duration-300 text-pka_blue2 font-garamond font-bold text-2xl md:text-3xl"
+                    }
+                  >
+                    {email.url}
+                  </Link>
+                  <div
+                    className={
+                      "absolute w-full bottom-0 -inset-x-4 transition-all duration-300 bg-pka_blue h-0 lg:group-hover:h-full -z-10 rounded-2xl"
+                    }
+                  ></div>
                 </div>
               )}
               {phone && (
-                <div className={"relative group py-4"}>
-                  <h6>{phone.label}</h6>
-                  <Link href={`tel:+${formatPhoneNumber(phone.number)}`}>
+                <div
+                  className={
+                    "relative group py-4 border-b border-pka_blue2 lg:border-none"
+                  }
+                >
+                  <h6
+                    className={
+                      "lg:group-hover:text-white transition-colors duration-300 lg:text-lg font-avenirThin xl:text-xl text-pka_blue2"
+                    }
+                  >
+                    {phone.label}
+                  </h6>
+                  <Link
+                    href={`tel:+${formatPhoneNumber(phone.number)}`}
+                    className={
+                      "lg:group-hover:text-white transition-colors duration-300 text-pka_blue2 font-garamond font-bold text-2xl md:text-3xl"
+                    }
+                  >
                     {phone.number}
                   </Link>
                   <div
                     className={
-                      "absolute w-full bottom-0 -inset-x-3 transition-all duration-300 bg-pka_blue h-0 lg:group-hover:h-full -z-10 rounded-2xl"
+                      "absolute w-full bottom-0 -inset-x-4 transition-all duration-300 bg-pka_blue h-0 lg:group-hover:h-full -z-10 rounded-2xl"
                     }
                   ></div>
                 </div>
               )}
               {socials && (
-                <div>
-                  <h6>Socials</h6>
+                <div
+                  className={"py-4 border-b border-pka_blue2 lg:border-none"}
+                >
+                  <h6
+                    className={
+                      "lg:text-lg font-avenirThin xl:text-xl text-pka_blue2"
+                    }
+                  >
+                    Socials
+                  </h6>
                   {socials.map((i, Idx) => (
-                    <Link key={i._key} href={i.url.trim()} target={"_blank"}>
+                    <Link
+                      key={i._key}
+                      href={i.url.trim()}
+                      target={"_blank"}
+                      className={
+                        "text-pka_blue2 font-garamond font-bold text-2xl md:text-3xl relative before:bg-pka_blue before:absolute before:w-0 before:transition-all hover:before:w-full before:rounded-sm before:bottom-1 before:h-1 before:duration-300"
+                      }
+                    >
                       <span>{i.label}</span>
                       {socials.length > Idx + 1 && <span>{", "}</span>}
                     </Link>
@@ -122,9 +174,13 @@ export default function ContactDetails({ data }: ContactDetailsProps) {
                 </div>
               )}
               {address && (
-                <div>
-                  <h6>{address.label}</h6>
-                  <p>{address.location}</p>
+                <div
+                  className={
+                    "py-4 lg:text-lg font-avenirThin xl:text-xl text-pka_blue2 border-b border-pka_blue2 lg:border-none"
+                  }
+                >
+                  <h6 className={"mb-2"}>{address.label}</h6>
+                  <p className={"text-base"}>{address.location}</p>
                 </div>
               )}
             </div>

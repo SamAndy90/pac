@@ -13,8 +13,9 @@ import { Container } from "@/common";
 import { CartButton } from "./Shop/CartButton";
 import { FiX } from "react-icons/fi";
 import { usePathname } from "next/navigation";
+import { LinkType } from "@/types";
 
-const social = [
+const social: LinkType[] = [
   {
     label: "LinkedIn",
     url: "http://www.linkedin.com",

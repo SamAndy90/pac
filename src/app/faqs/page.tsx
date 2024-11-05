@@ -1,4 +1,4 @@
-import ContactTemplate from "@/components/Contact/ContactTemplate";
+import FAQsPage from "@/components/FAQS/FAQsPage";
 import { getData } from "@/lib/data-fetchers/sanity";
 
 export default async function Page() {
@@ -12,5 +12,5 @@ export default async function Page() {
   }
   const sections = data[0]?.faqstemplatesections?.sections;
 
-  return <ContactTemplate data={sections} />;
+  return <FAQsPage data={sections} />;
 }
