@@ -18,14 +18,14 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
   const { addToCart } = useShopContext();
 
-  const images = media.edges?.map((el: any) => {
-    if (!el.node.image.url) return;
-    return {
-      id: el.node.image.id,
-      src: el.node.image.url,
-      alt: el.node.image.altText || "Product Image",
-    };
-  });
+  const images =
+    media.edges
+      ?.filter((el: any) => el.node.image?.url)
+      .map((el: any) => ({
+        id: el.node.image.id,
+        src: el.node.image.url,
+        alt: el.node.image.altText || "Product Image",
+      })) || [];
 
   const allVariantsOptions: CartItem[] = variants.edges.map((v: any) => {
     return {
