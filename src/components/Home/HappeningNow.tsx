@@ -88,7 +88,10 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
           </div> */}
           <Title className={"text-white text-center"}>{title}</Title>
 
-          <div ref={sliderRef} className="keen-slider mx-auto max-w-[1400px]">
+          <div
+            ref={sliderRef}
+            className="keen-slider mx-auto sm:max-w-[76%] 2xl:max-w-[80%] w-full"
+          >
             {cardsDisplay?.map((card) => (
               <div className={"keen-slider__slide"} key={card._key}>
                 <EventCard

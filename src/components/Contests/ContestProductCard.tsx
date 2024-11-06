@@ -13,30 +13,23 @@ export type ContestProductCardProps = {
 
 export function ContestProductCard({ product }: ContestProductCardProps) {
   const { title, description, media, id, handle, variants } = product;
-  const { cart, addToCart } = useShopContext();
+  const { addToCart } = useShopContext();
 
   const images = media.edges?.map((el: any) => {
     if (!el.node.image.url) return;
     return {
       id: el.node.image.id,
       src: el.node.image.url,
-      alt: el.node.image.altText ? el.node.image.altText : "Product Image",
+      alt: el.node.image.altText || "Product Image",
     };
   });
-
-  const imageSrc = media.edges[0]?.node.image.url
-    ? media.edges[0]?.node.image.url
-    : null;
-  const imageAltText = media.edges[0]?.node.image.altText
-    ? media.edges[0]?.node.image.altText
-    : "Product image";
 
   const allVariantsOptions: CartItem[] = variants.edges.map((v: any) => {
     return {
       id,
+      variantId: v.node.id,
       title,
       handle,
-      variantId: v.node.id,
       image: images[0],
       price: v.node.price.amount,
       variantQuantity: 1,
@@ -59,10 +52,10 @@ export function ContestProductCard({ product }: ContestProductCardProps) {
             "w-full h-full bg-white relative overflow-hidden rounded-xl z-20"
           }
         >
-          {imageSrc ? (
+          {images.length ? (
             <Image
-              src={imageSrc}
-              alt={imageAltText}
+              src={images[0].src}
+              alt={images[0].alt}
               fill
               className={
                 "object-contain lg:group-hover:scale-105 transition-transform duration-700"

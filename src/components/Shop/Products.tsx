@@ -1,5 +1,4 @@
 import { Container, Title } from "@/common";
-import { Portrait } from "@/types";
 import { ProductCard } from "./ProductCard";
 
 // export type Product = {

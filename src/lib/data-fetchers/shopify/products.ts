@@ -45,7 +45,7 @@ export async function ShopifyData({
 export async function getShopifyProducts() {
   const query = `
   {
-    products(first: 20) {
+    products(first: 100) {
       edges {
         node {
           id
@@ -175,17 +175,10 @@ export async function getCollection(handle: string) {
   return response.data.collection || null;
 }
 
-export async function createCheckout(id: string, quantity: number) {
+export async function cartCreate(variantId: string, quantity: number) {
   const query = `
-    mutation {
-      cartCreate(input: {
-        lines: [
-          {
-            merchandiseId: "${id}"
-            quantity: ${quantity}
-          }
-        ]
-      }) {
+    mutation cartCreate($lines: [CartLineInput!]!) {
+      cartCreate(input: { lines: $lines }) {
         cart {
           id
           checkoutUrl
@@ -197,10 +190,6 @@ export async function createCheckout(id: string, quantity: number) {
                 merchandise {
                   ... on ProductVariant {
                     id
-                    title
-                    product {
-                      title
-                    }
                     price {
                       amount
                     }
@@ -217,13 +206,22 @@ export async function createCheckout(id: string, quantity: number) {
       }
     }`;
 
-  const res = await ShopifyData({ query });
+  const variables = {
+    lines: [
+      {
+        merchandiseId: variantId,
+        quantity,
+      },
+    ],
+  };
 
-  return res.data.cartCreate.cart ? res.data.cartCreate.cart : [];
+  const res = await ShopifyData({ query, variables });
+
+  return res.data.cartCreate.cart || [];
 }
 
-export async function updateCheckout(id: string, lineItems: any[]) {
-  const lineItemsObject = lineItems.map((item) => {
+export async function cartLinesUpdate(checkoutId: string, lineItems: any[]) {
+  const lineItemsObjects = lineItems.map((item) => {
     return `
       {
         id: "${item.cartLineId}"
@@ -234,8 +232,8 @@ export async function updateCheckout(id: string, lineItems: any[]) {
   const query = `
     mutation {
       cartLinesUpdate(
-        cartId: "${id}"
-        lines: [${lineItemsObject}]
+        cartId: "${checkoutId}"
+        lines: [${lineItemsObjects}]
       ) {
         cart {
           id
@@ -248,13 +246,8 @@ export async function updateCheckout(id: string, lineItems: any[]) {
                 merchandise {
                   ... on ProductVariant {
                     id
-                    title
-                    product {
-                      title
-                    }
                     price {
                       amount
-                      currencyCode
                     }
                   }
                 }
@@ -271,7 +264,42 @@ export async function updateCheckout(id: string, lineItems: any[]) {
 
   const res = await ShopifyData({ query });
 
-  return res.data.cartLinesUpdate.cart ? res.data.cartLinesUpdate.cart : [];
+  return res.data.cartLinesUpdate.cart || [];
+}
+
+export async function cartLinesAdd(
+  cartId: string,
+  lineItems: { merchandiseId: string; quantity: number }[]
+) {
+  const query = `
+    mutation cartLinesAdd($cartId: ID!, $lines: [CartLineInput!]!) {
+      cartLinesAdd(cartId: $cartId, lines: $lines) {
+        cart {
+          checkoutUrl
+          lines (first: 20){
+            edges {
+              node {
+                id
+                quantity
+              }
+            }
+          }
+        }
+        userErrors {
+          field
+          message
+        }
+      }
+    }`;
+
+  const variables = {
+    cartId,
+    lines: lineItems,
+  };
+
+  const res = await ShopifyData({ query, variables });
+
+  return res.data.cartLinesAdd.cart || [];
 }
 
 // export async function getCollection(handle: string) {
@@ -365,4 +393,99 @@ export async function updateCheckout(id: string, lineItems: any[]) {
 //   } catch (error) {
 //     return [];
 //   }
+// }
+
+// export async function cartCreate(variantId: string, quantity: number) {
+//   const query = `
+//     mutation {
+//       cartCreate(input: {
+//         lines: [
+//           {
+//             quantity: ${quantity}
+//             merchandiseId: "${variantId}"
+//           }
+//         ]
+//       }) {
+//         cart {
+//           id
+//           checkoutUrl
+//           lines(first: 5) {
+//             edges {
+//               node {
+//                 id
+//                 quantity
+//                 merchandise {
+//                   ... on ProductVariant {
+//                     id
+//                     price {
+//                       amount
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//         userErrors {
+//           field
+//           message
+//         }
+//       }
+//     }`;
+
+//   const res = await ShopifyData({ query });
+
+//   return res.data.cartCreate.cart ? res.data.cartCreate.cart : [];
+// }
+
+// export async function updateCheckout(id: string, lineItems: any[]) {
+//   const lineItemsObject = lineItems.map((item) => {
+//     return `
+//       {
+//         id: "${item.cartLineId}"
+//         merchandiseId: "${item.variantId}"
+//         quantity: ${item.variantQuantity}
+//       }`;
+//   });
+//   const query = `
+//     mutation {
+//       cartLinesUpdate(
+//         cartId: "${id}"
+//         lines: [${lineItemsObject}]
+//       ) {
+//         cart {
+//           id
+//           checkoutUrl
+//           lines(first: 10) {
+//             edges {
+//               node {
+//                 id
+//                 quantity
+//                 merchandise {
+//                   ... on ProductVariant {
+//                     id
+//                     title
+//                     product {
+//                       title
+//                     }
+//                     price {
+//                       amount
+//                       currencyCode
+//                     }
+//                   }
+//                 }
+//               }
+//             }
+//           }
+//         }
+//         userErrors {
+//           field
+//           message
+//         }
+//       }
+//     }`;
+
+//   const res = await ShopifyData({ query });
+
+//   return res.data.cartLinesUpdate.cart ? res.data.cartLinesUpdate.cart : [];
 // }

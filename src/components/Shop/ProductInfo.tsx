@@ -6,6 +6,7 @@ import { FaRegImages } from "react-icons/fa6";
 import { ImageSlider } from "./ImageSlider";
 import { NewButton } from "../ui/NewButton";
 import { useShopContext } from "@/contexts/ShopContext";
+import { CartItem } from "@/types";
 
 export type ProductInfoProps = {
   product: any;
@@ -15,18 +16,18 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const { id, title, handle, description, variants, priceRange, media } =
     product;
 
-  const { cart, addToCart } = useShopContext();
+  const { addToCart } = useShopContext();
 
   const images = media.edges?.map((el: any) => {
     if (!el.node.image.url) return;
     return {
       id: el.node.image.id,
       src: el.node.image.url,
-      alt: el.node.image.altText ? el.node.image.altText : "Product Image",
+      alt: el.node.image.altText || "Product Image",
     };
   });
 
-  const allVariantsOptions = variants.edges.map((v: any) => {
+  const allVariantsOptions: CartItem[] = variants.edges.map((v: any) => {
     return {
       id,
       variantId: v.node.id,
@@ -38,12 +39,14 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     };
   });
 
+  // console.log({ pr: allVariantsOptions[0] });
+
   return (
     <section className={"my-28 lg:my-32"}>
       <Container>
         <div className={"flex w-full flex-col gap-y-12 md:flex-row md:gap-x-6"}>
           <div className={"md:w-1/2"}>
-            {!!images.length ? (
+            {images.length ? (
               <ImageSlider images={images} />
             ) : (
               <div

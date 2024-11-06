@@ -1,8 +1,9 @@
 "use client";
 
 import {
-  createCheckout,
-  updateCheckout,
+  cartCreate,
+  cartLinesAdd,
+  cartLinesUpdate,
 } from "@/lib/data-fetchers/shopify/products";
 import { CartItem } from "@/types";
 import { createContext, useContext, useEffect, useState } from "react";
@@ -67,50 +68,12 @@ export function ShopProvider(props: ShopProviderProps) {
     }
   }, []);
 
-  // async function addToCart(newItem: any) {
-  //   if (cart.length === 0) {
-  //     const checkout = await createCheckout(
-  //       newItem.id,
-  //       newItem.variantQuantity
-  //     );
-
-  //     setCart([newItem]);
-  //     setCheckoutId(checkout.id);
-  //     setCheckoutURL(checkout.checkoutUrl);
-
-  //     localStorage.setItem(
-  //       "checkout_id",
-  //       JSON.stringify([[newItem], checkout])
-  //     );
-  //   } else {
-  //     let newCart = [...cart];
-
-  //     cart.map((item) => {
-  //       if (item.id === newItem.id) {
-  //         item.variantQuantity++;
-  //         newCart = [...cart];
-  //       } else {
-  //         newCart = [...cart, newItem];
-  //       }
-  //     });
-
-  //     setCart(newCart);
-
-  //     const newCheckout = await updateCheckout(checkoutId, newCart);
-
-  //     localStorage.setItem(
-  //       "checkout_id",
-  //       JSON.stringify([newCart, newCheckout])
-  //     );
-  //   }
-  // }
   async function addToCart(newItem: CartItem) {
-    const checkout = await createCheckout(
-      newItem.variantId,
-      newItem.variantQuantity
-    );
-
     if (cart.length === 0) {
+      const checkout = await cartCreate(
+        newItem.variantId,
+        newItem.variantQuantity
+      );
       const cartWithId = checkout.lines.edges.map((edge: any) => ({
         ...newItem,
         cartLineId: edge.node.id,
@@ -128,38 +91,51 @@ export function ShopProvider(props: ShopProviderProps) {
           checkoutUrl: checkout.checkoutUrl,
         })
       );
+
+      console.log("Cart created successfully");
     } else {
-      let updatedCart = [...cart];
-      cart.map((item) => {
-        if (item.variantId === newItem.variantId) {
-          item.variantQuantity++;
-          updatedCart = [...cart];
-        } else {
-          const cartWithId = checkout.lines.edges.map((edge: any) => ({
+      let updatedCart;
+
+      const existingItem = cart.find(
+        (item) => item.variantId === newItem.variantId
+      );
+      if (existingItem) {
+        updatedCart = cart.map((item) =>
+          item.variantId === newItem.variantId
+            ? { ...item, variantQuantity: item.variantQuantity + 1 }
+            : item
+        );
+
+        const response = await cartLinesUpdate(checkoutId, updatedCart);
+
+        console.log("Cart updated successfully");
+      } else {
+        const response = await cartLinesAdd(checkoutId, [
+          {
+            merchandiseId: newItem.variantId,
+            quantity: newItem.variantQuantity,
+          },
+        ]);
+
+        updatedCart = [
+          ...cart,
+          {
             ...newItem,
-            cartLineId: edge.node.id,
-          }));
-          updatedCart = [...cart, cartWithId[0]];
-        }
-      });
+            cartLineId: response.lines.edges[0].node.id,
+          },
+        ];
+
+        console.log("New line added successfully");
+      }
+
       setCart(updatedCart);
-      const updatedCheckout = await updateCheckout(checkoutId, updatedCart);
-
-      // setCheckoutURL(updatedCheckout.checkoutURL);
-
-      // const updatedCartWithIds = updatedCheckout.lines.edges.map(
-      //   (edge: any) => ({
-      //     ...updatedCart.find((item) => item.id === edge.node.merchandise.id),
-      //     cartLineId: edge.node.id,
-      //   })
-      // );
 
       localStorage.setItem(
         "checkout_id",
         JSON.stringify({
           cart: updatedCart,
-          id: updatedCheckout.id,
-          checkoutUrl: updatedCheckout.checkoutUrl,
+          id: checkoutId,
+          checkoutUrl: checkoutURL,
         })
       );
     }
@@ -171,7 +147,7 @@ export function ShopProvider(props: ShopProviderProps) {
     );
     setCart(updatedCart);
 
-    const newCheckout = await updateCheckout(checkoutId, updatedCart);
+    const newCheckout = await cartLinesUpdate(checkoutId, updatedCart);
 
     localStorage.setItem(
       "checkout_id",

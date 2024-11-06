@@ -36,7 +36,7 @@ const FooterContent = (props: FooterContentProps) => {
 
   return (
     <footer className={"max-w-[1920px] relative z-50 w-full mx-auto"}>
-      <div className={"-mt-16"}>
+      <div className={"-mt-16 translate-y-[1px] sm:translate-y-0"}>
         <Image src={RectangleIMG} alt={"Decor"} className={"w-full"} />
       </div>
       <div className={"bg-pka_blue"}>

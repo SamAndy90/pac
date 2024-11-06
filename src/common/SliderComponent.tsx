@@ -28,7 +28,7 @@ export const SliderComponent = ({ data }: SliderComponentProps) => {
   return (
     <div className="w-full flex relative ">
       <div
-        className="hidden items-center lg:flex h-full lg:justify-center lg:!align-middle absolute  z-50 lg:left-[14px]  xl:left-[18px] 2xl:left-[21px] min-[1920px]:left-[26px]  text-black hover:cursor-pointer"
+        className="hidden items-center lg:flex h-full lg:justify-center lg:!align-middle absolute z-50 lg:left-[14px] xl:left-[18px] 2xl:left-[21px] min-[1920px]:left-[26px] text-black hover:cursor-pointer"
         onClick={goToPrev}
       >
         <ArrowLeft size={45} />
