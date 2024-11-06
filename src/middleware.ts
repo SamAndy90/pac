@@ -5,7 +5,9 @@ export default authMiddleware({
     !(
       req.url.includes("/dashboard") ||
       req.url.includes("/plp-contest") ||
-      req.url.includes("/studio")
+      req.url.includes("/studio") ||
+      req.url.includes("/contests") ||
+      req.url.includes("/shop")
     ),
 });
 
