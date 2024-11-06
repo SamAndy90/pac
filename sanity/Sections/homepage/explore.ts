@@ -1,4 +1,5 @@
 import { defineArrayMember, defineField } from "sanity";
+import { portraitField, titleField } from "../fields";
 
 export const explore = defineField({
   name: "page.explore",
@@ -18,19 +19,13 @@ export const explore = defineField({
         defineArrayMember({
           type: "object",
           fields: [
+            defineField(titleField),
             defineField({
-              name: "cardTitle",
-              title: "Card Title",
-              type: "string",
+              name: "link",
+              type: "url",
+              title: "Link",
             }),
-            defineField({
-              name: "cardImage",
-              title: "Card Image",
-              type: "image",
-              options: {
-                hotspot: true,
-              },
-            }),
+            defineField(portraitField),
           ],
         }),
       ],
