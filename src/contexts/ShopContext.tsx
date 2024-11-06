@@ -3,35 +3,22 @@
 import {
   cartCreate,
   cartLinesAdd,
+  cartLinesRemove,
   cartLinesUpdate,
 } from "@/lib/data-fetchers/shopify/products";
 import { CartItem } from "@/types";
 import { createContext, useContext, useEffect, useState } from "react";
 
-export type CartProduct = {
-  id: string;
-  title: string;
-  handle: string;
-  image: {
-    id: string;
-    src: string;
-    alt: string;
-  };
-  variantQuantity: number;
-  price: string;
-  cartLineId: string;
-};
-
 export type TShopContext = {
-  cart: CartProduct[];
+  cart: CartItem[];
   isCartOpen: boolean;
   setIsCartOpen: (v: boolean) => void;
   // checkoutId: string;
   // setCheckoutId: (v: string) => void;
   checkoutURL: string;
   // setCheckoutURL: (v: string) => void;
-  addToCart: (v: any) => void;
-  removeCartProduct: (v: CartProduct) => void;
+  addToCart: (v: CartItem) => void;
+  removeFromCart: (v: CartItem) => void;
 };
 
 const defaultShopValues: TShopContext = {
@@ -43,7 +30,7 @@ const defaultShopValues: TShopContext = {
   checkoutURL: "",
   // setCheckoutURL: () => {},
   addToCart: () => {},
-  removeCartProduct: () => {},
+  removeFromCart: () => {},
 };
 
 const ShopContext = createContext<TShopContext>(defaultShopValues);
@@ -91,7 +78,6 @@ export function ShopProvider(props: ShopProviderProps) {
           checkoutUrl: checkout.checkoutUrl,
         })
       );
-
       console.log("Cart created successfully");
     } else {
       let updatedCart;
@@ -106,7 +92,7 @@ export function ShopProvider(props: ShopProviderProps) {
             : item
         );
 
-        const response = await cartLinesUpdate(checkoutId, updatedCart);
+        await cartLinesUpdate(checkoutId, updatedCart);
 
         console.log("Cart updated successfully");
       } else {
@@ -141,20 +127,20 @@ export function ShopProvider(props: ShopProviderProps) {
     }
   }
 
-  async function removeCartProduct(itemToRemove: any) {
-    const updatedCart = cart.filter(
-      (item) => item.variantId !== itemToRemove.variantId
-    );
+  async function removeFromCart(item: CartItem) {
+    if (!item.cartLineId) return;
+
+    const updatedCart = [...cart].filter((i) => i.variantId !== item.variantId);
     setCart(updatedCart);
 
-    const newCheckout = await cartLinesUpdate(checkoutId, updatedCart);
+    await cartLinesRemove(checkoutId, [item.cartLineId]);
 
     localStorage.setItem(
       "checkout_id",
       JSON.stringify({
         cart: updatedCart,
-        id: newCheckout.id,
-        checkoutUrl: newCheckout.checkoutUrl,
+        id: checkoutId,
+        checkoutUrl: checkoutURL,
       })
     );
   }
@@ -166,7 +152,7 @@ export function ShopProvider(props: ShopProviderProps) {
         isCartOpen,
         setIsCartOpen,
         addToCart,
-        removeCartProduct,
+        removeFromCart,
         checkoutURL,
         // checkoutId,
         // setCheckoutId,

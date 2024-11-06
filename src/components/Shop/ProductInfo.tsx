@@ -39,8 +39,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     };
   });
 
-  // console.log({ pr: allVariantsOptions[0] });
-
   return (
     <section className={"my-28 lg:my-32"}>
       <Container>

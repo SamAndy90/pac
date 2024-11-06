@@ -1,19 +1,19 @@
 "use client";
 
-import { CartProduct, useShopContext } from "@/contexts/ShopContext";
+import { useShopContext } from "@/contexts/ShopContext";
 import { formatter } from "@/lib/utils";
+import { CartItem } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
 import { FiX } from "react-icons/fi";
 
 export type CartProductCardProps = {
-  product: CartProduct;
+  product: CartItem;
 };
 
 export default function CartProductCard({ product }: CartProductCardProps) {
-  const { id, title, handle, price, image, variantQuantity, cartLineId } =
-    product;
-  const { setIsCartOpen, removeCartProduct } = useShopContext();
+  const { title, handle, price, image, variantQuantity } = product;
+  const { cart, setIsCartOpen, removeFromCart } = useShopContext();
 
   return (
     <div className={"px-3 py-2.5 rounded-xl bg-pka_background"}>
@@ -50,7 +50,10 @@ export default function CartProductCard({ product }: CartProductCardProps) {
         <button
           className={"absolute right-0 top-0 outline-none"}
           type={"button"}
-          onClick={() => removeCartProduct(product)}
+          onClick={() => {
+            removeFromCart(product);
+            if (cart.length === 1) setIsCartOpen(false);
+          }}
         >
           <FiX
             className={

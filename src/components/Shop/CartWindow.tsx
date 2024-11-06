@@ -10,8 +10,8 @@ import { Fragment } from "react";
 import { FiX } from "react-icons/fi";
 import { NewButton } from "../ui/NewButton";
 import Link from "next/link";
-import { CartProduct } from "@/contexts/ShopContext";
 import CartProductCard from "./CartProductCard";
+import { CartItem } from "@/types";
 
 export const CartWindow = ({
   open,
@@ -22,7 +22,7 @@ export const CartWindow = ({
   open: boolean;
   onClose: () => void;
   checkoutURL: string;
-  cart: CartProduct[];
+  cart: CartItem[];
 }) => {
   let totalPrice = 0;
   cart?.map((p) => (totalPrice += +p.price * p.variantQuantity));
@@ -82,8 +82,8 @@ export const CartWindow = ({
                   }
                 >
                   <div className={"overflow-y-scroll flex flex-col gap-y-3"}>
-                    {cart?.map((p) => {
-                      return <CartProductCard key={p.id} product={p} />;
+                    {cart?.map((item) => {
+                      return <CartProductCard key={item.id} product={item} />;
                     })}
                   </div>
                 </div>
@@ -100,9 +100,7 @@ export const CartWindow = ({
                     <NewButton
                       colorVariant={"black"}
                       fullWidth
-                      onClick={() => {
-                        onClose();
-                      }}
+                      onClick={onClose}
                     >
                       Checkout
                     </NewButton>

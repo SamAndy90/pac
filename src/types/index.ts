@@ -39,14 +39,15 @@ export type SanityLink = {
 
 export type CartItem = {
   id: string;
+  variantId: string;
+  cartLineId?: string;
   title: string;
   handle: string;
-  variantId: string;
+  price: string;
+  variantQuantity: number;
   image: {
     id: string;
     src: string;
     alt: string;
   };
-  price: string;
-  variantQuantity: number;
 };
