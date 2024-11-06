@@ -62,7 +62,7 @@ export default function HeaderContent(props: HeaderContentProps) {
       <header className="fixed z-50 w-full lg:top-3">
         <Container>
           <div className={"py-2 lg:py-5 flex gap-x-2"}>
-            <nav className="bg-pka_blue flex-1 px-4 lg:px-10 text-white tracking-widest text-xl font-thunder font-medium flex items-center z-40 justify-between lg:justify-around rounded-full h-12 lg:h-[62px] relative">
+            <nav className="bg-pka_blue flex-1 px-4 lg:px-10 text-white tracking-widest text-base font-thunder font-medium flex items-center z-40 justify-between lg:justify-around rounded-full h-12 lg:h-[62px] relative">
               <div className="hidden lg:flex flex-1 items-center gap-x-3">
                 {leftlinks.map((item, Idx) => (
                   <div
