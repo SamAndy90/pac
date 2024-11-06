@@ -9,12 +9,8 @@ export type ProductCardProps = {
 export function ProductCard({ data }: ProductCardProps) {
   const { title, description, media, id, handle } = data;
 
-  const imageSrc = media.edges[0]?.node.image.url
-    ? media.edges[0]?.node.image.url
-    : null;
-  const imageAltText = media.edges[0]?.node.image.altText
-    ? media.edges[0]?.node.image.altText
-    : "Product image";
+  const imageSrc = media.edges[0]?.node.image?.url || null;
+  const imageAltText = media.edges[0]?.node.image?.altText || "Product image";
 
   return (
     <Link
