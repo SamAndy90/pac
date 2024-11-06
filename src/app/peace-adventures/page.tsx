@@ -2,7 +2,9 @@ import JournalPage from "@/components/Journal/JournalPage";
 import { getData } from "@/lib/data-fetchers/sanity";
 
 export default async function Page() {
-  const data = await getData(`*[_type == "page" && title == "Journal"]`);
+  const data = await getData(
+    `*[_type == "page" && title == "Peace Adventures"]`
+  );
   const newslist = await getData(`*[_type == "newslist"]`);
 
   if (

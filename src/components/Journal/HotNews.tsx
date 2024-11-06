@@ -14,7 +14,7 @@ export function HotNews({ data }: HotNewsProps) {
   if (!data) return;
   const { news } = data;
   return (
-    <section className={""}>
+    <section>
       <Container>
         <div className={"flex flex-col lg:flex-row gap-x-4 gap-y-5"}>
           {news

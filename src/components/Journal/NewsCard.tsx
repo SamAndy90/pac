@@ -13,7 +13,7 @@ export default function NewsCard({ post }: NewsCardProps) {
   const { article, title, gallery, created, _key } = post;
   return (
     <Link
-      href={`/journal/${_key}`}
+      href={`/peace-adventures/${_key}`}
       className={
         "gap-x-5 group flex gap-5 border-pka_black hover:border-pka_blue py-5 lg:py-8 border-b"
       }

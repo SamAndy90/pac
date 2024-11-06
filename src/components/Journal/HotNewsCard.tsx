@@ -17,7 +17,7 @@ export function HotNewsCard({
   const { article, title, created, gallery, _key } = data;
   return (
     <Link
-      href={`/journal/${_key}`}
+      href={`/peace-adventures/${_key}`}
       className={cn("group border-b border-pka_blue2 lg:border-none", classes)}
     >
       <div className={"aspect-[14/10] mb-4 relative"}>
