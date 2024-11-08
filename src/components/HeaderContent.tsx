@@ -14,6 +14,7 @@ import { CartButton } from "./Shop/CartButton";
 import { FiX } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 import { LinkType } from "@/types";
+import TransitionLink from "@/common/TransitionLink";
 
 const social: LinkType[] = [
   {
@@ -77,7 +78,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                         height={24}
                       />
                     )}
-                    <Link
+                    <TransitionLink
                       href={item.slug.current}
                       className={cn(
                         "relative before:bg-white before:absolute before:w-0 before:transition-all hover:before:w-full before:rounded-sm before:bottom-1 before:h-0.5 before:duration-500 tracking-widest",
@@ -88,19 +89,22 @@ export default function HeaderContent(props: HeaderContentProps) {
                       )}
                     >
                       {item.value}
-                    </Link>
+                    </TransitionLink>
                   </div>
                 ))}
               </div>
               <div className="items-center h-full absolute w-16 top-1/2 left-4 sm:left-1/2 sm:-translate-x-1/2 -translate-y-1/2 lg:justify-center flex">
-                <Link href={"/"} className={"h-full w-12 lg:w-full relative"}>
+                <TransitionLink
+                  href={"/"}
+                  className={"h-full w-12 lg:w-full relative"}
+                >
                   <Image
                     src={ImgUrl(logo)}
                     alt="PAK Logo"
                     fill
                     className={"object-contain"}
                   />
-                </Link>
+                </TransitionLink>
               </div>
               <div className="flex flex-1 items-center justify-end gap-x-6 lg:gap-x-10">
                 <div className="lg:flex hidden gap-x-3">
@@ -117,7 +121,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                           height={24}
                         />
                       )}
-                      <Link
+                      <TransitionLink
                         href={item.slug.current}
                         className={cn(
                           "relative before:bg-white before:absolute before:w-0 before:transition-all hover:before:w-full before:rounded-sm before:bottom-1 before:h-0.5 before:duration-500 tracking-widest",
@@ -128,7 +132,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                         )}
                       >
                         {item.value}
-                      </Link>
+                      </TransitionLink>
                     </div>
                   ))}
                 </div>

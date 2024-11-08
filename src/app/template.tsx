@@ -4,19 +4,18 @@ import Image from "next/image";
 import Logo from "/src/resources/png/pac-logo.png";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import { animatePageIn } from "@/lib/animation";
 
 export default function Template({ children }: { children: React.ReactNode }) {
-  //   const ref = useRef(null);
+  const ref = useRef(null);
 
-  //   useEffect(() => {
-  //     if (ref.current) {
-  //       const tl = gsap.timeline();
-  //     }
-  //   }, []);
+  useEffect(() => {
+    animatePageIn();
+  }, []);
 
   return (
     <>
-      {/* <div
+      <div
         ref={ref}
         id={"splash-component"}
         className={
@@ -26,9 +25,9 @@ export default function Template({ children }: { children: React.ReactNode }) {
         <Image
           src={Logo}
           alt={"Logo"}
-          className={"w-[25%] animate-bounce duration-1500"}
+          className={"w-[25%] animate-pulse duration-1500"}
         />
-      </div> */}
+      </div>
       {children}
     </>
   );
