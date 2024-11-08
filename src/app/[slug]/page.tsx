@@ -50,7 +50,6 @@ export default async function Page(props: MetadataProps) {
 
     return <CommingSoon title={title} image={ImgUrl(image)} />;
   }
-  console.log({ s: slugData?.template });
 
   switch (slugData?.template) {
     case "ancillary":
