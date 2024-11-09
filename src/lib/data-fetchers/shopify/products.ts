@@ -82,7 +82,7 @@ export async function getShopifyProductById(id: string) {
       title
       handle
       description
-      variants (first: 20) {
+      variants (first: 250) {
         edges {
           node {
             id

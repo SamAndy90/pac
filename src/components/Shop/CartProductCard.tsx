@@ -5,6 +5,7 @@ import { formatter } from "@/lib/utils";
 import { CartItem } from "@/types";
 import Image from "next/image";
 import Link from "next/link";
+import { FaRegImages } from "react-icons/fa6";
 import { FiX } from "react-icons/fi";
 
 export type CartProductCardProps = {
@@ -23,13 +24,21 @@ export default function CartProductCard({ product }: CartProductCardProps) {
             "w-1/3 aspect-square rounded-xl relative overflow-hidden bg-pka_green_light"
           }
         >
-          {image && (
+          {image ? (
             <Image
               src={image.src}
               alt={image.alt}
               fill
               className={"object-contain"}
             />
+          ) : (
+            <div
+              className={
+                "bg-pka_green_light aspect-square rounded-xl flex items-center justify-center"
+              }
+            >
+              <FaRegImages className={"text-pka_blue2 size-8"} />
+            </div>
           )}
         </div>
         <div className={"flex flex-col justify-between py-3"}>

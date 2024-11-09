@@ -9,6 +9,7 @@ import { useShopContext } from "@/contexts/ShopContext";
 import { CartItem } from "@/types";
 import SelectInput from "@/common/Inputs/SelectInput";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export type ProductInfoProps = {
   product: any;
@@ -19,8 +20,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   const { id, title, handle, description, variants, priceRange, media } =
     product;
 
-  const { addToCart } = useShopContext();
-  console.log({ variantId });
+  const router = useRouter();
+
+  const { addToCart, checkoutURL } = useShopContext();
 
   const images =
     media.edges
@@ -93,15 +95,16 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 fullWidth
                 size={"small"}
                 className={"border-pka_blue2 tracking-wider pb-1.5 sm:w-auto"}
-                onClick={() =>
+                onClick={() => {
                   addToCart(
                     allVariantsOptions.find(
                       (item) => item.merchandiseId === variantId
                     )!
-                  )
-                }
+                  );
+                  router.push(checkoutURL);
+                }}
               >
-                Add to cart
+                Enter to Win
               </NewButton>
             </div>
           </div>

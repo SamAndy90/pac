@@ -90,9 +90,14 @@ export function ContestProductCard({ product }: ContestProductCardProps) {
       >
         {description}
       </p>
-      <NewButton fullWidth onClick={() => addToCart(allVariantsOptions[0])}>
-        Buy
-      </NewButton>
+      <Link href={`/shop/${handle}?id=${id}`}>
+        <NewButton
+          fullWidth
+          // onClick={() => addToCart(allVariantsOptions[0])}
+        >
+          Go to Product
+        </NewButton>
+      </Link>
     </div>
   );
 }
