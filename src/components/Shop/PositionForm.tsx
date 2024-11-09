@@ -1,29 +1,31 @@
 "use client";
 
-import { Title } from "@/common";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
+import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
-import { FormSelectInput } from "./FormSelectInput";
-import { NewButton } from "../NewButton";
 import { getDefaults } from "@/lib/zod";
-import { Option } from "./SelectInput";
+import { NewButton } from "../ui/NewButton";
+import { FormSelectInput } from "@/common/FormInputs/FormSelectInput";
+import { Title } from "@/common";
+import { Option } from "@/common/Inputs/SelectInput";
 
 export const positionSchema = z.object({
+  // position: z.string().default(""),
   position: z.object({
-    label: z.string().min(1, "Label cannot be empty"),
-    value: z.string().min(1, "Value cannot be empty"),
+    value: z.string().default(""),
+    label: z.string().default(""),
   }),
 });
 
 type Form = z.infer<typeof positionSchema>;
 
-export type PositionFormType = {
+export type PositionFormProps = {
   list: Option[];
 };
 
-export function PositionForm({ list }: PositionFormType) {
+export function PositionForm({ list }: PositionFormProps) {
   const router = useRouter();
 
   const form = useForm<Form>({
@@ -31,6 +33,9 @@ export function PositionForm({ list }: PositionFormType) {
     defaultValues: getDefaults(positionSchema),
   });
   function onSubmit(data: Form) {
+    // TODO
+    // ...
+
     form.reset();
   }
 
@@ -40,13 +45,19 @@ export function PositionForm({ list }: PositionFormType) {
         <Title className={"mb-[62px] text-3xl"}>Select entry position</Title>
         <div className={"mb-[72px] flex flex-col gap-y-6 md:mb-24"}>
           <FormSelectInput
-            label={"Choose a position"}
+            label={"Position"}
+            display={"Choose position"}
             fieldName={"position"}
             options={list}
           />
         </div>
-        <NewButton type={"submit"} colorVariant={"black"} fullWidth>
-          Enter to Win
+        <NewButton
+          type={"submit"}
+          colorVariant={"black"}
+          fullWidth
+          className={"sm:w-auto"}
+        >
+          Enter to win
         </NewButton>
       </form>
     </FormProvider>

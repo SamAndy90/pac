@@ -58,7 +58,7 @@ export function ShopProvider(props: ShopProviderProps) {
   async function addToCart(newItem: CartItem) {
     if (cart.length === 0) {
       const checkout = await cartCreate(
-        newItem.variantId,
+        newItem.merchandiseId,
         newItem.variantQuantity
       );
       const cartWithId = checkout.lines.edges.map((edge: any) => ({
@@ -83,11 +83,11 @@ export function ShopProvider(props: ShopProviderProps) {
       let updatedCart;
 
       const existingItem = cart.find(
-        (item) => item.variantId === newItem.variantId
+        (item) => item.merchandiseId === newItem.merchandiseId
       );
       if (existingItem) {
         updatedCart = cart.map((item) =>
-          item.variantId === newItem.variantId
+          item.merchandiseId === newItem.merchandiseId
             ? { ...item, variantQuantity: item.variantQuantity + 1 }
             : item
         );
@@ -98,7 +98,7 @@ export function ShopProvider(props: ShopProviderProps) {
       } else {
         const response = await cartLinesAdd(checkoutId, [
           {
-            merchandiseId: newItem.variantId,
+            merchandiseId: newItem.merchandiseId,
             quantity: newItem.variantQuantity,
           },
         ]);
@@ -130,7 +130,9 @@ export function ShopProvider(props: ShopProviderProps) {
   async function removeFromCart(item: CartItem) {
     if (!item.cartLineId) return;
 
-    const updatedCart = [...cart].filter((i) => i.variantId !== item.variantId);
+    const updatedCart = [...cart].filter(
+      (i) => i.merchandiseId !== item.merchandiseId
+    );
     setCart(updatedCart);
 
     await cartLinesRemove(checkoutId, [item.cartLineId]);

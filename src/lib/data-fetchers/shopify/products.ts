@@ -86,6 +86,8 @@ export async function getShopifyProductById(id: string) {
         edges {
           node {
             id
+            title
+            availableForSale
             price{
               amount
             }
@@ -170,7 +172,7 @@ export async function getCollection(handle: string) {
   return response.data.collection || null;
 }
 
-export async function cartCreate(variantId: string, quantity: number) {
+export async function cartCreate(merchandiseId: string, quantity: number) {
   const query = `
     mutation cartCreate($lines: [CartLineInput!]!) {
       cartCreate(input: { lines: $lines }) {
@@ -204,7 +206,7 @@ export async function cartCreate(variantId: string, quantity: number) {
   const variables = {
     lines: [
       {
-        merchandiseId: variantId,
+        merchandiseId: merchandiseId,
         quantity,
       },
     ],
@@ -220,7 +222,7 @@ export async function cartLinesUpdate(cartId: string, lineItems: any[]) {
     return `
       {
         id: "${item.cartLineId}"
-        merchandiseId: "${item.variantId}"
+        merchandiseId: "${item.merchandiseId}"
         quantity: ${item.variantQuantity}
       }`;
   });

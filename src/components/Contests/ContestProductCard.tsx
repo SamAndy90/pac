@@ -15,26 +15,30 @@ export function ContestProductCard({ product }: ContestProductCardProps) {
   const { title, description, media, id, handle, variants } = product;
   const { addToCart } = useShopContext();
 
-  const images = media.edges?.map((el: any) => {
-    if (!el.node.image.url) return;
-    return {
-      id: el.node.image.id,
-      src: el.node.image.url,
-      alt: el.node.image.altText || "Product Image",
-    };
-  });
+  const images =
+    media.edges
+      ?.filter((el: any) => el.node.image?.url)
+      .map((el: any) => ({
+        id: el.node.image.id,
+        src: el.node.image.url,
+        alt: el.node.image.altText || "Product Image",
+      })) || [];
 
-  const allVariantsOptions: CartItem[] = variants.edges.map((v: any) => {
-    return {
-      id,
-      variantId: v.node.id,
-      title,
-      handle,
-      image: images[0],
-      price: v.node.price.amount,
-      variantQuantity: 1,
-    };
-  });
+  const allVariantsOptions: CartItem[] = variants.edges
+    .map((v: any) => {
+      return {
+        id,
+        merchandiseId: v.node.id,
+        title,
+        handle,
+        variantTitle: v.node.title,
+        availableForSale: v.node.availableForSale,
+        image: images[0],
+        price: v.node.price.amount,
+        variantQuantity: 1,
+      };
+    })
+    .filter((v: CartItem) => v.availableForSale);
 
   return (
     <div className={"w-full lg:col-span-1 group flex flex-col"}>

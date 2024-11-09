@@ -7,16 +7,20 @@ import { ImageSlider } from "./ImageSlider";
 import { NewButton } from "../ui/NewButton";
 import { useShopContext } from "@/contexts/ShopContext";
 import { CartItem } from "@/types";
+import SelectInput from "@/common/Inputs/SelectInput";
+import { useState } from "react";
 
 export type ProductInfoProps = {
   product: any;
 };
 
 export default function ProductInfo({ product }: ProductInfoProps) {
+  const [variantId, setVariantId] = useState("");
   const { id, title, handle, description, variants, priceRange, media } =
     product;
 
   const { addToCart } = useShopContext();
+  console.log({ variantId });
 
   const images =
     media.edges
@@ -27,17 +31,21 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         alt: el.node.image.altText || "Product Image",
       })) || [];
 
-  const allVariantsOptions: CartItem[] = variants.edges.map((v: any) => {
-    return {
-      id,
-      variantId: v.node.id,
-      title,
-      handle,
-      image: images[0],
-      price: v.node.price.amount,
-      variantQuantity: 1,
-    };
-  });
+  const allVariantsOptions: CartItem[] = variants.edges
+    .map((v: any) => {
+      return {
+        id,
+        merchandiseId: v.node.id,
+        title,
+        handle,
+        variantTitle: v.node.title,
+        availableForSale: v.node.availableForSale,
+        image: images[0],
+        price: v.node.price.amount,
+        variantQuantity: 1,
+      };
+    })
+    .filter((v: CartItem) => v.availableForSale);
 
   return (
     <section className={"my-28 lg:my-32"}>
@@ -56,15 +64,22 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               </div>
             )}
           </div>
-          <div className={"flex-1 shrink-0 flex gap-y-2 flex-col py-2"}>
+          <div className={"flex-1 shrink-0 py-2"}>
             <Title>{title}</Title>
             <p className={"text-pka_blue2 text-lg flex-1 lg:flex-initial mb-6"}>
               {description}
             </p>
+            <div className={"mb-8 lg:mb-12"}>
+              <SelectInput
+                list={allVariantsOptions.map((v) => ({
+                  label: v.variantTitle,
+                  value: v.merchandiseId,
+                }))}
+                setId={setVariantId}
+              />
+            </div>
             <div
-              className={
-                "flex flex-col sm:flex-row gap-y-2 sm:items-center justify-between gap-x-2"
-              }
+              className={"flex flex-col gap-y-3 sm:items-start justify-between"}
             >
               <div
                 className={
@@ -78,7 +93,13 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 fullWidth
                 size={"small"}
                 className={"border-pka_blue2 tracking-wider pb-1.5 sm:w-auto"}
-                onClick={() => addToCart(allVariantsOptions[0])}
+                onClick={() =>
+                  addToCart(
+                    allVariantsOptions.find(
+                      (item) => item.merchandiseId === variantId
+                    )!
+                  )
+                }
               >
                 Add to cart
               </NewButton>

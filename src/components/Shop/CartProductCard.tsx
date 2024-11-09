@@ -19,14 +19,18 @@ export default function CartProductCard({ product }: CartProductCardProps) {
     <div className={"px-3 py-2.5 rounded-xl bg-pka_background"}>
       <div className={"flex gap-x-3 relative"}>
         <div
-          className={"w-1/3 aspect-square rounded-xl relative overflow-hidden"}
+          className={
+            "w-1/3 aspect-square rounded-xl relative overflow-hidden bg-pka_green_light"
+          }
         >
-          <Image
-            src={image.src}
-            alt={image.alt}
-            fill
-            className={"object-contain"}
-          />
+          {image && (
+            <Image
+              src={image.src}
+              alt={image.alt}
+              fill
+              className={"object-contain"}
+            />
+          )}
         </div>
         <div className={"flex flex-col justify-between py-3"}>
           <Link

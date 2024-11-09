@@ -57,7 +57,9 @@ export default function Explore({ data }: ExploreProps) {
       <Container>
         <div className={"pt-10 pb-14 md:py-14 lg:py-20"}>
           {title && (
-            <Title className={"text-center mb-6 lg:mb-8"}>{title}</Title>
+            <Title className={"lg:hidden text-center mb-6 lg:mb-8"}>
+              {title}
+            </Title>
           )}
           <div className={"relative"}>
             <div
