@@ -9,7 +9,7 @@ import { useShopContext } from "@/contexts/ShopContext";
 import { CartItem } from "@/types";
 import SelectInput from "@/common/Inputs/SelectInput";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 
 export type ProductInfoProps = {
   product: any;
@@ -22,7 +22,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
   const router = useRouter();
 
-  const { addToCart, checkoutURL } = useShopContext();
+  const { addToCart, checkoutURL, cart } = useShopContext();
 
   const images =
     media.edges
@@ -101,7 +101,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                       (item) => item.merchandiseId === variantId
                     )!
                   );
-                  router.push(checkoutURL);
                 }}
               >
                 Enter to Win
