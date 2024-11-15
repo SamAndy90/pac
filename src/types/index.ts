@@ -53,3 +53,54 @@ export type CartItem = {
     alt: string;
   };
 };
+
+export type CartLine = {
+  node: {
+    id: string;
+    quantity: number;
+    merchandise: {
+      id: string;
+      product: {
+        id: string;
+        title: string;
+        handle: string;
+        description: string;
+        priceRange: {
+          minVariantPrice: {
+            amount: string;
+          };
+        };
+        media: {
+          edges: [
+            {
+              node: {
+                image: {
+                  id: string;
+                  url: string;
+                  altText: string | null;
+                };
+              };
+            }
+          ];
+        };
+      };
+    };
+  };
+};
+
+export type Cart = {
+  id: string;
+  checkoutUrl: string;
+  createdAt?: string;
+  updatedAt?: string;
+  totalQuantity: number;
+  cost: {
+    totalAmount: {
+      amount: string;
+      currencyCode?: string;
+    };
+  };
+  lines: {
+    edges: CartLine[];
+  };
+};

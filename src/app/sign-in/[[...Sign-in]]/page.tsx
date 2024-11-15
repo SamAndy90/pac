@@ -11,7 +11,7 @@ async function getData(): Promise<any[]> {
   return fetchData;
 }
 
-export default function page() {
+export default function Page() {
   return (
     <div className="flex flex-row  justify-center items-center min-h-[925px]">
       <div className="flex mx-[10px] flex-row rounded-[20px]  bg-white w-full justify-center max-w-[1339px] min-h-[639px] my-[140px]">

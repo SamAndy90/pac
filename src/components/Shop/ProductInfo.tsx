@@ -6,23 +6,137 @@ import { FaRegImages } from "react-icons/fa6";
 import { ImageSlider } from "./ImageSlider";
 import { NewButton } from "../ui/NewButton";
 import { useShopContext } from "@/contexts/ShopContext";
-import { CartItem } from "@/types";
+import { Cart, CartItem } from "@/types";
 import SelectInput from "@/common/Inputs/SelectInput";
 import { useState } from "react";
-import { redirect, useRouter } from "next/navigation";
+import { useMutation, useQuery } from "@apollo/client";
+import client from "@/lib/shopifyClient";
+import {
+  CART_CREATE_MUTATION,
+  CART_LINES_ADD_MUTATION,
+  GET_CART_QUERY,
+} from "@/lib/data-fetchers/queries";
 
 export type ProductInfoProps = {
   product: any;
 };
 
 export default function ProductInfo({ product }: ProductInfoProps) {
-  const [variantId, setVariantId] = useState("");
   const { id, title, handle, description, variants, priceRange, media } =
     product;
 
-  const router = useRouter();
+  const [variantId, setVariantId] = useState(variants.edges[0].node.id);
+  const { cartId, setCartId } = useShopContext();
 
-  const { addToCart, checkoutURL, cart } = useShopContext();
+  const { data: cartData } = useQuery<{ cart: Cart }>(GET_CART_QUERY, {
+    variables: {
+      cartId,
+    },
+    skip: !cartId,
+  });
+
+  const [createCartMutation] = useMutation(CART_CREATE_MUTATION, {
+    onCompleted() {
+      client.refetchQueries({
+        include: ["getCart"],
+      });
+    },
+  });
+
+  const [addToCartMutation] = useMutation(CART_LINES_ADD_MUTATION, {
+    onCompleted() {
+      client.refetchQueries({
+        include: ["getCart"],
+      });
+    },
+  });
+
+  const createCart = async (
+    items: { quantity: number; variantId: string }[] = []
+  ) => {
+    try {
+      const response = await createCartMutation({
+        variables: {
+          lines: items.map((item) => ({
+            quantity: item.quantity,
+            merchandiseId: item.variantId,
+          })),
+        },
+      });
+
+      if (response.data.cartCreate.userErrors.length) {
+        console.error("User error:", response.data.cartCreate.userErrors);
+        return null;
+      }
+
+      const cartId = response.data.cartCreate.cart.id;
+      console.log("Cart created successfully:", cartId);
+
+      return { cartId };
+    } catch (error) {
+      console.error("Error creating cart:", error);
+      return null;
+    }
+  };
+
+  const addToCart = async (
+    cartId: string,
+    items: { quantity: number; variantId: string }[] = []
+  ) => {
+    try {
+      const response = await addToCartMutation({
+        variables: {
+          cartId,
+          lines: items.map((item) => ({
+            quantity: item.quantity,
+            merchandiseId: item.variantId,
+          })),
+        },
+      });
+
+      if (response.data.cartLinesAdd.userErrors.length) {
+        console.error("User error:", response.data.cartLinesAdd.userErrors);
+        return null;
+      }
+
+      // Отримати оновлені дані кошика
+      const updatedCart = response.data.cartLinesAdd.cart;
+      console.log("Product added to cart successfully:", updatedCart);
+
+      return updatedCart;
+    } catch (error) {
+      console.error("Error adding product to cart:", error);
+      return null;
+    }
+  };
+
+  async function addProductToCart(merchandiseId: string) {
+    if (!cartId) {
+      const cart = await createCart([
+        { quantity: 1, variantId: merchandiseId },
+      ]);
+
+      if (cart) {
+        setCartId(cart.cartId);
+        localStorage.setItem("cart_id", JSON.stringify(cart.cartId));
+      }
+    } else {
+      const lines = cartData?.cart.lines.edges;
+
+      const isInCart = lines?.some(
+        (line) => line.node.merchandise.id === merchandiseId
+      );
+
+      if (isInCart) {
+        // TODO Update logic
+        console.log("Merchandise is in the cart");
+      } else {
+        await addToCart(cartId, [{ quantity: 1, variantId: merchandiseId }]);
+      }
+    }
+  }
+
+  console.log({ variantId });
 
   const images =
     media.edges
@@ -71,15 +185,17 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             <p className={"text-pka_blue2 text-lg flex-1 lg:flex-initial mb-6"}>
               {description}
             </p>
-            <div className={"mb-8 lg:mb-12"}>
-              <SelectInput
-                list={allVariantsOptions.map((v) => ({
-                  label: v.variantTitle,
-                  value: v.merchandiseId,
-                }))}
-                setId={setVariantId}
-              />
-            </div>
+            {variants.edges.length > 1 && (
+              <div className={"mb-8 lg:mb-12"}>
+                <SelectInput
+                  list={allVariantsOptions.map((v) => ({
+                    label: v.variantTitle,
+                    value: v.merchandiseId,
+                  }))}
+                  setId={setVariantId}
+                />
+              </div>
+            )}
             <div
               className={"flex flex-col gap-y-3 sm:items-start justify-between"}
             >
@@ -95,13 +211,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 fullWidth
                 size={"small"}
                 className={"border-pka_blue2 tracking-wider pb-1.5 sm:w-auto"}
-                onClick={() => {
-                  addToCart(
-                    allVariantsOptions.find(
-                      (item) => item.merchandiseId === variantId
-                    )!
-                  );
-                }}
+                onClick={() => addProductToCart(variantId)}
               >
                 Enter to Win
               </NewButton>

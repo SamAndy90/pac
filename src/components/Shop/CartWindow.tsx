@@ -11,22 +11,17 @@ import { FiX } from "react-icons/fi";
 import { NewButton } from "../ui/NewButton";
 import Link from "next/link";
 import CartProductCard from "./CartProductCard";
-import { CartItem } from "@/types";
+import { Cart } from "@/types";
 
 export const CartWindow = ({
   open,
   onClose,
-  checkoutURL,
   cart,
 }: {
   open: boolean;
   onClose: () => void;
-  checkoutURL: string;
-  cart: CartItem[];
+  cart?: Cart;
 }) => {
-  let totalPrice = 0;
-  cart?.map((p) => (totalPrice += +p.price * p.variantQuantity));
-
   return (
     <Transition appear show={open} as={Fragment}>
       <Dialog onClose={onClose}>
@@ -76,36 +71,76 @@ export const CartWindow = ({
               </button>
               <div className={"flex flex-col gap-y-2 overflow-hidden h-full"}>
                 <Title className={"text-3xl xl:text-4xl"}>Cart</Title>
-                <div
-                  className={
-                    "flex-1 border-y-[1px] border-pka_black py-2 overflow-hidden"
-                  }
-                >
-                  <div className={"overflow-y-scroll flex flex-col gap-y-3"}>
-                    {cart?.map((item) => {
-                      return <CartProductCard key={item.id} product={item} />;
-                    })}
-                  </div>
-                </div>
-                <div
-                  className={
-                    "text-pka_blue font-thunder text-3xl font-bold flex items-center justify-between"
-                  }
-                >
-                  <span className={"font-normal"}>Total amount:</span>
-                  <span>{formatter.format(totalPrice)}</span>
-                </div>
-                <div>
-                  <Link href={checkoutURL} target={"_blank"} className={"mb-4"}>
-                    <NewButton
-                      colorVariant={"black"}
-                      fullWidth
-                      onClick={onClose}
+                {!cart ? (
+                  <div
+                    className={
+                      "flex-1 flex items-center justify-center border-t-[1px] border-pka_black py-2 overflow-hidden"
+                    }
+                  >
+                    <p
+                      className={
+                        "text-pka_black/20 font-thunder tracking-wider text-2xl text-center"
+                      }
                     >
-                      Checkout
-                    </NewButton>
-                  </Link>
-                </div>
+                      Cart is empty
+                    </p>
+                  </div>
+                ) : (
+                  <>
+                    <div
+                      className={
+                        "flex-1 border-y-[1px] border-pka_black py-2 overflow-hidden"
+                      }
+                    >
+                      <div
+                        className={
+                          "overflow-y-auto h-full flex flex-col gap-y-3"
+                        }
+                      >
+                        {cart.lines.edges.map((item) => {
+                          return (
+                            <CartProductCard
+                              key={item.node.id}
+                              product={item}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
+                    {cart.cost.totalAmount.amount && (
+                      <div
+                        className={
+                          "text-pka_blue font-thunder text-3xl font-bold flex items-center justify-between"
+                        }
+                      >
+                        <span className={"font-normal"}>Total amount:</span>
+                        {/* <span>{formatter.format(totalPrice)}</span> */}
+                        <span>
+                          {formatter.format(
+                            parseInt(cart.cost.totalAmount.amount)
+                          )}
+                        </span>
+                      </div>
+                    )}
+                    {cart.checkoutUrl && (
+                      <div>
+                        <Link
+                          href={cart.checkoutUrl}
+                          target={"_blank"}
+                          className={"mb-4"}
+                        >
+                          <NewButton
+                            colorVariant={"black"}
+                            fullWidth
+                            onClick={onClose}
+                          >
+                            Checkout
+                          </NewButton>
+                        </Link>
+                      </div>
+                    )}
+                  </>
+                )}
               </div>
             </div>
           </DialogPanel>

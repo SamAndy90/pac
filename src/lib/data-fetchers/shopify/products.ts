@@ -117,7 +117,7 @@ export async function getShopifyProductById(id: string) {
 
   const response = await ShopifyData({ query });
 
-  return response.data.product ? response.data.product : null;
+  return response.data?.product ? response.data.product : null;
 }
 
 export async function getCollection(handle: string) {
@@ -335,4 +335,65 @@ export async function cartLinesRemove(cartId: string, lineIds: string[]) {
   const res = await ShopifyData({ query, variables });
 
   return res.data.cartLinesRemove.cart || [];
+}
+
+export async function getCart(cartId: string) {
+  const query = `
+    query getCart($cartId: ID!) {
+      cart(id: $cartId) {
+        id
+        checkoutUrl
+        createdAt
+        updatedAt
+        lines(first: 100) {
+          edges {
+            node {
+              id
+              quantity
+              merchandise {
+                ... on ProductVariant {
+                  id
+                  product {
+                    id
+                    title
+                    priceRange {
+                      minVariantPrice {
+                        amount
+                      }
+                    }
+                    media(first: 10) {
+                      edges {
+                        node {
+                          ... on MediaImage {
+                            image {
+                              id
+                              url
+                              altText
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        cost {
+          totalAmount {
+            amount
+            currencyCode
+          }
+        }
+      }
+    }`;
+
+  const variables = {
+    cartId,
+  };
+
+  const res = await ShopifyData({ query, variables });
+
+  return res.data?.cart || null;
 }

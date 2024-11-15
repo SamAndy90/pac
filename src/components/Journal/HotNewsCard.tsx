@@ -58,11 +58,12 @@ export const ArticleBadge = ({
   return (
     <div
       className={cn(
-        "uppercase relative inline-block leading-none z-10 py-1 px-3 rounded-full font-avenirBold text-[8px] md:text-[10px] text-white",
+        "uppercase relative inline-block leading-none z-10 py-1 px-3 rounded-full font-avenirBold text-[8px] md:text-[10px] text-pka_blue lg:group-hover:text-white transition-colors duration-500",
         {
-          "bg-pka_blue": type === "company",
-          "bg-pka_blue2": type === "project",
-          "bg-pka_green text-pka_blue2": type === "team",
+          "bg-pka_blue text-white": type === "company",
+          "bg-pka_blue2 text-white": type === "project",
+          "bg-pka_green text-pka_blue2 lg:group-hover:text-blue2":
+            type === "team",
         },
         className
       )}

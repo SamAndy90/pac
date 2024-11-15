@@ -3,9 +3,10 @@ import {
   ListboxButton,
   ListboxOption,
   ListboxOptions,
+  Transition,
 } from "@headlessui/react";
 import { FiCheck, FiChevronDown } from "react-icons/fi";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
 
 export type Option = {
@@ -56,40 +57,50 @@ export default function SelectInput({ list, setId }: SelectInputProps) {
             </>
           )}
         </ListboxButton>
-        <ListboxOptions
-          anchor="bottom"
-          transition
-          className={
-            "w-[var(--button-width)] !max-h-56 mt-1 py-1.5 rounded-2xl border border-pka_blue bg-white focus:outline-none transition-all data-[leave]:data-[closed]:opacity-0 text-base"
-          }
+        <Transition
+          as={Fragment}
+          enter={"transition ease-in duration-100"}
+          enterFrom={"opacity-0"}
+          enterTo={"opacity-100"}
+          leave={"transition ease-in duration-100"}
+          leaveFrom={"opacity-100"}
+          leaveTo={"opacity-0"}
         >
-          {list.map((i) => (
-            <ListboxOption
-              key={i.value}
-              value={i}
-              className="group select-none cursor-pointer bg-pka_background my-[1px]"
-            >
-              {({ focus, selected }) => (
-                <>
-                  <div
-                    className={cn(
-                      "flex items-center justify-between px-6 pb-3.5 pt-4 text-pka_blue",
-                      {
-                        "bg-pka_green_light": focus,
-                        "!bg-pka_blue text-white": selected,
-                      }
-                    )}
-                  >
-                    <span>Position {i.label}</span>
-                    {selected && (
-                      <FiCheck className={"h-4 w-4 flex-shrink-0"} />
-                    )}
-                  </div>
-                </>
-              )}
-            </ListboxOption>
-          ))}
-        </ListboxOptions>
+          <ListboxOptions
+            anchor="bottom"
+            transition
+            className={
+              "w-[var(--button-width)] z-[1000] !max-h-56 mt-1 py-1.5 rounded-2xl border border-pka_blue bg-white focus:outline-none transition-all data-[leave]:data-[closed]:opacity-0 text-base"
+            }
+          >
+            {list.map((i) => (
+              <ListboxOption
+                key={i.value}
+                value={i}
+                className="group select-none cursor-pointer bg-pka_background my-[1px]"
+              >
+                {({ focus, selected }) => (
+                  <>
+                    <div
+                      className={cn(
+                        "flex items-center justify-between px-6 pb-3.5 pt-4 text-pka_blue",
+                        {
+                          "bg-pka_green_light": focus,
+                          "!bg-pka_blue text-white": selected,
+                        }
+                      )}
+                    >
+                      <span>Position {i.label}</span>
+                      {selected && (
+                        <FiCheck className={"h-4 w-4 flex-shrink-0"} />
+                      )}
+                    </div>
+                  </>
+                )}
+              </ListboxOption>
+            ))}
+          </ListboxOptions>
+        </Transition>
       </Listbox>
     </div>
   );
