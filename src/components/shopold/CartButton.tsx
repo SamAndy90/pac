@@ -25,8 +25,6 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { useShopContext } from "@/contexts/ShopContext";
-import Link from "next/link";
 
 const CREATE_CHECKOUT = gql`
   mutation createCheckout($lineItems: [CheckoutLineItemInput!]!) {
@@ -70,11 +68,7 @@ const CartButton = () => {
     currency: "USD",
   });
 
-  const { cart, checkoutURL } = useShopContext();
   let cartQuantity = 0;
-  cart.map((item) => {
-    return (cartQuantity += item.variantQuantity);
-  });
 
   return (
     <Sheet>
