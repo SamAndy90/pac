@@ -17,10 +17,16 @@ const ShopPageComponents: {
 type ShopPageProps = {
   data: [any];
   shopifyProducts: [any];
+  title?: string;
 };
 
-export default function ShopPage({ data, shopifyProducts }: ShopPageProps) {
+export default function ShopPage({
+  data,
+  shopifyProducts,
+  title = "Shop",
+}: ShopPageProps) {
   const [sections, setSections] = useState(data);
+  const [pageTitle] = useState(title);
 
   let Sections: any = [] as ReactNode[];
 
@@ -34,7 +40,7 @@ export default function ShopPage({ data, shopifyProducts }: ShopPageProps) {
   });
 
   useEffect(() => {
-    const query = `*[_type == "page" && title == "Shop"]`;
+    const query = `*[_type == "page" && title == "${pageTitle}"]`;
     const subscription = client.listen(query).subscribe((update) => {
       if (update.result?.shoptemplatesections?.sections) {
         setSections(update.result?.shoptemplatesections.sections);

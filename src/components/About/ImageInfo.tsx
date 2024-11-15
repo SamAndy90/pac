@@ -50,7 +50,7 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
           ))}
         </h2> */}
         <Title className={"text-white mb-[5vw] flex-1"}>
-          {oneWordTitle.map((word, idX) => (
+          {oneWordTitle?.map((word, idX) => (
             <div key={word + idX}>{word}</div>
           ))}
         </Title>

@@ -12,10 +12,12 @@ const FAQsPageComponents: {
 
 type FAQsPageProps = {
   data: [any];
+  title?: string;
 };
 
-export default function FAQsPage({ data }: FAQsPageProps) {
+export default function FAQsPage({ data, title = "FAQs" }: FAQsPageProps) {
   const [sections, setSections] = useState(data);
+  const [pageTitle] = useState(title);
 
   let Sections: any = [] as ReactNode[];
 
@@ -26,7 +28,7 @@ export default function FAQsPage({ data }: FAQsPageProps) {
   });
 
   useEffect(() => {
-    const query = `*[_type == "page" && title == "FAQs"]`;
+    const query = `*[_type == "page" && title == "${pageTitle}"]`;
     const subscription = client.listen(query).subscribe((update) => {
       if (update.result?.faqstemplatesections?.sections) {
         setSections(update.result?.faqstemplatesections.sections);

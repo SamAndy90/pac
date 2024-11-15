@@ -1,9 +1,9 @@
 import { Loader } from "@/common";
-import ContactTemplate from "@/components/Contact/ContactTemplate";
+import ContactPage from "@/components/Contact/ContactPage";
 import { getData } from "@/lib/data-fetchers/sanity";
 import { Suspense } from "react";
 
-export default async function ContactPage() {
+export default async function Page() {
   const data = await getData(`*[_type == "page" && title == "Contact"]`);
   if (
     !data ||
@@ -20,7 +20,7 @@ export default async function ContactPage() {
 
   return (
     <Suspense fallback={<Loader />}>
-      <ContactTemplate data={sections} />
+      <ContactPage data={sections} />
     </Suspense>
   );
 }

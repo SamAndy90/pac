@@ -30,8 +30,6 @@ export type ProductInfoProps = {
 //         value: v.node.id,
 //       };
 //     });
-//   console.log(allVariants);
-
 //   setProductVariants(allVariants);
 // }, []);
 // const [productVariants, setProductVariants] = useState([]);

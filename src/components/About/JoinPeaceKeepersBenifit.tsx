@@ -38,12 +38,8 @@ const JoinPeaceKeepersBenifit = ({ data }: JoinPeaceKeepersBenifitProps) => {
             <div className="flex flex-col sm:flex-row gap-2 w-full md:items-center justify-center">
               {data.buttons.map((button, index) =>
                 button?.url ? (
-                  <Link href={button.url}>
-                    <NewButton
-                      key={index}
-                      colorVariant={button.style}
-                      fullWidth
-                    >
+                  <Link href={button.url} key={button.url + index}>
+                    <NewButton colorVariant={button.style} fullWidth>
                       {button.text}
                     </NewButton>
                   </Link>

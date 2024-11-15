@@ -1,9 +1,16 @@
 import CommingSoon from "@/components/CommingSoon";
 import { Metadata } from "next";
 import Ancillary from "@/components/templates/Ancillary";
-import ShopTemplate from "@/components/shoptemplate/ShopTemplate";
 import { getData } from "@/lib/data-fetchers/sanity";
 import { ImgUrl } from "@/lib/utils";
+import {
+  ContactTemplate,
+  FAQSTemplate,
+  HomeTemplate,
+  JournalTemplate,
+  PrivacyTemplate,
+  ShopTemplate,
+} from "@/components/PageTemplates";
 
 type Props = {
   params: {
@@ -44,7 +51,7 @@ export default async function Page(props: Props) {
   ) {
     const section = slugData?.ancillarysections?.sections[0];
     const title = section?.title;
-    const image = section?.portrait?.asset?._ref;
+    const image = section?.portrait;
 
     return <CommingSoon title={title} image={ImgUrl(image)} />;
   }
@@ -60,8 +67,19 @@ export default async function Page(props: Props) {
           sections={slugData.ancillarysections.sections}
         />
       );
+    case "homepageTemplate":
+      return <HomeTemplate data={slugData} title={slugData.title} />;
     case "shoptemplate":
-      return <ShopTemplate title={slugData.title} data={slugData} />;
+      return <ShopTemplate data={slugData} title={slugData.title} />;
+    case "journaltemplate":
+      return <JournalTemplate data={slugData} title={slugData.title} />;
+    case "contacttemplate":
+      return <ContactTemplate data={slugData} />;
+    case "faqstemplate":
+      return <FAQSTemplate data={slugData} title={slugData.title} />;
+    case "privacytemplate":
+      return <PrivacyTemplate data={slugData} title={slugData.title} />;
+
     default:
       return (
         <div

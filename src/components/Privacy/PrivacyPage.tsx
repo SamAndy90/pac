@@ -12,10 +12,15 @@ const PrivacyPageComponents: {
 
 type PrivacyPageProps = {
   data: [any];
+  title?: string;
 };
 
-export default function PrivacyPage({ data }: PrivacyPageProps) {
+export default function PrivacyPage({
+  data,
+  title = "Privacy",
+}: PrivacyPageProps) {
   const [sections, setSections] = useState(data);
+  const [pageTitle] = useState(title);
 
   let Sections: any = [] as ReactNode[];
 
@@ -26,7 +31,7 @@ export default function PrivacyPage({ data }: PrivacyPageProps) {
   });
 
   useEffect(() => {
-    const query = `*[_type == "page" && title == "Privacy"]`;
+    const query = `*[_type == "page" && title == "${pageTitle}"]`;
     const subscription = client.listen(query).subscribe((update) => {
       if (update.result?.privacytemplatesections?.sections) {
         setSections(update.result?.privacytemplatesections.sections);

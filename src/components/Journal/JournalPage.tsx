@@ -21,10 +21,16 @@ const JournalPageComponents: { [key: string]: (data: any) => ReactNode } = {
 type PrivacyPageProps = {
   data: [any];
   news: any;
+  title?: string;
 };
 
-export default function JournalPage({ data, news }: PrivacyPageProps) {
+export default function JournalPage({
+  data,
+  news,
+  title = "Journal",
+}: PrivacyPageProps) {
   const [sections, setSections] = useState(data);
+  const [pageTitle] = useState(title);
 
   let Sections: any = [] as ReactNode[];
 
@@ -37,7 +43,7 @@ export default function JournalPage({ data, news }: PrivacyPageProps) {
   });
 
   useEffect(() => {
-    const query = `*[_type == "page" && title == "Journal"]`;
+    const query = `*[_type == "page" && title == "${pageTitle}"]`;
     const subscription = client.listen(query).subscribe((update) => {
       if (update.result?.journaltemplatesections?.sections) {
         setSections(update.result?.journaltemplatesections.sections);

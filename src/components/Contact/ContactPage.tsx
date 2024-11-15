@@ -9,11 +9,11 @@ const ContactTemplateComponents: {
   informing: (data: any) => <Informing data={data} />,
 } as const;
 
-type ContactTemplateProps = {
+type ContactPageProps = {
   data: [any];
 };
 
-export default function ContactTemplate({ data }: ContactTemplateProps) {
+export default function ContactPage({ data }: ContactPageProps) {
   let Sections: any = [] as ReactNode[];
 
   Sections = data?.map((section: any) => {

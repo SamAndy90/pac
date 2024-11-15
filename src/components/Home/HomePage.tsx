@@ -29,10 +29,12 @@ const HomePageComponents: { [key: string]: (data: any) => ReactNode } = {
 
 type HomePageProps = {
   data: any[];
+  title?: string;
 };
 
-export default function HomePage({ data }: HomePageProps) {
+export default function HomePage({ data, title = "Homepage" }: HomePageProps) {
   const [sections, setSections] = useState<any[]>(data);
+  const [pageTitle] = useState(title);
   const [mounted, setMounted] = useState(false);
   const { toggleBanner, hasConsent } = useConsent();
   const [consent, setConsent] = useState(true);
@@ -84,7 +86,7 @@ export default function HomePage({ data }: HomePageProps) {
   });
 
   useEffect(() => {
-    const query = `*[_type == "page" && title == "Homepage"]`;
+    const query = `*[_type == "page" && title == "${pageTitle}"]`;
     const subscription = client.listen(query).subscribe((update) => {
       if (update.result?.homepagetemplatesections?.sections) {
         setSections(update.result?.homepagetemplatesections.sections);
