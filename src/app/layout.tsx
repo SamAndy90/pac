@@ -5,6 +5,7 @@ import {
   Averia_Libre,
   Roboto,
   EB_Garamond,
+  Cormorant_Garamond,
 } from "next/font/google";
 import localFont from "next/font/local";
 import "slick-carousel/slick/slick.css";
@@ -45,6 +46,13 @@ const garamond = EB_Garamond({
   weight: ["400", "500", "700"],
   preload: false,
   variable: "--font-garamond",
+});
+
+const garamond_2 = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  preload: false,
+  variable: "--font-cormorant_garamond",
 });
 
 const roboto = Roboto({
@@ -156,7 +164,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${roboto.variable} ${garamond.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} relative bg-pka_background`}
+          className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${roboto.variable} ${garamond.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} ${garamond_2.variable} relative bg-pka_background font-avenirThin`}
         >
           <Providers>
             <Banner />

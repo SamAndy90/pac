@@ -76,6 +76,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                         alt={"Logo"}
                         width={24}
                         height={24}
+                        priority={true}
                       />
                     )}
                     <TransitionLink
@@ -103,6 +104,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                     alt="PAK Logo"
                     fill
                     className={"object-contain"}
+                    priority={true}
                   />
                 </TransitionLink>
               </div>
@@ -119,6 +121,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                           alt={"Logo"}
                           width={24}
                           height={24}
+                          priority={true}
                         />
                       )}
                       <TransitionLink
@@ -229,6 +232,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                       alt={"Logo"}
                       width={24}
                       height={24}
+                      priority={true}
                     />
                   )}
                   <Link

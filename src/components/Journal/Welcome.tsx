@@ -40,7 +40,7 @@ export function Welcome({ data }: WelcomeProps) {
           {title && (
             <p
               className={
-                "lg:w-[60%] max-w-[800px] lg:text-lg font-avenirThin xl:text-xl text-center text-pka_blue2"
+                "lg:w-[60%] max-w-[800px] text-base text-center text-pka_blue2"
               }
             >
               {description}

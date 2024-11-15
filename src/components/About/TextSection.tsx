@@ -41,7 +41,6 @@ const TextSection = ({ data, className }: Props) => {
       >
         {description}
       </p>
-      {/* <PortableText value={props.data.content} components={components} /> */}
     </section>
   );
 };

@@ -6,9 +6,9 @@ import { FaRegImages } from "react-icons/fa6";
 import { ImageSlider } from "./ImageSlider";
 import { NewButton } from "../ui/NewButton";
 import { useShopContext } from "@/contexts/ShopContext";
-import { Cart, CartItem } from "@/types";
+import { Cart } from "@/types";
 import SelectInput from "@/common/Inputs/SelectInput";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import client from "@/lib/shopifyClient";
 import {
@@ -21,10 +21,23 @@ export type ProductInfoProps = {
   product: any;
 };
 
-export default function ProductInfo({ product }: ProductInfoProps) {
-  const { id, title, handle, description, variants, priceRange, media } =
-    product;
+// useEffect(() => {
+//   const allVariants = [...variants.edges]
+//     .filter((v: any) => v.node.availableForSale)
+//     .map((v: any) => {
+//       return {
+//         label: v.node.title,
+//         value: v.node.id,
+//       };
+//     });
+//   console.log(allVariants);
 
+//   setProductVariants(allVariants);
+// }, []);
+// const [productVariants, setProductVariants] = useState([]);
+
+export default function ProductInfo({ product }: ProductInfoProps) {
+  const { title, description, variants, priceRange, media } = product;
   const [variantId, setVariantId] = useState(variants.edges[0].node.id);
   const { cartId, setCartId } = useShopContext();
 
@@ -136,8 +149,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     }
   }
 
-  console.log({ variantId });
-
   const images =
     media.edges
       ?.filter((el: any) => el.node.image?.url)
@@ -147,21 +158,32 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         alt: el.node.image.altText || "Product Image",
       })) || [];
 
-  const allVariantsOptions: CartItem[] = variants.edges
-    .map((v: any) => {
-      return {
-        id,
-        merchandiseId: v.node.id,
-        title,
-        handle,
-        variantTitle: v.node.title,
-        availableForSale: v.node.availableForSale,
-        image: images[0],
-        price: v.node.price.amount,
-        variantQuantity: 1,
-      };
-    })
-    .filter((v: CartItem) => v.availableForSale);
+  let allVariants =
+    variants.edges
+      .filter((v: any) => v.node.availableForSale)
+      .map((v: any) => {
+        return {
+          label: v.node.title,
+          value: v.node.id,
+        };
+      }) || [];
+
+  // if (cartData && cartData.cart && !loading && !error) {
+  //   allVariants = allVariants.filter((variant: any) =>
+  //     cartData.cart.lines.edges.some(
+  //       (line) => line.node.merchandise.id !== variant.value
+  //     )
+  //   );
+  // }
+
+  // const availableVariants =
+  //   cartData?.cart && !loading && !error
+  //     ? allVariants.filter((variant: any) =>
+  //         cartData.cart.lines.edges.some(
+  //           (line) => line.node.merchandise.id !== variant.value
+  //         )
+  //       )
+  //     : allVariants;
 
   return (
     <section className={"my-28 lg:my-32"}>
@@ -187,13 +209,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             </p>
             {variants.edges.length > 1 && (
               <div className={"mb-8 lg:mb-12"}>
-                <SelectInput
-                  list={allVariantsOptions.map((v) => ({
-                    label: v.variantTitle,
-                    value: v.merchandiseId,
-                  }))}
-                  setId={setVariantId}
-                />
+                <SelectInput list={allVariants} setId={setVariantId} />
               </div>
             )}
             <div

@@ -99,7 +99,7 @@ export default function CartProductCard({ product }: CartProductCardProps) {
           </Link>
           <div className={"flex justify-between"}>
             <span className={"text-pka_black/50"}>
-              Qny <span>{quantity}</span>
+              Quantity <span>{quantity}</span>
             </span>
             <span className={"text-pka_blue font-medium font-thunder text-xl"}>
               {formatter.format(parseInt(priceRange.minVariantPrice.amount))}

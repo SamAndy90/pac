@@ -5,15 +5,13 @@ import ShopTemplate from "@/components/shoptemplate/ShopTemplate";
 import { getData } from "@/lib/data-fetchers/sanity";
 import { ImgUrl } from "@/lib/utils";
 
-type MetadataProps = {
+type Props = {
   params: {
     slug: string;
   };
 };
 
-export async function generateMetadata(
-  props: MetadataProps
-): Promise<Metadata> {
+export async function generateMetadata(props: Props): Promise<Metadata> {
   const data: any = await getData(`*[_type == "page"]`);
 
   const slugData = data.find(
@@ -33,7 +31,7 @@ export async function generateMetadata(
   };
 }
 
-export default async function Page(props: MetadataProps) {
+export default async function Page(props: Props) {
   const data = await getData(`*[_type == "page"]`);
 
   const slugData = data.find(

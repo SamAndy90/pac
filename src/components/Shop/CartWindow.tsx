@@ -35,7 +35,7 @@ export const CartWindow = ({
           leaveTo={"opacity-0"}
         >
           <div
-            className={"fixed inset-0 z-[90] bg-white/30 backdrop-blur-sm"}
+            className={"fixed inset-0 z-[999] bg-white/30 backdrop-blur-sm"}
             aria-hidden
           />
         </TransitionChild>
@@ -51,7 +51,7 @@ export const CartWindow = ({
         >
           <DialogPanel
             className={cn(
-              "fixed right-0 top-0 z-[100] h-full max-h-full min-w-full sm:min-w-96 max-w-full overflow-y-auto overflow-x-hidden bg-white sm:shadow-[0_0_20px_rgba(255,255,255,0.03)]"
+              "fixed right-0 top-0 z-[1000] h-full max-h-full min-w-full sm:min-w-96 max-w-full overflow-y-auto overflow-x-hidden bg-white sm:shadow-[0_0_20px_rgba(255,255,255,0.03)]"
             )}
           >
             <div

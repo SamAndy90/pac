@@ -69,6 +69,7 @@ const config = {
         averia: ["var(--font-averia)"],
         thunder: ["var(--font-thunder-variable)"],
         garamond: ["var(--font-garamond)"],
+        garamond_2: ["var(--font-cormorant_garamond)"],
       },
       borderRadius: {
         lg: "var(--radius)",

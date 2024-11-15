@@ -12,6 +12,7 @@ export const Loader = () => {
         src={LoaderImage}
         alt={"Logo"}
         className="w-16 h-16 translate-y-1"
+        priority={true}
       />
     </div>
   );

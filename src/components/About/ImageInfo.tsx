@@ -32,7 +32,10 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
       })}
     >
       <div
-        style={{ backgroundColor: bgColor.value, color: textColor.value }}
+        style={{
+          backgroundColor: bgColor?.value || "",
+          color: textColor?.value || "",
+        }}
         className={
           "lg:w-[50%] bg-pka_blue text-white flex flex-col justify-between px-3 py-16 lg:py-20 gap-y-12 lg:px-12 xl:pr-28"
         }

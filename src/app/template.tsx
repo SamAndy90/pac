@@ -3,7 +3,6 @@
 import Image from "next/image";
 import Logo from "/src/resources/png/pac-logo.png";
 import { useEffect, useRef } from "react";
-import gsap from "gsap";
 import { animatePageIn } from "@/lib/animation";
 
 export default function Template({ children }: { children: React.ReactNode }) {
@@ -26,6 +25,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
           src={Logo}
           alt={"Logo"}
           className={"w-[25%] animate-pulse duration-1500"}
+          priority={true}
         />
       </div>
       {children}

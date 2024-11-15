@@ -64,6 +64,7 @@ const FooterContent = (props: FooterContentProps) => {
                   alt={"Logo"}
                   fill
                   className={"object-contain"}
+                  priority={true}
                 />
               </div>
               {/* <h2

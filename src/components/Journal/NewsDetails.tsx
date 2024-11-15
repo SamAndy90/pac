@@ -27,40 +27,45 @@ export default function NewsDetails({ data }: NewsDetailsProps) {
             {title}
           </Title>
 
-          <div className={"grid grid-cols-1 lg:grid-cols-2 gap-y-10"}>
-            <div className={"grid grid-cols-2 gap-3 lg:gap-5"}>
-              {gallery.map((img) => (
-                <div
-                  className={
-                    "relative aspect-square rounded-2xl overflow-hidden"
-                  }
-                >
-                  <Image
-                    src={ImgUrl(img)}
-                    alt={"Image"}
-                    fill
-                    className={"object-cover"}
-                  />
-                </div>
-              ))}
+          <div className={"flex flex-col lg:flex-row gap-y-10"}>
+            <div className={"flex-1"}>
+              <div className={"grid grid-cols-2 gap-3 lg:gap-5"}>
+                {gallery.map((img) => (
+                  <div
+                    key={JSON.stringify(img)}
+                    className={
+                      "relative aspect-square rounded-2xl overflow-hidden"
+                    }
+                  >
+                    <Image
+                      src={ImgUrl(img)}
+                      alt={"Image"}
+                      fill
+                      className={"object-cover"}
+                    />
+                  </div>
+                ))}
+              </div>
             </div>
 
-            <div
-              className={
-                "w-[90%] lg:w-[65%] lg:max-w-[520px] lg:mx-auto pt-4 md:pt-9 xl:pt-12"
-              }
-            >
+            <div className={"flex-1"}>
               <div
                 className={
-                  "text-sm lg:text-base font-avenirThin text-pka_blue2 mb-4"
+                  "w-[90%] lg:w-[65%] lg:max-w-[520px] lg:mx-auto pt-4 md:pt-9 xl:pt-12"
                 }
               >
-                {formatDate(created)}
-              </div>
-              <div className={"flex flex-col gap-y-3"}>
-                {paragraphs.map((p) => (
-                  <p>{p}</p>
-                ))}
+                <div
+                  className={
+                    "text-sm lg:text-base font-avenirThin text-pka_blue2 mb-4"
+                  }
+                >
+                  {formatDate(created)}
+                </div>
+                <div className={"flex flex-col gap-y-3"}>
+                  {paragraphs.map((p) => (
+                    <p key={p.slice(0, 21)}>{p}</p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
