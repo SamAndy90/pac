@@ -4,7 +4,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaRegImages } from "react-icons/fa6";
 import { NewButton } from "../ui/NewButton";
-import { useShopContext } from "@/contexts/ShopContext";
 import { CartItem } from "@/types";
 
 export type ContestProductCardProps = {
@@ -13,7 +12,6 @@ export type ContestProductCardProps = {
 
 export function ContestProductCard({ product }: ContestProductCardProps) {
   const { title, description, media, id, handle, variants } = product;
-  const { addToCart } = useShopContext();
 
   const images =
     media.edges
