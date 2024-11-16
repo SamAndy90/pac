@@ -38,7 +38,7 @@ export function FAQs({ data }: FAQsProps) {
                     </p>
                   }
                 >
-                  <p>{faq.answer}</p>
+                  <p className={"font-avenirThin text-base"}>{faq.answer}</p>
                 </DisclosureItem>
               ))}
             </Disclosure>

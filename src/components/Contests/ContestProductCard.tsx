@@ -76,25 +76,20 @@ export function ContestProductCard({ product }: ContestProductCardProps) {
       </Link>
       <h4
         className={
-          "mb-1 lg:mb-2 font-garamond font-bold text-pka_blue text-center text-[8.2vw] md:text-[4vw] lg:text-[3vw] xl:text-[2.4vw] leading-none"
+          "mb-2 lg:mb-3 font-garamond font-bold text-pka_blue text-center text-[8.2vw] md:text-[4vw] lg:text-[3vw] xl:text-[2.4vw] leading-none"
         }
       >
         {title}
       </h4>
       <p
         className={
-          "text-pka_blue2/90 mb-6 lg:text-lg leading-tight lg:leading-tight text-center line-clamp-5 flex-1"
+          "text-pka_blue2/90 mb-6 leading-tight lg:leading-tight text-center line-clamp-5 flex-1"
         }
       >
         {description}
       </p>
       <Link href={`/shop/${handle}?id=${id}`}>
-        <NewButton
-          fullWidth
-          // onClick={() => addToCart(allVariantsOptions[0])}
-        >
-          Go to Product
-        </NewButton>
+        <NewButton fullWidth>Go to Product</NewButton>
       </Link>
     </div>
   );

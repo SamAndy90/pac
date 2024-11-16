@@ -57,7 +57,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({
           fill
         />
 
-        <div className="relative h-full font-roboto flex flex-col justify-center items-center text-center">
+        <div className="relative h-full flex flex-col justify-center items-center text-center">
           <div className="text-2xl text-[#CED0CC] transition-colors group-hover:text-white duration-300">
             {title}
           </div>

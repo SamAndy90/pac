@@ -18,10 +18,10 @@ const BenifitCard = ({ card }: BenifitCardProps) => {
         alt="banner"
       />
       <div className="text-center">
-        <h2 className="uppercase text-pka_blue mb-2 font-thunder font-semibold text-2xl tracking-wider">
+        <h2 className="uppercase text-pka_blue mb-2 font-thunder font-semibold text-2xl tracking-widest">
           {card?.Title}
         </h2>
-        <p className="text-pka_blue max-w-[80%] mx-auto font-avenirThin text-sm lg:text-base">
+        <p className="text-pka_blue max-w-[80%] mx-auto font-avenirThin">
           {card?.Intro}
         </p>
       </div>

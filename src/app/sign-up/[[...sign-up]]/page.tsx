@@ -1,6 +1,7 @@
 import { SignUp } from "@clerk/nextjs";
 import Image from "next/image";
-import cardImage from "../../../resources/png/background.png";
+import bgIMG from "@/resources/png/background.png";
+
 const SignUpPage = () => {
   return (
     <div className="flex flex-row  justify-center items-center min-h-[925px]">
@@ -11,7 +12,7 @@ const SignUpPage = () => {
               elements: {
                 card: "shadow-none",
                 formButtonPrimary:
-                  " rounded-[6.4px]  hover:bg-[#33455A]   hover:text-[#FFC52E]  text-[#33455A] font-avenirBold   bg-[#FFC52E]   ",
+                  "uppercase font-thunder text-lg transition-colors rounded-lg text-white hover:text-pka_blue2 bg-pka_blue2 hover:bg-pka_green_light focus:outline-none focus:ring-0 active:bg-pka_green",
               },
             }}
           />
@@ -19,11 +20,10 @@ const SignUpPage = () => {
         <div className="w-1/2 hidden md:flex justify-center items-center">
           <div className="relative w-full h-full">
             <Image
-              src={cardImage}
+              src={bgIMG}
               alt="product"
-              className="rounded-[20px]"
-              layout="fill"
-              objectFit="cover"
+              className={"rounded-[20px] object-cover"}
+              fill
             />
           </div>
         </div>

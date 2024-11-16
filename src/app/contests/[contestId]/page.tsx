@@ -35,7 +35,7 @@ export default async function ContestPage({ params }: ContestPageType) {
           <Title className={"text-center mb-5"}>{event?.title}</Title>
           <p
             className={
-              "font-garamond text-xl lg:text-2xl sm:max-w-[85%] text-center mx-auto text-pka_blue2 mb-14"
+              "sm:max-w-[85%] text-center mx-auto text-pka_blue2 mb-14"
             }
           >
             {event?.description}

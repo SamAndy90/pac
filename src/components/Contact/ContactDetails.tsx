@@ -71,7 +71,7 @@ export default function ContactDetails({ data }: ContactDetailsProps) {
               {textsvg && (
                 <div
                   className={
-                    "relative mx-auto lg:mx-0 w-[110px] h-[44px] lg:w-[140px] lg:h-[55px] mb-3 lg:mb-6"
+                    "relative mx-auto lg:mx-0 w-[110px] h-[44px] lg:w-[140px] lg:h-[55px] mb-4 lg:mb-8"
                   }
                 >
                   <Image
@@ -85,7 +85,7 @@ export default function ContactDetails({ data }: ContactDetailsProps) {
               {description && (
                 <p
                   className={
-                    "mb-12 lg:text-lg text-center font-avenirThin xl:text-xl text-pka_blue2 max-w-[650px] mx-auto lg:text-left lg:mx-0 lg:max-w-none"
+                    "mb-12 text-center font-avenirThin text-pka_blue2 max-w-[650px] mx-auto lg:text-left lg:mx-0 lg:max-w-none"
                   }
                 >
                   {description}

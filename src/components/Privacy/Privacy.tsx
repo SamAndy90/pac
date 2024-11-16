@@ -36,9 +36,7 @@ export function Privacy({ data }: PrivacyProps) {
                   {block.paragraphs.map((paragraph, Idx) => (
                     <p
                       key={block._key + Idx}
-                      className={
-                        "text-sm md:text-base text-pka_blue2 font-avenirThin"
-                      }
+                      className={"text-pka_blue2 font-avenirThin"}
                     >
                       {paragraph}
                     </p>

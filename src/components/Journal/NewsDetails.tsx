@@ -54,11 +54,7 @@ export default function NewsDetails({ data }: NewsDetailsProps) {
                   "w-[90%] lg:w-[65%] lg:max-w-[520px] lg:mx-auto pt-4 md:pt-9 xl:pt-12"
                 }
               >
-                <div
-                  className={
-                    "text-sm lg:text-base font-avenirThin text-pka_blue2 mb-4"
-                  }
-                >
+                <div className={"font-avenirThin text-pka_blue2 mb-4"}>
                   {formatDate(created)}
                 </div>
                 <div className={"flex flex-col gap-y-3"}>

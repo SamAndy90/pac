@@ -14,6 +14,7 @@ import client from "@/lib/shopifyClient";
 import {
   CART_CREATE_MUTATION,
   CART_LINES_ADD_MUTATION,
+  CART_LINES_UPDATE_MUTATION,
   GET_CART_QUERY,
 } from "@/lib/data-fetchers/queries";
 
@@ -55,6 +56,14 @@ export default function ProductInfo({ product }: ProductInfoProps) {
   });
 
   const [addToCartMutation] = useMutation(CART_LINES_ADD_MUTATION, {
+    onCompleted() {
+      client.refetchQueries({
+        include: ["getCart"],
+      });
+    },
+  });
+
+  const [updateCartLinesMutation] = useMutation(CART_LINES_UPDATE_MUTATION, {
     onCompleted() {
       client.refetchQueries({
         include: ["getCart"],
@@ -134,13 +143,33 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     } else {
       const lines = cartData?.cart.lines.edges;
 
-      const isInCart = lines?.some(
+      const isExist = lines?.some(
         (line) => line.node.merchandise.id === merchandiseId
       );
 
-      if (isInCart) {
+      if (isExist) {
         // TODO Update logic
-        console.log("Merchandise is in the cart");
+
+        const updatedLines = lines?.map((line) => {
+          return line.node.merchandise.id === merchandiseId
+            ? {
+                id: line.node.id,
+                merchandiseId: line.node.merchandise.id,
+                quantity: line.node.quantity + 1,
+              }
+            : {
+                id: line.node.id,
+                merchandiseId: line.node.merchandise.id,
+                quantity: line.node.quantity,
+              };
+        });
+
+        updateCartLinesMutation({
+          variables: {
+            cartId,
+            lines: updatedLines,
+          },
+        });
       } else {
         await addToCart(cartId, [{ quantity: 1, variantId: merchandiseId }]);
       }
@@ -202,7 +231,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           </div>
           <div className={"flex-1 shrink-0 py-2"}>
             <Title>{title}</Title>
-            <p className={"text-pka_blue2 text-lg flex-1 lg:flex-initial mb-6"}>
+            <p className={"text-pka_blue2 flex-1 lg:flex-initial mb-6"}>
               {description}
             </p>
             {variants.edges.length > 1 && (
@@ -224,7 +253,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 colorVariant={"primary"}
                 fullWidth
                 size={"small"}
-                className={"border-pka_blue2 tracking-wider pb-1.5 sm:w-auto"}
+                className={"border-pka_blue2 pb-1.5 sm:w-auto"}
                 onClick={() => addProductToCart(variantId)}
               >
                 Enter to Win

@@ -48,14 +48,14 @@ export function ProductCard({ data }: ProductCardProps) {
       </div>
       <h4
         className={
-          "mb-1 lg:mb-2 font-garamond font-bold text-pka_blue text-center text-[8.2vw] md:text-[5vw] lg:text-[3.2vw] xl:text-[2.8vw] leading-none"
+          "mb-2 lg:mb-3 font-garamond font-bold text-pka_blue text-center text-[8.2vw] md:text-[5vw] lg:text-[3.2vw] xl:text-[2.8vw] leading-none"
         }
       >
         {title}
       </h4>
       <p
         className={
-          "text-pka_blue2/90 lg:text-lg leading-tight lg:leading-tight text-center line-clamp-5"
+          "text-pka_blue2/90 leading-tight lg:leading-tight text-center line-clamp-5"
         }
       >
         {description}

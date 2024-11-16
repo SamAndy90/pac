@@ -32,7 +32,7 @@ const Services = ({ data }: ServicesProps) => {
             <Title className={"mb-10 lg:mb-12"}>{title}</Title>
             <div
               className={
-                "grid gap-y-5 gap-x-16 font-avenirThin lg:max-w-[85vw] text-lg lg:text-xl lg:grid-cols-2 grid-cols-1"
+                "grid gap-y-5 gap-x-16 font-avenirThin lg:max-w-[85vw] lg:grid-cols-2 grid-cols-1"
               }
             >
               {description.map((paragraph, idX) => (
@@ -63,9 +63,7 @@ const Services = ({ data }: ServicesProps) => {
               >
                 {services.map((service, idX) => (
                   <li key={service + idX} className={"flex items-center"}>
-                    <span
-                      className={"w-5 mr-4 font-avenirBold text-lg lg:text-xl"}
-                    >
+                    <span className={"w-5 mr-4 font-avenirBold"}>
                       {idX < 9 ? `0${idX + 1}` : idX + 1}
                     </span>
                     <span>{service}</span>

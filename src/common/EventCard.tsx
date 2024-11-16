@@ -86,12 +86,12 @@ export const EventCard: FC<EventCardProps> = ({
         )}
 
         <h3
-          className={cn("relative w-2/4 font-thunder text-5xl text-[#0A1200]")}
+          className={cn("relative w-3/4 font-thunder text-5xl text-[#0A1200]")}
         >
           {title}
         </h3>
 
-        <p className="max-w-[375px] font-avenirBold text-lg text-[#0A1200]">
+        <p className="max-w-[375px] font-avenirThin text-[#0A1200]">
           {description}
         </p>
 

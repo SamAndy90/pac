@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react";
-import { SplashProvider } from "./Splash";
 import { AnnouncementProvider } from "./Announcement";
 import StoreProvider from "./StoreProvider";
 import ApolloProviderComp from "./ApolloProviderComp";
@@ -10,9 +9,7 @@ export function Providers({ children }: PropsWithChildren) {
     <ApolloProviderComp>
       <StoreProvider>
         <ShopProvider>
-          <SplashProvider>
-            <AnnouncementProvider>{children}</AnnouncementProvider>
-          </SplashProvider>
+          <AnnouncementProvider>{children}</AnnouncementProvider>
         </ShopProvider>
       </StoreProvider>
     </ApolloProviderComp>

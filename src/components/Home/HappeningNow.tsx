@@ -80,14 +80,7 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
     <section className={"bg-pka_blue mx-auto max-w-[1920px]"}>
       <Container>
         <div className="justify-center min-h-screen items-center gap-y-12 md:gap-y-24 overflow-hidden flex flex-col pt-[72px] pb-24">
-          {/* <div className="flex justify-center w-full m-auto">
-            <p className="font-thunder flex flex-col items-center xl:text-7xl font-bold text-center text-white tracking-wider text-6xl">
-              <span>{splitTitle(title)[0]}</span>
-              <span>{splitTitle(title)[1]}</span>
-            </p>
-          </div> */}
           <Title className={"text-white text-center"}>{title}</Title>
-
           <div
             ref={sliderRef}
             className="keen-slider mx-auto sm:max-w-[76%] 2xl:max-w-[80%] w-full"
@@ -101,7 +94,7 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
                   backgroundImage={card.portrait}
                   countdownBgColor={card.timerstyle.bgcolor.value}
                   countdownTextColor={card.timerstyle.numcolor.value}
-                  exploreButtonText="Explore"
+                  exploreButtonText={"Explore"}
                   timer={card.time}
                   starttime={card.starttime}
                   style={card.homepageStyle}
@@ -110,47 +103,6 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
               </div>
             ))}
           </div>
-
-          {/* <div className="hidden w-full lg:flex gap-7 relative justify-center">
-            {cardsDisplay.map((card) => {
-              return (
-                <EventCard
-                  key={card._key}
-                  title={card.Title}
-                  description={card.Intro}
-                  backgroundImage={card.portrait?.asset._ref}
-                  countdownBgColor={card.timerstyle.bgcolor.value}
-                  countdownTextColor={card.timerstyle.numcolor.value}
-                  exploreButtonText="Explore"
-                  timer={card.time}
-                  starttime={card.starttime}
-                  style={card.homepageStyle}
-                  className={"flex-1"}
-                />
-              );
-            })}
-          </div>
-
-          <div className="lg:hidden w-full mx-auto flex">
-            <div className="slider-container containerClass" id="happeningNow">
-              <Slider {...settings}>
-                {cardsDisplay.map((card: any) => (
-                  <EventCard
-                    key={card._key}
-                    title={card.Title}
-                    description={card.Intro}
-                    backgroundImage={card.portrait?.asset._ref}
-                    countdownBgColor={card.timerstyle.bgcolor.value}
-                    countdownTextColor={card.timerstyle.numcolor.value}
-                    exploreButtonText="Explore"
-                    timer={card.time}
-                    style={card?.homepageStyle}
-                    starttime={card.starttime}
-                  />
-                ))}
-              </Slider>
-            </div>
-          </div> */}
 
           {data?.newbutton?.length > 0 && (
             <Link href={data.newbutton[0].url} className={"mt-16"}>

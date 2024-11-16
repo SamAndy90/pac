@@ -24,7 +24,6 @@ import LiveVisualEditing from "@/components/LiveVisualEditing";
 import { Loader } from "@/common/Loader";
 import { Suspense } from "react";
 import { IconDescriptor } from "next/dist/lib/metadata/types/metadata-types";
-import Splash from "@/components/Splash";
 import { Providers } from "@/contexts/Providers";
 
 const LondrinaSolid = Londrina_Solid({
@@ -168,7 +167,6 @@ export default function RootLayout({
         >
           <Providers>
             <Banner />
-            <Splash />
             <div
               className={"flex min-h-screen flex-col h-full justify-between"}
             >
