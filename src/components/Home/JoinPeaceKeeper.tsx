@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { NewButton } from "../ui/NewButton";
+import { NewButton } from "../../common/UI/NewButton";
 import { Color, Portrait } from "@/types";
 import { ImgUrl } from "@/lib/utils";
 import { Title } from "@/common";

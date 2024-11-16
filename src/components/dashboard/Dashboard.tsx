@@ -1,6 +1,6 @@
 // Dashboard.tsx
 import React from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/common/UI/tabs";
 import { ComingSoon } from "@/common";
 import { NextStudio } from "next-sanity/studio";
 import config from "../../../sanity.config";

@@ -1,17 +1,19 @@
+import { ImgUrl } from "@/lib/utils";
+import { Portrait } from "@/types";
 import Image from "next/image";
 
 type Props = {
   title: string;
-  image: string;
+  image: Portrait;
 };
 
 const BannerCard = async ({ title, image }: Props) => {
   return (
     <div className="w-full mt-28 mb-20 h-[300px] md:h-[450px] lg:h-[638px] rounded-lg relative flex justify-center items-center overflow-hidden">
       <div className="w-full mx-2 relative rounded-lg h-full">
-        <div className="absolute inset-0 bg-[#0A1200] bg-opacity-20 rounded-lg"></div>
+        <div className="absolute inset-0 bg-pka_green bg-opacity-20 rounded-lg"></div>
         <Image
-          src={image}
+          src={ImgUrl(image)}
           alt="banner"
           className="object-cover rounded-lg"
           layout="fill"

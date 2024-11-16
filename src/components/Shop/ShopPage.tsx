@@ -1,10 +1,10 @@
 "use client";
 
 import { ReactNode, useEffect, useState } from "react";
-import BannerComponent from "../product/BannerComponent";
+import BannerComponent from "@/components/Shop/BannerComponent";
 import { client } from "../../../sanity/lib/client";
 import JoinPeaceKeepersBenifit from "@/components/About/JoinPeaceKeepersBenifit";
-import { Products } from "./Products";
+import { Products } from "@/components/Shop/Products";
 
 const ShopPageComponents: {
   [key: string]: (data: any) => ReactNode;

@@ -4,3 +4,4 @@ export * from "./JournalTemplate";
 export * from "./ContactTemplate";
 export * from "./FAQSTemplate";
 export * from "./PrivacyTemplate";
+export * from "./AncillaryTemplate";

@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import { Fragment } from "react";
 import { FiX } from "react-icons/fi";
-import { NewButton } from "../ui/NewButton";
+import { NewButton } from "../../common/UI/NewButton";
 import Link from "next/link";
 import CartProductCard from "./CartProductCard";
 import { Cart } from "@/types";

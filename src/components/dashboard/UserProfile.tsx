@@ -1,6 +1,6 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/common/UI/avatar";
 import { useUser } from "@clerk/nextjs";
 
 const UserProfile = () => {

@@ -1,7 +1,7 @@
 import { Container } from "@/common";
 import { Portrait } from "@/types";
 import NewsList from "./NewsList";
-import { NewButton } from "../ui/NewButton";
+import { NewButton } from "../../common/UI/NewButton";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
 

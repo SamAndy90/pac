@@ -8,8 +8,6 @@ import {
   Cormorant_Garamond,
 } from "next/font/google";
 import localFont from "next/font/local";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import Banner from "@/components/AnnouncementBanner";
@@ -21,8 +19,6 @@ import "keen-slider/keen-slider.min.css";
 import { draftMode } from "next/headers";
 import LiveVisualEditing from "@/components/LiveVisualEditing";
 
-import { Loader } from "@/common/Loader";
-import { Suspense } from "react";
 import { IconDescriptor } from "next/dist/lib/metadata/types/metadata-types";
 import { Providers } from "@/contexts/Providers";
 
@@ -171,10 +167,7 @@ export default function RootLayout({
               className={"flex min-h-screen flex-col h-full justify-between"}
             >
               <Header />
-              <main className="flex-1">
-                <Suspense fallback={<Loader />}>{children}</Suspense>
-              </main>
-
+              <main className="flex-1">{children}</main>
               <Footer />
             </div>
             {draftMode().isEnabled && <LiveVisualEditing />}

@@ -11,7 +11,7 @@ export const animatePageIn = () => {
       yPercent: 0,
     }).to([splashCoomponent], {
       yPercent: 100,
-      delay: 1,
+      delay: 0.5,
       duration: 1,
       ease: "power2.inOut",
     });

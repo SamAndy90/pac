@@ -90,16 +90,6 @@ const AboutPageHero = ({ data }: AboutPageHeroProps) => {
                 Keepers <em className={"font-normal"}>Adventures</em>
               </div>
             </Title>
-            {/* <h1
-              className={
-                "text-6xl max-w-[460px] sm:text-7xl sm:max-w-[520px] tracking-wider text-pka_blue font-thunder font-bold leading-none mx-auto"
-              }
-            >
-              <p>About Peace</p>
-              <p>
-                Keepers <em className={"font-normal"}>Adventures</em>
-              </p>
-            </h1> */}
           </div>
         </div>
 

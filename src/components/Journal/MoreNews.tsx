@@ -1,7 +1,7 @@
 import { Container, Title } from "@/common";
 import { Post } from "./News";
 import NewsList from "./NewsList";
-import { NewButton } from "../ui/NewButton";
+import { NewButton } from "../../common/UI/NewButton";
 import Link from "next/link";
 
 export type MoreNewsProps = {

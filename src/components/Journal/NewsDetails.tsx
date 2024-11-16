@@ -1,6 +1,6 @@
 import { Container, Title } from "@/common";
 import { Post } from "./News";
-import { NewButton } from "../ui/NewButton";
+import { NewButton } from "../../common/UI/NewButton";
 import Link from "next/link";
 import { ArticleBadge } from "./HotNewsCard";
 import { formatDate, ImgUrl } from "@/lib/utils";

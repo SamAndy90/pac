@@ -9,9 +9,9 @@ import Services from "@/components/About/Services";
 import ImageSection from "@/components/About/ImageSection";
 import JoinPeaceKeepersBenifit from "@/components/About/JoinPeaceKeepersBenifit";
 
-type Props = {
+type AncillaryPageProps = {
   sections: any;
-  pageTitle: string;
+  title?: string;
 };
 
 const AllComponents: { [key: string]: (data: any) => ReactNode } = {
@@ -24,7 +24,7 @@ const AllComponents: { [key: string]: (data: any) => ReactNode } = {
   "page.imageInfo": (data: any) => <ImageInfo data={data} revert={true} />,
 } as const;
 
-const AncillarySubscription = ({ sections, pageTitle }: Props) => {
+const AncillaryPage = ({ sections, title = "About" }: AncillaryPageProps) => {
   const [sectionData, setSectionsData] = useState(sections);
   const [mounted, setMounted] = useState(false);
 
@@ -36,19 +36,16 @@ const AncillarySubscription = ({ sections, pageTitle }: Props) => {
     }) || [];
 
   useEffect(() => {
-    // remove everything except the characters in the string and the spaces and numbers
+    const query = `*[_type == "page" && title == "${title}"]`;
 
-    const titleData = pageTitle.replace(/[^a-zA-Z0-9 &]/g, "");
-    const qry = `*[_type == "page" && title == "${titleData}"]`;
-
-    const subscription = client.listen(qry).subscribe((update) => {
+    const subscription = client.listen(query).subscribe((update) => {
       if (update.result?.ancillarysections.sections) {
         setSectionsData(update.result?.ancillarysections.sections);
       }
     });
 
     return () => subscription.unsubscribe();
-  }, [setSectionsData, client, pageTitle]);
+  }, [setSectionsData, client, title]);
 
   useEffect(() => {
     setMounted(true);
@@ -63,4 +60,4 @@ const AncillarySubscription = ({ sections, pageTitle }: Props) => {
   );
 };
 
-export default AncillarySubscription;
+export default AncillaryPage;

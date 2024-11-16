@@ -1,8 +1,6 @@
 import CommingSoon from "@/components/CommingSoon";
 import { Metadata } from "next";
-import Ancillary from "@/components/templates/Ancillary";
 import { getData } from "@/lib/data-fetchers/sanity";
-import { ImgUrl } from "@/lib/utils";
 import {
   ContactTemplate,
   FAQSTemplate,
@@ -10,7 +8,8 @@ import {
   JournalTemplate,
   PrivacyTemplate,
   ShopTemplate,
-} from "@/components/PageTemplates";
+  AncillaryTemplate,
+} from "@/components/Templates";
 
 type Props = {
   params: {
@@ -49,24 +48,18 @@ export default async function Page(props: Props) {
     slugData?.ancillarysections?.sections?.length === 1 &&
     slugData?.ancillarysections?.sections[0]._type === "page.comingsoon"
   ) {
+    console.log({ slugData });
+
     const section = slugData?.ancillarysections?.sections[0];
     const title = section?.title;
     const image = section?.portrait;
 
-    return <CommingSoon title={title} image={ImgUrl(image)} />;
+    return <CommingSoon title={title} image={image} />;
   }
 
   switch (slugData?.template) {
     case "ancillary":
-      if (slugData.ancillarysections.sections.length === 0) {
-        return null;
-      }
-      return (
-        <Ancillary
-          title={slugData.title}
-          sections={slugData.ancillarysections.sections}
-        />
-      );
+      return <AncillaryTemplate title={slugData.title} data={slugData} />;
     case "homepageTemplate":
       return <HomeTemplate data={slugData} title={slugData.title} />;
     case "shoptemplate":

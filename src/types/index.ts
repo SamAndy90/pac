@@ -37,23 +37,6 @@ export type SanityLink = {
   slug: Slug;
 };
 
-export type CartItem = {
-  id: string;
-  merchandiseId: string;
-  cartLineId?: string;
-  title: string;
-  handle: string;
-  variantTitle: string;
-  availableForSale: boolean;
-  price: string;
-  variantQuantity: number;
-  image: {
-    id: string;
-    src: string;
-    alt: string;
-  };
-};
-
 export type CartLine = {
   node: {
     id: string;

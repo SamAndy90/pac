@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NewButton } from "../ui/NewButton";
+import { NewButton } from "../../common/UI/NewButton";
 import { Container, Title } from "@/common";
 import BenifitCard from "./BenifitCard";
 import { Portrait } from "@/types";

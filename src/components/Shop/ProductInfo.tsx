@@ -4,11 +4,11 @@ import { Container, Title } from "@/common";
 import { formatter } from "@/lib/utils";
 import { FaRegImages } from "react-icons/fa6";
 import { ImageSlider } from "./ImageSlider";
-import { NewButton } from "../ui/NewButton";
+import { NewButton } from "../../common/UI/NewButton";
 import { useShopContext } from "@/contexts/ShopContext";
 import { Cart } from "@/types";
 import SelectInput from "@/common/Inputs/SelectInput";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import client from "@/lib/shopifyClient";
 import {
@@ -21,19 +21,6 @@ import {
 export type ProductInfoProps = {
   product: any;
 };
-
-// useEffect(() => {
-//   const allVariants = [...variants.edges]
-//     .filter((v: any) => v.node.availableForSale)
-//     .map((v: any) => {
-//       return {
-//         label: v.node.title,
-//         value: v.node.id,
-//       };
-//     });
-//   setProductVariants(allVariants);
-// }, []);
-// const [productVariants, setProductVariants] = useState([]);
 
 export default function ProductInfo({ product }: ProductInfoProps) {
   const { title, description, variants, priceRange, media } = product;
@@ -148,8 +135,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
       );
 
       if (isExist) {
-        // TODO Update logic
-
         const updatedLines = lines?.map((line) => {
           return line.node.merchandise.id === merchandiseId
             ? {
@@ -194,23 +179,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           value: v.node.id,
         };
       }) || [];
-
-  // if (cartData && cartData.cart && !loading && !error) {
-  //   allVariants = allVariants.filter((variant: any) =>
-  //     cartData.cart.lines.edges.some(
-  //       (line) => line.node.merchandise.id !== variant.value
-  //     )
-  //   );
-  // }
-
-  // const availableVariants =
-  //   cartData?.cart && !loading && !error
-  //     ? allVariants.filter((variant: any) =>
-  //         cartData.cart.lines.edges.some(
-  //           (line) => line.node.merchandise.id !== variant.value
-  //         )
-  //       )
-  //     : allVariants;
 
   return (
     <section className={"my-28 lg:my-32"}>

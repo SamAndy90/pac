@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegImages } from "react-icons/fa6";
-import { NewButton } from "../ui/NewButton";
-import { CartItem } from "@/types";
+import { NewButton } from "../../common/UI/NewButton";
 
 export type ContestProductCardProps = {
   product: any;
@@ -21,22 +20,6 @@ export function ContestProductCard({ product }: ContestProductCardProps) {
         src: el.node.image.url,
         alt: el.node.image.altText || "Product Image",
       })) || [];
-
-  const allVariantsOptions: CartItem[] = variants.edges
-    .map((v: any) => {
-      return {
-        id,
-        merchandiseId: v.node.id,
-        title,
-        handle,
-        variantTitle: v.node.title,
-        availableForSale: v.node.availableForSale,
-        image: images[0],
-        price: v.node.price.amount,
-        variantQuantity: 1,
-      };
-    })
-    .filter((v: CartItem) => v.availableForSale);
 
   return (
     <div className={"w-full lg:col-span-1 group flex flex-col"}>

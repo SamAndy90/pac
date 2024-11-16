@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { cn, ImgUrl } from "@/lib/utils";
 import Link from "next/link";
-import { NewButton } from "../ui/NewButton";
+import { NewButton } from "../../common/UI/NewButton";
 import { Button, Color, Portrait } from "@/types";
 import { Title } from "@/common";
 
@@ -22,7 +22,7 @@ type ImageInfoProps = {
 };
 
 const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
-  const { title, description, buttons, bgColor, textColor } = data;
+  const { title, description, buttons, bgColor, textColor, portrait } = data;
   const oneWordTitle = title?.split(" ");
 
   return (
@@ -40,15 +40,6 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
           "lg:w-[50%] bg-pka_blue text-white flex flex-col justify-between px-3 py-16 lg:py-20 gap-y-12 lg:px-12 xl:pr-28"
         }
       >
-        {/* <h2
-          className={
-            "uppercase mb-[5vw] flex-1 font-thunder font-bold text-7xl tracking-wider"
-          }
-        >
-          {oneWordTitle.map((word, idX) => (
-            <div key={word + idX}>{word}</div>
-          ))}
-        </h2> */}
         <Title className={"text-white mb-[5vw] flex-1"}>
           {oneWordTitle?.map((word, idX) => (
             <div key={word + idX}>{word}</div>
@@ -89,7 +80,7 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
       <div className="lg:w-[50%] aspect-[11/12]">
         <div className={"w-full h-full relative"}>
           <Image
-            src={ImgUrl(data.portrait)}
+            src={ImgUrl(portrait)}
             alt={"Join peace keepers social image"}
             fill
             className={"object-cover"}

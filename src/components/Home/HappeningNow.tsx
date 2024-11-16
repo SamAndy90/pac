@@ -3,7 +3,7 @@ import { Container, Title } from "@/common";
 import { useKeenSlider } from "keen-slider/react";
 import { Color, Portrait } from "@/types";
 import { EventCard } from "@/common/EventCard";
-import { NewButton } from "@/components/ui/NewButton";
+import { NewButton } from "@/common/UI/NewButton";
 
 type Button = {
   url: string;

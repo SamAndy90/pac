@@ -1,15 +1,13 @@
-import React from "react";
-
 type Props = {
   title: string;
   imageUrl: string;
 };
 
-const SmallBanner = ({ imageUrl, title }: Props) => {
+const BannerCard = ({ title, imageUrl }: Props) => {
   return (
     <div className="w-full mt-24 h-[238px] md:h-[300px] lg:h-[300px] rounded-lg relative flex justify-center  items-center overflow-hidden">
       <div className="w-full mx-2 relative rounded-lg h-full">
-        <div className="absolute inset-0 bg-pka_black bg-opacity-20 rounded-lg"></div>
+        <div className="absolute inset-0 bg-[#0A1200] bg-opacity-20 rounded-lg"></div>
         <img
           src={imageUrl}
           alt="banner"
@@ -26,4 +24,4 @@ const SmallBanner = ({ imageUrl, title }: Props) => {
   );
 };
 
-export default SmallBanner;
+export default BannerCard;
