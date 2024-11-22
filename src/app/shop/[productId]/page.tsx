@@ -1,7 +1,5 @@
-import { Loader } from "@/common";
 import ProductInfo from "@/components/Shop/ProductInfo";
 import { getShopifyProductById } from "@/lib/data-fetchers/shopify/products";
-import { Suspense } from "react";
 
 export type ProductPageProps = {
   searchParams: { id: string };
@@ -22,9 +20,5 @@ export default async function ProductPage({
     );
   }
 
-  return (
-    // <Suspense fallback={<Loader />}>
-    <ProductInfo product={product} />
-    // </Suspense>
-  );
+  return <ProductInfo product={product} />;
 }

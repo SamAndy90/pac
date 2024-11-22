@@ -3,9 +3,9 @@ import { Container, Title } from "@/common";
 import { useKeenSlider } from "keen-slider/react";
 import { Color, Portrait } from "@/types";
 import { EventCard } from "@/common/EventCard";
-import { NewButton } from "@/common/UI/NewButton";
+import { Button } from "@/common/UI/Button";
 
-type Button = {
+type TButton = {
   url: string;
   text: string;
   style: "primary" | "secondary";
@@ -25,7 +25,7 @@ type Card = {
   status: string;
   starttime: string;
   portrait: Portrait;
-  buttons?: Button[];
+  buttons?: TButton[];
 };
 
 type TData = {
@@ -33,7 +33,7 @@ type TData = {
   _type: string;
   _key: string;
   title: string;
-  newbutton: Button[];
+  newbutton: TButton[];
 };
 
 type HappeningNowProps = {
@@ -106,9 +106,9 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
 
           {data?.newbutton?.length > 0 && (
             <Link href={data.newbutton[0].url} className={"mt-16"}>
-              <NewButton colorVariant={"secondary"}>
+              <Button colorVariant={"secondary"}>
                 {data.newbutton[0].text}
-              </NewButton>
+              </Button>
             </Link>
           )}
         </div>

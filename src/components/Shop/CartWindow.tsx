@@ -8,7 +8,7 @@ import {
 } from "@headlessui/react";
 import { Fragment } from "react";
 import { FiX } from "react-icons/fi";
-import { NewButton } from "../../common/UI/NewButton";
+import { Button } from "../../common/UI/Button";
 import Link from "next/link";
 import CartProductCard from "./CartProductCard";
 import { Cart } from "@/types";
@@ -129,13 +129,13 @@ export const CartWindow = ({
                           target={"_blank"}
                           className={"mb-4"}
                         >
-                          <NewButton
+                          <Button
                             colorVariant={"black"}
                             fullWidth
                             onClick={onClose}
                           >
                             Checkout
-                          </NewButton>
+                          </Button>
                         </Link>
                       </div>
                     )}

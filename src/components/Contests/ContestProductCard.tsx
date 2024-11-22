@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegImages } from "react-icons/fa6";
-import { NewButton } from "../../common/UI/NewButton";
+import { Button } from "../../common/UI/Button";
 
 export type ContestProductCardProps = {
   product: any;
@@ -72,7 +72,7 @@ export function ContestProductCard({ product }: ContestProductCardProps) {
         {description}
       </p>
       <Link href={`/shop/${handle}?id=${id}`}>
-        <NewButton fullWidth>Go to Product</NewButton>
+        <Button fullWidth>Go to Product</Button>
       </Link>
     </div>
   );

@@ -4,7 +4,7 @@ import { Container, Title } from "@/common";
 import { formatter } from "@/lib/utils";
 import { FaRegImages } from "react-icons/fa6";
 import { ImageSlider } from "./ImageSlider";
-import { NewButton } from "../../common/UI/NewButton";
+import { Button } from "../../common/UI/Button";
 import { useShopContext } from "@/contexts/ShopContext";
 import { Cart } from "@/types";
 import SelectInput from "@/common/Inputs/SelectInput";
@@ -217,7 +217,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               >
                 {formatter.format(priceRange.minVariantPrice.amount)} CAD
               </div>
-              <NewButton
+              <Button
                 colorVariant={"primary"}
                 fullWidth
                 size={"small"}
@@ -225,7 +225,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 onClick={() => addProductToCart(variantId)}
               >
                 Enter to Win
-              </NewButton>
+              </Button>
             </div>
           </div>
         </div>

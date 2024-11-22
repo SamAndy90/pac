@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { NewButton } from "../../common/UI/NewButton";
+import { Button } from "../../common/UI/Button";
 import { Container, Title } from "@/common";
 import BenifitCard from "./BenifitCard";
 import { Portrait } from "@/types";
@@ -39,14 +39,14 @@ const JoinPeaceKeepersBenifit = ({ data }: JoinPeaceKeepersBenifitProps) => {
               {data.buttons.map((button, index) =>
                 button?.url ? (
                   <Link href={button.url} key={button.url + index}>
-                    <NewButton colorVariant={button.style} fullWidth>
+                    <Button colorVariant={button.style} fullWidth>
                       {button.text}
-                    </NewButton>
+                    </Button>
                   </Link>
                 ) : (
-                  <NewButton key={index} colorVariant={button.style}>
+                  <Button key={index} colorVariant={button.style}>
                     {button.text}
-                  </NewButton>
+                  </Button>
                 )
               )}
             </div>

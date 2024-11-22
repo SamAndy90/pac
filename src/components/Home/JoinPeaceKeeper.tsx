@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { NewButton } from "../../common/UI/NewButton";
+import { Button } from "../../common/UI/Button";
 import { Color, Portrait } from "@/types";
 import { ImgUrl } from "@/lib/utils";
 import { Title } from "@/common";
@@ -51,19 +51,19 @@ const JoinPeaceKeeper = ({ data }: Props) => {
                     "md:min-w-[180px] lg:min-w-[210px] w-full sm:w-auto"
                   }
                 >
-                  <NewButton colorVariant={button.style} fullWidth>
+                  <Button colorVariant={button.style} fullWidth>
                     {button.text}
-                  </NewButton>
+                  </Button>
                 </Link>
               ) : (
-                <NewButton
+                <Button
                   key={button._key}
                   className={
                     "md:min-w-[180px] lg:min-w-[210px] w-full sm:w-auto border-pka_background"
                   }
                 >
                   {button.text}
-                </NewButton>
+                </Button>
               )
             )}
           </div>

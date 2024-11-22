@@ -4,6 +4,7 @@ import Link from "next/link";
 import { cn, formatDate, ImgUrl } from "@/lib/utils";
 import { ArticleBadge } from "./HotNewsCard";
 import { FaArrowRight } from "react-icons/fa";
+import { FaRegImages } from "react-icons/fa6";
 
 export type NewsCardProps = {
   post: Post;
@@ -29,14 +30,24 @@ export default function NewsCard({ post }: NewsCardProps) {
           "lg:w-[22%] lg:max-w-[300px] relative hidden lg:block aspect-square rounded-xl overflow-hidden"
         }
       >
-        <Image
-          src={ImgUrl(gallery[0])}
-          alt={"News image"}
-          fill
-          className={
-            "object-cover group-hover:scale-[1.03] transition-transform duration-700"
-          }
-        />
+        {gallery ? (
+          <Image
+            src={ImgUrl(gallery[0])}
+            alt={"News image"}
+            fill
+            className={
+              "object-cover group-hover:scale-[1.03] transition-transform duration-700"
+            }
+          />
+        ) : (
+          <div
+            className={
+              "bg-pka_green_light h-full rounded-xl flex items-center justify-center"
+            }
+          >
+            <FaRegImages className={"text-pka_blue2 size-20"} />
+          </div>
+        )}
       </div>
 
       <div

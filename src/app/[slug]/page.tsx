@@ -48,8 +48,6 @@ export default async function Page(props: Props) {
     slugData?.ancillarysections?.sections?.length === 1 &&
     slugData?.ancillarysections?.sections[0]._type === "page.comingsoon"
   ) {
-    console.log({ slugData });
-
     const section = slugData?.ancillarysections?.sections[0];
     const title = section?.title;
     const image = section?.portrait;

@@ -6,7 +6,7 @@ export type Portrait = {
   _type: string;
 };
 
-export type Button = {
+export type ButtonType = {
   style: string;
   text: string;
   url: string;

@@ -1,7 +1,5 @@
 import { Container, Title } from "@/common";
 import { Post } from "./News";
-import { NewButton } from "../../common/UI/NewButton";
-import Link from "next/link";
 import { ArticleBadge } from "./HotNewsCard";
 import { formatDate, ImgUrl } from "@/lib/utils";
 import Image from "next/image";
@@ -30,7 +28,7 @@ export default function NewsDetails({ data }: NewsDetailsProps) {
           <div className={"flex flex-col lg:flex-row gap-y-10"}>
             <div className={"flex-1"}>
               <div className={"grid grid-cols-2 gap-3 lg:gap-5"}>
-                {gallery.map((img) => (
+                {gallery?.map((img) => (
                   <div
                     key={JSON.stringify(img)}
                     className={

@@ -1,7 +1,7 @@
 import { Container, Title } from "@/common";
 import { Post } from "./News";
 import NewsList from "./NewsList";
-import { NewButton } from "../../common/UI/NewButton";
+import { Button } from "../../common/UI/Button";
 import Link from "next/link";
 
 export type MoreNewsProps = {
@@ -15,13 +15,13 @@ export default function MoreNews({ data = [] }: MoreNewsProps) {
         <div className={"flex flex-col gap-8"}>
           <Title>More News!</Title>
           <NewsList news={data} />
-          <Link href={"/journal"} className={"sm:self-center"}>
-            <NewButton
+          <Link href={"/peace-adventures"} className={"sm:self-center"}>
+            <Button
               fullWidth
               className={"tracking-wider mx-auto border-pka_background"}
             >
               To Journal
-            </NewButton>
+            </Button>
           </Link>
         </div>
       </Container>

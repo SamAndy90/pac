@@ -1,15 +1,15 @@
 import Image from "next/image";
 import { cn, ImgUrl } from "@/lib/utils";
 import Link from "next/link";
-import { NewButton } from "../../common/UI/NewButton";
-import { Button, Color, Portrait } from "@/types";
+import { Button } from "../../common/UI/Button";
+import { type ButtonType, Color, Portrait } from "@/types";
 import { Title } from "@/common";
 
 type ImageInfoData = {
   title: string;
   description: string;
   portrait: Portrait;
-  buttons: Button[];
+  buttons: ButtonType[];
   textColor: Color;
   bgColor: Color;
   _type: string;
@@ -57,12 +57,12 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
                     "md:min-w-[180px] lg:min-w-[210px] w-full sm:w-auto"
                   }
                 >
-                  <NewButton fullWidth colorVariant={"secondary"}>
+                  <Button fullWidth colorVariant={"secondary"}>
                     {button.text}
-                  </NewButton>
+                  </Button>
                 </Link>
               ) : (
-                <NewButton
+                <Button
                   key={button._key}
                   colorVariant={"secondary"}
                   className={
@@ -70,7 +70,7 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
                   }
                 >
                   {button.text}
-                </NewButton>
+                </Button>
               )
             )}
           </div>
