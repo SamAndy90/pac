@@ -35,12 +35,12 @@ type HomePageProps = {
 export default function HomePage({ data, title = "Homepage" }: HomePageProps) {
   const [sections, setSections] = useState<any[]>(data);
   const [pageTitle] = useState(title);
-  const [mounted, setMounted] = useState(false);
-  const { toggleBanner, hasConsent } = useConsent();
-  const [consent, setConsent] = useState(true);
-  {
-    consent ? () => toggleBanner() : setConsent(false);
-  }
+  // const [mounted, setMounted] = useState(false);
+  // const { toggleBanner, hasConsent } = useConsent();
+  // const [consent, setConsent] = useState(true);
+  // {
+  //   consent ? () => toggleBanner() : setConsent(false);
+  // }
 
   let DateList: any = [] as ReactNode[];
 
@@ -96,36 +96,40 @@ export default function HomePage({ data, title = "Homepage" }: HomePageProps) {
     return () => subscription.unsubscribe();
   }, [setSections, client]);
 
-  useEffect(() => {
-    setMounted(true);
-  }, [setMounted]);
+  // useEffect(() => {
+  //   setMounted(true);
+  // }, [setMounted]);
 
-  if (!mounted) return null;
+  if (!sections) return null;
 
   return (
-    <ConsentProvider options={consentOptions}>
-      {...DateList}
-      <ConsentBanner
-        settings={{
-          hidden: false,
-          label: "Decide",
-          modal: { title: "Cookies" },
-        }}
-        decline={{ label: "No", hidden: true }}
-        approve={{ label: "That's ok" }}
-      >
-        <>
-          <div className="flex text-2xl lg:3xl">
-            Cookies improve your experience
-          </div>
-          We use cookies and similar technologies to give you a personalised
-          shopping experience, personalised advertising and to analyse our web
-          traffic. Click ‘That's ok' if you'd like to allow all cookies.
-          Alternatively, you can choose which types of cookies you'd like to
-          accept or disable by clicking 'Let me choose' below. For more
-          information, please see our
-        </>
-      </ConsentBanner>
-    </ConsentProvider>
+    <>
+      <ConsentProvider options={consentOptions}>
+        {...DateList}
+        <ConsentBanner
+          settings={{
+            hidden: false,
+            label: "Decide",
+            modal: { title: "Cookies" },
+          }}
+          decline={{ label: "No", hidden: true }}
+          approve={{ label: "That's ok" }}
+        >
+          <>
+            <div className="flex text-2xl lg:3xl">
+              Cookies improve your experience
+            </div>
+            <p>
+              We use cookies and similar technologies to give you a personalised
+              shopping experience, personalised advertising and to analyse our
+              web traffic. Click ‘That's ok' if you'd like to allow all cookies.
+              Alternatively, you can choose which types of cookies you'd like to
+              accept or disable by clicking 'Let me choose' below. For more
+              information, please see our
+            </p>
+          </>
+        </ConsentBanner>
+      </ConsentProvider>
+    </>
   );
 }

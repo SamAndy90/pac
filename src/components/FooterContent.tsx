@@ -34,6 +34,16 @@ const FooterContent = (props: FooterContentProps) => {
     return () => subscription.unsubscribe();
   }, [setData, client]);
 
+  // if (pathname.startsWith("/age-restriction")) return null;
+
+  if (!data)
+    return (
+      <div className="flex text-pka_blue justify-center py-5 font-bold">
+        No Footer Found, If you want to add or create footer then go to CMS and
+        content on Footer
+      </div>
+    );
+
   return (
     <footer className={"max-w-[1920px] relative z-50 w-full mx-auto"}>
       <div className={"-mt-16 translate-y-[1px] sm:translate-y-0"}>

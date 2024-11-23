@@ -38,7 +38,7 @@ export default function Hero({ data }: HeroProps) {
                 src={ImgUrl(background)}
                 alt={"Main image"}
                 fill
-                objectFit={"cover"}
+                className={"object-cover"}
               />
             </div>
             <p className="flex-1 lg:self-end xl:text-xl 2xl:text-2xl lg:pl-6 text-pka_blue2 font-avenirThin">

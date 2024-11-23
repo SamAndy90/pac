@@ -29,6 +29,7 @@
     "graphql": "^16.8.1",
     "graphql-request": "^6.1.0",
     "gsap": "^3.12.5",
+    "js-cookie": "^3.0.5",
     "keen-slider": "^6.8.6",
     "lucide-react": "^0.365.0",
     "mongoose": "^8.2.4",
@@ -51,6 +52,7 @@
     "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/ramda": "^0.30.2",
     "@types/react": "^18",

@@ -10,7 +10,6 @@ import {
 import localFont from "next/font/local";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Banner from "@/components/AnnouncementBanner";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -162,7 +161,6 @@ export default function RootLayout({
           className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${roboto.variable} ${garamond.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} ${garamond_2.variable} relative bg-pka_background font-avenirThin`}
         >
           <Providers>
-            <Banner />
             <div
               className={"flex min-h-screen flex-col h-full justify-between"}
             >

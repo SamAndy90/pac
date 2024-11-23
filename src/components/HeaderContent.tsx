@@ -58,6 +58,16 @@ export default function HeaderContent(props: HeaderContentProps) {
     body.style.overflow = isMenuOpen ? "hidden" : "";
   }, [isMenuOpen]);
 
+  // if (pathname.startsWith("/age-restriction")) return null;
+
+  if (!data)
+    return (
+      <div className="flex text-pka_blue justify-center py-5 font-bold">
+        No Header Found, If you want to add or create header then go to CMS and
+        content on Header
+      </div>
+    );
+
   return (
     <>
       <header className="fixed z-50 w-full lg:top-3">

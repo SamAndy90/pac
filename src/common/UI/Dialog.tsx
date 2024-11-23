@@ -44,7 +44,7 @@ export function Dialog(props: DialogProps) {
         >
           <div
             className={twMerge(
-              "fixed inset-0 z-40 bg-white/20 backdrop-blur",
+              "fixed inset-0 z-[110] bg-white/20 backdrop-blur",
               overlayClassName
             )}
             aria-hidden
@@ -62,7 +62,7 @@ export function Dialog(props: DialogProps) {
         >
           <DialogPanel
             className={twMerge(
-              `fixed left-1/2 top-1/2 z-40 w-full md:max-w-screen-sm max-h-full max-w-[calc(100%-24px)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden py-4`,
+              `fixed left-1/2 top-1/2 z-[120] w-full md:max-w-screen-sm max-h-full max-w-[calc(100%-24px)] -translate-x-1/2 -translate-y-1/2 overflow-y-auto overflow-x-hidden py-4`,
               contentClassName
             )}
           >

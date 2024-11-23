@@ -30,6 +30,7 @@ import { faqs } from "./Sections/faqs";
 import { privacy } from "./Sections/privacy-policy";
 import { contest, contests } from "./Sections/contests";
 import { contactdetails, informing } from "./Sections/contact";
+import { ageRestriction } from "./Sections/ageRestriction";
 
 export const schema: { types: SchemaTypeDefinition[] } = {
   types: [
@@ -64,5 +65,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     pageComingSoon,
     pageImageInfo,
     pageShopBanner,
+    ageRestriction,
   ],
 };

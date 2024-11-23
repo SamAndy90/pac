@@ -141,8 +141,7 @@ export const EventCard: FC<EventCardProps> = ({
         {title}
       </h3>
 
-      <Link
-        href={"/"}
+      <div
         className={
           "flex items-center z-0 gap-x-1 border-b pb-[3px] group/link hover:border-b-white transition-all duration-300 border-b-white/50 justify-center text-white"
         }
@@ -159,7 +158,7 @@ export const EventCard: FC<EventCardProps> = ({
             "size-2.5 group-hover/link:translate-x-1 transition-all duration-300"
           }
         />
-      </Link>
+      </div>
 
       <div className="absolute z-20 bottom-[20%] sm:bottom-[26%]">
         {loadTimer()}
