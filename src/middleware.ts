@@ -25,9 +25,9 @@ export default function combinedMiddleware(request: NextRequest, event: any) {
     }
   }
 
-  if (request.nextUrl.pathname.includes("/age-restriction")) {
-    return NextResponse.redirect(new URL("/", request.url));
-  }
+  // if (request.nextUrl.pathname.includes("/age-restriction")) {
+  //   return NextResponse.redirect(new URL("/", request.url));
+  // }
 
   return authMiddleware({
     publicRoutes: (req) =>
