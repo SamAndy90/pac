@@ -6,9 +6,7 @@ import {
   ListboxButton,
   ListboxOption,
   ListboxOptions,
-  Transition,
 } from "@headlessui/react";
-import { Fragment } from "react";
 import { FiAlertTriangle, FiCheck, FiChevronDown } from "react-icons/fi";
 
 type Option = {

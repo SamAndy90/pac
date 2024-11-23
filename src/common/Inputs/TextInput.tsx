@@ -55,9 +55,8 @@ export const TextInput = forwardRef<
           "flex flex-nowrap items-center overflow-hidden rounded-xl border transition duration-300",
           {
             "border-red-500": error,
-            "border-pka_blue2/30 hover:border-pka_blue2": !error,
-            "hover:border-pka_blue2": !isFocused && !error,
-            "!border-pka_green": isFocused && !error,
+            "hover:border-pka_blue border-pka_blue/30": !isFocused && !error,
+            "border-pka_green": isFocused && !error,
           },
           className?.inputWrapper
         )}
