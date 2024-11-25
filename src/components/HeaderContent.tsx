@@ -58,8 +58,6 @@ export default function HeaderContent(props: HeaderContentProps) {
     body.style.overflow = isMenuOpen ? "hidden" : "";
   }, [isMenuOpen]);
 
-  // if (pathname.startsWith("/age-restriction")) return null;
-
   if (!data)
     return (
       <div className="flex text-pka_blue justify-center py-5 font-bold">
@@ -70,7 +68,11 @@ export default function HeaderContent(props: HeaderContentProps) {
 
   return (
     <>
-      <header className="fixed z-50 w-full lg:top-3">
+      <header
+        className={cn("fixed z-50 w-full lg:top-3", {
+          hidden: pathname.includes("/age-restriction"),
+        })}
+      >
         <Container>
           <div className={"py-2 lg:py-5 flex gap-x-2"}>
             <nav className="bg-pka_blue flex-1 px-4 lg:px-10 text-white tracking-widest text-base font-thunder font-medium flex items-center z-40 justify-between lg:justify-around rounded-full h-12 lg:h-[62px] relative">

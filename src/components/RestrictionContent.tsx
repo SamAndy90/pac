@@ -29,7 +29,7 @@ export function RestrictionContent({ data }: RestrictionContentProps) {
   } = ageData;
 
   const handleConfirm = () => {
-    Cookies.set("ageVerified", "true", { expires: 7 });
+    Cookies.set("ageVerified", "true", { expires: 1 });
     setTimeout(() => {
       router.push("/");
     }, 0);

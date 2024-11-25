@@ -34,8 +34,6 @@ const FooterContent = (props: FooterContentProps) => {
     return () => subscription.unsubscribe();
   }, [setData, client]);
 
-  // if (pathname.startsWith("/age-restriction")) return null;
-
   if (!data)
     return (
       <div className="flex text-pka_blue justify-center py-5 font-bold">
@@ -45,7 +43,11 @@ const FooterContent = (props: FooterContentProps) => {
     );
 
   return (
-    <footer className={"max-w-[1920px] relative z-50 w-full mx-auto"}>
+    <footer
+      className={cn("max-w-[1920px] relative z-50 w-full mx-auto", {
+        hidden: pathname.startsWith("/age-restriction"),
+      })}
+    >
       <div className={"-mt-16 translate-y-[1px] sm:translate-y-0"}>
         <Image src={RectangleIMG} alt={"Decor"} className={"w-full"} />
       </div>
@@ -128,37 +130,6 @@ const FooterContent = (props: FooterContentProps) => {
       </div>
     </footer>
   );
-  // return (
-  //   <footer className={"bg-pka_blue"}>
-  //     <Container>
-  //       <div className={"py-1"}>
-  //         <nav className={"py-16"}>
-  //           <ul
-  //             className={
-  //               "flex flex-col md:flex-row text-white font-averia text-[17px] justify-center md:justify-evenly items-center text-center gap-y-5 gap-x-4"
-  //             }
-  //           >
-  //             {links.map((link: any) => {
-  //               return (
-  //                 <li
-  //                   key={link.value}
-  //                   className={
-  //                     "transition-colors uppercase hover:text-pka_green_light"
-  //                   }
-  //                 >
-  //                   <Link href={link.slug.current}>{link.value}</Link>
-  //                 </li>
-  //               );
-  //             })}
-  //           </ul>
-  //         </nav>
-  //         <div className="py-10 leading-none font-bold tracking-wider text-center text-7xl font-thunder text-pka_green_light">
-  //           <p>{title}</p>
-  //         </div>
-  //       </div>
-  //     </Container>
-  //   </footer>
-  // );
 };
 
 export default FooterContent;

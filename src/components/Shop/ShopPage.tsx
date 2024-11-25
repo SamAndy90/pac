@@ -26,7 +26,6 @@ export default function ShopPage({
   title = "Shop",
 }: ShopPageProps) {
   const [sections, setSections] = useState(data);
-  const [pageTitle] = useState(title);
 
   let Sections: any = [] as ReactNode[];
 
@@ -40,7 +39,7 @@ export default function ShopPage({
   });
 
   useEffect(() => {
-    const query = `*[_type == "page" && title == "${pageTitle}"]`;
+    const query = `*[_type == "page" && title == "${title}"]`;
     const subscription = client.listen(query).subscribe((update) => {
       if (update.result?.shoptemplatesections?.sections) {
         setSections(update.result?.shoptemplatesections.sections);

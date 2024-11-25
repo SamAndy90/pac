@@ -17,17 +17,13 @@ export default function combinedMiddleware(request: NextRequest, event: any) {
   const { cookies } = request;
 
   const ageVerified = cookies.get("ageVerified");
-  console.log({ ageVerified });
 
-  if (!ageVerified) {
-    if (!request.nextUrl.pathname.startsWith("/age-restriction")) {
-      return NextResponse.redirect(new URL("/age-restriction", request.url));
-    }
+  if (
+    !ageVerified &&
+    !request.nextUrl.pathname.startsWith("/age-restriction")
+  ) {
+    return NextResponse.redirect(new URL("/age-restriction", request.url));
   }
-
-  // if (request.nextUrl.pathname.includes("/age-restriction")) {
-  //   return NextResponse.redirect(new URL("/", request.url));
-  // }
 
   return authMiddleware({
     publicRoutes: (req) =>
