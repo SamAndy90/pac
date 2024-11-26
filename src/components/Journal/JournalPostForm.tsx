@@ -7,17 +7,20 @@ import { Button } from "@/common/UI/Button";
 import { DataFetcherErrorAlert } from "@/common/DataFetcherErrorAlert";
 import { Title } from "@/common";
 import { FormTextInput } from "@/common/FormInputs";
-import { FormSelectInput } from "@/common/FormInputs/FormSelectInput";
+import { CMSFormData } from "@/lib/actions";
 
 const formSchema = z.object({
-  title: z.string().default(""),
-  paragraphs: z.string().default(""),
-  article: z.string().default("news"),
+  email: z.string().email().default(""),
 });
 
 type Form = z.infer<typeof formSchema>;
 
-export function JournalPostForm() {
+type JournalPostFormProps = {
+  data: CMSFormData;
+};
+
+export function JournalPostForm({ data }: JournalPostFormProps) {
+  const { form_title = "Form Title", submit_button_text = "Submit" } = data;
   const form = useForm<Form>({
     resolver: zodResolver(formSchema),
     defaultValues: getDefaults(formSchema),
@@ -43,27 +46,11 @@ export function JournalPostForm() {
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>
         <div className={"flex flex-col gap-y-6 md:gap-y-8"}>
-          <Title className={"text-center"}>formName</Title>
+          <Title className={"text-center"}>{form_title}</Title>
 
           <div className={"flex flex-col gap-y-6 md:gap-y-10"}>
             <div className={"flex flex-col gap-y-4 md:gap-y-5"}>
-              <FormTextInput<Form> fieldName={"title"} label={"Title"} />
-              <FormTextInput<Form>
-                fieldName={"paragraphs"}
-                label={"Paragraphs"}
-                multiline={true}
-              />
-              <FormSelectInput
-                label={"Article"}
-                display={"Choose"}
-                fieldName={"article"}
-                options={[
-                  { label: "Company", value: "company" },
-                  { label: "Team", value: "team" },
-                  { label: "Project", value: "project" },
-                ]}
-              />
-
+              <FormTextInput<Form> fieldName={"email"} label={"Email"} />
               {/* <DataFetcherErrorAlert isError={} error={} /> */}
             </div>
 
@@ -73,7 +60,7 @@ export function JournalPostForm() {
               fullWidth
               loading={isLoading}
             >
-              Create post
+              {submit_button_text}
             </Button>
           </div>
         </div>

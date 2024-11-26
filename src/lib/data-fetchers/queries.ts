@@ -149,5 +149,3 @@ export const CART_LINES_REMOVE_MUTATION = gql`
     }
   }
 `;
-
-// TODO Update mutation query

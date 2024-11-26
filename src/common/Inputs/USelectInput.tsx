@@ -9,7 +9,7 @@ import {
 } from "@headlessui/react";
 import { FiAlertTriangle, FiCheck, FiChevronDown } from "react-icons/fi";
 
-type Option = {
+export type Option = {
   value: string;
   label: string;
 };

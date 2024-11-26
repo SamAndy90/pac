@@ -4,7 +4,6 @@ import NewsList from "./NewsList";
 import { Button } from "../../common/UI/Button";
 import { cn } from "@/lib/utils";
 import { useState } from "react";
-import { Dialog } from "@/common/UI/Dialog";
 import { AddPostComponent } from "./AddPostComponent";
 
 export type Article = "company" | "team" | "project";

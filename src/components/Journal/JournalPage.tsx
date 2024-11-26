@@ -30,7 +30,6 @@ export default function JournalPage({
   title = "Journal",
 }: PrivacyPageProps) {
   const [sections, setSections] = useState(data);
-  const [pageTitle] = useState(title);
 
   let Sections: any = [] as ReactNode[];
 
@@ -43,7 +42,7 @@ export default function JournalPage({
   });
 
   useEffect(() => {
-    const query = `*[_type == "page" && title == "${pageTitle}"]`;
+    const query = `*[_type == "page" && title == "${title}"]`;
     const subscription = client.listen(query).subscribe((update) => {
       if (update.result?.journaltemplatesections?.sections) {
         setSections(update.result?.journaltemplatesections.sections);

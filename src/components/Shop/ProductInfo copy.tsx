@@ -7,6 +7,7 @@ import { ImageSlider } from "./ImageSlider";
 import { Button } from "../../common/UI/Button";
 import { useShopContext } from "@/contexts/ShopContext";
 import { Cart } from "@/types";
+import SelectInput from "@/common/Inputs/SelectInput";
 import { useState } from "react";
 import { useMutation, useQuery } from "@apollo/client";
 import client from "@/lib/shopifyClient";
@@ -16,7 +17,7 @@ import {
   CART_LINES_UPDATE_MUTATION,
   GET_CART_QUERY,
 } from "@/lib/data-fetchers/queries";
-import { Option, USelectInput } from "@/common/Inputs/USelectInput";
+import { USelectInput } from "@/common/Inputs/USelectInput";
 
 export type ProductInfoProps = {
   product: any;
@@ -24,9 +25,7 @@ export type ProductInfoProps = {
 
 export default function ProductInfo({ product }: ProductInfoProps) {
   const { title, description, variants, priceRange, media } = product;
-  const [variantIds, setVariantIds] = useState<string[]>([
-    variants.edges[0].node.id,
-  ]);
+  const [variantId, setVariantId] = useState(variants.edges[0].node.id);
   const { cartId, setCartId } = useShopContext();
 
   const { data: cartData } = useQuery<{ cart: Cart }>(GET_CART_QUERY, {
@@ -119,53 +118,47 @@ export default function ProductInfo({ product }: ProductInfoProps) {
     }
   };
 
-  async function addProductToCart(merchandiseIds: string[]) {
+  async function addProductToCart(merchandiseId: string) {
     if (!cartId) {
-      const cart = await createCart(
-        merchandiseIds.map((id) => ({ quantity: 1, variantId: id }))
-      );
+      const cart = await createCart([
+        { quantity: 1, variantId: merchandiseId },
+      ]);
 
       if (cart) {
         setCartId(cart.cartId);
         localStorage.setItem("cart_id", JSON.stringify(cart.cartId));
-        setVariantIds([]);
       }
     } else {
       const lines = cartData?.cart.lines.edges;
 
-      const existingItems = new Map(
-        lines?.map((line) => [line.node.merchandise.id, line])
+      const isExist = lines?.some(
+        (line) => line.node.merchandise.id === merchandiseId
       );
 
-      const updatedLines = [];
-      const newLines = [];
+      if (isExist) {
+        const updatedLines = lines?.map((line) => {
+          return line.node.merchandise.id === merchandiseId
+            ? {
+                id: line.node.id,
+                merchandiseId: line.node.merchandise.id,
+                quantity: line.node.quantity + 1,
+              }
+            : {
+                id: line.node.id,
+                merchandiseId: line.node.merchandise.id,
+                quantity: line.node.quantity,
+              };
+        });
 
-      for (const id of merchandiseIds) {
-        if (existingItems.has(id)) {
-          const existingLine = existingItems.get(id)!;
-          updatedLines.push({
-            id: existingLine.node.id,
-            merchandiseId: existingLine.node.merchandise.id,
-            quantity: existingLine.node.quantity + 1,
-          });
-        } else {
-          newLines.push({ quantity: 1, variantId: id });
-        }
-      }
-
-      if (updatedLines.length > 0) {
-        await updateCartLinesMutation({
+        updateCartLinesMutation({
           variables: {
             cartId,
             lines: updatedLines,
           },
         });
+      } else {
+        await addToCart(cartId, [{ quantity: 1, variantId: merchandiseId }]);
       }
-
-      if (newLines.length > 0) {
-        await addToCart(cartId, newLines);
-      }
-      setVariantIds([]);
     }
   }
 
@@ -178,7 +171,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         alt: el.node.image.altText || "Product Image",
       })) || [];
 
-  let allVariants: Option[] =
+  let allVariants =
     variants.edges
       .filter((v: any) => v.node.availableForSale)
       .map((v: any) => {
@@ -187,8 +180,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
           value: v.node.id,
         };
       }) || [];
-
-  console.log({ allVariants });
 
   return (
     <section className={"my-28 lg:my-32"}>
@@ -217,9 +208,9 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 {/* <SelectInput list={allVariants} setId={setVariantId} /> */}
                 <USelectInput
                   options={allVariants}
-                  multiple={true}
-                  value={variantIds ?? []}
-                  onChange={setVariantIds}
+                  multiple
+                  value={variantId}
+                  onChange={setVariantId}
                 />
               </div>
             )}
@@ -238,7 +229,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
                 fullWidth
                 size={"small"}
                 className={"border-pka_blue2 pb-1.5 sm:w-auto"}
-                onClick={() => addProductToCart(variantIds)}
+                onClick={() => addProductToCart(variantId)}
               >
                 Enter to Win
               </Button>
