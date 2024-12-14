@@ -1,7 +1,4 @@
-"use client";
-
-import { ReactNode, useEffect, useState } from "react";
-import { client } from "../../../sanity/lib/client";
+import { Fragment, ReactNode } from "react";
 import AboutPageHero from "@/components/About/AboutPageHero";
 import TextSection from "@/components/About/TextSection";
 import ImageInfo from "@/components/About/ImageInfo";
@@ -10,8 +7,7 @@ import ImageSection from "@/components/About/ImageSection";
 import JoinPeaceKeepersBenifit from "@/components/About/JoinPeaceKeepersBenifit";
 
 type AncillaryPageProps = {
-  sections: any;
-  title?: string;
+  sections: any[];
 };
 
 const AllComponents: { [key: string]: (data: any) => ReactNode } = {
@@ -21,43 +17,22 @@ const AllComponents: { [key: string]: (data: any) => ReactNode } = {
   "page.services": (data: any) => <Services data={data} />,
   "page.image": (data: any) => <ImageSection data={data} />,
   "page.benifits": (data: any) => <JoinPeaceKeepersBenifit data={data} />,
-  "page.imageInfo": (data: any) => <ImageInfo data={data} revert={true} />,
 } as const;
 
-const AncillaryPage = ({ sections, title = "About" }: AncillaryPageProps) => {
-  const [sectionData, setSectionsData] = useState(sections);
-  const [mounted, setMounted] = useState(false);
+export default function AncillaryPage({ sections }: AncillaryPageProps) {
+  if (!sections?.length) return null;
 
-  const DataList: ReactNode[] =
-    sectionData.map((section: any) => {
-      if (AllComponents[section._type]) {
-        return AllComponents[section._type](section);
-      }
-    }) || [];
+  let DataList: any = [] as ReactNode[];
 
-  useEffect(() => {
-    const query = `*[_type == "page" && title == "${title}"]`;
+  DataList = sections?.map((section: any) => {
+    if (AllComponents[section._type]) {
+      return (
+        <Fragment key={section._key}>
+          {AllComponents[section._type](section)}
+        </Fragment>
+      );
+    }
+  });
 
-    const subscription = client.listen(query).subscribe((update) => {
-      if (update.result?.ancillarysections.sections) {
-        setSectionsData(update.result?.ancillarysections.sections);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [setSectionsData, client, title]);
-
-  useEffect(() => {
-    setMounted(true);
-  }, [setMounted]);
-
-  if (!mounted) {
-    return null;
-  }
-
-  return (
-    <div className="flex w-full flex-col justify-center">{...DataList}</div>
-  );
-};
-
-export default AncillaryPage;
+  return <>{...DataList}</>;
+}

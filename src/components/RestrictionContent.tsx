@@ -2,7 +2,6 @@
 
 import { SanityDocument } from "next-sanity";
 import age18IMG from "@/resources/png/age-restriction.png";
-import { AgeRestrictionData } from "./AgeRestriction";
 import Image from "next/image";
 import { cn, ImgUrl } from "@/lib/utils";
 import { Title } from "@/common";
@@ -10,6 +9,7 @@ import { Button } from "@/common/UI/Button";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { AgeRestrictionData } from "@/app/age-restriction/page";
 
 export type RestrictionContentProps = {
   data: SanityDocument & AgeRestrictionData;

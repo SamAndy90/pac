@@ -1,7 +1,7 @@
 import { Container, Title } from "@/common";
 import { ContestCard } from "@/common/ContestCard";
 import { getData } from "@/lib/data-fetchers/sanity";
-import { Portrait } from "@/types";
+import { Color, Portrait } from "@/types";
 
 export type EventType = {
   _key: string;
@@ -11,8 +11,8 @@ export type EventType = {
   portrait: Portrait;
   title: string;
   timerstyle: {
-    bgcolor: string;
-    numcolor: string;
+    bgcolor: Color;
+    numcolor: Color;
   };
   collection_name: string;
   subtitle: string;
@@ -22,7 +22,7 @@ export type EventType = {
 export default async function ContestsPage() {
   const data = await getData(`*[_type == "contests"]`);
 
-  if (!data || !data.length) {
+  if (!data || !data?.length) {
     return (
       <div className={"text-center text-2xl mt-28 text-pka_blue"}>
         Content not found
@@ -30,6 +30,7 @@ export default async function ContestsPage() {
     );
   }
   const events: EventType[] = data[0]?.contestsList;
+  console.log({ events });
 
   return (
     <section className={"mt-14 md:mt-20 pt-12 pb-40"}>
@@ -41,32 +42,9 @@ export default async function ContestsPage() {
               "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-[5vw] lg:px-[8vw] gap-y-[12vw] md:gap-x-[8vw] lg:gap-x-[5vw] lg:gap-y-[6vw]"
             }
           >
-            {events.map((event) => {
-              const {
-                collection_name,
-                subtitle,
-                title,
-                description,
-                starttime,
-                endtime,
-                timerstyle,
-                portrait,
-              } = event;
-              return (
-                <ContestCard
-                  key={event._key}
-                  collectionName={collection_name}
-                  subtitle={subtitle}
-                  title={title}
-                  description={description}
-                  eventStart={starttime}
-                  eventEnd={endtime}
-                  countdownBgColor={timerstyle.bgcolor}
-                  countdownTextColor={timerstyle.numcolor}
-                  backgroundImage={portrait}
-                />
-              );
-            })}
+            {events?.map((event) => (
+              <ContestCard key={event._key} event={event} />
+            ))}
           </div>
         </div>
       </Container>

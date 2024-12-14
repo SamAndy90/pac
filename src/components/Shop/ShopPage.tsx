@@ -1,8 +1,5 @@
-"use client";
-
-import { ReactNode, useEffect, useState } from "react";
+import { Fragment, ReactNode } from "react";
 import BannerComponent from "@/components/Shop/BannerComponent";
-import { client } from "../../../sanity/lib/client";
 import JoinPeaceKeepersBenifit from "@/components/About/JoinPeaceKeepersBenifit";
 import { Products } from "@/components/Shop/Products";
 
@@ -17,36 +14,29 @@ const ShopPageComponents: {
 type ShopPageProps = {
   data: [any];
   shopifyProducts: [any];
-  title?: string;
 };
 
-export default function ShopPage({
-  data,
-  shopifyProducts,
-  title = "Shop",
-}: ShopPageProps) {
-  const [sections, setSections] = useState(data);
+export default function ShopPage({ data, shopifyProducts }: ShopPageProps) {
+  if (!data?.length) return null;
 
   let Sections: any = [] as ReactNode[];
 
-  Sections = sections?.map((section: any) => {
+  Sections = data?.map((section: any) => {
     if (ShopPageComponents[section._type]) {
       if (section._type === "products") {
-        return ShopPageComponents[section._type](shopifyProducts);
+        return (
+          <Fragment key={section._key}>
+            {ShopPageComponents[section._type](shopifyProducts)}
+          </Fragment>
+        );
       }
-      return ShopPageComponents[section._type](section);
+      return (
+        <Fragment key={section._key}>
+          {ShopPageComponents[section._type](section)}
+        </Fragment>
+      );
     }
   });
-
-  useEffect(() => {
-    const query = `*[_type == "page" && title == "${title}"]`;
-    const subscription = client.listen(query).subscribe((update) => {
-      if (update.result?.shoptemplatesections?.sections) {
-        setSections(update.result?.shoptemplatesections.sections);
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, [setSections, client]);
 
   return <>{...Sections}</>;
 }

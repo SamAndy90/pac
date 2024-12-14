@@ -22,8 +22,8 @@ export const explore = defineField({
             defineField(titleField),
             defineField({
               name: "link",
-              type: "url",
-              title: "Link",
+              type: "string",
+              title: "Link (ex. contests, peace-social, etc.)",
             }),
             defineField(portraitField),
           ],

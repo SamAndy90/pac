@@ -1,9 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { FaRegImages } from "react-icons/fa6";
+import { ProductType } from "@/components/Shop/Products";
 
 export type ProductCardProps = {
-  data: any;
+  data: ProductType;
 };
 
 export function ProductCard({ data }: ProductCardProps) {

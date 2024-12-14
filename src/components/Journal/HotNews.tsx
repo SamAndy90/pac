@@ -18,12 +18,12 @@ export function HotNews({ data }: HotNewsProps) {
       <Container>
         <div className={"flex flex-col lg:flex-row gap-x-4 gap-y-5"}>
           {news
-            .sort(
+            ?.sort(
               (a, b) =>
                 new Date(b.created).getTime() - new Date(a.created).getTime()
             )
-            .slice(0, 2)
-            .map((post, Idx) => (
+            ?.slice(0, 2)
+            ?.map((post, Idx) => (
               <HotNewsCard
                 data={post}
                 Idx={Idx}

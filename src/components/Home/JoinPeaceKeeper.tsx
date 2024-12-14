@@ -1,30 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Button } from "../../common/UI/Button";
-import { Color, Portrait } from "@/types";
+import { Button } from "@/common/UI/Button";
+import { ButtonType, Portrait } from "@/types";
 import { ImgUrl } from "@/lib/utils";
 import { Title } from "@/common";
 
-interface PeaceKeeperData {
-  _id: string;
-  portrait: Portrait;
-  title: string;
-  description: string;
-  buttons: any[];
-  _updatedAt: string;
-  _createdAt: string;
-  _rev: string;
-  name: string;
-  textColor: Color;
-  bgColor: Color;
-  _type: string;
-}
-
-type Props = {
-  data: PeaceKeeperData;
+type JoinPeaceKeeperProps = {
+  data: {
+    title: string;
+    description: string;
+    portrait: Portrait;
+    buttons: ButtonType[];
+    _type: string;
+    _key: string;
+  };
 };
 
-const JoinPeaceKeeper = ({ data }: Props) => {
+const JoinPeaceKeeper = ({ data }: JoinPeaceKeeperProps) => {
   const { title, description, buttons } = data;
 
   return (
@@ -58,6 +50,7 @@ const JoinPeaceKeeper = ({ data }: Props) => {
               ) : (
                 <Button
                   key={button._key}
+                  colorVariant={button.style}
                   className={
                     "md:min-w-[180px] lg:min-w-[210px] w-full sm:w-auto border-pka_background"
                   }

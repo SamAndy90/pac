@@ -36,3 +36,11 @@ export const formatter = new Intl.NumberFormat("en-US", {
 export function formatPhoneNumber(phoneNumber: string) {
   return phoneNumber.replace(/\D/g, "");
 }
+
+export const getBaseUrl = () => {
+  if (process.env.VERCEL_URL) {
+    return `https://${process.env.VERCEL_URL}`;
+  }
+
+  return `http://localhost:3000`;
+};

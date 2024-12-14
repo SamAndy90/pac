@@ -29,7 +29,7 @@ export function AddPostComponent() {
         {formData.triger_button_text}
       </Button>
       <Dialog open={openForm} onClose={() => setOpenForm(false)}>
-        <JournalPostForm data={formData} />
+        <JournalPostForm data={formData} onClose={() => setOpenForm(false)} />
       </Dialog>
     </>
   );

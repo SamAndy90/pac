@@ -1,8 +1,6 @@
 import { type SchemaTypeDefinition } from "sanity";
 
 import pageShopBanner from "./Sections/pageBanner";
-import PageShop from "./Sections/PageShop";
-import pageImageInfo from "./Sections/aboutpage/pageImageInfo";
 import pageComingSoon from "./Sections/pageComingSoon";
 
 import Header from "./Sections/header";
@@ -62,9 +60,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     contests,
     contactdetails,
     informing,
-    PageShop,
     pageComingSoon,
-    pageImageInfo,
     pageShopBanner,
     ageRestriction,
     emailForm,

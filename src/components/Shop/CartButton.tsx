@@ -1,3 +1,5 @@
+"use client";
+
 import { useShopContext } from "@/contexts/ShopContext";
 import { ShoppingCart } from "lucide-react";
 import { CartWindow } from "./CartWindow";

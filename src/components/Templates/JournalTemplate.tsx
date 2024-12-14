@@ -3,10 +3,9 @@ import { getData } from "@/lib/data-fetchers/sanity";
 
 type JournalTemplateProps = {
   data: any;
-  title: string;
 };
 
-export async function JournalTemplate({ data, title }: JournalTemplateProps) {
+export async function JournalTemplate({ data }: JournalTemplateProps) {
   if (!data || !data?.journaltemplatesections?.sections) {
     return (
       <div
@@ -22,5 +21,5 @@ export async function JournalTemplate({ data, title }: JournalTemplateProps) {
 
   const sections = data?.journaltemplatesections?.sections;
 
-  return <JournalPage data={sections} news={newslist[0]} title={title} />;
+  return <JournalPage data={sections} news={newslist[0]} />;
 }

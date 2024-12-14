@@ -188,8 +188,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         };
       }) || [];
 
-  console.log({ allVariants });
-
   return (
     <section className={"my-28 lg:my-32"}>
       <Container>
@@ -214,7 +212,6 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             </p>
             {variants.edges.length > 1 && (
               <div className={"mb-8 lg:mb-12"}>
-                {/* <SelectInput list={allVariants} setId={setVariantId} /> */}
                 <USelectInput
                   options={allVariants}
                   multiple={true}

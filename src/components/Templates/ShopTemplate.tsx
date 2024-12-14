@@ -3,10 +3,9 @@ import { getShopifyProducts } from "@/lib/data-fetchers/shopify/products";
 
 type ShopTemplateProps = {
   data: any;
-  title: string;
 };
 
-export async function ShopTemplate({ data, title }: ShopTemplateProps) {
+export async function ShopTemplate({ data }: ShopTemplateProps) {
   if (!data || !data?.shoptemplatesections?.sections) {
     return (
       <div
@@ -22,7 +21,17 @@ export async function ShopTemplate({ data, title }: ShopTemplateProps) {
 
   const shopifyProducts = await getShopifyProducts();
 
-  return (
-    <ShopPage data={sections} shopifyProducts={shopifyProducts} title={title} />
-  );
+  if (!shopifyProducts) {
+    return (
+      <div
+        className={
+          "font-thunder tracking-wider text-pka_blue uppercase text-3xl h-screen flex items-center justify-center"
+        }
+      >
+        <p>Can`t find any products</p>
+      </div>
+    );
+  }
+
+  return <ShopPage data={sections} shopifyProducts={shopifyProducts} />;
 }

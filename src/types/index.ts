@@ -1,3 +1,5 @@
+import { ButtonStyles } from "@/common/UI/Button";
+
 export type Portrait = {
   asset: {
     _ref: string;
@@ -7,9 +9,9 @@ export type Portrait = {
 };
 
 export type ButtonType = {
-  style: string;
+  style?: ButtonStyles;
   text: string;
-  url: string;
+  url?: string;
   _key: string;
 };
 
@@ -28,6 +30,15 @@ export type Color = {
 export type Slug = {
   current: string;
   _type: string;
+};
+
+export type Price = { minVariantPrice: { amount: string } };
+
+export type MediaImage = {
+  image: {
+    altText: string | null;
+    url: string;
+  };
 };
 
 export type SanityLink = {

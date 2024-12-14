@@ -1,11 +1,10 @@
-import PrivacyPage from "../Privacy/PrivacyPage";
+import PrivacyPage from "@/components/Privacy/PrivacyPage";
 
 type PrivacyTemplateProps = {
   data: any;
-  title: string;
 };
 
-export async function PrivacyTemplate({ data, title }: PrivacyTemplateProps) {
+export function PrivacyTemplate({ data }: PrivacyTemplateProps) {
   if (!data || !data?.privacytemplatesections?.sections) {
     return (
       <div
@@ -20,5 +19,5 @@ export async function PrivacyTemplate({ data, title }: PrivacyTemplateProps) {
 
   const sections = data?.privacytemplatesections?.sections;
 
-  return <PrivacyPage data={sections} title={title} />;
+  return <PrivacyPage data={sections} />;
 }

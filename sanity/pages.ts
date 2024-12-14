@@ -52,7 +52,6 @@ export default defineType({
             defineArrayMember({ type: "abouthero" }),
             defineArrayMember({ type: "textsection" }),
             defineArrayMember({ type: "page.ancillary50" }),
-            defineArrayMember({ type: "page.imageInfo" }),
             defineArrayMember({ type: "page.image" }),
             defineArrayMember({ type: "page.services" }),
             defineArrayMember({ type: "page.benifits" }),
@@ -98,18 +97,6 @@ export default defineType({
             defineArrayMember({ type: "page.comingsoon" }),
             defineArrayMember({ type: "products" }),
           ],
-        },
-        {
-          name: "shoptype",
-          title: "Choose Shop Type",
-          type: "string",
-          options: {
-            list: [
-              { title: "Merchandize", value: "merces" },
-              { title: "Contest", value: "contest" },
-              { title: "Peace Social", value: "peace" },
-            ],
-          },
         },
       ],
     }),

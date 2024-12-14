@@ -1,3 +1,5 @@
+"use client";
+
 import { Title } from "@/common";
 import { cn, formatter } from "@/lib/utils";
 import {

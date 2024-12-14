@@ -1,8 +1,6 @@
-import { SanityDocument } from "next-sanity";
-
-import { sanityFetch } from "../../sanity/lib/fetch";
 import FooterContent from "./FooterContent";
 import { Portrait, SanityLink } from "@/types";
+import { getData } from "@/lib/data-fetchers/sanity";
 
 export type FooterContentData = {
   title: string;
@@ -11,14 +9,8 @@ export type FooterContentData = {
   links: SanityLink[];
 };
 
-async function getData() {
-  return await sanityFetch<SanityDocument<FooterContentData>[]>({
-    query: `*[_type == 'footer']`,
-  });
-}
-
-export default async function Footer() {
-  const data = await getData();
+export async function Footer() {
+  const data = await getData<FooterContentData>(`*[_type == 'footer']`);
 
   return <FooterContent data={data[0]} />;
 }

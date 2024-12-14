@@ -1,4 +1,6 @@
-"use cient";
+"use client";
+
+import { motion, useScroll } from "motion/react";
 
 import Image from "next/image";
 import React from "react";
@@ -12,30 +14,26 @@ import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { Portrait } from "@/types";
 
-type AboutPageHeroData = {
-  title?: string;
-  _type: string;
-  _key: string;
-  portrait?: Portrait;
-};
-
 type AboutPageHeroProps = {
-  data: AboutPageHeroData;
+  data: {
+    title?: string;
+    portrait: Portrait;
+    _type: string;
+    _key: string;
+  };
 };
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger, useGSAP);
-}
 
 const AboutPageHero = ({ data }: AboutPageHeroProps) => {
-  const container = useRef<HTMLElement | any>();
-  const { title, portrait } = data;
+  const container = useRef<HTMLElement | any>(null);
   const imgRef = useRef(null);
+  const { title, portrait } = data;
 
   useGSAP(
     () => {
+      gsap.registerPlugin(ScrollTrigger);
+
       gsap.to(".scaleimage", {
-        scale: 2.5,
+        scale: 2.6,
         scrollTrigger: {
           trigger: container.current,
           start: "top top",
@@ -45,33 +43,23 @@ const AboutPageHero = ({ data }: AboutPageHeroProps) => {
           pinSpacing: false,
         },
       });
-    },
-    { scope: container }
-  );
 
-  useGSAP(
-    () => {
       gsap.to(".uptitle", {
-        y: -150,
+        y: -170,
         scrollTrigger: {
           trigger: container.current,
-          start: "top top",
-          end: "bottom top",
+          start: "-1% top",
+          end: "=+500px top",
           scrub: 1,
         },
       });
-    },
-    { scope: container }
-  );
 
-  useGSAP(
-    () => {
       gsap.to(".downtitle", {
-        y: 150,
+        y: 170,
         scrollTrigger: {
           trigger: container.current,
-          start: "top top",
-          end: "bottom top",
+          start: "-1% top",
+          end: "=+500px top",
           scrub: 1,
         },
       });
@@ -84,31 +72,35 @@ const AboutPageHero = ({ data }: AboutPageHeroProps) => {
       <section className={"lg:hidden"}>
         <div className={"px-3"}>
           <div className={"pt-[95px] mb-8 md:mb-12 text-center"}>
-            <Title>
-              <div>About Peace</div>
-              <div>
-                Keepers <em className={"font-normal"}>Adventures</em>
-              </div>
-            </Title>
+            {title && (
+              <Title>
+                <div>{title.split(" ")[0]}</div>
+                <div>
+                  {title
+                    .split(" ")
+                    .slice(1)
+                    .map((i) => i.trim())
+                    .join(" ")}
+                </div>
+              </Title>
+            )}
           </div>
         </div>
 
         <div className={"relative aspect-[10/11] md:aspect-[4/3] bg-pka_green"}>
-          {portrait && (
-            <Image
-              src={ImgUrl(portrait)}
-              alt="banner"
-              className="object-cover scaleimage"
-              fill
-            />
-          )}
+          <Image
+            src={ImgUrl(portrait)}
+            alt={"banner"}
+            className={"object-cover"}
+            fill
+          />
         </div>
       </section>
 
       <section className="hidden lg:block overflow-hidden min-h-[200vh]">
         <Container className={"h-full"} ref={container}>
           <div
-            className={cn("h-full flex flex-col items-center justify-center", {
+            className={cn("flex flex-col items-center", {
               "pt-[27vh]": !title,
             })}
           >
@@ -124,15 +116,13 @@ const AboutPageHero = ({ data }: AboutPageHeroProps) => {
               </div>
             )}
             <div className="relative z-[100] scaleimage mx-auto rounded-3xl overflow-hidden lg:w-[50dvw] xl:w-[45dvw] h-[45vh] max-h-[600px]">
-              {portrait && (
-                <Image
-                  ref={imgRef}
-                  src={ImgUrl(portrait)}
-                  alt="banner"
-                  className="object-cover "
-                  fill
-                />
-              )}
+              <Image
+                ref={imgRef}
+                src={ImgUrl(portrait)}
+                alt={"banner"}
+                className={"object-cover"}
+                fill
+              />
             </div>
             {title && (
               <div className={"mt-8 downtitle xl:mt-10 text-center"}>

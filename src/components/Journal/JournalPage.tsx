@@ -1,12 +1,9 @@
-"use client";
-
-import { ReactNode, useEffect, useState } from "react";
-import { client } from "../../../sanity/lib/client";
 import { Welcome } from "./Welcome";
 import { HotNews } from "./HotNews";
 import TextSection from "../About/TextSection";
 import News from "./News";
 import ImageSection from "../About/ImageSection";
+import { Fragment, ReactNode } from "react";
 
 const JournalPageComponents: { [key: string]: (data: any) => ReactNode } = {
   welcome: (data: any) => <Welcome data={data} />,
@@ -21,35 +18,26 @@ const JournalPageComponents: { [key: string]: (data: any) => ReactNode } = {
 type PrivacyPageProps = {
   data: [any];
   news: any;
-  title?: string;
 };
 
-export default function JournalPage({
-  data,
-  news,
-  title = "Journal",
-}: PrivacyPageProps) {
-  const [sections, setSections] = useState(data);
+export default function JournalPage({ data, news }: PrivacyPageProps) {
+  if (!data?.length) return null;
 
   let Sections: any = [] as ReactNode[];
 
-  Sections = sections?.map((section: any) => {
+  Sections = data?.map((section: any) => {
     if (JournalPageComponents[section._type]) {
-      return JournalPageComponents[section._type](
-        section._type === "news" || section._type === "hotnews" ? news : section
+      return (
+        <Fragment key={section._key}>
+          {JournalPageComponents[section._type](
+            section._type === "news" || section._type === "hotnews"
+              ? news
+              : section
+          )}
+        </Fragment>
       );
     }
   });
-
-  useEffect(() => {
-    const query = `*[_type == "page" && title == "${title}"]`;
-    const subscription = client.listen(query).subscribe((update) => {
-      if (update.result?.journaltemplatesections?.sections) {
-        setSections(update.result?.journaltemplatesections.sections);
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, [setSections, client]);
 
   return <>{...Sections}</>;
 }

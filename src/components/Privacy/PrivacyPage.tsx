@@ -1,7 +1,4 @@
-"use client";
-
-import { ReactNode, useEffect, useState } from "react";
-import { client } from "../../../sanity/lib/client";
+import { Fragment, ReactNode } from "react";
 import { Privacy } from "./Privacy";
 
 const PrivacyPageComponents: {
@@ -12,33 +9,22 @@ const PrivacyPageComponents: {
 
 type PrivacyPageProps = {
   data: [any];
-  title?: string;
 };
 
-export default function PrivacyPage({
-  data,
-  title = "Privacy",
-}: PrivacyPageProps) {
-  const [sections, setSections] = useState(data);
-  const [pageTitle] = useState(title);
+export default function PrivacyPage({ data }: PrivacyPageProps) {
+  if (!data?.length) return null;
 
   let Sections: any = [] as ReactNode[];
 
-  Sections = sections?.map((section: any) => {
+  Sections = data?.map((section: any) => {
     if (PrivacyPageComponents[section._type]) {
-      return PrivacyPageComponents[section._type](section);
+      return (
+        <Fragment key={section._key}>
+          {PrivacyPageComponents[section._type](section)}
+        </Fragment>
+      );
     }
   });
-
-  useEffect(() => {
-    const query = `*[_type == "page" && title == "${pageTitle}"]`;
-    const subscription = client.listen(query).subscribe((update) => {
-      if (update.result?.privacytemplatesections?.sections) {
-        setSections(update.result?.privacytemplatesections.sections);
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, [setSections, client]);
 
   return <>{...Sections}</>;
 }

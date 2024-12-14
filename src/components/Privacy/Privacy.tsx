@@ -27,13 +27,13 @@ export function Privacy({ data }: PrivacyProps) {
         <div className={"max-w-[1000px] mx-auto"}>
           <Title className={"mb-6 md:mb-10 text-center"}>{title}</Title>
           <div className={"flex flex-col gap-y-8"}>
-            {blocks.map((block) => (
+            {blocks?.map((block) => (
               <div key={block._key}>
                 <Title component={"h5"} className={"text-2xl mb-2 xl:text-3xl"}>
-                  {block.title}
+                  {block?.title}
                 </Title>
                 <div className={"flex flex-col gap-y-2"}>
-                  {block.paragraphs.map((paragraph, Idx) => (
+                  {block?.paragraphs?.map((paragraph, Idx) => (
                     <p
                       key={block._key + Idx}
                       className={"text-pka_blue2 font-avenirThin"}

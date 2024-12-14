@@ -1,7 +1,7 @@
 import { titleField } from "../fields/titleField";
-import { buttonField } from "../fields/buttonField";
 import { portraitField } from "../fields/portraitField";
 import { defineField } from "sanity";
+import { buttons } from "../fields";
 
 export const imageInfo = defineField({
   name: "page.ancillary50",
@@ -24,7 +24,7 @@ export const imageInfo = defineField({
       title: "Choose Text Color",
       type: "simplerColor",
     }),
-    defineField(buttonField),
+    defineField(buttons),
     defineField(portraitField),
   ],
 });

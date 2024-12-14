@@ -4,7 +4,7 @@ type ContactTemplateProps = {
   data: any;
 };
 
-export async function ContactTemplate({ data }: ContactTemplateProps) {
+export function ContactTemplate({ data }: ContactTemplateProps) {
   if (
     !data ||
     data.length === 0 ||

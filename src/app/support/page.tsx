@@ -5,7 +5,7 @@ export default async function Page() {
   const data = await getData(`*[_type == "page" && title == "Support"]`);
   if (
     !data ||
-    data.length === 0 ||
+    data?.length === 0 ||
     !data[0]?.privacytemplatesections?.sections
   ) {
     return (

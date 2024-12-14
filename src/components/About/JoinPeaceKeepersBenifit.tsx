@@ -2,24 +2,23 @@ import Link from "next/link";
 import { Button } from "../../common/UI/Button";
 import { Container, Title } from "@/common";
 import BenifitCard from "./BenifitCard";
-import { Portrait } from "@/types";
-import { SanityDocument } from "next-sanity";
+import { ButtonType, Portrait } from "@/types";
 
-export type TCard = {
-  Intro: string;
-  Title: string;
+export type BenefitCard = {
+  title: string;
+  description: string;
   _key: string;
   portrait: Portrait;
 };
 
-type TData = {
-  title: string;
-  cards: TCard[];
-  buttons: any[];
-};
-
 type JoinPeaceKeepersBenifitProps = {
-  data: SanityDocument<TData>;
+  data: {
+    title: string;
+    cards: BenefitCard[];
+    buttons: ButtonType[];
+    _key: string;
+    _type: string;
+  };
 };
 
 const JoinPeaceKeepersBenifit = ({ data }: JoinPeaceKeepersBenifitProps) => {
@@ -36,15 +35,15 @@ const JoinPeaceKeepersBenifit = ({ data }: JoinPeaceKeepersBenifitProps) => {
           </div>
           {data?.buttons && (
             <div className="flex flex-col sm:flex-row gap-2 w-full md:items-center justify-center">
-              {data.buttons.map((button, index) =>
+              {data.buttons.map((button) =>
                 button?.url ? (
-                  <Link href={button.url} key={button.url + index}>
-                    <Button colorVariant={button.style} fullWidth>
+                  <Link href={button.url} key={button._key}>
+                    <Button colorVariant={button?.style} fullWidth>
                       {button.text}
                     </Button>
                   </Link>
                 ) : (
-                  <Button key={index} colorVariant={button.style}>
+                  <Button key={button._key} colorVariant={button?.style}>
                     {button.text}
                   </Button>
                 )

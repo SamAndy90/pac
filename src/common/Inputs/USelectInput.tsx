@@ -107,10 +107,10 @@ export function USelectInput(props: USelectInputProps) {
           </ListboxButton>
 
           <ListboxOptions
-            anchor={"bottom"}
+            anchor={"bottom start"}
             transition
             className={
-              "w-[calc(var(--button-width)+32px)] [--anchor-gap:2px] z-[1000] !max-h-56 py-1.5 rounded-2xl border border-pka_blue bg-white focus:outline-none text-base origin-top transition duration-300 ease-out data-[closed]:scale-95 data-[open]:scale-100 data-[closed]:opacity-0"
+              "w-[var(--button-width)] [--anchor-gap:2px] z-[1000] !max-h-56 py-1.5 rounded-2xl border border-pka_blue bg-white focus:outline-none text-base origin-top transition duration-300 ease-out data-[closed]:scale-95 data-[open]:scale-100 data-[closed]:opacity-0"
             }
           >
             {options.map((i) => (

@@ -1,3 +1,5 @@
+"use client";
+
 import { Container, Title } from "@/common";
 import { Disclosure, DisclosureItem } from "@/common/Disclosure";
 

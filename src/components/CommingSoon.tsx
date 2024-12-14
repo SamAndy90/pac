@@ -7,7 +7,7 @@ type Props = {
   image: Portrait;
 };
 
-const BannerCard = async ({ title, image }: Props) => {
+const BannerCard = ({ title, image }: Props) => {
   return (
     <div className="w-full mt-28 mb-20 h-[300px] md:h-[450px] lg:h-[638px] rounded-lg relative flex justify-center items-center overflow-hidden">
       <div className="w-full mx-2 relative rounded-lg h-full">

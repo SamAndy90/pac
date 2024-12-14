@@ -1,7 +1,7 @@
 import { titleField } from "../fields/titleField";
-import { buttonField } from "../fields/buttonField";
 import { portraitField } from "../fields/portraitField";
 import { defineArrayMember, defineField } from "sanity";
+import { buttons } from "../fields";
 
 export const benifits = defineField({
   name: "page.benifits",
@@ -18,12 +18,12 @@ export const benifits = defineField({
           type: "object",
           fields: [
             defineField({
-              name: "Title",
-              title: "Event Name",
+              name: "title",
+              title: "Event Title",
               type: "string",
             }),
             defineField({
-              name: "Intro",
+              name: "description",
               title: "Event Description",
               type: "text",
             }),
@@ -32,38 +32,6 @@ export const benifits = defineField({
         }),
       ],
     }),
-    defineField({
-      name: "buttons",
-      title: "Buttons",
-      type: "array",
-      of: [
-        defineArrayMember({
-          type: "object",
-          fields: [
-            defineField({
-              name: "style",
-              title: "Choose Style",
-              type: "string",
-              options: {
-                list: [
-                  { title: "Style 1", value: "primary" },
-                  { title: "Style 2", value: "secondary" },
-                ],
-              },
-            }),
-            defineField({
-              name: "text",
-              title: "Button Text",
-              type: "string",
-            }),
-            defineField({
-              name: "url",
-              title: "Button URL",
-              type: "string",
-            }),
-          ],
-        }),
-      ],
-    }),
+    defineField(buttons),
   ],
 });

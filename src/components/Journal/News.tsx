@@ -1,3 +1,5 @@
+"use client";
+
 import { Container } from "@/common";
 import { Portrait } from "@/types";
 import NewsList from "./NewsList";
@@ -35,8 +37,8 @@ export default function News({ data }: NewsProps) {
       <Container>
         <div className={"flex flex-col gap-8"}>
           <AddPostComponent />
-          <NewsList news={news.slice(0, newsCount)} />
-          <div className={cn(news.length <= newsCount && "hidden")}>
+          <NewsList news={news?.slice(0, newsCount)} />
+          <div className={cn(news?.length <= newsCount && "hidden")}>
             <Button
               fullWidth
               className={
@@ -44,7 +46,7 @@ export default function News({ data }: NewsProps) {
               }
               onClick={() =>
                 setNewsCount((count) =>
-                  news.length > count + 5 ? count + 5 : news.length
+                  news?.length > count + 5 ? count + 5 : news?.length
                 )
               }
             >

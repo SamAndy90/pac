@@ -1,23 +1,26 @@
-type Props = {
-  title: string;
+import Image from "next/image";
+
+type BannerCardProps = {
+  title?: string;
   imageUrl: string;
 };
 
-const BannerCard = ({ title, imageUrl }: Props) => {
+const BannerCard = ({ title, imageUrl }: BannerCardProps) => {
   return (
-    <div className="w-full mt-24 h-[238px] md:h-[300px] lg:h-[300px] rounded-lg relative flex justify-center  items-center overflow-hidden">
+    <div className="w-full mt-16 lg:mt-24 h-[238px] md:h-[300px] lg:h-[300px] rounded-lg relative flex justify-center items-center overflow-hidden">
       <div className="w-full mx-2 relative rounded-lg h-full">
-        <div className="absolute inset-0 bg-[#0A1200] bg-opacity-20 rounded-lg"></div>
-        <img
+        <div className="absolute inset-0 bg-[#0A1200] bg-opacity-20 rounded-lg" />
+        <Image
           src={imageUrl}
-          alt="banner"
-          className="object-cover rounded-lg w-full h-full"
+          alt={"banner"}
+          fill
+          className={"object-cover rounded-lg"}
         />
       </div>
 
       <div className="absolute flex justify-center items-center inset-0">
         <div className="text-center flex items-center justify-center w-full h-full font-avenir text-white opacity-[75%] text-[120px] md:text-[160px] lg:text-[200px] font-black relative z-10">
-          <h1 className="">{title}</h1>
+          <h1>{title}</h1>
         </div>
       </div>
     </div>

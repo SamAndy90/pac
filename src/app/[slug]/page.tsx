@@ -1,6 +1,6 @@
 import CommingSoon from "@/components/CommingSoon";
 import { Metadata } from "next";
-import { getData } from "@/lib/data-fetchers/sanity";
+import { getSlugData } from "@/lib/data-fetchers/sanity";
 import {
   ContactTemplate,
   FAQSTemplate,
@@ -10,6 +10,8 @@ import {
   ShopTemplate,
   AncillaryTemplate,
 } from "@/components/Templates";
+import { Suspense } from "react";
+import { Loader } from "@/common";
 
 type Props = {
   params: {
@@ -17,11 +19,9 @@ type Props = {
   };
 };
 
-export async function generateMetadata(props: Props): Promise<Metadata> {
-  const data: any = await getData(`*[_type == "page"]`);
-
-  const slugData = data.find(
-    (item: any) => item.slug?.current === props.params.slug
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const slugData: any = await getSlugData(
+    `*[_type == "page" && slug.current == "${params.slug}"][0]`
   );
 
   if (slugData?.schemaMarkup) {
@@ -37,40 +37,45 @@ export async function generateMetadata(props: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page(props: Props) {
-  const data = await getData(`*[_type == "page"]`);
-
-  const slugData = data.find(
-    (item: any) => item.slug?.current === props.params.slug
+export default async function Page({ params }: Props) {
+  const data = await getSlugData(
+    `*[_type == "page" && slug.current == "${params.slug}"][0]`
   );
 
   if (
-    slugData?.ancillarysections?.sections?.length === 1 &&
-    slugData?.ancillarysections?.sections[0]._type === "page.comingsoon"
+    data?.ancillarysections?.sections?.length === 1 &&
+    data?.ancillarysections?.sections[0]._type === "page.comingsoon"
   ) {
-    const section = slugData?.ancillarysections?.sections[0];
+    const section = data?.ancillarysections?.sections[0];
     const title = section?.title;
     const image = section?.portrait;
 
     return <CommingSoon title={title} image={image} />;
   }
 
-  switch (slugData?.template) {
+  switch (data?.template) {
     case "ancillary":
-      return <AncillaryTemplate title={slugData.title} data={slugData} />;
+      return <AncillaryTemplate data={data} />;
     case "homepageTemplate":
-      return <HomeTemplate data={slugData} title={slugData.title} />;
+      return <HomeTemplate data={data} />;
     case "shoptemplate":
-      return <ShopTemplate data={slugData} title={slugData.title} />;
+      return (
+        <Suspense fallback={<Loader />}>
+          <ShopTemplate data={data} />
+        </Suspense>
+      );
     case "journaltemplate":
-      return <JournalTemplate data={slugData} title={slugData.title} />;
+      return (
+        <Suspense fallback={<Loader />}>
+          <JournalTemplate data={data} />
+        </Suspense>
+      );
     case "contacttemplate":
-      return <ContactTemplate data={slugData} />;
+      return <ContactTemplate data={data} />;
     case "faqstemplate":
-      return <FAQSTemplate data={slugData} title={slugData.title} />;
+      return <FAQSTemplate data={data} />;
     case "privacytemplate":
-      return <PrivacyTemplate data={slugData} title={slugData.title} />;
-
+      return <PrivacyTemplate data={data} />;
     default:
       return (
         <div

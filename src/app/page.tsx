@@ -9,7 +9,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   if (
     data &&
-    data.length > 0 &&
+    data?.length > 0 &&
     data[0].schemaMarkup &&
     data[0].schemaMarkup.length > 0
   ) {
@@ -30,7 +30,7 @@ export default async function Home() {
 
   if (
     !data ||
-    data.length === 0 ||
+    data?.length === 0 ||
     !data[0]?.homepagetemplatesections?.sections
   ) {
     data = await getData(query);

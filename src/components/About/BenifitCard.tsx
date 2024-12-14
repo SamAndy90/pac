@@ -2,10 +2,10 @@ import Image from "next/image";
 import React from "react";
 
 import { ImgUrl } from "@/lib/utils";
-import { TCard } from "./JoinPeaceKeepersBenifit";
+import { BenefitCard } from "./JoinPeaceKeepersBenifit";
 
 type BenifitCardProps = {
-  card: TCard;
+  card: BenefitCard;
 };
 
 const BenifitCard = ({ card }: BenifitCardProps) => {
@@ -19,10 +19,10 @@ const BenifitCard = ({ card }: BenifitCardProps) => {
       />
       <div className="text-center">
         <h2 className="uppercase text-pka_blue mb-2 font-thunder font-semibold text-2xl tracking-widest">
-          {card?.Title}
+          {card?.title}
         </h2>
         <p className="text-pka_blue max-w-[80%] mx-auto font-avenirThin">
-          {card?.Intro}
+          {card?.description}
         </p>
       </div>
     </div>

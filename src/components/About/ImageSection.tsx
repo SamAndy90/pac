@@ -2,14 +2,12 @@ import Image from "next/image";
 import { cn, ImgUrl } from "@/lib/utils";
 import { Portrait } from "@/types";
 
-type ImageData = {
-  portrait: Portrait;
-  _key: string;
-  _type: string;
-};
-
 type ImageSectionProps = {
-  data: ImageData;
+  data: {
+    portrait: Portrait;
+    _key: string;
+    _type: string;
+  };
 };
 
 const ImageSection = ({ data }: ImageSectionProps) => {

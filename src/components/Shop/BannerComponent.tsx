@@ -1,38 +1,19 @@
-"use client";
-
-import React, { useEffect, useState } from "react";
-import { client } from "../../../sanity/lib/client";
 import BannerCard from "./BannerCard";
 import { ImgUrl } from "@/lib/utils";
+import { Portrait } from "@/types";
 
 type Props = {
-  data: any;
+  data: {
+    title?: string;
+    bannerStyle?: string;
+    portrait: Portrait;
+    _key: string;
+    _type: string;
+  };
 };
 
 export default function BannerComponent({ data }: Props) {
-  const [mounted, setMounted] = useState(false);
-  const [sectionData, setSectionData] = useState(data);
-  useEffect(() => {
-    const query = `*[_type == "page" && title == "Shop"]`;
+  if (!data) return null;
 
-    const subscription = client.listen(query).subscribe((update) => {
-      if (update.result?.sections) {
-        setSectionData(update.result?.sections[0]);
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [client, setSectionData]);
-
-  useEffect(() => {
-    setMounted(true);
-  }, [setMounted]);
-
-  if (!mounted) return null;
-  return (
-    <BannerCard
-      title={sectionData?.title}
-      imageUrl={ImgUrl(sectionData?.portrait)}
-    />
-  );
+  return <BannerCard title={data?.title} imageUrl={ImgUrl(data.portrait)} />;
 }

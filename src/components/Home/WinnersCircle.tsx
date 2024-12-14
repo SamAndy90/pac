@@ -5,36 +5,27 @@ import { Container, Title } from "@/common";
 import { Portrait } from "@/types";
 import { useKeenSlider } from "keen-slider/react";
 
-interface CardData {
-  cardSrc: Portrait;
-  title: string;
-  description: string;
-  videoUrl: string;
-}
-
-type Winner = {
-  _key: string;
+export type Winner = {
+  winnerTitle?: string;
+  description?: string;
+  videoUrl?: string;
   portrait: Portrait;
-  winnerTitle: string;
-  videoUrl: string;
-  description: string;
-};
-
-type WinnersCircleData = {
-  winners: Winner[];
-  _type: "winnersCircle";
   _key: string;
-  title: string;
-  description: string;
 };
 
-type Props = {
-  data: WinnersCircleData;
+type WinnersCircleProps = {
+  data: {
+    title: string;
+    description: string;
+    winners: Winner[];
+    _type: string;
+    _key: string;
+  };
 };
 
-const WinnersCircle = ({ data }: Props) => {
+const WinnersCircle = ({ data }: WinnersCircleProps) => {
   const { title, description, winners } = data;
-  const [sliderRef, instanceRef] = useKeenSlider({
+  const [sliderRef] = useKeenSlider({
     slides: {
       perView: 1.2,
       spacing: 20,
@@ -84,39 +75,24 @@ const WinnersCircle = ({ data }: Props) => {
     },
   });
 
-  const mappedData: CardData[] = data?.winners.map((winner) => ({
-    cardSrc: winner.portrait,
-    title: winner.winnerTitle,
-    description: winner.description,
-    videoUrl: winner.videoUrl,
-  }));
-
   return (
     <section className="w-full overflow-hidden mb-16">
       <Container className={"2xl:max-w-[1680px]"}>
         <div className="relative py-20">
           <div className="max-w-[1100px] gap-y-6 flex flex-col items-center justify-start lg:justify-between mx-auto aspect-square bg-pka_green_light top-0 w-full rounded-full">
-            {/* <h2 className="uppercase text-center lg:max-w-[290px] max-w-[266px] mt-[8.81%] font-thunder tracking-wider text-5xl lg:text-7xl font-bold text-pka_blue2">
-              {data.title}
-            </h2> */}
-            <Title className={"text-center mt-[8.81%]"}>{title}</Title>
-
-            {/* <p className="text-[#19222C] font-avenirBold text-lg lg:text-2xl lg:max-w-[645px] max-w-[520px] text-center lg:mb-[13.36%]">
-              {description}
-            </p> */}
-            <p className="text-pka_blue2 font-avenirBold text-lg lg:text-2xl lg:max-w-[645px] max-w-[520px] text-center lg:mb-[13.36%]">
-              {description}
-            </p>
+            {title && (
+              <Title className={"text-center mt-[8.81%]"}>{title}</Title>
+            )}
+            {description && (
+              <p className="text-pka_blue2 font-avenirBold text-lg lg:text-2xl lg:max-w-[645px] max-w-[520px] text-center lg:mb-[13.36%]">
+                {description}
+              </p>
+            )}
             <div className="lg:absolute lg:top-1/2 lg:left-1/2 lg:transform lg:-translate-x-1/2 lg:-translate-y-1/2 w-full">
               <div ref={sliderRef} className="keen-slider">
-                {mappedData?.map((card) => (
-                  <div className={"keen-slider__slide"} key={card.videoUrl}>
-                    <VideoCard
-                      cardSrc={card.cardSrc}
-                      title={card.title}
-                      description={card.description}
-                      videoUrl={card.videoUrl}
-                    />
+                {winners?.map((card) => (
+                  <div className={"keen-slider__slide"} key={card._key}>
+                    <VideoCard card={card} />
                   </div>
                 ))}
               </div>

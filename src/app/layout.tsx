@@ -10,8 +10,8 @@ import {
 import localFont from "next/font/local";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 import "keen-slider/keen-slider.min.css";
 
@@ -20,6 +20,8 @@ import LiveVisualEditing from "@/components/LiveVisualEditing";
 
 import { IconDescriptor } from "next/dist/lib/metadata/types/metadata-types";
 import { Providers } from "@/contexts/Providers";
+import { CookieBanner } from "@/components/Home/CookieBanner";
+import { Suspense } from "react";
 
 const LondrinaSolid = Londrina_Solid({
   subsets: ["latin"],
@@ -164,12 +166,17 @@ export default function RootLayout({
             <div
               className={"flex min-h-screen flex-col h-full justify-between"}
             >
-              <Header />
+              <Suspense>
+                <Header />
+              </Suspense>
               <main className="flex-1">{children}</main>
-              <Footer />
+              <Suspense>
+                <Footer />
+              </Suspense>
             </div>
             {draftMode().isEnabled && <LiveVisualEditing />}
           </Providers>
+          <CookieBanner />
         </body>
       </html>
     </ClerkProvider>

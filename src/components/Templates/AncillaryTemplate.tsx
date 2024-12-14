@@ -1,14 +1,10 @@
-import AncillaryPage from "../About/AncillaryPage";
+import AncillaryPage from "@/components/About/AncillaryPage";
 
 type AncillaryTemplateProps = {
   data: any;
-  title: string;
 };
 
-export async function AncillaryTemplate({
-  data,
-  title,
-}: AncillaryTemplateProps) {
+export function AncillaryTemplate({ data }: AncillaryTemplateProps) {
   if (!data || !data?.ancillarysections?.sections) {
     return (
       <div
@@ -22,5 +18,5 @@ export async function AncillaryTemplate({
   }
   const sections = data?.ancillarysections?.sections;
 
-  return <AncillaryPage sections={sections} title={title} />;
+  return <AncillaryPage sections={sections} />;
 }

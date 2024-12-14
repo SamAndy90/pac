@@ -6,12 +6,12 @@ import { type ButtonType, Color, Portrait } from "@/types";
 import { Title } from "@/common";
 
 type ImageInfoData = {
-  title: string;
-  description: string;
+  title?: string;
+  description?: string;
   portrait: Portrait;
-  buttons: ButtonType[];
-  textColor: Color;
-  bgColor: Color;
+  buttons?: ButtonType[];
+  textColor?: Color;
+  bgColor?: Color;
   _type: string;
   _key: string;
 };
@@ -33,19 +33,19 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
     >
       <div
         style={{
-          backgroundColor: bgColor?.value || "",
-          color: textColor?.value || "",
+          backgroundColor: bgColor?.value || "#0A4A64",
+          color: textColor?.value || "#fff",
         }}
         className={
           "lg:w-[50%] bg-pka_blue text-white flex flex-col justify-between px-3 py-16 lg:py-20 gap-y-12 lg:px-12 xl:pr-28"
         }
       >
-        <Title className={"text-white mb-[5vw] flex-1"}>
+        <Title className={"text-inherit mb-[5vw] flex-1"}>
           {oneWordTitle?.map((word, idX) => (
             <div key={word + idX}>{word}</div>
           ))}
         </Title>
-        <p className={"font-avenirThin"}>{description}</p>
+        {description && <p className={"font-avenirThin"}>{description}</p>}
         {!!buttons?.length && (
           <div className="md:gap-x-3 xl:gap-x-7 mt-6 gap-y-3 flex-col md:flex-row flex text-center items-center">
             {buttons?.map((button) =>
@@ -81,7 +81,7 @@ const ImageInfo = ({ data, revert = false }: ImageInfoProps) => {
         <div className={"w-full h-full relative"}>
           <Image
             src={ImgUrl(portrait)}
-            alt={"Join peace keepers social image"}
+            alt={"Join peace adventures social image"}
             fill
             className={"object-cover"}
           />

@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 
 import Image from "next/image";
 import { useKeenSlider } from "keen-slider/react";
@@ -16,20 +16,18 @@ type Card = {
   _key: string;
 };
 
-type DataType = {
-  title: string;
-  cards: Card[];
-  _key: string;
-  _type: string;
-};
-
 type ExploreProps = {
-  data: DataType;
+  baseURL: string;
+  data: {
+    title: string;
+    cards: Card[];
+    _key: string;
+    _type: string;
+  };
 };
 
-export default function Explore({ data }: ExploreProps) {
+export default function Explore({ data, baseURL }: ExploreProps) {
   const { title, cards } = data;
-
   const [sliderRef, keenSlider] = useKeenSlider({
     slides: {
       perView: 1,
@@ -68,11 +66,11 @@ export default function Explore({ data }: ExploreProps) {
             >
               {cards?.map((card) => (
                 <Link
-                  href={card.link}
+                  href={`${baseURL}/${card.link}`}
                   className={"keen-slider__slide group"}
                   key={card._key}
                 >
-                  <div className="flex flex-col items-center rounded-[20px] overflow-hidden relative m-auto overflow-x-hidden aspect-[1/1.4]">
+                  <div className="flex flex-col items-center rounded-[20px] overflow-hidden relative m-auto overflow-x-hidden aspect-[1/1.4] bg-pka_green_light">
                     <h4 className="absolute z-10 text-xl xl:text-2xl font-thunder font-bold tracking-wider bottom-[8.5%] m-auto text-center uppercase text-white/85 duration-500 group-hover:text-white transition-all lg:group-hover:scale-110 lg:group-hover:-translate-y-2">
                       {card.title}
                     </h4>
@@ -86,7 +84,7 @@ export default function Explore({ data }: ExploreProps) {
                       className={
                         "absolute opacity-25 transition-opacity duration-500 lg:group-hover:opacity-0 bg-[#0A1200] w-full h-full"
                       }
-                    ></div>
+                    />
                   </div>
                 </Link>
               ))}

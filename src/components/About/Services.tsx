@@ -2,18 +2,15 @@ import Image from "next/image";
 import { Container, Title } from "@/common";
 import { Portrait } from "@/types";
 import { ImgUrl } from "@/lib/utils";
-import { SanityDocument } from "next-sanity";
-
-type ServicesData = {
-  subtitle: string;
-  title: string;
-  description: string[];
-  services: string[];
-  portrait: Portrait;
-};
 
 type ServicesProps = {
-  data: SanityDocument<ServicesData>;
+  data: {
+    subtitle?: string;
+    title?: string;
+    description?: string[];
+    services?: string[];
+    portrait: Portrait;
+  };
 };
 
 const Services = ({ data }: ServicesProps) => {
@@ -29,13 +26,13 @@ const Services = ({ data }: ServicesProps) => {
                 {subtitle}
               </h4>
             )}
-            <Title className={"mb-10 lg:mb-12"}>{title}</Title>
+            {title && <Title className={"mb-10 lg:mb-12"}>{title}</Title>}
             <div
               className={
                 "grid gap-y-5 gap-x-16 font-avenirThin lg:max-w-[85vw] lg:grid-cols-2 grid-cols-1"
               }
             >
-              {description.map((paragraph, idX) => (
+              {description?.map((paragraph, idX) => (
                 <p key={paragraph.slice(0, 12) + idX}>{paragraph}</p>
               ))}
             </div>
@@ -61,7 +58,7 @@ const Services = ({ data }: ServicesProps) => {
                   "mx-auto py-1 text-start inline-flex flex-col gap-y-1 text-lg lg:text-xl font-avenirThin"
                 }
               >
-                {services.map((service, idX) => (
+                {services?.map((service, idX) => (
                   <li key={service + idX} className={"flex items-center"}>
                     <span className={"w-5 mr-4 font-avenirBold"}>
                       {idX < 9 ? `0${idX + 1}` : idX + 1}

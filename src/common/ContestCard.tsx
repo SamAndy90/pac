@@ -5,43 +5,36 @@ import Link from "next/link";
 import { FC, HTMLAttributes } from "react";
 import CountdownComponent from "../components/countdownCounter";
 import { cn, ImgUrl } from "@/lib/utils";
-import { Portrait } from "@/types";
+import { EventType } from "@/app/contests/page";
 
-type ContestCardProps = {
-  collectionName: string;
-  subtitle?: string;
-  title: string;
-  description: string;
-  eventStart: string;
-  eventEnd: string;
-  countdownBgColor: string;
-  countdownTextColor: string;
-  backgroundImage?: Portrait;
-} & Pick<HTMLAttributes<HTMLDivElement>, "className">;
+type ContestCardProps = { event: EventType } & Pick<
+  HTMLAttributes<HTMLDivElement>,
+  "className"
+>;
 
-export const ContestCard: FC<ContestCardProps> = ({
-  collectionName,
-  subtitle,
-  title,
-  description,
-  backgroundImage,
-  countdownBgColor,
-  countdownTextColor,
-  eventStart,
-  eventEnd,
-  className,
-}) => {
+export const ContestCard: FC<ContestCardProps> = ({ event, className }) => {
+  const {
+    title,
+    description,
+    collection_name,
+    starttime,
+    endtime,
+    portrait,
+    timerstyle,
+    subtitle,
+  } = event;
+  const { bgcolor, numcolor } = timerstyle;
   const currentTime = new Date();
-  const startTime = new Date(eventStart);
-  const endTime = new Date(eventEnd);
+  const startTime = new Date(starttime);
+  const endTime = new Date(endtime);
 
   const loadTimer = () => {
     if (currentTime > startTime && currentTime < endTime) {
       return (
         <CountdownComponent
-          bgColor={countdownBgColor}
-          textColor={countdownTextColor}
-          timer={eventEnd}
+          bgColor={bgcolor.value || "#e5abc4"}
+          textColor={numcolor.value || "#fff"}
+          timer={endtime}
           size={"small"}
         />
       );
@@ -65,15 +58,15 @@ export const ContestCard: FC<ContestCardProps> = ({
 
   return (
     <Component
-      href={`contests/${collectionName}`}
+      href={`contests/${collection_name}`}
       className={cn(
         "max-w-[446px] w-full group px-3 py-4 mx-auto aspect-[1/1.435] gap-y-2 overflow-hidden relative rounded-[20px] text-center flex flex-col items-center",
         className
       )}
     >
-      {backgroundImage && (
+      {portrait && (
         <Image
-          src={ImgUrl(backgroundImage)}
+          src={ImgUrl(portrait)}
           alt="bg"
           className="object-cover -z-10 group-hover:scale-105 transition-all duration-500"
           fill

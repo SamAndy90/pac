@@ -8,3 +8,9 @@ export async function getData<T>(query: string): Promise<SanityResult<T>[]> {
     query,
   });
 }
+
+export async function getSlugData<T>(query: string): Promise<SanityDocument> {
+  return await sanityFetch<SanityDocument>({
+    query,
+  });
+}

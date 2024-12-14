@@ -26,17 +26,6 @@ export const happeningNow = defineField({
               type: "string",
             }),
             defineField({
-              name: "whereToShow",
-              title: "Where to Show",
-              type: "string",
-              options: {
-                list: [
-                  { title: "Home Page", value: "homepage" },
-                  { title: "PLP Contest Page", value: "plpcontest" },
-                ],
-              },
-            }),
-            defineField({
               name: "status",
               title: "Card Status",
               type: "string",
@@ -46,6 +35,8 @@ export const happeningNow = defineField({
                   { title: "Inactive", value: "inactive" },
                 ],
               },
+              validation: (rule) =>
+                rule.required().error("Status is required."),
             }),
             defineField({
               name: "homepageStyle",
@@ -58,26 +49,12 @@ export const happeningNow = defineField({
                   { title: "Style 3", value: "style3" },
                 ],
               },
-              hidden: ({ parent }) => parent.whereToShow !== "homepage",
-            }),
-            defineField({
-              name: "contestStyle",
-              title: "Choose PLP Contest Style for Cards",
-              type: "string",
-              options: {
-                list: [
-                  { title: "Contest Style 1", value: "conteststyle1" },
-                  { title: "Contest style 2", value: "conteststyle2" },
-                ],
-              },
-              hidden: ({ parent }: any) => parent.whereToShow !== "plpcontest",
             }),
             defineField({
               name: "description",
               title: "Event Description",
               type: "text",
             }),
-
             defineField({
               name: "starttime",
               title: "Start Time",
@@ -116,11 +93,11 @@ export const happeningNow = defineField({
               ],
             }),
             defineField({
-              name: "link",
-              title: "Event URL",
-              type: "string",
+              name: "slug",
+              title: "Event Slug (Collection Name)",
+              type: "slug",
+              validation: (rule) => rule.required().error("Slug is required"),
             }),
-            defineField(buttons),
             defineField(portraitField),
           ],
         }),

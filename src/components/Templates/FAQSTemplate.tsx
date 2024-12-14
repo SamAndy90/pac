@@ -1,11 +1,10 @@
-import FAQsPage from "../FAQS/FAQsPage";
+import FAQsPage from "@/components/FAQS/FAQsPage";
 
 type FAQSTemplateProps = {
   data: any;
-  title: string;
 };
 
-export async function FAQSTemplate({ data, title }: FAQSTemplateProps) {
+export function FAQSTemplate({ data }: FAQSTemplateProps) {
   if (!data || !data?.faqstemplatesections?.sections) {
     return (
       <div
@@ -20,5 +19,5 @@ export async function FAQSTemplate({ data, title }: FAQSTemplateProps) {
 
   const sections = data?.faqstemplatesections?.sections;
 
-  return <FAQsPage data={sections} title={title} />;
+  return <FAQsPage data={sections} />;
 }

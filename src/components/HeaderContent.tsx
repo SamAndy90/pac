@@ -8,13 +8,11 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { SanityDocument } from "next-sanity";
 import { HeaderContentData } from "./Header";
-import { client } from "../../sanity/lib/client";
 import { Container } from "@/common";
 import { CartButton } from "./Shop/CartButton";
 import { FiX } from "react-icons/fi";
 import { usePathname } from "next/navigation";
 import { LinkType } from "@/types";
-import TransitionLink from "@/common/TransitionLink";
 
 const social: LinkType[] = [
   {
@@ -31,26 +29,12 @@ type HeaderContentProps = {
   data: SanityDocument<HeaderContentData>;
 };
 
-export default function HeaderContent(props: HeaderContentProps) {
+export default function HeaderContent({ data }: HeaderContentProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [data, setData] = useState(props.data);
   const { isLoaded, isSignedIn, user } = useUser();
   const pathname = usePathname();
 
   const { logo, leftlinks, rightlinks, burgerlinks } = data;
-
-  useEffect(() => {
-    const query = `*[_type == 'header']`;
-    const subscription = client
-      .listen<SanityDocument<HeaderContentData>>(query)
-      .subscribe((update) => {
-        if (update.result) {
-          setData(update.result);
-        }
-      });
-
-    return () => subscription.unsubscribe();
-  }, [setData, client]);
 
   useEffect(() => {
     const body = document.querySelector("body");
@@ -91,7 +75,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                         priority={true}
                       />
                     )}
-                    <TransitionLink
+                    <Link
                       href={item.slug.current}
                       className={cn(
                         "relative before:bg-white before:absolute before:w-0 before:transition-all hover:before:w-full before:rounded-sm before:bottom-1 before:h-0.5 before:duration-500 tracking-widest",
@@ -102,15 +86,12 @@ export default function HeaderContent(props: HeaderContentProps) {
                       )}
                     >
                       {item.value}
-                    </TransitionLink>
+                    </Link>
                   </div>
                 ))}
               </div>
               <div className="items-center h-full absolute w-16 top-1/2 left-4 sm:left-1/2 sm:-translate-x-1/2 -translate-y-1/2 lg:justify-center flex">
-                <TransitionLink
-                  href={"/"}
-                  className={"h-full w-12 lg:w-full relative"}
-                >
+                <Link href={"/"} className={"h-full w-12 lg:w-full relative"}>
                   <Image
                     src={ImgUrl(logo)}
                     alt="PAK Logo"
@@ -118,7 +99,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                     className={"object-contain"}
                     priority={true}
                   />
-                </TransitionLink>
+                </Link>
               </div>
               <div className="flex flex-1 items-center justify-end gap-x-6 lg:gap-x-10">
                 <div className="lg:flex hidden gap-x-3">
@@ -136,7 +117,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                           priority={true}
                         />
                       )}
-                      <TransitionLink
+                      <Link
                         href={item.slug.current}
                         className={cn(
                           "relative before:bg-white before:absolute before:w-0 before:transition-all hover:before:w-full before:rounded-sm before:bottom-1 before:h-0.5 before:duration-500 tracking-widest",
@@ -147,7 +128,7 @@ export default function HeaderContent(props: HeaderContentProps) {
                         )}
                       >
                         {item.value}
-                      </TransitionLink>
+                      </Link>
                     </div>
                   ))}
                 </div>

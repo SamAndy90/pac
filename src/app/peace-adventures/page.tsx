@@ -9,7 +9,7 @@ export default async function Page() {
 
   if (
     !data ||
-    data.length === 0 ||
+    data?.length === 0 ||
     !data[0]?.journaltemplatesections?.sections
   ) {
     return (

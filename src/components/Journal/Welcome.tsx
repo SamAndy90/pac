@@ -5,9 +5,9 @@ import Image from "next/image";
 
 export type WelcomeProps = {
   data: {
-    title: string;
-    description: string;
-    textsvg: Portrait;
+    title?: string;
+    description?: string;
+    textsvg?: Portrait;
     _type: string;
     _key: string;
   };

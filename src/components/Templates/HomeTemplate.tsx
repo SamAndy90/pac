@@ -2,10 +2,9 @@ import HomePage from "@/components/Home/HomePage";
 
 type HomeTemplateProps = {
   data: any;
-  title: string;
 };
 
-export async function HomeTemplate({ data, title }: HomeTemplateProps) {
+export function HomeTemplate({ data }: HomeTemplateProps) {
   if (!data || !data?.homepagetemplatesections?.sections) {
     return (
       <div
@@ -20,5 +19,5 @@ export async function HomeTemplate({ data, title }: HomeTemplateProps) {
 
   const sections = data?.homepagetemplatesections?.sections;
 
-  return <HomePage data={sections} title={title} />;
+  return <HomePage data={sections} />;
 }
