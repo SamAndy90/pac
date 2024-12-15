@@ -66,7 +66,7 @@ export default function Explore({ data, baseURL }: ExploreProps) {
             >
               {cards?.map((card) => (
                 <Link
-                  href={`${baseURL}/${card.link}`}
+                  href={`https://pac-nine-alpha.vercel.app/${card.link}`}
                   className={"keen-slider__slide group"}
                   key={card._key}
                 >
