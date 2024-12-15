@@ -74,8 +74,8 @@ export function JournalPostForm({ data, onClose }: JournalPostFormProps) {
         <div className={"flex flex-col gap-y-6 md:gap-y-8"}>
           <Title className={"text-center"}>{form_title}</Title>
 
-          <div className={"flex flex-col gap-y-6 md:gap-y-10"}>
-            <div className={"flex flex-col gap-y-4 md:gap-y-5"}>
+          <div className={"flex flex-col items-center gap-y-6 md:gap-y-10"}>
+            <div className={"flex flex-col gap-y-4 md:gap-y-5 w-full"}>
               <FormTextInput<Form>
                 fieldName={"email"}
                 label={"Email"}
@@ -86,7 +86,6 @@ export function JournalPostForm({ data, onClose }: JournalPostFormProps) {
             <Button
               type={"submit"}
               className={"border-pka_blue2"}
-              fullWidth
               loading={loading}
             >
               {submit_button_text}

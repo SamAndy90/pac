@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
   try {
     const { error } = await resend.emails.send({
       from: "Peace Adventures <onboarding@resend.dev>",
-      to: [email],
+      to: ["support@digiolive.com"],
       subject: "Peace Adventures",
       react: EmailTemplate({ email }),
     });
