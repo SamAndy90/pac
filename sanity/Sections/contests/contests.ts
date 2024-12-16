@@ -16,5 +16,10 @@ export const contests = defineType({
       title: "Contests List",
       of: [defineArrayMember({ type: "contest" })],
     }),
+    defineField({
+      name: "buttonText",
+      type: "string",
+      title: "Product Button Text",
+    }),
   ],
 });

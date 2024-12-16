@@ -32,7 +32,7 @@ export const ContestCard: FC<ContestCardProps> = ({ event, className }) => {
     if (currentTime > startTime && currentTime < endTime) {
       return (
         <CountdownComponent
-          bgColor={bgcolor.value || "#e5abc4"}
+          bgColor={bgcolor.value || "#0A4A64"}
           textColor={numcolor.value || "#fff"}
           timer={endtime}
           size={"small"}
@@ -60,7 +60,7 @@ export const ContestCard: FC<ContestCardProps> = ({ event, className }) => {
     <Component
       href={`contests/${collection_name}`}
       className={cn(
-        "max-w-[446px] w-full group px-3 py-4 mx-auto aspect-[1/1.435] gap-y-2 overflow-hidden relative rounded-[20px] text-center flex flex-col items-center",
+        "max-w-[446px] w-full group px-3 py-4 mx-auto aspect-[1/1.435] gap-y-2 overflow-hidden relative rounded-[20px] text-center flex flex-col items-center bg-pka_green",
         className
       )}
     >
@@ -68,7 +68,7 @@ export const ContestCard: FC<ContestCardProps> = ({ event, className }) => {
         <Image
           src={ImgUrl(portrait)}
           alt="bg"
-          className="object-cover -z-10 group-hover:scale-105 transition-all duration-500"
+          className="object-cover z-0 group-hover:scale-105 transition-all duration-500"
           fill
         />
       )}
@@ -92,7 +92,7 @@ export const ContestCard: FC<ContestCardProps> = ({ event, className }) => {
       >
         {title}
       </h3>
-      <p className={"text-white line-clamp-4"}>{description}</p>
+      <p className={"text-white line-clamp-4 relative"}>{description}</p>
       <div className="absolute z-20 bottom-[15%] sm:bottom-[12%]">
         {loadTimer()}
       </div>

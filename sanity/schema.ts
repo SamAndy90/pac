@@ -22,7 +22,7 @@ import {
   imageSection,
   benifits,
 } from "./Sections/aboutpage";
-import { products, productCard } from "./Sections/shop";
+import { products } from "./Sections/shop";
 import { newslist, welcome, hotnews, news } from "./Sections/journalpage";
 import { faqs } from "./Sections/faqs";
 import { privacy } from "./Sections/privacy-policy";
@@ -48,7 +48,6 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     services,
     imageSection,
     benifits,
-    productCard,
     products,
     faqs,
     privacy,

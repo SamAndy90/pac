@@ -41,7 +41,7 @@ export const VideoCard: React.FC<VideoCardProps> = ({ card }) => {
     <>
       <div
         onClick={showModal}
-        className="relative group hover:cursor-pointer w-full items-center mx-auto xl:max-w-[254px] rounded-2xl lg:rounded-[20px] overflow-hidden aspect-[2/3] bg-[#0A1200]"
+        className="relative px-2 group hover:cursor-pointer w-full items-center mx-auto xl:max-w-[254px] rounded-2xl lg:rounded-[20px] overflow-hidden aspect-[2/3] bg-[#0A1200]"
       >
         <Image
           src={ImgUrl(portrait)}

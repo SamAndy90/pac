@@ -79,12 +79,15 @@ const WinnersCircle = ({ data }: WinnersCircleProps) => {
     <section className="w-full overflow-hidden mb-16">
       <Container className={"2xl:max-w-[1680px]"}>
         <div className="relative py-20">
-          <div className="max-w-[1100px] gap-y-6 flex flex-col items-center justify-start lg:justify-between mx-auto aspect-square bg-pka_green_light top-0 w-full rounded-full">
+          <div className="max-w-[1000px] gap-y-7 flex flex-col items-center justify-start lg:justify-between mx-auto aspect-square bg-pka_green_light top-0 w-full rounded-full">
             {title && (
-              <Title className={"text-center mt-[8.81%]"}>{title}</Title>
+              <Title className={"text-center max-w-[300px] mt-16 lg:mt-36"}>
+                {title}
+              </Title>
             )}
+
             {description && (
-              <p className="text-pka_blue2 font-avenirBold text-lg lg:text-2xl lg:max-w-[645px] max-w-[520px] text-center lg:mb-[13.36%]">
+              <p className="text-pka_blue2 text-lg lg:text-2xl lg:max-w-[645px] max-w-[520px] text-center lg:mb-24">
                 {description}
               </p>
             )}

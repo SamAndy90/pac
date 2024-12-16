@@ -205,7 +205,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
               </div>
             )}
           </div>
-          <div className={"flex-1 shrink-0 py-2"}>
+          <div className={"flex-1 max-w-[500px] py-2"}>
             <Title>{title}</Title>
             <p className={"text-pka_blue2 flex-1 lg:flex-initial mb-6"}>
               {description}

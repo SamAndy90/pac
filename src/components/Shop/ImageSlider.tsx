@@ -49,22 +49,13 @@ export function ImageSlider(props: ImageSliderProps) {
             <li
               key={i.id}
               className={
-                "keen-slider__slide rounded-2xl overflow-hidden relative flex items-center justify-center"
+                "keen-slider__slide rounded-2xl overflow-hidden relative flex items-center justify-center bg-white"
               }
             >
               <Image
                 src={i.src}
                 alt={i.alt}
-                className={"z-0 object-cover brightness-50"}
-                fill
-              />
-              <div className={"absolute inset-0 z-10 backdrop-blur-sm"}></div>
-              <Image
-                src={i.src}
-                alt={i.alt}
-                className={
-                  "!left-1/2 !top-1/2 z-20 max-h-[90%] max-w-[90%] -translate-x-1/2 -translate-y-1/2 object-contain"
-                }
+                className={"object-contain"}
                 fill
               />
             </li>

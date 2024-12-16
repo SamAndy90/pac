@@ -7,9 +7,12 @@ import { Button } from "../../common/UI/Button";
 
 export type ContestProductCardProps = {
   product: any;
+  button?: string;
 };
-
-export function ContestProductCard({ product }: ContestProductCardProps) {
+export function ContestProductCard({
+  product,
+  button,
+}: ContestProductCardProps) {
   const { title, description, media, id, handle, variants } = product;
 
   const images =
@@ -72,7 +75,7 @@ export function ContestProductCard({ product }: ContestProductCardProps) {
         {description}
       </p>
       <Link href={`/shop/${handle}?id=${id}`}>
-        <Button fullWidth>Go to Product</Button>
+        <Button fullWidth>{button}</Button>
       </Link>
     </div>
   );

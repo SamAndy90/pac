@@ -40,7 +40,10 @@ export default async function ContestPage({ params }: ContestPageType) {
           >
             {event?.description}
           </p>
-          <ContestProducts products={collection.products.edges} />
+          <ContestProducts
+            products={collection.products.edges}
+            button={data[0]?.buttonText}
+          />
         </div>
       </Container>
     </section>

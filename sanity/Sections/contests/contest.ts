@@ -62,20 +62,3 @@ export const contest = defineField({
     defineField(portraitField),
   ],
 });
-//   preview: {
-//     prepare() {
-//       return { title: "Contest" };
-//     },
-//   },
-
-// defineField({
-//     name: "status",
-//     title: "Contest Status",
-//     type: "string",
-//     options: {
-//       list: [
-//         { title: "Active", value: "active" },
-//         { title: "Inactive", value: "inactive" },
-//       ],
-//     },
-//   }),

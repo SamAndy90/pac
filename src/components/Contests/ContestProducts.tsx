@@ -18,9 +18,10 @@ import { ContestProductCard } from "./ContestProductCard";
 
 export type ContestProductsProps = {
   products: any[];
+  button: string;
 };
 
-export function ContestProducts({ products }: ContestProductsProps) {
+export function ContestProducts({ products, button }: ContestProductsProps) {
   if (!products) {
     return (
       <section>
@@ -48,7 +49,11 @@ export function ContestProducts({ products }: ContestProductsProps) {
             }
           >
             {products.map((el) => (
-              <ContestProductCard key={el.node.id} product={el.node} />
+              <ContestProductCard
+                key={el.node.id}
+                product={el.node}
+                button={button}
+              />
             ))}
           </div>
         </div>

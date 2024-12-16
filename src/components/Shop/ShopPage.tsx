@@ -1,19 +1,24 @@
 import { Fragment, ReactNode } from "react";
 import BannerComponent from "@/components/Shop/BannerComponent";
 import JoinPeaceKeepersBenifit from "@/components/About/JoinPeaceKeepersBenifit";
-import { Products } from "@/components/Shop/Products";
+import { Products, ProductType } from "@/components/Shop/Products";
 
 const ShopPageComponents: {
-  [key: string]: (data: any) => ReactNode;
+  [key: string]: (
+    data: any,
+    shopifyProducts?: { node: ProductType }[]
+  ) => ReactNode;
 } = {
   "page.shopBanner": (data: any) => <BannerComponent data={data} />,
   "page.benifits": (data: any) => <JoinPeaceKeepersBenifit data={data} />,
-  products: (data: any) => <Products data={data} />,
+  products: (data: any, shopifyProducts: any) => (
+    <Products data={data} products={shopifyProducts} />
+  ),
 } as const;
 
 type ShopPageProps = {
-  data: [any];
-  shopifyProducts: [any];
+  data: any[];
+  shopifyProducts: { node: ProductType }[];
 };
 
 export default function ShopPage({ data, shopifyProducts }: ShopPageProps) {
@@ -26,7 +31,7 @@ export default function ShopPage({ data, shopifyProducts }: ShopPageProps) {
       if (section._type === "products") {
         return (
           <Fragment key={section._key}>
-            {ShopPageComponents[section._type](shopifyProducts)}
+            {ShopPageComponents[section._type](section, shopifyProducts)}
           </Fragment>
         );
       }

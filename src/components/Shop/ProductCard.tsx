@@ -25,7 +25,9 @@ export function ProductCard({ data }: ProductCardProps) {
           }
         ></div>
         <div
-          className={"w-full h-full relative overflow-hidden rounded-xl z-20"}
+          className={
+            "w-full h-full bg-white relative overflow-hidden rounded-xl z-20"
+          }
         >
           {imageSrc ? (
             <Image
@@ -33,7 +35,7 @@ export function ProductCard({ data }: ProductCardProps) {
               alt={imageAltText}
               fill
               className={
-                "object-cover lg:group-hover:scale-105 transition-transform duration-700"
+                "object-contain lg:group-hover:scale-105 transition-transform duration-700"
               }
             />
           ) : (
