@@ -22,6 +22,7 @@ import { IconDescriptor } from "next/dist/lib/metadata/types/metadata-types";
 import { Providers } from "@/contexts/Providers";
 import { CookieBanner } from "@/components/Home/CookieBanner";
 import { Suspense } from "react";
+import Transitions from "@/components/Transitions";
 
 const LondrinaSolid = Londrina_Solid({
   subsets: ["latin"],
@@ -177,6 +178,7 @@ export default function RootLayout({
             {draftMode().isEnabled && <LiveVisualEditing />}
           </Providers>
           <CookieBanner />
+          <Transitions />
         </body>
       </html>
     </ClerkProvider>

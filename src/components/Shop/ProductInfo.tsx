@@ -4,7 +4,7 @@ import { Container, Title } from "@/common";
 import { formatter } from "@/lib/utils";
 import { FaRegImages } from "react-icons/fa6";
 import { ImageSlider } from "./ImageSlider";
-import { Button } from "../../common/UI/Button";
+import { Button } from "@/common/UI/Button";
 import { useShopContext } from "@/contexts/ShopContext";
 import { Cart } from "@/types";
 import { useState } from "react";
@@ -16,7 +16,7 @@ import {
   CART_LINES_UPDATE_MUTATION,
   GET_CART_QUERY,
 } from "@/lib/data-fetchers/queries";
-import { Option, USelectInput } from "@/common/Inputs/USelectInput";
+import { Option, SelectInput } from "@/common/Inputs/SelectInput";
 
 export type ProductInfoProps = {
   product: any;
@@ -212,7 +212,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
             </p>
             {variants.edges.length > 1 && (
               <div className={"mb-8 lg:mb-12"}>
-                <USelectInput
+                <SelectInput
                   options={allVariants}
                   multiple={true}
                   value={variantIds ?? []}
