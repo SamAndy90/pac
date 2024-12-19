@@ -55,14 +55,7 @@ export default function NewsCard({ post }: NewsCardProps) {
           "flex-1 transition-colors duration-500 flex flex-col justify-between gap-y-3"
         }
       >
-        <ArticleBadge
-          type={article}
-          className={cn(
-            "self-start",
-            article === "company" &&
-              "lg:group-hover:bg-pka_blue2 transition-colors duration-500"
-          )}
-        />
+        <ArticleBadge type={article} className={cn("self-start")} />
         <div className={"flex items-center justify-between relative"}>
           <div>
             <h4

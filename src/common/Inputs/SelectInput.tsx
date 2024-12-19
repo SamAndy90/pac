@@ -7,7 +7,7 @@ import {
   ListboxOption,
   ListboxOptions,
 } from "@headlessui/react";
-import { FiAlertTriangle, FiCheck, FiChevronDown } from "react-icons/fi";
+import { FiCheck, FiChevronDown } from "react-icons/fi";
 
 export type Option = {
   value: string;
@@ -27,7 +27,7 @@ type BaseProps = {
   error?: boolean;
 };
 
-export type USelectInputProps =
+export type SelectInputProps =
   | ({
       value: string;
       onChange: (value: string) => void;
@@ -39,7 +39,7 @@ export type USelectInputProps =
       multiple: true;
     } & BaseProps);
 
-export function SelectInput(props: USelectInputProps) {
+export function SelectInput(props: SelectInputProps) {
   const {
     value,
     onChange,
@@ -78,16 +78,25 @@ export function SelectInput(props: USelectInputProps) {
         defaultValue={options[0].value}
       >
         <div className={"relative"}>
-          <ListboxButton
-            className={cn(
-              "group flex w-full items-center justify-between rounded-full border border-pka_blue/30 text-left text-pka_blue transition-colors hover:border-pka_blue px-6 py-3.5",
-              { "border-red-500": error },
-              button
-            )}
-          >
+          <ListboxButton className={cn("w-full")}>
             {({ open, focus }) => (
-              <>
-                <span className={cn("line-clamp-1 flex-1 whitespace-nowrap")}>
+              <div
+                className={cn(
+                  "flex items-center justify-between group rounded-full border text-left text-pka_blue transition-colors px-6 py-3.5",
+                  {
+                    "border-red-500": error,
+                    "hover:border-pka_blue border-pka_blue/30":
+                      !focus && !open && !error,
+                    "border-pka_green": open && !error,
+                  },
+                  button
+                )}
+              >
+                <span
+                  className={cn("line-clamp-1 flex-1 whitespace-nowrap", {
+                    "text-pka_blue2/50": displayValue == display,
+                  })}
+                >
                   {displayValue}
                 </span>
                 <div>
@@ -102,7 +111,7 @@ export function SelectInput(props: USelectInputProps) {
                     )}
                   />
                 </div>
-              </>
+              </div>
             )}
           </ListboxButton>
 
@@ -137,12 +146,11 @@ export function SelectInput(props: USelectInputProps) {
 
       {helperText && (
         <p
-          className={cn("flex items-center gap-x-2 text-xs font-bold", {
+          className={cn("text-sm", {
             "text-red-500": error,
-            "text-gray-700": !error,
+            "text-pka_blue2/60": !error,
           })}
         >
-          <FiAlertTriangle className={"size-4 stroke-[2.5px]"} />
           {helperText}
         </p>
       )}

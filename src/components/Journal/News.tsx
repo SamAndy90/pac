@@ -8,7 +8,13 @@ import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { AddPostComponent } from "./AddPostComponent";
 
-export type Article = "company" | "team" | "project";
+export type Article =
+  | "sweepstakes_insights"
+  | "adventure_stories"
+  | "community_&_service"
+  | "outdoor_gear_&_lifestyle"
+  | "transparency_&_accountability"
+  | "tips_&_how-tos";
 
 export type Post = {
   article: Article;

@@ -64,7 +64,7 @@ export const TextInput = forwardRef<
         <Component
           id={id}
           className={cn(
-            "block flex-1 px-3 py-3.5 outline-0 text-pka_blue",
+            "block flex-1 px-3 py-3.5 outline-0 text-pka_blue placeholder:text-pka_blue2/50",
             { "min-h-32": multiline },
             className?.input
           )}

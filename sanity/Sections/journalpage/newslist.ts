@@ -21,9 +21,24 @@ export const newslist = defineType({
               title: "Article",
               options: {
                 list: [
-                  { title: "Company", value: "company" },
-                  { title: "Team", value: "team" },
-                  { title: "Project", value: "project" },
+                  {
+                    title: "Sweepstakes Insights",
+                    value: "sweepstakes_insights",
+                  },
+                  { title: "Adventure Stories", value: "adventure_stories" },
+                  {
+                    title: "Community & Service",
+                    value: "community_&_service",
+                  },
+                  {
+                    title: "Outdoor Gear & Lifestyle",
+                    value: "outdoor_gear_&_lifestyle",
+                  },
+                  {
+                    title: "Transparency & Accountability",
+                    value: "transparency_&_accountability",
+                  },
+                  { title: "Tips & How-Tos", value: "tips_&_how-tos" },
                 ],
               },
             }),

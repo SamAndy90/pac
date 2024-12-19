@@ -23,7 +23,7 @@ export function AddPostComponent() {
   return (
     <>
       <Button
-        className={"self-end border-pka_blue2"}
+        className={"self-center border-pka_blue2"}
         onClick={() => setOpenForm(true)}
       >
         {formData.triger_button_text}

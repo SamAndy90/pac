@@ -3,6 +3,7 @@ import { cn, formatDate, ImgUrl } from "@/lib/utils";
 import { HTMLAttributes } from "react";
 import Link from "next/link";
 import { Article, Post } from "./News";
+import { FaRegImages } from "react-icons/fa6";
 
 type HotNewsCardProps = {
   data: Post;
@@ -28,14 +29,24 @@ export function HotNewsCard({
           )}
         ></div>
         <div className={"relative h-full rounded-xl overflow-hidden"}>
-          <Image
-            src={ImgUrl(gallery[0])}
-            alt={"News image"}
-            fill
-            className={
-              "object-cover group-hover:scale-105 delay-75 transition-transform duration-1000"
-            }
-          />
+          {gallery?.length > 0 ? (
+            <Image
+              src={ImgUrl(gallery[0])}
+              alt={"News image"}
+              fill
+              className={
+                "object-cover group-hover:scale-105 delay-75 transition-transform duration-1000"
+              }
+            />
+          ) : (
+            <div
+              className={
+                "bg-pka_green_light relative h-full rounded-xl flex items-center justify-center"
+              }
+            >
+              <FaRegImages className={"text-pka_blue2 size-20"} />
+            </div>
+          )}
         </div>
       </div>
       <ArticleBadge type={article} className={"mb-3"} />
@@ -58,17 +69,11 @@ export const ArticleBadge = ({
   return (
     <div
       className={cn(
-        "uppercase relative inline-block leading-none z-10 py-1 px-3 rounded-full font-avenirBold text-[8px] md:text-[10px] text-pka_blue lg:group-hover:text-white transition-colors duration-500",
-        {
-          "bg-pka_blue text-white": type === "company",
-          "bg-pka_blue2 text-white": type === "project",
-          "bg-pka_green text-pka_blue2 lg:group-hover:text-blue2":
-            type === "team",
-        },
+        "uppercase relative inline-block leading-none z-10 py-1 px-3 rounded-full font-avenirBold text-[8px] md:text-[10px] text-white lg:group-hover:text-pka_blue transition-colors duration-500 bg-pka_blue lg:group-hover:bg-white",
         className
       )}
     >
-      {type} news
+      {type?.replace(/_/g, " ")}
     </div>
   );
 };

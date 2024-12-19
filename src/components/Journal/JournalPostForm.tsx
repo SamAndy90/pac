@@ -7,11 +7,20 @@ import { z } from "zod";
 import { getDefaults } from "@/lib/zod";
 import { Button } from "@/common/UI/Button";
 import { Title } from "@/common";
-import { FormTextInput } from "@/common/FormInputs";
+import { FormSelectInput, FormTextInput } from "@/common/FormInputs";
 import { CMSFormData } from "@/lib/actions";
 import { useState } from "react";
 
 const formSchema = z.object({
+  title: z
+    .string()
+    .min(3, "Title must contain at least 3 characters")
+    .default(""),
+  category: z.string().min(1, "Choose the category please").default(""),
+  description: z
+    .string()
+    .min(30, "Description must contain at least 30 characters")
+    .default(""),
   email: z.string().email().default(""),
 });
 
@@ -38,10 +47,16 @@ export function JournalPostForm({ data, onClose }: JournalPostFormProps) {
     setError("");
     setLoading(true);
 
+    const fullData = {
+      ...data,
+      category: CategoriesData.find((c) => c.value === data.category)?.label,
+      createdAt: new Date().toLocaleDateString(),
+    };
+
     try {
       const res = await fetch("api/subscribe", {
         method: "POST",
-        body: JSON.stringify(data),
+        body: JSON.stringify(fullData),
         headers: {
           "Content-Type": "application/json",
         },
@@ -77,9 +92,26 @@ export function JournalPostForm({ data, onClose }: JournalPostFormProps) {
           <div className={"flex flex-col items-center gap-y-6 md:gap-y-10"}>
             <div className={"flex flex-col gap-y-4 md:gap-y-5 w-full"}>
               <FormTextInput<Form>
+                fieldName={"title"}
+                label={"Title"}
+                placeholder={"Name your adventure"}
+              />
+              <FormSelectInput
+                fieldName={"category"}
+                options={CategoriesData}
+                label={"Category"}
+                display={"Choose the category"}
+              />
+              <FormTextInput<Form>
+                fieldName={"description"}
+                label={"Text"}
+                placeholder={"Describe your adventure"}
+                multiline={true}
+              />
+              <FormTextInput<Form>
                 fieldName={"email"}
                 label={"Email"}
-                placeholder={"Please write your email here"}
+                placeholder={"Please write your email"}
               />
             </div>
 
@@ -91,12 +123,41 @@ export function JournalPostForm({ data, onClose }: JournalPostFormProps) {
               {submit_button_text}
             </Button>
           </div>
-          {success && (
-            <p className={"mt-3 text-center text-pka_blue"}>{success}</p>
-          )}
-          {!error && <p className={"mt-3 text-center text-red-500"}>{error}</p>}
         </div>
+        {success && (
+          <p className={"mt-4 mb-2 text-center text-pka_blue"}>{success}</p>
+        )}
+        {error && (
+          <p className={"mt-4 mb-2 text-center text-red-500"}>{error}</p>
+        )}
       </form>
     </FormProvider>
   );
 }
+
+export const CategoriesData = [
+  {
+    label: "Sweepstakes Insights",
+    value: "sweepstakes_insights",
+  },
+  {
+    label: "Adventure Stories",
+    value: "adventure_stories",
+  },
+  {
+    label: "Community & Service",
+    value: "community_&_service",
+  },
+  {
+    label: "Outdoor Gear & Lifestyle",
+    value: "outdoor_gear_&_lifestyle",
+  },
+  {
+    label: "Transparency & Accountability",
+    value: "transparency_&_accountability",
+  },
+  {
+    label: "Tips & How-Tos",
+    value: "tips_&_how-tos",
+  },
+];
