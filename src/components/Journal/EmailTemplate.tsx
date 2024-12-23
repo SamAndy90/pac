@@ -4,6 +4,7 @@ type EmailTemplateProps = {
     category: string;
     description: string;
     email: string;
+    images?: string[];
     createdAt: string;
   };
 };
@@ -11,7 +12,7 @@ type EmailTemplateProps = {
 export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
   data,
 }) => {
-  const { title, category, description, createdAt, email } = data;
+  const { title, category, description, createdAt, email, images } = data;
   return (
     <div
       style={{
@@ -41,7 +42,19 @@ export const EmailTemplate: React.FC<Readonly<EmailTemplateProps>> = ({
         <span style={{ fontWeight: 600 }}>DESCRIPTION:</span> {description}
       </p>
       <p>
-        <span style={{ fontWeight: 600 }}>DATE:</span> {createdAt}
+        <span style={{ fontWeight: 600 }}>IMAGES URLS: </span>
+        {!!images?.length ? (
+          <ul>
+            {images?.map((url) => (
+              <li key={url}>{url}</li>
+            ))}
+          </ul>
+        ) : (
+          <span>No images</span>
+        )}
+      </p>
+      <p style={{ marginTop: "8px" }}>
+        <span style={{ fontWeight: 600 }}>CREATED AT:</span> {createdAt}
       </p>
     </div>
   );

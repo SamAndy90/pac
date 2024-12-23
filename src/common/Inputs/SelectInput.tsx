@@ -67,7 +67,7 @@ export function SelectInput(props: SelectInputProps) {
   }
 
   return (
-    <div className={cn("flex flex-col gap-y-2", wrapper)}>
+    <div className={cn("flex flex-col gap-y-2 w-full", wrapper)}>
       {label && (
         <label className={cn("text-pka_blue2", labelClassName)}>{label}</label>
       )}
@@ -77,71 +77,69 @@ export function SelectInput(props: SelectInputProps) {
         multiple={multiple}
         defaultValue={options[0].value}
       >
-        <div className={"relative"}>
-          <ListboxButton className={cn("w-full")}>
-            {({ open, focus }) => (
-              <div
-                className={cn(
-                  "flex items-center justify-between group rounded-full border text-left text-pka_blue transition-colors px-6 py-3.5",
-                  {
-                    "border-red-500": error,
-                    "hover:border-pka_blue border-pka_blue/30":
-                      !focus && !open && !error,
-                    "border-pka_green": open && !error,
-                  },
-                  button
-                )}
+        <ListboxButton>
+          {({ open, focus }) => (
+            <div
+              className={cn(
+                "flex items-center justify-between group rounded-full border text-left text-pka_blue transition-colors px-6 py-3.5",
+                {
+                  "border-red-500": error,
+                  "hover:border-pka_blue border-pka_blue/30":
+                    !focus && !open && !error,
+                  "border-pka_green": open && !error,
+                },
+                button
+              )}
+            >
+              <span
+                className={cn("line-clamp-1 flex-1 whitespace-nowrap", {
+                  "text-pka_blue2/50": displayValue == display,
+                })}
               >
-                <span
-                  className={cn("line-clamp-1 flex-1 whitespace-nowrap", {
-                    "text-pka_blue2/50": displayValue == display,
-                  })}
-                >
-                  {displayValue}
-                </span>
-                <div>
-                  <FiChevronDown
-                    aria-hidden
-                    className={cn(
-                      "size-6 transform select-none text-pka_blue/30 transition group-hover:text-pka_blue",
-                      {
-                        "rotate-180": open,
-                        "!text-pka_green ": focus,
-                      }
-                    )}
-                  />
-                </div>
+                {displayValue}
+              </span>
+              <div>
+                <FiChevronDown
+                  aria-hidden
+                  className={cn(
+                    "size-6 transform select-none text-pka_blue/30 transition group-hover:text-pka_blue",
+                    {
+                      "rotate-180": open,
+                      "!text-pka_green ": focus,
+                    }
+                  )}
+                />
               </div>
-            )}
-          </ListboxButton>
+            </div>
+          )}
+        </ListboxButton>
 
-          <ListboxOptions
-            anchor={"bottom start"}
-            transition
-            className={
-              "w-[var(--button-width)] [--anchor-gap:2px] z-[1000] !max-h-56 py-1.5 rounded-2xl border border-pka_blue bg-white focus:outline-none text-base origin-top transition duration-300 ease-out data-[closed]:scale-95 data-[open]:scale-100 data-[closed]:opacity-0"
-            }
-          >
-            {options.map((i) => (
-              <ListboxOption key={i.value} value={i.value}>
-                {({ focus, selected }) => (
-                  <div
-                    className={cn(
-                      "flex items-center justify-between px-6 pb-3.5 pt-4 text-pka_blue select-none cursor-pointer text-nowrap",
-                      {
-                        "bg-pka_green_light": focus,
-                        "!bg-pka_blue text-white": selected,
-                      }
-                    )}
-                  >
-                    <span>{i.label}</span>
-                    {selected && <FiCheck className={"size-4 flex-shrink-0"} />}
-                  </div>
-                )}
-              </ListboxOption>
-            ))}
-          </ListboxOptions>
-        </div>
+        <ListboxOptions
+          anchor={"bottom start"}
+          transition
+          className={
+            "w-[var(--button-width)] [--anchor-gap:2px] z-[1000] !max-h-56 py-1.5 rounded-2xl border border-pka_blue bg-white focus:outline-none text-base transition duration-300 ease-out data-[closed]:opacity-0"
+          }
+        >
+          {options.map((i) => (
+            <ListboxOption key={i.value} value={i.value}>
+              {({ focus, selected }) => (
+                <div
+                  className={cn(
+                    "flex items-center justify-between px-6 pb-3.5 pt-4 text-pka_blue select-none cursor-pointer text-nowrap",
+                    {
+                      "bg-pka_green_light": focus,
+                      "!bg-pka_blue text-white": selected,
+                    }
+                  )}
+                >
+                  <span>{i.label}</span>
+                  {selected && <FiCheck className={"size-4 flex-shrink-0"} />}
+                </div>
+              )}
+            </ListboxOption>
+          ))}
+        </ListboxOptions>
       </Listbox>
 
       {helperText && (

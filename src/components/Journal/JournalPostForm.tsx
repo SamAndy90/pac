@@ -9,7 +9,11 @@ import { Button } from "@/common/UI/Button";
 import { Title } from "@/common";
 import { FormSelectInput, FormTextInput } from "@/common/FormInputs";
 import { CMSFormData } from "@/lib/actions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { UploadDropzone } from "@/lib/uploadthing";
+import { twMerge } from "tailwind-merge";
+import { FiUpload } from "react-icons/fi";
+import { log } from "node:console";
 
 const formSchema = z.object({
   title: z
@@ -32,6 +36,7 @@ type JournalPostFormProps = {
 };
 
 export function JournalPostForm({ data, onClose }: JournalPostFormProps) {
+  const [images, setImages] = useState<string[]>([]);
   const [success, setSuccess] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -50,6 +55,7 @@ export function JournalPostForm({ data, onClose }: JournalPostFormProps) {
     const fullData = {
       ...data,
       category: CategoriesData.find((c) => c.value === data.category)?.label,
+      images,
       createdAt: new Date().toLocaleDateString(),
     };
 
@@ -112,6 +118,26 @@ export function JournalPostForm({ data, onClose }: JournalPostFormProps) {
                 fieldName={"email"}
                 label={"Email"}
                 placeholder={"Please write your email"}
+              />
+              <UploadDropzone
+                endpoint="imageUploader"
+                onUploadBegin={() => {
+                  setLoading(true);
+                  setError("");
+                }}
+                onClientUploadComplete={(res) => {
+                  const imgUrls = res.map((imgData) => imgData.url);
+                  setImages(imgUrls);
+                  setLoading(false);
+                }}
+                onUploadError={(error: Error) => {
+                  console.log(`ERROR! ${error.message}`);
+                  setError(error.message);
+                }}
+                config={{ cn: twMerge }}
+                className={
+                  " mt-0 px-3 py-5 border-solid hover:border-pka_blue border-pka_blue/30 transition-all duration-300 ut-upload-icon:text-pka_blue ut-label:text-base ut-label:text-pka_blue ut-label:hover:text-pka_green ut-label:transition-all ut-label:duration-300 ut-allowed-content:text-xs ut-allowed-content:text-pka_blue2/50 ut-button:bg-pka_blue2 ut-button:ut-uploading:bg-pka_blue2/50 ut-button:after:bg-pka_green ut-button:ring-0"
+                }
               />
             </div>
 
