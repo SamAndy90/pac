@@ -7,7 +7,7 @@ type BannerCardProps = {
 
 const BannerCard = ({ title, imageUrl }: BannerCardProps) => {
   return (
-    <div className="w-full mt-16 lg:mt-24 h-[238px] md:h-[300px] lg:h-[300px] rounded-lg relative flex justify-center items-center overflow-hidden">
+    <section className="w-full h-[238px] md:h-[300px] lg:h-[300px] rounded-lg relative flex justify-center items-center overflow-hidden">
       <div className="w-full mx-2 relative rounded-lg h-full">
         <div className="absolute inset-0 bg-[#0A1200] bg-opacity-20 rounded-lg" />
         <Image
@@ -23,7 +23,7 @@ const BannerCard = ({ title, imageUrl }: BannerCardProps) => {
           <h1>{title}</h1>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

@@ -23,7 +23,7 @@ type JoinPeaceKeepersBenifitProps = {
 
 const JoinPeaceKeepersBenifit = ({ data }: JoinPeaceKeepersBenifitProps) => {
   return (
-    <section className={"mb-16"}>
+    <section>
       <Container>
         <div className={"flex flex-col items-center py-12 lg:py-14 gap-y-8"}>
           <Title className={"max-w-xl text-center"}>{data?.title}</Title>

@@ -75,6 +75,7 @@ export default defineType({
             defineArrayMember({ type: "page.joinpeacekeeper" }),
             defineArrayMember({ type: "page.livecontest" }),
             defineArrayMember({ type: "page.explore" }),
+            defineArrayMember({ type: "howToGetEntered" }),
             defineArrayMember({ type: "page.happeningnow" }),
             defineArrayMember({ type: "page.winnersCircle" }),
           ],

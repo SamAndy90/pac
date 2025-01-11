@@ -9,10 +9,18 @@ import { Button } from "@/common/UI/Button";
 
 export type Card = {
   subtitle?: string;
+  subtitlePosition?: string;
   title?: string;
+  titlePosition?: string;
   status: string;
-  homepageStyle?: string;
   description?: string;
+  descriptionPosition?: string;
+  ctaComponent: string;
+  cta?: {
+    ctaLabel?: string;
+    ctaLink?: string;
+  };
+  ctaPosition?: string;
   starttime: string;
   time: string;
   timerstyle: { bgcolor: Color; numcolor: Color };

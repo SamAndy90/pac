@@ -1,16 +1,18 @@
 import Image from "next/image";
 import { Container, Title } from "@/common";
-import { Portrait } from "@/types";
-import { ImgUrl } from "@/lib/utils";
+import { Color, Portrait } from "@/types";
+import { cn, ImgUrl } from "@/lib/utils";
 import CountdownComponent from "@/components/countdownCounter";
 
 type TData = {
-  _key: string;
   portrait: Portrait;
   title: string;
-  _type: string;
+  titleColor?: Color;
+  titleFontSize?: string;
   time: string;
   endtime: string;
+  _key: string;
+  _type: string;
 };
 
 type Props = {
@@ -18,7 +20,7 @@ type Props = {
 };
 
 export default function LiveContest({ data }: Props) {
-  const { title, portrait } = data;
+  const { title, portrait, titleColor, titleFontSize } = data;
   const currentTime = new Date().getTime();
 
   let time = true;
@@ -61,10 +63,21 @@ export default function LiveContest({ data }: Props) {
           "relative min-h-screen flex flex-col gap-16 items-center justify-between"
         }
       >
-        {/* <h2 className="text-6xl md:text-7xl lg:text-8xl uppercase tracking-widest md:tracking-[0.25em] mt-[13.6vh] text-pka_blue xl:text-9xl 2xl:text-[150px] text-center font-thunder font-bold">
+        <h2
+          style={{ color: titleColor?.value ?? "" }}
+          className={cn(
+            "mt-[13.6vh] text-center uppercase font-thunder font-bold xl:text-7xl text-6xl text-pka_blue tracking-wider",
+            {
+              "xl:text-5xl text-4xl": titleFontSize === "s",
+              "xl:text-6xl text-5xl": titleFontSize === "m",
+              "xl:text-7xl text-6xl": titleFontSize === "l",
+              "xl:text-8xl text-7xl": titleFontSize === "xl",
+              "xl:text-9xl text-8xl": titleFontSize === "2xl",
+            }
+          )}
+        >
           {title}
-        </h2> */}
-        <Title className={"mt-[13.6vh] text-center"}>{title}</Title>
+        </h2>
         <div className="mb-[8.7vh]">{timerDisplay()}</div>
       </Container>
     </section>

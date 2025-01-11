@@ -1,5 +1,6 @@
 import { Fragment, ReactNode } from "react";
 import HappeningNow from "@/components/Home/HappeningNow";
+import HowToGetEntered from "@/components/Home/HowToGetEntered";
 import WinnersCircle from "@/components/Home/WinnersCircle";
 import Explore from "@/components/Home/Explore";
 import JoinPeaceKeeper from "@/components/Home/JoinPeaceKeeper";
@@ -12,6 +13,7 @@ const HomePageComponents: { [key: string]: (data: any) => ReactNode } = {
   "page.joinpeacekeeper": (data: any) => <JoinPeaceKeeper data={data} />,
   "page.livecontest": (data: any) => <LiveContest data={data} />,
   "page.explore": (data: any) => <Explore data={data} baseURL={getBaseUrl()} />,
+  howToGetEntered: (data: any) => <HowToGetEntered data={data} />,
   "page.happeningnow": (data: any) => <HappeningNow data={data} />,
   "page.winnersCircle": (data: any) => <WinnersCircle data={data} />,
 } as const;

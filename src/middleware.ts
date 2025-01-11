@@ -15,7 +15,6 @@ import { authMiddleware } from "@clerk/nextjs/server";
 
 export default function combinedMiddleware(request: NextRequest, event: any) {
   const { cookies } = request;
-
   const ageVerified = cookies.get("ageVerified");
 
   if (

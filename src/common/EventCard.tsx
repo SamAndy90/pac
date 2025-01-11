@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import { FC, HTMLAttributes } from "react";
@@ -7,6 +5,7 @@ import CountdownComponent from "../components/countdownCounter";
 import { cn, ImgUrl } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
 import { Card } from "@/components/Home/HappeningNow";
+import { Button } from "./UI/Button";
 
 type EventCardProps = {
   card: Card;
@@ -15,15 +14,22 @@ type EventCardProps = {
 export const EventCard: FC<EventCardProps> = ({ card, className }) => {
   const {
     subtitle,
+    subtitlePosition,
     title,
+    titlePosition,
     description,
+    descriptionPosition,
+    ctaComponent,
+    cta,
+    ctaPosition,
+    status,
     slug,
     portrait,
     starttime,
     time,
     timerstyle,
-    homepageStyle: style = "style1",
   } = card;
+
   const loadTimer = () => {
     const currentTime = new Date();
     const startTime = new Date(starttime);
@@ -53,49 +59,14 @@ export const EventCard: FC<EventCardProps> = ({ card, className }) => {
     }
   };
 
-  if (style === "style1") {
-    return (
-      <Link
-        href={`/contests/${slug.current.trim()}`}
-        className={cn(
-          "max-w-[446px] group gap-y-4 px-3 py-16 mx-auto aspect-[1/1.435] bg-pka_green_light overflow-hidden relative rounded-[20px] text-center flex flex-col items-center lg:gap-y-8",
-          className
-        )}
-      >
-        <div className="absolute w-full bottom-0 h-1/3">
-          <Image
-            src={ImgUrl(portrait)}
-            alt={"Background"}
-            className="h-1/2 group-hover:scale-105 transition-all duration-500 object-cover"
-            fill
-          />
-        </div>
-        {title && (
-          <h3
-            className={cn(
-              "relative w-3/4 font-thunder text-5xl text-[#0A1200]"
-            )}
-          >
-            {title}
-          </h3>
-        )}
-        {description && (
-          <p className="max-w-[375px] font-avenirThin text-[#0A1200] line-clamp-6">
-            {description}
-          </p>
-        )}
-        <div className="absolute z-20 bottom-[10%] lg:bottom-[12%]">
-          {loadTimer()}
-        </div>
-      </Link>
-    );
-  }
+  const Component = status === "active" ? Link : "div";
 
+  // aspect-[1/1.435]
   return (
-    <Link
-      href={`/contests/${slug.current.trim()}`}
+    <Component
+      href={status === "active" ? `/contests/${slug.current.trim()}` : ""}
       className={cn(
-        "max-w-[446px] group px-3 py-16 mx-auto aspect-[1/1.435] overflow-hidden relative rounded-[20px] text-center flex flex-col items-center bg-pka_green_light",
+        "max-w-[446px] group h-full px-3 py-8 mx-auto overflow-hidden relative rounded-[20px] text-center flex flex-col items-center gap-y-4 bg-pka_green_light",
         className
       )}
     >
@@ -113,7 +84,11 @@ export const EventCard: FC<EventCardProps> = ({ card, className }) => {
       {subtitle && (
         <span
           className={cn(
-            "relative basis-1/4 font-averia text-xs uppercase text-white"
+            "relative font-averia text-xs uppercase text-white text-center w-full",
+            {
+              "text-left": subtitlePosition === "left",
+              "text-right": subtitlePosition === "right",
+            }
           )}
         >
           {subtitle}
@@ -122,36 +97,88 @@ export const EventCard: FC<EventCardProps> = ({ card, className }) => {
       {title && (
         <h3
           className={cn(
-            "relative !leading-[1.4] flex-1 w-2/3 font-thunder text-5xl text-white",
+            "relative flex-1 !leading-[1.4] font-thunder text-5xl text-white text-center w-full",
             {
-              "font-bold": style === "style3",
+              "text-left": titlePosition === "left",
+              "text-right": titlePosition === "right",
             }
           )}
         >
           {title}
         </h3>
       )}
-      <div
-        className={
-          "flex items-center z-0 gap-x-1 border-b pb-[3px] group/link hover:border-b-white transition-all duration-300 border-b-white/50 justify-center text-white"
-        }
-      >
-        <span
-          className={
-            "font-roboto leading-none font-medium text-sm tracking-[0.01em]"
-          }
+      {description && (
+        <p
+          className={cn(
+            "relative flex-1 flex-grow-[3] text-white text-center w-full line-clamp-6 mb-4",
+            {
+              "text-left": descriptionPosition === "left",
+              "text-right": descriptionPosition === "right",
+            }
+          )}
         >
-          Explore
-        </span>
-        <ArrowRight
-          className={
-            "size-2.5 group-hover/link:translate-x-1 transition-all duration-300"
-          }
-        />
+          {description}
+        </p>
+      )}
+      <div className="z-20 flex-1 mb-2">{loadTimer()}</div>
+      <div
+        className={cn("flex-1 z-10", {
+          "self-start": ctaPosition === "left",
+          "w-full": ctaPosition === "full",
+          "self-end": ctaPosition === "right",
+        })}
+      >
+        {cta &&
+          (status === "active" ? (
+            ctaComponent === "button" ? (
+              <Button className={"z-10"} fullWidth>
+                {cta?.ctaLabel}
+              </Button>
+            ) : (
+              <div
+                className={
+                  "flex items-center z-0 gap-x-1 border-b pb-[3px] group/link hover:border-b-white transition-all duration-300 border-b-white/50 justify-center text-white"
+                }
+              >
+                <span
+                  className={
+                    "font-roboto leading-none font-medium text-sm tracking-[0.01em]"
+                  }
+                >
+                  {cta?.ctaLabel}
+                </span>
+                <ArrowRight
+                  className={
+                    "size-2.5 group-hover/link:translate-x-1 transition-all duration-300"
+                  }
+                />
+              </div>
+            )
+          ) : ctaComponent === "button" ? (
+            <Link href={cta.ctaLink ?? ""} className={"z-10 w-full"}>
+              <Button fullWidth>{cta?.ctaLabel}</Button>
+            </Link>
+          ) : (
+            <div
+              className={
+                "flex items-center z-0 gap-x-1 border-b pb-[3px] group/link hover:border-b-white transition-all duration-300 border-b-white/50 justify-center text-white"
+              }
+            >
+              <span
+                className={
+                  "font-roboto leading-none font-medium text-sm tracking-[0.01em]"
+                }
+              >
+                {cta?.ctaLabel}
+              </span>
+              <ArrowRight
+                className={
+                  "size-2.5 group-hover/link:translate-x-1 transition-all duration-300"
+                }
+              />
+            </div>
+          ))}
       </div>
-      <div className="absolute z-20 bottom-[20%] sm:bottom-[26%]">
-        {loadTimer()}
-      </div>
-    </Link>
+    </Component>
   );
 };

@@ -8,6 +8,25 @@ export const liveContest = defineType({
   fields: [
     defineField(titleField),
     defineField({
+      name: "titleColor",
+      title: "Title Color",
+      type: "simplerColor",
+    }),
+    defineField({
+      name: "titleFontSize",
+      title: "Title Font Size",
+      type: "string",
+      options: {
+        list: [
+          { title: "S", value: "s" },
+          { title: "M", value: "m" },
+          { title: "L", value: "l" },
+          { title: "XL", value: "xl" },
+          { title: "2XL", value: "2xl" },
+        ],
+      },
+    }),
+    defineField({
       name: "time",
       title: "Start Time",
       type: "datetime",

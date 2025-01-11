@@ -11,6 +11,7 @@ import {
   joinPeaceKeeper,
   liveContest,
   explore,
+  howToGetEntered,
   happeningNow,
   winnersCircle,
 } from "./Sections/homepage";
@@ -40,6 +41,7 @@ export const schema: { types: SchemaTypeDefinition[] } = {
     joinPeaceKeeper,
     liveContest,
     explore,
+    howToGetEntered,
     happeningNow,
     winnersCircle,
     aboutHero,

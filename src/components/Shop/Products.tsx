@@ -19,9 +19,9 @@ export type ProductsProps = {
 export function Products({ data, products }: ProductsProps) {
   if (!products?.length) return null;
   return (
-    <section className={"py-12"}>
+    <section>
       <Container>
-        <div>
+        <div className={"py-12"}>
           <Title className={"mb-10 text-center"}>{data?.title}</Title>
           <div
             className={

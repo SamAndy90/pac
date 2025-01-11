@@ -21,9 +21,27 @@ export const happeningNow = defineField({
               type: "string",
             }),
             defineField({
+              name: "subtitlePosition",
+              title: "Subtitle Position",
+              type: "string",
+              options: {
+                list: ["left", "center", "right"],
+              },
+              initialValue: "center",
+            }),
+            defineField({
               name: "title",
               title: "Event Name",
               type: "string",
+            }),
+            defineField({
+              name: "titlePosition",
+              title: "Title Position",
+              type: "string",
+              options: {
+                list: ["left", "center", "right"],
+              },
+              initialValue: "center",
             }),
             defineField({
               name: "status",
@@ -39,21 +57,53 @@ export const happeningNow = defineField({
                 rule.required().error("Status is required."),
             }),
             defineField({
-              name: "homepageStyle",
-              title: "Choose Homepage Style for Cards",
-              type: "string",
-              options: {
-                list: [
-                  { title: "Style 1", value: "style1" },
-                  { title: "Style 2", value: "style2" },
-                  { title: "Style 3", value: "style3" },
-                ],
-              },
-            }),
-            defineField({
               name: "description",
               title: "Event Description",
               type: "text",
+            }),
+            defineField({
+              name: "descriptionPosition",
+              title: "Description Position",
+              type: "string",
+              options: {
+                list: ["left", "center", "right"],
+              },
+              initialValue: "center",
+            }),
+            defineField({
+              name: "cta",
+              title: "CTA",
+              type: "object",
+              fields: [
+                defineField({
+                  name: "ctaLabel",
+                  title: "Label",
+                  type: "string",
+                }),
+                defineField({
+                  name: "ctaLink",
+                  title: "Link",
+                  type: "string",
+                }),
+              ],
+            }),
+            defineField({
+              name: "ctaPosition",
+              title: "CTA Position",
+              type: "string",
+              options: {
+                list: ["left", "center", "right", "full"],
+              },
+              initialValue: "center",
+            }),
+            defineField({
+              name: "ctaComponent",
+              title: "CTA Component",
+              type: "string",
+              options: {
+                list: ["button", "text"],
+              },
+              initialValue: "text",
             }),
             defineField({
               name: "starttime",

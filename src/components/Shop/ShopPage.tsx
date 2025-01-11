@@ -43,5 +43,5 @@ export default function ShopPage({ data, shopifyProducts }: ShopPageProps) {
     }
   });
 
-  return <>{...Sections}</>;
+  return <div className={"lg:pt-20 pt-12 pb-20"}>{...Sections}</div>;
 }
