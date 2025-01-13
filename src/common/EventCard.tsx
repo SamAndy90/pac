@@ -78,7 +78,7 @@ export const EventCard: FC<EventCardProps> = ({ card, className }) => {
       />
       <div
         className={
-          "absolute pointer-events-none z-10 w-full h-full top-0 left-0 bg-[#0A1200]/20 group-hover:bg-[#0A1200]/0 transition-all duration-500"
+          "absolute pointer-events-none z-0 inset-0 bg-pka_black/15 group-hover:bg-pka_black/30 group-hover:backdrop-blur-sm transition-all duration-300"
         }
       />
       {subtitle && (

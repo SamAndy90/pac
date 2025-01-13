@@ -1,8 +1,10 @@
 import Image from "next/image";
-import { Container, Title } from "@/common";
-import { Color, Portrait } from "@/types";
+import { Container } from "@/common";
+import { ButtonType, Color, Portrait } from "@/types";
 import { cn, ImgUrl } from "@/lib/utils";
 import CountdownComponent from "@/components/countdownCounter";
+import { Button } from "@/common/UI/Button";
+import Link from "next/link";
 
 type TData = {
   portrait: Portrait;
@@ -11,6 +13,7 @@ type TData = {
   titleFontSize?: string;
   time: string;
   endtime: string;
+  buttons?: ButtonType[];
   _key: string;
   _type: string;
 };
@@ -20,7 +23,7 @@ type Props = {
 };
 
 export default function LiveContest({ data }: Props) {
-  const { title, portrait, titleColor, titleFontSize } = data;
+  const { title, portrait, titleColor, titleFontSize, buttons } = data;
   const currentTime = new Date().getTime();
 
   let time = true;
@@ -78,6 +81,21 @@ export default function LiveContest({ data }: Props) {
         >
           {title}
         </h2>
+        <div className={"flex-1 flex flex-col justify-end"}>
+          {buttons?.map((b, Idx) => {
+            return b?.url ? (
+              <Link href={b.url} key={b.text + Idx}>
+                <Button key={b.text + Idx} colorVariant={b.style}>
+                  {b.text}
+                </Button>
+              </Link>
+            ) : (
+              <Button key={b.text + Idx} colorVariant={b.style}>
+                {b.text}
+              </Button>
+            );
+          })}
+        </div>
         <div className="mb-[8.7vh]">{timerDisplay()}</div>
       </Container>
     </section>

@@ -39,21 +39,25 @@ const Renderer: React.FC<RendererProps> = ({
             backgroundColor: bgColor,
           }}
           className={cn(
-            "flex flex-col xl:p-x-6 lg:py-6 px-4 py-5 md:px-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
+            "flex flex-col p-4 md:py-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
             {
-              "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+              "p-4 md:py-4 md:rounded-2xl": size === "small",
             }
           )}
         >
           <span
-            className={cn("text-3xl md:text-4xl lg:text-5xl xl:text-[57px]", {
-              "text-2xl md:text-2xl lg:text-2xl xl:text-2xl": size === "small",
-            })}
+            className={cn(
+              "text-3xl md:text-4xl lg:text-5xl min-w-10 md:min-w-14",
+              {
+                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-10 md:min-w-10":
+                  size === "small",
+              }
+            )}
           >
             {days}
           </span>
           <span
-            className={cn("md:text-lg xl:text-2xl", {
+            className={cn("md:text-lg xl:text-xl", {
               "md:text-base xl:text-base": size === "small",
             })}
           >
@@ -65,21 +69,25 @@ const Renderer: React.FC<RendererProps> = ({
             backgroundColor: bgColor,
           }}
           className={cn(
-            "flex flex-col xl:p-x-6 lg:py-6 px-4 py-5 md:px-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
+            "flex flex-col p-4 md:py-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
             {
-              "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+              "p-4 md:py-4 md:rounded-2xl": size === "small",
             }
           )}
         >
           <span
-            className={cn("text-3xl md:text-4xl lg:text-5xl xl:text-[57px]", {
-              "text-2xl md:text-2xl lg:text-2xl xl:text-2xl": size === "small",
-            })}
+            className={cn(
+              "text-3xl md:text-4xl lg:text-5xl min-w-10 md:min-w-14",
+              {
+                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-10 md:min-w-10":
+                  size === "small",
+              }
+            )}
           >
             {hours}
           </span>
           <span
-            className={cn("md:text-lg xl:text-2xl", {
+            className={cn("md:text-lg xl:text-xl", {
               "md:text-base xl:text-base": size === "small",
             })}
           >
@@ -91,21 +99,25 @@ const Renderer: React.FC<RendererProps> = ({
             backgroundColor: bgColor,
           }}
           className={cn(
-            "flex flex-col xl:p-x-6 lg:py-6 px-4 py-5 md:px-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
+            "flex flex-col p-4 md:py-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
             {
-              "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+              "p-4 md:py-4 md:rounded-2xl": size === "small",
             }
           )}
         >
           <span
-            className={cn("text-3xl md:text-4xl lg:text-5xl xl:text-[57px]", {
-              "text-2xl md:text-2xl lg:text-2xl xl:text-2xl": size === "small",
-            })}
+            className={cn(
+              "text-3xl md:text-4xl lg:text-5xl min-w-10 md:min-w-14",
+              {
+                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-10 md:min-w-10":
+                  size === "small",
+              }
+            )}
           >
             {minutes}
           </span>
           <span
-            className={cn("md:text-lg xl:text-2xl", {
+            className={cn("md:text-lg xl:text-xl", {
               "md:text-base xl:text-base": size === "small",
             })}
           >
@@ -117,17 +129,17 @@ const Renderer: React.FC<RendererProps> = ({
             backgroundColor: bgColor,
           }}
           className={cn(
-            "flex flex-col xl:p-x-6 lg:py-6 px-4 py-5 md:px-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
+            "flex flex-col p-4 md:py-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
             {
-              "p-4 md:p-4 lg:p-4 xl:p-4 md:rounded-2xl": size === "small",
+              "p-4 md:py-4 md:rounded-2xl": size === "small",
             }
           )}
         >
           <span
             className={cn(
-              "text-3xl md:text-4xl lg:text-5xl xl:text-[57px] min-w-10 md:min-w-14 xl:min-w-20",
+              "text-3xl md:text-4xl lg:text-5xl min-w-10 md:min-w-14",
               {
-                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-10 md:min-w-10 xl:min-w-10":
+                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-10 md:min-w-10":
                   size === "small",
               }
             )}
@@ -135,7 +147,7 @@ const Renderer: React.FC<RendererProps> = ({
             {seconds}
           </span>
           <span
-            className={cn("md:text-lg xl:text-2xl", {
+            className={cn("md:text-lg xl:text-xl", {
               "md:text-base xl:text-base": size === "small",
             })}
           >

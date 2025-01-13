@@ -1,4 +1,4 @@
-import { titleField, portraitField } from "../fields";
+import { titleField, portraitField, buttons } from "../fields";
 import { defineField, defineType } from "sanity";
 
 export const liveContest = defineType({
@@ -47,5 +47,6 @@ export const liveContest = defineType({
       },
     }),
     defineField(portraitField),
+    defineField(buttons),
   ],
 });

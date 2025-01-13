@@ -22,7 +22,11 @@ export const hero = defineField({
       options: {
         hotspot: true,
       },
-      validation: (rule) => rule.required().error("An image is required."),
+    }),
+    defineField({
+      name: "videoLink",
+      title: "Video Link",
+      type: "url",
     }),
   ],
   preview: {

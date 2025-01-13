@@ -81,8 +81,8 @@ function Card({ data }: { data: Card }) {
         height={35}
         className={"mb-5"}
       />
-      <h5 className={"mb-4 text-2xl"}>{title}</h5>
-      <p className={"text-xl"}>{description}</p>
+      <h5 className={"mb-2 text-xl"}>{title}</h5>
+      <p>{description}</p>
     </div>
   );
 }
