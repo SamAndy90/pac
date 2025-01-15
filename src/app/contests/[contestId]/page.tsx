@@ -2,7 +2,7 @@ import { Container, Title } from "@/common";
 import { ContestProducts } from "@/components/Contests/ContestProducts";
 import { getData } from "@/lib/data-fetchers/sanity";
 import { getCollection } from "@/lib/data-fetchers/shopify/products";
-import { EventType } from "../page";
+import { ContestType } from "@/types";
 
 export type ContestPageType = {
   params: { contestId: string };
@@ -11,7 +11,7 @@ export type ContestPageType = {
 export default async function ContestPage({ params }: ContestPageType) {
   const collection = await getCollection(params.contestId);
   const data = await getData(`*[_type == "contests"]`);
-  const events: EventType[] = data[0]?.contestsList;
+  const events: ContestType[] = data[0]?.contestsList;
   const event = events.find(
     (event) => event.collection_name === params.contestId
   );

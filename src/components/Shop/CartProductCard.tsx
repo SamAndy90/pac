@@ -70,7 +70,7 @@ export default function CartProductCard({ product }: CartProductCardProps) {
             "w-1/3 aspect-square rounded-xl relative overflow-hidden bg-pka_green_light"
           }
         >
-          {media.edges[0].node.image && media.edges[0].node.image.url ? (
+          {media.edges[0]?.node.image && media.edges[0].node.image.url ? (
             <Image
               src={media.edges[0].node.image.url}
               alt={media.edges[0].node.image.altText || "Image"}

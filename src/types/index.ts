@@ -8,6 +8,14 @@ export type Portrait = {
   _type: string;
 };
 
+export type Video = {
+  asset: {
+    _ref: string;
+    _type: string;
+  };
+  _type: string;
+};
+
 export type ButtonType = {
   style?: ButtonStyles;
   text: string;
@@ -97,4 +105,29 @@ export type Cart = {
   lines: {
     edges: CartLine[];
   };
+};
+
+export type ContestType = {
+  collection_name: string;
+  status: string;
+  subtitle?: string;
+  subtitlePosition?: string;
+  title?: string;
+  titlePosition?: string;
+  description?: string;
+  descriptionPosition?: string;
+  ctaComponent?: string;
+  cta?: {
+    ctaLabel?: string;
+    ctaLink?: string;
+  };
+  ctaPosition?: string;
+  bg?: string;
+  picture?: Portrait;
+  videoLink?: string;
+  videoFile?: Video;
+  starttime: string;
+  endtime: string;
+  timerstyle?: { bgcolor?: Color; numcolor?: Color };
+  _key: string;
 };

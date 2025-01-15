@@ -1,18 +1,24 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { FC, HTMLAttributes } from "react";
 import CountdownComponent from "../components/countdownCounter";
-import { cn, ImgUrl } from "@/lib/utils";
+import { cn, getVideoURL, ImgUrl } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
-import { Card } from "@/components/Home/HappeningNow";
+// import { Card } from "@/components/Home/HappeningNow";
 import { Button } from "./UI/Button";
+import ReactPlayer from "react-player";
+import { ContestType } from "@/types";
 
 type EventCardProps = {
-  card: Card;
+  // card: Card;
+  data: ContestType;
 } & Pick<HTMLAttributes<HTMLDivElement>, "className">;
 
-export const EventCard: FC<EventCardProps> = ({ card, className }) => {
+export const EventCard: FC<EventCardProps> = ({ data, className }) => {
   const {
+    collection_name,
     subtitle,
     subtitlePosition,
     title,
@@ -23,24 +29,26 @@ export const EventCard: FC<EventCardProps> = ({ card, className }) => {
     cta,
     ctaPosition,
     status,
-    slug,
-    portrait,
     starttime,
-    time,
+    endtime,
     timerstyle,
-  } = card;
+    bg,
+    picture,
+    videoFile,
+    videoLink,
+  } = data;
 
   const loadTimer = () => {
     const currentTime = new Date();
     const startTime = new Date(starttime);
-    const endTime = new Date(time);
+    const endTime = new Date(endtime);
 
     if (currentTime > startTime && currentTime < endTime) {
       return (
         <CountdownComponent
           bgColor={timerstyle?.bgcolor?.value}
           textColor={timerstyle?.numcolor?.value}
-          timer={time}
+          timer={endtime}
           size={"small"}
         />
       );
@@ -59,32 +67,85 @@ export const EventCard: FC<EventCardProps> = ({ card, className }) => {
     }
   };
 
+  const url = getVideoURL(videoFile);
+
   const Component = status === "active" ? Link : "div";
 
-  // aspect-[1/1.435]
   return (
     <Component
-      href={status === "active" ? `/contests/${slug.current.trim()}` : ""}
+      href={status === "active" ? `/contests/${collection_name?.trim()}` : ""}
       className={cn(
-        "max-w-[446px] group h-full px-3 py-8 mx-auto overflow-hidden relative rounded-[20px] text-center flex flex-col items-center gap-y-4 bg-pka_green_light",
+        "max-w-[390px] group h-full min-h-[460px] px-3 py-8 mx-auto overflow-hidden relative rounded-[20px] text-center flex flex-col items-center gap-y-4 bg-pka_green_light",
         className
       )}
     >
-      <Image
-        src={ImgUrl(portrait)}
-        alt={"Background"}
-        className="object-cover group-hover:scale-105 transition-all duration-500"
-        fill
-      />
+      {bg === "image" && picture && (
+        <Image
+          src={ImgUrl(picture)}
+          alt={"Background"}
+          fill
+          className={
+            "object-cover z-0 group-hover:scale-105 transition-all duration-500 pointer-events-none select-none"
+          }
+        />
+      )}
+      {bg === "file" && url && (
+        <ReactPlayer
+          className={
+            "react-player absolute inset-0 z-0 group-hover:scale-105 transition-all duration-500 pointer-events-none select-none"
+          }
+          playing={true}
+          controls={false}
+          muted={true}
+          url={url}
+          loop={true}
+          width={"100%"}
+          height={"100%"}
+        />
+      )}
+      {bg === "url" && videoLink && (
+        <ReactPlayer
+          className={
+            "react-player z-0 absolute inset-0 group-hover:scale-105 transition-all duration-500 pointer-events-none select-none"
+          }
+          playing={true}
+          controls={false}
+          muted={true}
+          url={videoLink}
+          loop={true}
+          width={"auto"}
+          height={"100%"}
+          config={{
+            youtube: {
+              playerVars: { controls: 0, modestbranding: 1, rel: 0 },
+            },
+            vimeo: {
+              playerOptions: {
+                controls: false,
+                title: false,
+                byline: false,
+              },
+            },
+            file: {
+              attributes: {
+                controls: false,
+                muted: true,
+                autoPlay: true,
+              },
+            },
+          }}
+        />
+      )}
+
       <div
         className={
           "absolute pointer-events-none z-0 inset-0 bg-pka_black/15 group-hover:bg-pka_black/30 group-hover:backdrop-blur-sm transition-all duration-300"
         }
       />
       {subtitle && (
-        <span
+        <div
           className={cn(
-            "relative font-averia text-xs uppercase text-white text-center w-full",
+            "relative font-averia text-xs uppercase text-white text-center w-full mb-3",
             {
               "text-left": subtitlePosition === "left",
               "text-right": subtitlePosition === "right",
@@ -92,12 +153,12 @@ export const EventCard: FC<EventCardProps> = ({ card, className }) => {
           )}
         >
           {subtitle}
-        </span>
+        </div>
       )}
       {title && (
         <h3
           className={cn(
-            "relative flex-1 !leading-[1.4] font-thunder text-5xl text-white text-center w-full",
+            "relative mb-3 leading-none font-thunder text-4xl text-white text-center w-full",
             {
               "text-left": titlePosition === "left",
               "text-right": titlePosition === "right",
@@ -108,17 +169,19 @@ export const EventCard: FC<EventCardProps> = ({ card, className }) => {
         </h3>
       )}
       {description && (
-        <p
-          className={cn(
-            "relative flex-1 flex-grow-[3] text-white text-center w-full line-clamp-6 mb-4",
-            {
-              "text-left": descriptionPosition === "left",
-              "text-right": descriptionPosition === "right",
-            }
-          )}
-        >
-          {description}
-        </p>
+        <div className={"w-full flex-1 mb-4 relative"}>
+          <p
+            className={cn(
+              "text-white text-sm text-center leading-tight line-clamp-4",
+              {
+                "text-left": descriptionPosition === "left",
+                "text-right": descriptionPosition === "right",
+              }
+            )}
+          >
+            {description}
+          </p>
+        </div>
       )}
       <div className="z-20 flex-1 mb-2">{loadTimer()}</div>
       <div

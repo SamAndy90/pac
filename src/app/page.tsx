@@ -6,7 +6,6 @@ const query = `*[_type == "page" && title == "Homepage"]`;
 
 export async function generateMetadata(): Promise<Metadata> {
   const data: any = await getData(query);
-
   if (
     data &&
     data?.length > 0 &&

@@ -3,7 +3,8 @@ import imageUrlBuilder from "@sanity/image-url";
 import { type ClassValue, clsx } from "clsx";
 import { client } from "../../sanity/lib/client";
 import { twMerge } from "tailwind-merge";
-import { Portrait } from "@/types";
+import { Portrait, Video } from "@/types";
+import { getFileAsset } from "@sanity/asset-utils";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -43,4 +44,13 @@ export const getBaseUrl = () => {
   }
 
   return `http://localhost:3000`;
+};
+
+export const getVideoURL = (source?: Video) => {
+  return source
+    ? getFileAsset(source.asset._ref, {
+        projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+        dataset: process.env.NEXT_PUBLIC_SANITY_DATASET,
+      }).url
+    : undefined;
 };

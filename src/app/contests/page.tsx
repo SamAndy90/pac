@@ -1,23 +1,22 @@
-import { Container, Title } from "@/common";
-import { ContestCard } from "@/common/ContestCard";
+import { Container, EventCard, Title } from "@/common";
 import { getData } from "@/lib/data-fetchers/sanity";
-import { Color, Portrait } from "@/types";
+import { Color, ContestType, Portrait } from "@/types";
 
-export type EventType = {
-  _key: string;
-  _type: string;
-  starttime: string;
-  endtime: string;
-  portrait: Portrait;
-  title: string;
-  timerstyle: {
-    bgcolor: Color;
-    numcolor: Color;
-  };
-  collection_name: string;
-  subtitle: string;
-  description: string;
-};
+// export type EventType = {
+//   _key: string;
+//   _type: string;
+//   starttime: string;
+//   endtime: string;
+//   portrait: Portrait;
+//   title: string;
+//   timerstyle: {
+//     bgcolor: Color;
+//     numcolor: Color;
+//   };
+//   collection_name: string;
+//   subtitle: string;
+//   description: string;
+// };
 
 export default async function ContestsPage() {
   const data = await getData(`*[_type == "contests"]`);
@@ -29,7 +28,7 @@ export default async function ContestsPage() {
       </div>
     );
   }
-  const events: EventType[] = data[0]?.contestsList;
+  const events: ContestType[] = data[0]?.contestsList;
   return (
     <section className={"mt-14 md:mt-20 pt-12 pb-40"}>
       <Container>
@@ -37,11 +36,11 @@ export default async function ContestsPage() {
           <Title className={"mb-8 text-center"}>{data[0]?.title}</Title>
           <div
             className={
-              "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 px-[5vw] lg:px-[8vw] gap-y-[12vw] md:gap-x-[8vw] lg:gap-x-[5vw] lg:gap-y-[6vw]"
+              "grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 sm:px-12 lg:px-40 2xl:px-[15vw] gap-x-8 lg:gap-x-10 lg:gap-y-8 gap-y-6"
             }
           >
             {events?.map((event) => (
-              <ContestCard key={event._key} event={event} />
+              <EventCard key={event._key} data={event} />
             ))}
           </div>
         </div>

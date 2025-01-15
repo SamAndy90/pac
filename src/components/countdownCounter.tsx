@@ -25,9 +25,9 @@ const Renderer: React.FC<RendererProps> = ({
     return (
       <div
         className={clsx(
-          "gap-1 text-center lg:gap-x-2 xl:gap-x-3 flex items-center justify-center font-thunder tracking-widest text-white",
+          "gap-1 text-center lg:gap-x-2 flex items-center justify-center font-thunder tracking-widest text-white",
           {
-            "xl:gap-x-2": size === "small",
+            "xl:gap-x-1.5": size === "small",
           }
         )}
         style={{
@@ -41,7 +41,7 @@ const Renderer: React.FC<RendererProps> = ({
           className={cn(
             "flex flex-col p-4 md:py-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
             {
-              "p-4 md:py-4 md:rounded-2xl": size === "small",
+              "p-3 md:py-4 md:rounded-2xl": size === "small",
             }
           )}
         >
@@ -49,7 +49,7 @@ const Renderer: React.FC<RendererProps> = ({
             className={cn(
               "text-3xl md:text-4xl lg:text-5xl min-w-10 md:min-w-14",
               {
-                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-10 md:min-w-10":
+                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-7 md:min-w-8":
                   size === "small",
               }
             )}
@@ -71,7 +71,7 @@ const Renderer: React.FC<RendererProps> = ({
           className={cn(
             "flex flex-col p-4 md:py-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
             {
-              "p-4 md:py-4 md:rounded-2xl": size === "small",
+              "p-3 md:py-4 md:rounded-2xl": size === "small",
             }
           )}
         >
@@ -79,7 +79,7 @@ const Renderer: React.FC<RendererProps> = ({
             className={cn(
               "text-3xl md:text-4xl lg:text-5xl min-w-10 md:min-w-14",
               {
-                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-10 md:min-w-10":
+                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-7 md:min-w-8":
                   size === "small",
               }
             )}
@@ -101,7 +101,7 @@ const Renderer: React.FC<RendererProps> = ({
           className={cn(
             "flex flex-col p-4 md:py-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
             {
-              "p-4 md:py-4 md:rounded-2xl": size === "small",
+              "p-3 md:py-4 md:rounded-2xl": size === "small",
             }
           )}
         >
@@ -109,7 +109,7 @@ const Renderer: React.FC<RendererProps> = ({
             className={cn(
               "text-3xl md:text-4xl lg:text-5xl min-w-10 md:min-w-14",
               {
-                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-10 md:min-w-10":
+                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-7 md:min-w-8":
                   size === "small",
               }
             )}
@@ -131,7 +131,7 @@ const Renderer: React.FC<RendererProps> = ({
           className={cn(
             "flex flex-col p-4 md:py-5 items-center justify-center gap-y-1.5 rounded-2xl md:rounded-3xl",
             {
-              "p-4 md:py-4 md:rounded-2xl": size === "small",
+              "p-3 md:py-4 md:rounded-2xl": size === "small",
             }
           )}
         >
@@ -139,7 +139,7 @@ const Renderer: React.FC<RendererProps> = ({
             className={cn(
               "text-3xl md:text-4xl lg:text-5xl min-w-10 md:min-w-14",
               {
-                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-10 md:min-w-10":
+                "text-2xl md:text-2xl lg:text-2xl xl:text-2xl min-w-7 md:min-w-8":
                   size === "small",
               }
             )}

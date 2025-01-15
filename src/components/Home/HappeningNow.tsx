@@ -3,44 +3,48 @@
 import Link from "next/link";
 import { Container, Title } from "@/common";
 import { useKeenSlider } from "keen-slider/react";
-import { ButtonType, Color, Portrait, Slug } from "@/types";
+import { ButtonType, Color, ContestType, Portrait, Slug, Video } from "@/types";
 import { EventCard } from "@/common/EventCard";
 import { Button } from "@/common/UI/Button";
 
-export type Card = {
-  subtitle?: string;
-  subtitlePosition?: string;
-  title?: string;
-  titlePosition?: string;
-  status: string;
-  description?: string;
-  descriptionPosition?: string;
-  ctaComponent: string;
-  cta?: {
-    ctaLabel?: string;
-    ctaLink?: string;
-  };
-  ctaPosition?: string;
-  starttime: string;
-  time: string;
-  timerstyle: { bgcolor: Color; numcolor: Color };
-  slug: Slug;
-  portrait: Portrait;
-  _key: string;
-};
+// export type Card = {
+//   slug: Slug;
+//   status: string;
+//   subtitle?: string;
+//   subtitlePosition?: string;
+//   title?: string;
+//   titlePosition?: string;
+//   description?: string;
+//   descriptionPosition?: string;
+//   ctaComponent: string;
+//   cta?: {
+//     ctaLabel?: string;
+//     ctaLink?: string;
+//   };
+//   ctaPosition?: string;
+//   starttime: string;
+//   time: string;
+//   timerstyle: { bgcolor: Color; numcolor: Color };
+//   bg?: string;
+//   picture?: Portrait;
+//   videoLink?: string;
+//   videoFile?: Video;
+//   _key: string;
+// };
 
 type HappeningNowProps = {
   data: {
     title?: string;
-    cards?: Card[];
+    cards?: ContestType[];
     buttons?: ButtonType[];
     _type: string;
     _key: string;
   };
+  events?: ContestType[];
 };
 
-const HappeningNow = ({ data }: HappeningNowProps) => {
-  const { title, cards, buttons } = data;
+const HappeningNow = ({ data, events }: HappeningNowProps) => {
+  const { title, buttons } = data;
 
   const [sliderRef] = useKeenSlider({
     slides: {
@@ -63,7 +67,7 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
     },
   });
 
-  const cardsDisplay = cards?.filter((card) => {
+  const cardsDisplay = events?.filter((card) => {
     return card.status === "active";
   });
 
@@ -78,7 +82,7 @@ const HappeningNow = ({ data }: HappeningNowProps) => {
           >
             {cardsDisplay?.map((card) => (
               <div className={"keen-slider__slide"} key={card._key}>
-                <EventCard card={card} className={"flex-1"} />
+                <EventCard data={card} className={"flex-1"} />
               </div>
             ))}
           </div>
