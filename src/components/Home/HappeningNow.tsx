@@ -3,34 +3,9 @@
 import Link from "next/link";
 import { Container, Title } from "@/common";
 import { useKeenSlider } from "keen-slider/react";
-import { ButtonType, Color, ContestType, Portrait, Slug, Video } from "@/types";
+import { ButtonType, ContestType } from "@/types";
 import { EventCard } from "@/common/EventCard";
 import { Button } from "@/common/UI/Button";
-
-// export type Card = {
-//   slug: Slug;
-//   status: string;
-//   subtitle?: string;
-//   subtitlePosition?: string;
-//   title?: string;
-//   titlePosition?: string;
-//   description?: string;
-//   descriptionPosition?: string;
-//   ctaComponent: string;
-//   cta?: {
-//     ctaLabel?: string;
-//     ctaLink?: string;
-//   };
-//   ctaPosition?: string;
-//   starttime: string;
-//   time: string;
-//   timerstyle: { bgcolor: Color; numcolor: Color };
-//   bg?: string;
-//   picture?: Portrait;
-//   videoLink?: string;
-//   videoFile?: Video;
-//   _key: string;
-// };
 
 type HappeningNowProps = {
   data: {

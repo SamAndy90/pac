@@ -9,7 +9,7 @@ import { Button } from "@/common/UI/Button";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { AgeRestrictionData } from "@/app/age-restriction/page";
+import { AgeRestrictionData } from "@/app/(sanity-studio)/age-restriction/page";
 
 export type RestrictionContentProps = {
   data: SanityDocument & AgeRestrictionData;
@@ -29,7 +29,7 @@ export function RestrictionContent({ data }: RestrictionContentProps) {
   } = ageData;
 
   const handleConfirm = () => {
-    Cookies.set("ageVerified", "true", { expires: 1 });
+    Cookies.set("ageVerified", "true", { expires: 7 });
     setTimeout(() => {
       router.push("/");
     }, 0);

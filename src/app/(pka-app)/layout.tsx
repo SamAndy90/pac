@@ -1,14 +1,7 @@
 import type { Metadata } from "next";
-import {
-  Londrina_Solid,
-  Inter,
-  Averia_Libre,
-  Roboto,
-  EB_Garamond,
-  Cormorant_Garamond,
-} from "next/font/google";
+import { Averia_Libre, Roboto, EB_Garamond } from "next/font/google";
 import localFont from "next/font/local";
-import "./globals.css";
+import "@/styles/globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
@@ -24,18 +17,52 @@ import { CookieBanner } from "@/components/Home/CookieBanner";
 import { Suspense } from "react";
 import Transitions from "@/components/Transitions";
 
-const LondrinaSolid = Londrina_Solid({
-  subsets: ["latin"],
-  weight: ["900"],
-  preload: false,
-  variable: "--font-lodrina",
+const thunder = localFont({
+  src: [
+    {
+      path: "../../fonts/Thunder-LC.woff2",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../fonts/Thunder-MediumLC.woff2",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../fonts/Thunder-BoldLC.woff2",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../../fonts/Thunder-ExtraBoldLC.woff2",
+      weight: "800",
+      style: "normal",
+    },
+  ],
+  display: "swap",
+  variable: "--font-thunder-variable",
 });
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "800", "900"],
+const Avenir = localFont({
+  src: "../../fonts/AvenirLTStd-Black.otf",
+  display: "swap",
   preload: false,
-  variable: "--font-inter",
+  variable: "--font-avenir",
+});
+
+const AvenirBold = localFont({
+  src: "../../fonts/AvenirBold.otf",
+  display: "swap",
+  preload: false,
+  variable: "--font-avenir-bold",
+});
+
+const AvenirThin = localFont({
+  src: "../../fonts/AvenirLTStd-Book.otf",
+  display: "swap",
+  preload: false,
+  variable: "--font-avenir-thin",
 });
 
 const garamond = EB_Garamond({
@@ -43,13 +70,6 @@ const garamond = EB_Garamond({
   weight: ["400", "500", "700"],
   preload: false,
   variable: "--font-garamond",
-});
-
-const garamond_2 = Cormorant_Garamond({
-  subsets: ["latin"],
-  weight: ["400", "500", "700"],
-  preload: false,
-  variable: "--font-cormorant_garamond",
 });
 
 const roboto = Roboto({
@@ -64,54 +84,6 @@ const averia = Averia_Libre({
   weight: ["700"],
   preload: false,
   variable: "--font-averia",
-});
-
-const Avenir = localFont({
-  src: "../fonts/AvenirLTStd-Black.otf",
-  display: "swap",
-  preload: false,
-  variable: "--font-avenir",
-});
-
-const AvenirBold = localFont({
-  src: "../fonts/AvenirBold.otf",
-  display: "swap",
-  preload: false,
-  variable: "--font-avenir-bold",
-});
-
-const AvenirThin = localFont({
-  src: "../fonts/AvenirLTStd-Book.otf",
-  display: "swap",
-  preload: false,
-  variable: "--font-avenir-thin",
-});
-
-const thunder = localFont({
-  src: [
-    {
-      path: "../fonts/Thunder-LC.woff2",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Thunder-MediumLC.woff2",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Thunder-BoldLC.woff2",
-      weight: "700",
-      style: "normal",
-    },
-    {
-      path: "../fonts/Thunder-ExtraBoldLC.woff2",
-      weight: "800",
-      style: "normal",
-    },
-  ],
-  display: "swap",
-  variable: "--font-thunder-variable",
 });
 
 export const dynamic = "force-dynamic";
@@ -143,7 +115,6 @@ export const metadata: Metadata = {
       rel: "mask-icon",
       url: "/safari-pinned-tab.svg",
       color: "#0A4A64",
-      // because color is not supported by next metadata
     } as IconDescriptor,
   },
   manifest: "/site.webmanifest",
@@ -161,7 +132,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body
-          className={`${LondrinaSolid.variable} ${Avenir.variable} ${inter.variable} ${roboto.variable} ${garamond.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} ${garamond_2.variable} relative bg-pka_background font-avenirThin`}
+          className={`${Avenir.variable} ${roboto.variable} ${garamond.variable} ${AvenirThin.variable} ${AvenirBold.variable} ${thunder.variable} ${averia.variable} relative bg-pka_background font-avenirThin`}
         >
           <Providers>
             <div

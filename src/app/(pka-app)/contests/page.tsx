@@ -1,22 +1,6 @@
 import { Container, EventCard, Title } from "@/common";
 import { getData } from "@/lib/data-fetchers/sanity";
-import { Color, ContestType, Portrait } from "@/types";
-
-// export type EventType = {
-//   _key: string;
-//   _type: string;
-//   starttime: string;
-//   endtime: string;
-//   portrait: Portrait;
-//   title: string;
-//   timerstyle: {
-//     bgcolor: Color;
-//     numcolor: Color;
-//   };
-//   collection_name: string;
-//   subtitle: string;
-//   description: string;
-// };
+import { ContestType } from "@/types";
 
 export default async function ContestsPage() {
   const data = await getData(`*[_type == "contests"]`);

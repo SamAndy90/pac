@@ -1,7 +1,7 @@
 "use client";
 
 import { NextStudio } from "next-sanity/studio";
-import config from "../../../../sanity.config";
+import config from "../../../../../sanity.config";
 import { useUser } from "@clerk/nextjs";
 
 export default function StudioPage() {
@@ -10,7 +10,7 @@ export default function StudioPage() {
 
   if (userRole == "org:admin") {
     return (
-      <div className="pt-24 pb-16 bg-pka_background">
+      <div className="bg-pka_background">
         <NextStudio config={config} />
       </div>
     );

@@ -1,4 +1,3 @@
-// Dashboard.tsx
 import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/common/UI/tabs";
 import { ComingSoon } from "@/common";
@@ -60,7 +59,6 @@ const Dashboard: React.FC<Props> = ({ role }) => {
 
   return (
     <div className="flex justify-center px-4 pt-40 w-full">
-      {/* Center the tab list */}
       <Tabs defaultValue="user-profile" className="flex flex-col w-screen">
         <TabsList className="flex flex-col md:flex-row">
           {tabsList.map((tab, index) => (

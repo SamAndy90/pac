@@ -4,8 +4,9 @@ import Image from "next/image";
 import { Container, Title } from "@/common";
 import { Portrait, Video } from "@/types";
 import { getVideoURL, ImgUrl } from "@/lib/utils";
-import ReactPlayer from "react-player";
-import { Suspense } from "react";
+import dynamic from "next/dynamic";
+
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 type HeroProps = {
   data: {
@@ -46,51 +47,47 @@ export default function Hero({ data }: HeroProps) {
                 />
               )}
               {bg === "file" && url && (
-                <Suspense>
-                  <ReactPlayer
-                    className={"react-player"}
-                    playing={true}
-                    controls={false}
-                    muted={true}
-                    url={url}
-                    loop={true}
-                    width={"100%"}
-                    height={"100%"}
-                  />
-                </Suspense>
+                <ReactPlayer
+                  className={"react-player"}
+                  playing={true}
+                  controls={false}
+                  muted={true}
+                  url={url}
+                  loop={true}
+                  width={"100%"}
+                  height={"100%"}
+                />
               )}
               {bg === "url" && videoLink && (
-                <Suspense>
-                  <ReactPlayer
-                    className={"react-player"}
-                    playing={true}
-                    controls={false}
-                    muted={true}
-                    url={videoLink}
-                    loop={true}
-                    width={"100%"}
-                    height={"100%"}
-                    config={{
-                      youtube: {
-                        playerVars: { controls: 0, modestbranding: 1, rel: 0 },
+                <ReactPlayer
+                  className={"react-player"}
+                  playing={true}
+                  controls={false}
+                  muted={true}
+                  url={videoLink}
+                  loop={true}
+                  width={"100%"}
+                  height={"100%"}
+                  config={{
+                    youtube: {
+                      playerVars: { controls: 0, modestbranding: 1, rel: 0 },
+                    },
+                    vimeo: {
+                      playerOptions: {
+                        controls: false,
+                        title: false,
+                        byline: false,
                       },
-                      vimeo: {
-                        playerOptions: {
-                          controls: false,
-                          title: false,
-                          byline: false,
-                        },
+                    },
+                    file: {
+                      attributes: {
+                        controls: false,
+                        muted: true,
+                        autoPlay: true,
                       },
-                      file: {
-                        attributes: {
-                          controls: false,
-                          muted: true,
-                          autoPlay: true,
-                        },
-                      },
-                    }}
-                  />
-                </Suspense>
+                    },
+                  }}
+                />
               )}
             </div>
             <p className="flex-1 lg:self-end xl:text-xl 2xl:text-2xl lg:pl-6 text-pka_blue2 font-avenirThin">

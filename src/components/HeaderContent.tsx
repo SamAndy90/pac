@@ -31,7 +31,7 @@ type HeaderContentProps = {
 
 export default function HeaderContent({ data }: HeaderContentProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isLoaded, isSignedIn, user } = useUser();
+  const { isSignedIn } = useUser();
   const pathname = usePathname();
 
   const { logo, leftlinks, rightlinks, burgerlinks } = data;
@@ -52,11 +52,7 @@ export default function HeaderContent({ data }: HeaderContentProps) {
 
   return (
     <>
-      <header
-        className={cn("fixed z-50 w-full lg:top-3", {
-          hidden: pathname.includes("/age-restriction"),
-        })}
-      >
+      <header className={"fixed z-50 w-full lg:top-3"}>
         <Container>
           <div className={"py-2 lg:py-5 flex gap-x-2"}>
             <nav className="bg-pka_blue flex-1 px-4 lg:px-10 text-white tracking-widest text-base font-thunder font-medium flex items-center z-40 justify-between lg:justify-around rounded-full h-12 lg:h-[62px] relative">

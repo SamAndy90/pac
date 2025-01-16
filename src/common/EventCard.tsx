@@ -6,13 +6,13 @@ import { FC, HTMLAttributes } from "react";
 import CountdownComponent from "../components/countdownCounter";
 import { cn, getVideoURL, ImgUrl } from "@/lib/utils";
 import { ArrowRight } from "lucide-react";
-// import { Card } from "@/components/Home/HappeningNow";
 import { Button } from "./UI/Button";
-import ReactPlayer from "react-player";
 import { ContestType } from "@/types";
+import dynamic from "next/dynamic";
+
+const ReactPlayer = dynamic(() => import("react-player"), { ssr: false });
 
 type EventCardProps = {
-  // card: Card;
   data: ContestType;
 } & Pick<HTMLAttributes<HTMLDivElement>, "className">;
 
@@ -38,11 +38,11 @@ export const EventCard: FC<EventCardProps> = ({ data, className }) => {
     videoLink,
   } = data;
 
-  const loadTimer = () => {
-    const currentTime = new Date();
-    const startTime = new Date(starttime);
-    const endTime = new Date(endtime);
+  const currentTime = new Date();
+  const startTime = new Date(starttime);
+  const endTime = new Date(endtime);
 
+  const loadTimer = () => {
     if (currentTime > startTime && currentTime < endTime) {
       return (
         <CountdownComponent
@@ -69,7 +69,10 @@ export const EventCard: FC<EventCardProps> = ({ data, className }) => {
 
   const url = getVideoURL(videoFile);
 
-  const Component = status === "active" ? Link : "div";
+  const Component =
+    status === "active" && currentTime > startTime && currentTime < endTime
+      ? Link
+      : "div";
 
   return (
     <Component

@@ -1,4 +1,5 @@
 "use client";
+
 import { Loader } from "@/common/Loader";
 import Dashboard from "@/components/dashboard/Dashboard";
 import { useUser } from "@clerk/nextjs";
@@ -7,6 +8,8 @@ export default function Page() {
 
   // Extract the user role; handle it being possibly undefined
   const userRole = user?.organizationMemberships[0]?.role;
+
+  console.log({ user });
 
   // Define allowed roles for accessing the dashboard
   const allowedRoles = ["org:admin", "org:member", "org:socialadmin"];

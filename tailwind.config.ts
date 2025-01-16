@@ -22,16 +22,13 @@ export default withUt({
         pka_black: "#0A1200",
       },
       fontFamily: {
-        lodrian: ["var(--font-lodrina)"],
+        thunder: ["var(--font-thunder-variable)"],
         avenir: ["var(--font-avenir)"],
         avenirThin: ["var(--font-avenir-thin)"],
         avenirBold: ["var(--font-avenir-bold)"],
-        inter: ["var(--font-inter)"],
+        garamond: ["var(--font-garamond)"],
         roboto: ["var(--font-roboto)"],
         averia: ["var(--font-averia)"],
-        thunder: ["var(--font-thunder-variable)"],
-        garamond: ["var(--font-garamond)"],
-        garamond_2: ["var(--font-cormorant_garamond)"],
       },
       borderRadius: {
         lg: "0.5rem",
